@@ -1,0 +1,154 @@
+.header {
+  margin-bottom: var(--space-2xl);
+}
+
+.title {
+  font-size: 1.8rem;
+  margin-bottom: var(--space-xs);
+}
+
+.subtitle {
+  color: var(--color-text-muted);
+}
+
+.topGrid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: var(--space-lg);
+  margin-bottom: var(--space-2xl);
+}
+
+.complianceCard, .zatcaCard {
+  padding: var(--space-xl);
+}
+
+.complianceHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: var(--space-md);
+}
+
+.percentage {
+  font-size: 2rem;
+  font-weight: 700;
+  color: #10B981;
+}
+
+.progressBar {
+  height: 8px;
+  background: rgba(0, 0, 0, 0.05);
+  border-radius: 4px;
+  overflow: hidden;
+  margin-bottom: var(--space-md);
+}
+
+.progress {
+  height: 100%;
+  background: #10B981;
+  border-radius: 4px;
+}
+
+.complianceNote {
+  font-size: 0.85rem;
+  color: var(--color-text-muted);
+}
+
+.zatcaCard {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.statusActive {
+  display: block;
+  font-size: 0.85rem;
+  color: #10B981;
+  font-weight: 600;
+  margin-top: 4px;
+}
+
+.zatcaIcon {
+  font-size: 2.5rem;
+  opacity: 0.8;
+}
+
+.logContainer {
+  padding: var(--space-xl);
+}
+
+.logHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: var(--space-xl);
+  padding-bottom: var(--space-md);
+  border-bottom: 1px solid var(--color-background);
+}
+
+.shieldInfo {
+  font-size: 0.8rem;
+  font-weight: 600;
+  color: var(--color-primary);
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.logList {
+  display: flex;
+  flex-direction: column;
+}
+
+.logItem {
+  display: grid;
+  grid-template-columns: 100px 100px 1fr 80px 120px;
+  gap: var(--space-lg);
+  padding: var(--space-md) 0;
+  border-bottom: 1px solid var(--color-background);
+  align-items: center;
+  font-size: 0.9rem;
+}
+
+.logTime {
+  color: var(--color-text-muted);
+  font-size: 0.8rem;
+}
+
+.logUser strong {
+  color: var(--color-secondary);
+}
+
+.logAction span {
+  font-weight: 600;
+}
+
+.logId {
+  color: var(--color-text-muted);
+  font-family: monospace;
+}
+
+.logHash {
+  font-family: monospace;
+  font-size: 0.75rem;
+  color: var(--color-primary);
+  background: rgba(150, 123, 182, 0.05);
+  padding: 2px 6px;
+  border-radius: 4px;
+  cursor: help;
+}
+
+@media (max-width: 1024px) {
+  .topGrid {
+    grid-template-columns: 1fr;
+  }
+  
+  .logItem {
+    grid-template-columns: 1fr 1fr;
+    gap: var(--space-sm);
+  }
+  
+  .logHash, .logId {
+    display: none;
+  }
+}

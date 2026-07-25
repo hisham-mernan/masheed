@@ -1,0 +1,125 @@
+.adminLayout {
+  display: flex;
+  min-height: 100vh;
+  background: #0b0a14;
+  color: #fff;
+  font-family: 'Cairo', sans-serif;
+  direction: rtl;
+}
+
+.adminSidebar {
+  width: 280px;
+  background: #0f0e1d;
+  border-left: 1px solid rgba(255, 255, 255, 0.05);
+  padding: 1.5rem;
+  display: flex;
+  flex-direction: column;
+}
+
+.adminLogo {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  color: #8561AD;
+  font-size: 1.25rem;
+  font-weight: 700;
+  margin-bottom: 0.5rem;
+}
+
+.logoText {
+  color: #fff;
+}
+
+.badge {
+  background: rgba(133, 97, 173, 0.2);
+  color: #c4a8e0;
+  border: 1px solid rgba(133, 97, 173, 0.3);
+  padding: 0.25rem 0.5rem;
+  border-radius: 4px;
+  font-size: 0.75rem;
+  display: inline-block;
+  align-self: flex-start;
+  margin-bottom: 2rem;
+}
+
+.adminNav {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+  flex: 1;
+}
+
+.navLink {
+  color: rgba(255, 255, 255, 0.7);
+  text-decoration: none;
+  font-size: 0.9rem;
+  padding: 0.75rem 1rem;
+  border-radius: 6px;
+  transition: all 0.2s;
+  display: flex;
+  align-items: center;
+}
+
+.navLink:hover {
+  background: rgba(255, 255, 255, 0.05);
+  color: #fff;
+  transform: translateX(-4px);
+}
+
+.backLink {
+  color: #ef4444;
+  text-decoration: none;
+  font-size: 0.85rem;
+  padding: 0.75rem 1rem;
+  border-radius: 6px;
+  display: block;
+  border: 1px dashed rgba(239, 68, 68, 0.3);
+  transition: all 0.2s;
+}
+
+.backLink:hover {
+  background: rgba(239, 68, 68, 0.1);
+}
+
+.adminMain {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+.adminHeader {
+  height: 70px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 2rem;
+  background: #0f0e1d;
+}
+
+.headerTitle {
+  font-size: 1.1rem;
+  font-weight: 600;
+  color: #c4a8e0;
+}
+
+.headerMeta {
+  font-size: 0.85rem;
+  color: rgba(255, 255, 255, 0.5);
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.statusDot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: #10b981;
+}
+
+.adminContent {
+  flex: 1;
+  padding: 2rem;
+  overflow-y: auto;
+}

@@ -1,0 +1,121 @@
+.features {
+  padding: 5rem 0;
+  background: linear-gradient(180deg, var(--color-background) 0%, rgba(133,97,173,0.04) 100%);
+}
+
+.header {
+  text-align: center;
+  margin-bottom: 3.5rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1rem;
+}
+
+.title {
+  font-size: clamp(1.6rem, 3vw, 2.4rem);
+  font-weight: 800;
+  letter-spacing: -0.03em;
+  max-width: 580px;
+}
+
+.subtitle {
+  font-size: 1rem;
+  color: var(--color-text-muted);
+  max-width: 500px;
+  line-height: 1.8;
+}
+
+/* ── Grid ── */
+.grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: 1.25rem;
+}
+
+/* ── Card ── */
+.card {
+  position: relative;
+  background: white;
+  border: 1.5px solid var(--color-border);
+  border-radius: var(--radius-xl);
+  padding: 2rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+  overflow: hidden;
+  transition: transform 300ms var(--ease-spring), box-shadow 300ms, border-color 300ms;
+  cursor: default;
+}
+
+.card:hover {
+  transform: translateY(-5px);
+  box-shadow: var(--shadow-md);
+  border-color: rgba(133,97,173,0.2);
+}
+
+/* Color accent bar at bottom */
+.accentBar {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 3px;
+  opacity: 0;
+  transition: opacity 300ms;
+}
+
+.card:hover .accentBar { opacity: 1; }
+
+/* ── Icon ── */
+.iconWrap {
+  width: 52px;
+  height: 52px;
+  border-radius: var(--radius-md);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: transform 200ms var(--ease-spring);
+}
+
+.card:hover .iconWrap { transform: scale(1.08); }
+
+.iconWrap svg {
+  width: 22px;
+  height: 22px;
+}
+
+/* ── Card Content ── */
+.cardContent {
+  display: flex;
+  flex-direction: column;
+  gap: 0.35rem;
+  flex: 1;
+}
+
+.cardTitle {
+  font-size: 1.05rem;
+  font-weight: 700;
+  color: var(--color-accent);
+}
+
+.cardEng {
+  font-size: 0.72rem;
+  color: var(--color-text-muted);
+  font-family: 'Inter', sans-serif;
+  font-weight: 500;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+}
+
+.description {
+  font-size: 0.875rem;
+  color: var(--color-text-muted);
+  line-height: 1.75;
+  margin-top: 0.4rem;
+}
+
+@media (max-width: 640px) {
+  .features { padding: 3rem 0; }
+  .grid { grid-template-columns: 1fr; }
+}

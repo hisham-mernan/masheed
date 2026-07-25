@@ -1,0 +1,143 @@
+.header {
+  margin-bottom: var(--space-2xl);
+}
+
+.title {
+  font-size: 1.8rem;
+  margin-bottom: var(--space-xs);
+}
+
+.subtitle {
+  color: var(--color-text-muted);
+}
+
+.summaryGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: var(--space-lg);
+  margin-bottom: var(--space-2xl);
+}
+
+.summaryCard {
+  padding: var(--space-xl);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-sm);
+  position: relative;
+}
+
+.summaryLabel {
+  font-size: 0.9rem;
+  color: var(--color-text-muted);
+  font-weight: 500;
+}
+
+.summaryValue {
+  font-size: 2rem;
+  font-weight: 700;
+  color: var(--color-accent);
+}
+
+.badgeLabel {
+  font-size: 0.7rem;
+  background: rgba(0, 0, 0, 0.05);
+  padding: 2px 8px;
+  border-radius: 4px;
+  width: fit-content;
+  color: var(--color-text-muted);
+  font-weight: 600;
+}
+
+.primaryBadge {
+  background: rgba(150, 123, 182, 0.1);
+  color: var(--color-primary);
+}
+
+.ledgerContainer {
+  padding: var(--space-xl);
+}
+
+.ledgerHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: var(--space-xl);
+}
+
+.ledgerActions {
+  display: flex;
+  gap: var(--space-md);
+}
+
+.exportBtn {
+  padding: var(--space-sm) var(--space-lg);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-md);
+  font-weight: 600;
+  font-size: 0.9rem;
+}
+
+.table {
+  width: 100%;
+  border-collapse: collapse;
+  text-align: right;
+}
+
+[dir="ltr"] .table {
+  text-align: left;
+}
+
+.table th {
+  padding: var(--space-md);
+  color: var(--color-text-muted);
+  font-weight: 600;
+  font-size: 0.85rem;
+  border-bottom: 2px solid var(--color-background);
+}
+
+.table td {
+  padding: var(--space-lg) var(--space-md);
+  border-bottom: 1px solid var(--color-background);
+  font-size: 0.9rem;
+}
+
+.code {
+  font-family: monospace;
+  background: rgba(0, 0, 0, 0.03);
+  padding: 2px 6px;
+  border-radius: 4px;
+  font-size: 0.8rem;
+}
+
+.categoryBadge {
+  font-size: 0.8rem;
+  padding: 2px 8px;
+  background: #eee;
+  border-radius: 4px;
+}
+
+.positive {
+  color: #10B981;
+  font-weight: 600;
+}
+
+.negative {
+  color: #EF4444;
+  font-weight: 600;
+}
+
+.statusDot {
+  display: inline-block;
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  margin-left: 8px;
+}
+
+.done {
+  background: #10B981;
+}
+
+.pending {
+  background: #F59E0B;
+}

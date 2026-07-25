@@ -1,0 +1,145 @@
+.layout {
+  display: flex;
+  min-height: 100vh;
+  direction: rtl;
+  background: #F0F2F8;
+}
+
+.main {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+  overflow: hidden;
+}
+
+/* ── Top Nav ── */
+.topNav {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0.75rem 1.75rem;
+  background: white;
+  border-bottom: 1px solid var(--color-border);
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  gap: 1rem;
+}
+
+.breadcrumb {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 0.875rem;
+  color: var(--color-text-muted);
+}
+
+.breadcrumb svg { color: var(--color-primary); }
+
+.breadcrumbSep { opacity: 0.4; }
+
+.breadcrumbCurrent {
+  font-weight: 600;
+  color: var(--color-text);
+}
+
+/* ── Top Actions ── */
+.topActions {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.notifBtn {
+  position: relative;
+  width: 36px;
+  height: 36px;
+  border-radius: var(--radius-md);
+  background: var(--color-background);
+  border: 1.5px solid var(--color-border);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--color-text-muted);
+  cursor: pointer;
+  transition: border-color 200ms, color 200ms, background 200ms;
+}
+
+.notifBtn:hover {
+  border-color: var(--color-primary);
+  color: var(--color-primary);
+  background: var(--color-primary-light);
+}
+
+.notifBadge {
+  position: absolute;
+  top: -4px;
+  left: -4px;
+  min-width: 18px;
+  height: 18px;
+  border-radius: 20px;
+  background: var(--color-primary);
+  color: white;
+  font-size: 0.65rem;
+  font-weight: 700;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0 4px;
+  border: 2px solid white;
+}
+
+.avatar {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  padding: 0.35rem 0.75rem 0.35rem 0.35rem;
+  border-radius: var(--radius-md);
+  border: 1.5px solid var(--color-border);
+  background: white;
+  cursor: pointer;
+  transition: border-color 200ms;
+}
+
+.avatar:hover { border-color: rgba(133,97,173,0.3); }
+
+.avatarInner {
+  width: 30px;
+  height: 30px;
+  border-radius: var(--radius-sm);
+  background: linear-gradient(135deg, #8561AD, #6B46A0);
+  color: white;
+  font-size: 0.85rem;
+  font-weight: 700;
+  font-family: 'Cairo', sans-serif;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.avatarInfo {
+  display: flex;
+  flex-direction: column;
+  line-height: 1.2;
+}
+
+.avatarName {
+  font-size: 0.82rem;
+  font-weight: 600;
+  color: var(--color-text);
+  font-family: 'Cairo', sans-serif;
+}
+
+.avatarRole {
+  font-size: 0.68rem;
+  color: var(--color-text-muted);
+}
+
+/* ── Content ── */
+.content {
+  flex: 1;
+  padding: 1.75rem;
+  overflow-y: auto;
+}

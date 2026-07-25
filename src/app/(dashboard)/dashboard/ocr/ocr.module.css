@@ -1,0 +1,127 @@
+.header {
+  margin-bottom: var(--space-2xl);
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: var(--space-xl);
+}
+
+.uploadSection, .resultSection {
+  padding: var(--space-2xl);
+  display: flex;
+  flex-direction: column;
+}
+
+.dropzone {
+  border: 2px dashed var(--color-border);
+  border-radius: var(--radius-lg);
+  padding: var(--space-3xl) var(--space-xl);
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--space-md);
+  margin-bottom: var(--space-xl);
+  transition: all var(--transition-normal);
+}
+
+.dropzone:hover {
+  border-color: var(--color-primary);
+  background: var(--color-primary-light);
+}
+
+.uploadIcon {
+  font-size: 3rem;
+  opacity: 0.5;
+}
+
+.info h4 {
+  font-size: 0.9rem;
+  margin-bottom: var(--space-sm);
+}
+
+.info ul {
+  font-size: 0.85rem;
+  color: var(--color-text-muted);
+  padding-right: var(--space-lg);
+}
+
+.resHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: var(--space-xl);
+  padding-bottom: var(--space-md);
+  border-bottom: 1px solid var(--color-background);
+}
+
+.confidence {
+  font-size: 0.75rem;
+  background: #10B981;
+  color: white;
+  padding: 2px 8px;
+  border-radius: 4px;
+}
+
+.results {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-lg);
+}
+
+.resItem {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.resItem label {
+  font-size: 0.8rem;
+  font-weight: 700;
+  color: var(--color-text-muted);
+}
+
+.val {
+  padding: 10px;
+  background: var(--color-background);
+  border-radius: 6px;
+  font-size: 0.95rem;
+  font-weight: 600;
+  border: 1px solid var(--color-border);
+}
+
+.empty {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  background: var(--color-background);
+  border-radius: var(--radius-md);
+  color: var(--color-text-muted);
+}
+
+.scannerLine {
+  position: absolute;
+  top: 0;
+  width: 100%;
+  height: 2px;
+  background: var(--color-primary);
+  box-shadow: 0 0 10px var(--color-primary);
+  animation: scan 3s infinite;
+}
+
+@keyframes scan {
+  0% { top: 0; }
+  50% { top: 100%; }
+  100% { top: 0; }
+}
+
+@media (max-width: 1024px) {
+  .grid {
+    grid-template-columns: 1fr;
+  }
+}

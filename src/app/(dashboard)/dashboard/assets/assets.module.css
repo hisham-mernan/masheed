@@ -1,0 +1,231 @@
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: var(--space-2xl);
+}
+
+.titleInfo h1 {
+  font-size: 1.8rem;
+  margin-bottom: var(--space-xs);
+}
+
+.titleInfo p {
+  color: var(--color-text-muted);
+}
+
+.actions {
+  display: flex;
+  gap: var(--space-md);
+}
+
+.secBtn {
+  padding: 0.8rem 1.5rem;
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-md);
+  font-weight: 600;
+  color: var(--color-text-muted);
+}
+
+.filters {
+  padding: var(--space-md) var(--space-xl);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: var(--space-xl);
+}
+
+.search {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  background: var(--color-background);
+  padding: 8px 16px;
+  border-radius: 100px;
+  flex: 1;
+  max-width: 400px;
+}
+
+.search input {
+  background: transparent;
+  border: none;
+  font-size: 0.9rem;
+  width: 100%;
+}
+
+.viewToggle {
+  display: flex;
+  background: var(--color-background);
+  padding: 4px;
+  border-radius: 8px;
+}
+
+.viewToggle button {
+  padding: 6px 16px;
+  border-radius: 6px;
+  font-size: 0.85rem;
+  font-weight: 700;
+  color: var(--color-text-muted);
+}
+
+.active {
+  background: white;
+  color: var(--color-primary) !important;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+}
+
+.ledgerContainer {
+  overflow-x: auto;
+  padding: var(--space-md);
+}
+
+.table {
+  width: 100%;
+  border-collapse: collapse;
+  text-align: right;
+}
+
+[dir="ltr"] .table { text-align: left; }
+
+.table th {
+  padding: var(--space-xl) var(--space-md);
+  font-size: 0.8rem;
+  color: var(--color-text-muted);
+  border-bottom: 2px solid var(--color-background);
+}
+
+.table td {
+  padding: var(--space-lg) var(--space-md);
+  border-bottom: 1px solid var(--color-background);
+  font-size: 0.9rem;
+}
+
+.code {
+  font-family: monospace;
+  background: rgba(133, 97, 173, 0.05);
+  color: var(--color-primary);
+  padding: 4px 8px;
+  border-radius: 4px;
+}
+
+.typeCol {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.typeTag {
+  font-size: 0.8rem;
+  font-weight: 700;
+}
+
+.usageTag {
+  font-size: 0.7rem;
+  color: var(--color-text-muted);
+}
+
+.price {
+  font-weight: 700;
+  color: var(--color-accent);
+}
+
+.status {
+  padding: 4px 12px;
+  border-radius: 100px;
+  font-size: 0.75rem;
+  font-weight: 700;
+}
+
+.مؤجر { background: rgba(16, 185, 129, 0.1); color: #10B981; }
+.نشط { background: rgba(59, 130, 246, 0.1); color: #3B82F6; }
+.صيانة { background: rgba(245, 158, 11, 0.1); color: #F59E0B; }
+.شاغر { background: rgba(239, 68, 68, 0.1); color: #EF4444; }
+
+.tableActions {
+  display: flex;
+  gap: var(--space-md);
+}
+
+.tableActions button {
+  font-size: 1.1rem;
+  opacity: 0.5;
+}
+
+.tableActions button:hover {
+  opacity: 1;
+}
+
+.mapView {
+  height: 600px;
+}
+
+.mapPlaceholder {
+  height: 100%;
+  background: #eee url('https://images.unsplash.com/photo-1548345680-f5475ee51c47?q=80&w=2070&auto=format&fit=crop') center;
+  background-size: cover;
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.mapOverlay {
+  background: white;
+  padding: var(--space-2xl);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--glass-shadow);
+  text-align: center;
+  max-width: 400px;
+}
+
+.pins {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+}
+
+.pin {
+  position: absolute;
+  font-size: 2rem;
+  animation: bounce 2s infinite;
+}
+
+@keyframes bounce {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-10px); }
+}
+
+/* Modal */
+.modalBackdrop {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0,0,0,0.5);
+  backdrop-filter: blur(4px);
+  z-index: 1000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.qrModal {
+  width: 100%;
+  max-width: 400px;
+  padding: var(--space-3xl);
+  text-align: center;
+  animation: modalIn 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+@keyframes modalIn {
+  from { opacity: 0; transform: scale(0.9); }
+  to { opacity: 1; transform: scale(1); }
+}
+
+.qrVisual {
+  margin: var(--space-2xl) 0;
+}
