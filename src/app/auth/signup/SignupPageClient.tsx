@@ -72,7 +72,7 @@ export default function SignupPageClient() {
                 <p style={{ color: "#64748B", fontSize: "0.875rem", marginBottom: "2rem", lineHeight: "1.6" }}>
                   تم استلام طلب تسجيل الوقف الخاص بكم وهو قيد المراجعة حالياً من قبل الإشراف العام للمنصة. 
                   <br />
-                  ستتلقى بريداً إلكترونياً بالتفعيل (مجاني بالكامل) للدخول إلى لوحة التحكم والـ ERP فور الموافقة.
+                  ستتلقى بريداً إلكترونياً بالتفعيل (مجاني بالكامل) للدخول إلى لوحة التحكم والنظام فور الموافقة.
                 </p>
               </>
             ) : (
@@ -118,7 +118,7 @@ export default function SignupPageClient() {
             onClick={() => { setUserType("WAQF"); setError(""); }}
             style={{ flex: 1, padding: "0.6rem", borderRadius: "0.5rem", fontWeight: "bold", fontSize: "0.875rem", border: "none", cursor: "pointer", background: userType === "WAQF" ? "#8561AD" : "transparent", color: userType === "WAQF" ? "#fff" : "#64748B" }}
           >
-            🏛️ جهة وقفية (ERP)
+            🏛️ جهة وقفية (النظام)
           </button>
         </div>
 

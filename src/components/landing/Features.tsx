@@ -17,8 +17,8 @@ const features = [
     color: "#8561AD",
   },
   {
-    title: "نظام ERP مالي متكامل",
-    eng: "Financial ERP System",
+    title: "نظام مالي متكامل",
+    eng: "Financial System",
     description: "فصل 'الأصل' عن 'الريع' وأتمتة التقارير المحاسبية والمصارف بدقة. يدعم الأوقاف الخيرية، الأهلية، والمشتركة.",
     icon: (
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.75" strokeLinecap="round">

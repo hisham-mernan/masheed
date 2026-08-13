@@ -47,7 +47,7 @@ export default function Header() {
             </div>
             <div className={styles.logoTextContainer}>
               <span className={styles.logoAr}>مَشيد</span>
-              <span className={styles.logoEn}>MASHEED ERP</span>
+              <span className={styles.logoEn}>MASHEED SYSTEM</span>
             </div>
           </Link>
 

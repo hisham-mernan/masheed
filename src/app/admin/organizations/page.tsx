@@ -589,7 +589,7 @@ export default function AdminOrganizationsPage() {
                   cursor: "pointer"
                 }}
               >
-                تفعيل الوقف وتنشيط حساب الـ ERP (مجاناً)
+                تفعيل الوقف وتنشيط حساب النظام (مجاناً)
               </button>
               <button 
                 onClick={() => alert("تم رفض الطلب وإعادة إرساله للتعديل")}

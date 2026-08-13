@@ -89,7 +89,7 @@ export default async function AdminLayout({
           </Link>
           <div style={{ marginTop: "auto", paddingTop: "2rem" }}>
             <Link href="/dashboard" className={styles.backLink}>
-              🚪 العودة للوحة ERP الرئيسية
+              🚪 العودة للوحة النظام الرئيسية
             </Link>
           </div>
         </nav>

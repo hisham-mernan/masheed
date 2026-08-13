@@ -43,11 +43,11 @@ export default function Hero() {
               إدارة الأوقاف بذكاء{" "}
               <span className={styles.highlight}>ونظام مالي</span>
               <br />
-              متكامل (ERP & Tokenization)
+              متكامل (System & Tokenization)
             </h1>
 
             <p className={styles.subtitle}>
-              منصة <strong>مَشيد</strong> هي أول نظام ERP مبني خصيصاً لقطاع الأوقاف.
+              منصة <strong>مَشيد</strong> هي أول نظام مبني خصيصاً لقطاع الأوقاف.
               حوّل أوقافك إلى حصص مدمجة (Tokenized Waqf)، قم بأتمتة التوزيعات المالية للمستفيدين،
               وحقق أعلى معايير الحوكمة والامتثال وفق <strong>رؤية ٢٠٣٠</strong>.
             </p>

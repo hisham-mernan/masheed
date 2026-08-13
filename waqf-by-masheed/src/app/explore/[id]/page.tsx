@@ -247,7 +247,7 @@ export default function OpportunityDetailPage({ params }: PageProps) {
                 <h3 className="font-bold text-lg mb-4 flex items-center gap-2">
                   <ShieldCheck className="text-accent" size={20} /> مركز ثقة المستثمر (Investor Trust Center)
                 </h3>
-                <p className="text-muted text-xs mb-5">مؤشرات موثوقية الأداء المالي والحوكمي للأصل مسحوبة مباشرة من نظام الـ ERP للوقف:</p>
+                <p className="text-muted text-xs mb-5">مؤشرات موثوقية الأداء المالي والحوكمي للأصل مسحوبة مباشرة من النظام للوقف:</p>
                 
                 <div className="space-y-3 text-xs">
                   <div className="flex items-center justify-between p-2.5 bg-background rounded-xl border border-border">

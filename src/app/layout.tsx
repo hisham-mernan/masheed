@@ -3,8 +3,8 @@ import "./globals.css";
 
 export const metadata: Metadata = {
   title: "Masheed (مَشيد) | Intelligent Endowment Management",
-  description: "Comprehensive ERP and digital ecosystem for the Saudi Awqaf sector. Transforming endowment management through intelligent automation.",
-  keywords: ["Masheed", "Awqaf", "Saudi Vision 2030", "Endowment ERP", "GAW", "Saudi Arabia"],
+  description: "Comprehensive system and digital ecosystem for the Saudi Awqaf sector. Transforming endowment management through intelligent automation.",
+  keywords: ["Masheed", "Awqaf", "Saudi Vision 2030", "Endowment System", "GAW", "Saudi Arabia"],
 };
 
 export default function RootLayout({

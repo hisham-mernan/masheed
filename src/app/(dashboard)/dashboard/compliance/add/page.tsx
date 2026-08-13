@@ -5,7 +5,7 @@ export default async function AddUserPage() {
     <div className="fade-in" style={{ padding: "2rem", maxWidth: "800px", margin: "0 auto" }}>
       <div style={{ marginBottom: "2rem" }}>
         <h1 style={{ fontSize: "1.75rem", marginBottom: "0.5rem", color: "var(--text-main)" }}>إضافة مستخدم لنظام الوقف</h1>
-        <p style={{ color: "var(--text-muted)", marginBottom: "2rem" }}>إعطاء صلاحية دخول لمستخدم جديد لتمكينه من الدخول للـ ERP بنفس الوقف الخاص بك.</p>
+        <p style={{ color: "var(--text-muted)", marginBottom: "2rem" }}>إعطاء صلاحية دخول لمستخدم جديد لتمكينه من الدخول للنظام بنفس الوقف الخاص بك.</p>
       </div>
 
       <div className="glass-card" style={{ padding: "2rem" }}>
