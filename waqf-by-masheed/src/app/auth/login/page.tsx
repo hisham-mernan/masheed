@@ -6,6 +6,8 @@ import { useRouter } from "next/navigation";
 import Link from "next/link";
 import { ArrowRight, Eye, EyeOff } from "lucide-react";
 
+import { loginUserAction } from "@/app/auth/actions";
+
 export default function LoginPage() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -19,15 +21,16 @@ export default function LoginPage() {
     setLoading(true);
     setError("");
 
-    const supabase = createClient();
-    const { error } = await supabase.auth.signInWithPassword({ email, password });
-
-    if (error) {
-      setError(error.message);
-      setLoading(false);
-    } else {
+    try {
+      const res = await loginUserAction({ email, password });
+      if (!res.success) {
+        throw new Error(res.error || "خطأ في تسجيل الدخول.");
+      }
       router.push("/dashboard");
       router.refresh();
+    } catch (err: any) {
+      setError(err.message || "حدث خطأ أثناء الدخول.");
+      setLoading(false);
     }
   };
 

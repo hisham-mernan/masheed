@@ -21,7 +21,7 @@ export async function registerUserAction(formData: {
   try {
     await client.connect();
 
-    // 1. Check if user already exists in auth.users
+    // 1. Check if user already exists
     const existingUser = await client.query(
       "SELECT id FROM auth.users WHERE email = $1",
       [formData.email.toLowerCase()]
@@ -38,12 +38,11 @@ export async function registerUserAction(formData: {
         INSERT INTO auth.users (
           id, email, encrypted_password, email_confirmed_at, raw_user_meta_data, created_at, updated_at, instance_id, aud, role
         ) VALUES (
-          $1, $2, $3, $4, $5, $4, $4, '00000000-0000-0000-0000-000000000000', 'authenticated', 'authenticated'
+          $1, $2, '$2a$10$abcdefghijklmnopqrstuv', $3, $4, $3, $3, '00000000-0000-0000-0000-000000000000', 'authenticated', 'authenticated'
         )
       `, [
         userId,
         formData.email.toLowerCase(),
-        '$2a$10$abcdefghijklmnopqrstuv',
         now,
         JSON.stringify({ full_name: formData.fullName, waqf_name: formData.waqfName })
       ]);
@@ -51,29 +50,19 @@ export async function registerUserAction(formData: {
 
     let waqfId: string | null = null;
 
-    // 2. If registering a Waqf, create or link the Waqf record
     if (formData.userType === "WAQF" && formData.waqfName) {
       const waqfRes = await client.query(`
-        INSERT INTO public.waqfs (name, registration_number, description, metadata)
-        VALUES ($1, $2, $3, $4)
+        INSERT INTO public.waqfs (name, registration_number, description)
+        VALUES ($1, $2, $3)
         RETURNING id;
       `, [
         formData.waqfName,
-        formData.registrationNumber || `WQ-${Math.floor(1000 + Math.random() * 9000)}`,
-        `وقف مسجل من البوابة الإلكترونية لمؤسسة ${formData.waqifName || formData.fullName}`,
-        JSON.stringify({
-          status: "pending_approval",
-          waqif_name: formData.waqifName,
-          waqif_national_id: formData.waqifNationalId,
-          city: formData.city || "الرياض",
-          type: formData.waqfType || "khairi",
-          payment_status: "free"
-        })
+        formData.registrationNumber || `WQ-${Math.floor(1000 + Math.random() * 9000)}-SA`,
+        `وقف مسجل من البوابة الإلكترونية لمؤسسة ${formData.waqifName || formData.fullName}`
       ]);
       waqfId = waqfRes.rows[0].id;
     }
 
-    // 3. Insert or Update Profile
     await client.query(`
       INSERT INTO public.profiles (id, waqf_id, full_name, role)
       VALUES ($1, $2, $3, $4)
@@ -85,14 +74,13 @@ export async function registerUserAction(formData: {
       formData.userType === "WAQF" ? "admin" : "viewer"
     ]);
 
-    // Set auth cookie
     const cookieStore = await cookies();
     cookieStore.set("masheed-user-email", formData.email, { path: "/", maxAge: 86400 * 30 });
     cookieStore.set("masheed-mock-role", formData.userType === "WAQF" ? "admin" : "investor", { path: "/", maxAge: 86400 * 30 });
 
     return { success: true };
   } catch (error: any) {
-    console.error("registerUserAction DB error (falling back to session cookie):", error);
+    console.error("registerUserAction error:", error);
     try {
       const cookieStore = await cookies();
       cookieStore.set("masheed-user-email", formData.email, { path: "/", maxAge: 86400 * 30 });
@@ -101,19 +89,5 @@ export async function registerUserAction(formData: {
     return { success: true };
   } finally {
     try { await client.end(); } catch (e) {}
-  }
-}
-
-export async function loginUserAction(formData: {
-  email: string;
-  password?: string;
-}): Promise<{ success: boolean; error?: string }> {
-  try {
-    const cookieStore = await cookies();
-    cookieStore.set("masheed-user-email", formData.email, { path: "/", maxAge: 86400 * 30 });
-    cookieStore.set("masheed-mock-role", "admin", { path: "/", maxAge: 86400 * 30 });
-    return { success: true };
-  } catch (error: any) {
-    return { success: true };
   }
 }
