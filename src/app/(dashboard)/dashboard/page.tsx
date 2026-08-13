@@ -29,7 +29,7 @@ export default async function DashboardPage() {
     .maybeSingle();
 
   const targetWaqfId = profile?.waqf_id || "67dd4687-89e3-4c4a-a63d-e2f94dff0e73";
-  const firstName = profile?.full_name ? profile.full_name.split(" ")[0] : "هشام";
+  const firstName = profile?.full_name ? profile.full_name.split(" ")[0] : "ناظر الوقف";
   
   const today = new Date().toLocaleDateString("ar-SA", {
     weekday: "long",
@@ -69,10 +69,10 @@ export default async function DashboardPage() {
     .limit(6);
 
   const auditLogs = dbAuditLogs && dbAuditLogs.length > 0 ? dbAuditLogs : [
-    { id: "1", action: "INSERT", entity_type: "waqfs", created_at: "2026-06-28T16:05:47", profiles: { full_name: "هشام جوبان" } },
-    { id: "2", action: "INSERT", entity_type: "assets", created_at: "2026-06-29T10:15:00", profiles: { full_name: "هشام جوبان" } },
-    { id: "3", action: "DISTRIBUTE", entity_type: "distributions", created_at: "2026-07-25T15:00:00", profiles: { full_name: "هشام جوبان" } },
-    { id: "4", action: "APPROVE", entity_type: "compliance", created_at: "2026-08-10T13:10:00", profiles: { full_name: "هشام جوبان" } },
+    { id: "1", action: "INSERT", entity_type: "waqfs", created_at: "2026-06-28T16:05:47", profiles: { full_name: "ناظر الوقف" } },
+    { id: "2", action: "INSERT", entity_type: "assets", created_at: "2026-06-29T10:15:00", profiles: { full_name: "ناظر الوقف" } },
+    { id: "3", action: "DISTRIBUTE", entity_type: "distributions", created_at: "2026-07-25T15:00:00", profiles: { full_name: "ناظر الوقف" } },
+    { id: "4", action: "APPROVE", entity_type: "compliance", created_at: "2026-08-10T13:10:00", profiles: { full_name: "ناظر الوقف" } },
   ];
 
   const stats = [
