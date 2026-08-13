@@ -78,16 +78,17 @@ export default async function BeneficiaryPage() {
             <tbody>
               {beneficiaries && beneficiaries.length > 0 ? (
                 beneficiaries.map((b) => {
+                  const benName = b.name || b.full_name || "مستفيد";
                   const percentage = totalShares > 0 ? ((Number(b.shares_owned) / Number(totalShares)) * 100).toFixed(2) : "0.00";
                   return (
                     <tr key={b.id}>
                       <td>
                         <div className={styles.beneficiaryInfo}>
                           <div className={styles.avatar}>
-                            {b.full_name?.substring(0, 1)}
+                            {benName.substring(0, 1)}
                           </div>
                           <div>
-                            <div className={styles.name}>{b.full_name}</div>
+                            <div className={styles.name}>{benName}</div>
                             <div className={styles.nationalId}>{b.national_id || "غير متوفر"}</div>
                           </div>
                         </div>

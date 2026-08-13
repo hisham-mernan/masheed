@@ -22,11 +22,16 @@ export default function AssetsPage() {
   const [filterCity, setFilterCity] = useState("all");
 
   const [assets, setAssets] = useState<Asset[]>([
-    { id: "AST-101", name: "برج الخزامى السكني", category: "real_estate", categoryAr: "عقاري (Towers)", city: "الرياض", valuation: 12000000, occupancyRate: 95, complianceScore: 98, status: "active", statusAr: "نشط", hasInsurance: true },
-    { id: "AST-102", name: "مزرعة النخيل التصديرية", category: "land", categoryAr: "زراعي (Land)", city: "القصيم", valuation: 3500000, occupancyRate: 100, complianceScore: 92, status: "active", statusAr: "نشط", hasInsurance: false },
-    { id: "AST-103", name: "محفظة صكوك بنك الإنماء", category: "financial", categoryAr: "استثماري مالي (Sukuk)", city: "الرياض", valuation: 8000000, occupancyRate: 0, complianceScore: 100, status: "active", statusAr: "نشط", hasInsurance: false },
-    { id: "AST-104", name: "معدات ومولدات الطاقة الاحتياطية", category: "movable", categoryAr: "منقول (Machinery)", city: "مكة المكرمة", valuation: 1200000, occupancyRate: 0, complianceScore: 90, status: "maintenance", statusAr: "صيانة جارية", hasInsurance: true },
-    { id: "AST-105", name: "ترخيص التشغيل الزراعي العضوي", category: "intellectual", categoryAr: "حقوق معنوية (License)", city: "القصيم", valuation: 500000, occupancyRate: 0, complianceScore: 95, status: "active", statusAr: "نشط", hasInsurance: false }
+    { id: "AST-001", name: "برج جوبان التجاري - العليا", category: "real_estate", categoryAr: "عقاري (Towers)", city: "الرياض", valuation: 45000000, occupancyRate: 95, complianceScore: 98, status: "active", statusAr: "نشط", hasInsurance: true },
+    { id: "AST-002", name: "مجمع الجوهرة السكني - الملقا", category: "real_estate", categoryAr: "عقاري (Residential)", city: "الرياض", valuation: 28500000, occupancyRate: 100, complianceScore: 99, status: "active", statusAr: "نشط", hasInsurance: true },
+    { id: "AST-003", name: "مزارع النخيل الوقفية - الخرج", category: "land", categoryAr: "زراعي (Agricultural)", city: "الخرج", valuation: 14200000, occupancyRate: 100, complianceScore: 94, status: "active", statusAr: "نشط", hasInsurance: false },
+    { id: "AST-004", name: "محفظة صكوك صح الوقفية - البنك الأهلي", category: "financial", categoryAr: "استثماري مالي (Sukuk)", city: "الرياض", valuation: 18000000, occupancyRate: 0, complianceScore: 100, status: "active", statusAr: "نشط", hasInsurance: true },
+    { id: "AST-005", name: "مركز جوبان اللوجستي - الصناعية الثانية", category: "real_estate", categoryAr: "عقاري (Logistics)", city: "الدمام", valuation: 22000000, occupancyRate: 92, complianceScore: 96, status: "active", statusAr: "نشط", hasInsurance: true },
+    { id: "AST-006", name: "مجمع العيادات التخصصية - حي الشاطئ", category: "real_estate", categoryAr: "عقاري (Medical)", city: "جدة", valuation: 35000000, occupancyRate: 100, complianceScore: 97, status: "active", statusAr: "نشط", hasInsurance: true },
+    { id: "AST-007", name: "أرض استثمارية - طريق الملك سلمان", category: "land", categoryAr: "عقاري (Land/Dev)", city: "الرياض", valuation: 52000000, occupancyRate: 0, complianceScore: 91, status: "maintenance", statusAr: "تطوير وصيانة", hasInsurance: true },
+    { id: "AST-008", name: "محفظة الأسهم القيادية السعودية (تداول)", category: "financial", categoryAr: "استثماري مالي (Equities)", city: "الرياض", valuation: 12500000, occupancyRate: 0, complianceScore: 100, status: "active", statusAr: "نشط", hasInsurance: false },
+    { id: "AST-009", name: "صندوق النقد الوقفي الطارئ", category: "financial", categoryAr: "سيولة نقدية (Cash Fund)", city: "الرياض", valuation: 6500000, occupancyRate: 0, complianceScore: 100, status: "active", statusAr: "نشط", hasInsurance: false },
+    { id: "AST-010", name: "مزرعة عنيزة للإنتاج الحيواني والداجني", category: "land", categoryAr: "زراعي (Livestock)", city: "القصيم", valuation: 9800000, occupancyRate: 90, complianceScore: 95, status: "active", statusAr: "نشط", hasInsurance: true }
   ]);
 
   const handleLaunchMaintenance = (id: string) => {
@@ -92,15 +97,15 @@ export default function AssetsPage() {
           <div style={{ display: "flex", flexDirection: "column", gap: "1rem", fontSize: "0.85rem", color: "#1A1A2E" }}>
             <div style={{ display: "flex", justifyContent: "space-between", borderBottom: "1px solid #E2E8F0", paddingBottom: "0.5rem" }}>
               <span style={{ color: "#64748B" }}>إجمالي قيمة المحفظة المقدرة</span>
-              <strong style={{ color: "#10B981", fontSize: "1rem" }}>٢٤,٩٠٠,٠٠٠ ر.س</strong>
+              <strong style={{ color: "#10B981", fontSize: "1rem" }}>٢٤٣,٥٠٠,٠٠٠ ر.س</strong>
             </div>
             <div style={{ display: "flex", justifyContent: "space-between", borderBottom: "1px solid #E2E8F0", paddingBottom: "0.5rem" }}>
               <span style={{ color: "#64748B" }}>متوسط نسبة الإشغال العقاري</span>
-              <strong>٩٧.٥٪</strong>
+              <strong>٩٧.٨٪</strong>
             </div>
             <div style={{ display: "flex", justifyContent: "space-between" }}>
               <span style={{ color: "#64748B" }}>الأصول المشمولة بالتغطية</span>
-              <strong style={{ color: "#3B82F6" }}>٤٠٪ (٢ / ٥)</strong>
+              <strong style={{ color: "#3B82F6" }}>٧٠٪ (٧ / ١٠)</strong>
             </div>
           </div>
         </div>
