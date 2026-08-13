@@ -6,6 +6,8 @@ import { useRouter } from "next/navigation";
 import Link from "next/link";
 import { ArrowRight, Eye, EyeOff, Building2, User } from "lucide-react";
 
+import { registerUserAction } from "@/app/auth/actions";
+
 export default function SignupPage() {
   const [userType, setUserType] = useState<"INVESTOR" | "WAQF">("INVESTOR");
   
@@ -33,64 +35,28 @@ export default function SignupPage() {
     setLoading(true);
     setError("");
 
-    const supabase = createClient();
-    
     try {
-      // 1. Sign up the user account in Supabase auth
-      const { data: signUpData, error: authError } = await supabase.auth.signUp({
+      // Execute robust registration Server Action
+      const res = await registerUserAction({
         email,
-        password,
-        options: {
-          data: {
-            full_name: fullName,
-            waqf_name: userType === "WAQF" ? waqfName : undefined,
-          },
-        },
+        fullName,
+        userType,
+        waqfName: userType === "WAQF" ? waqfName : undefined,
+        registrationNumber: userType === "WAQF" ? registrationNumber : undefined,
+        waqfType: userType === "WAQF" ? waqfType : undefined,
+        waqifName: userType === "WAQF" ? waqifName : undefined,
+        waqifNationalId: userType === "WAQF" ? waqifNationalId : undefined,
+        city: userType === "WAQF" ? city : undefined,
       });
 
-      if (authError) throw authError;
-      if (!signUpData.user) throw new Error("فشل إنشاء حساب المستخدم.");
-
-      // 2. If registering a Waqf, create the Waqf and Profile records in public schema
-      if (userType === "WAQF") {
-        // Insert Waqf record with pending status in metadata
-        const { data: waqf, error: waqfError } = await supabase
-          .from("waqfs")
-          .insert({
-            name: waqfName,
-            registration_number: registrationNumber,
-            description: `وقف مسجل من البوابة الإلكترونية للمؤسس ${waqifName}`,
-            metadata: {
-              status: "pending_approval",
-              waqif_name: waqifName,
-              waqif_national_id: waqifNationalId,
-              city: city,
-              type: waqfType,
-              payment_status: "free"
-            }
-          })
-          .select()
-          .single();
-
-        if (waqfError) throw waqfError;
-
-        // Insert or update Profile record with role 'admin'
-        const { error: profileError } = await supabase
-          .from("profiles")
-          .upsert({
-            id: signUpData.user.id,
-            waqf_id: waqf.id,
-            full_name: fullName,
-            role: "admin"
-          });
-
-        if (profileError) throw profileError;
+      if (!res.success) {
+        throw new Error(res.error || "فشل التسجيل. يرجى المحاولة مجدداً.");
       }
 
       setSuccess(true);
     } catch (err: any) {
       console.error("Signup error:", err);
-      setError(err.message || "حدث خطأ غير متوقع أثناء التسجيل. يرجى المحاولة مجدداً.");
+      setError(err.message || "حدث خطأ أثناء التسجيل. يرجى المحاولة مجدداً.");
     } finally {
       setLoading(false);
     }
