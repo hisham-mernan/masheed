@@ -19,30 +19,45 @@ export default async function AdminLayout({
 
   const cookieStore = await cookies();
   const mockRole = cookieStore.get("masheed-mock-role")?.value;
+  const userEmail = cookieStore.get("masheed-user-email")?.value;
+  const userIdCookie = cookieStore.get("masheed-user-id")?.value;
 
-  if (mockRole === "admin") {
-    isOffline = true;
+  if (!userIdCookie && !userEmail && !mockRole) {
+    shouldRedirectToLogin = true;
   } else {
     try {
-      const supabase = await createClient();
-      const { data: { user } } = await supabase.auth.getUser();
+      const { Client } = require("pg");
+      const client = new Client({
+        connectionString: "postgresql://postgres:oQ%3C_PpAmv85M-b%21%28@db.wyxyrehrpsohkaoanldm.supabase.co:5432/postgres",
+        ssl: { rejectUnauthorized: false }
+      });
+      await client.connect();
 
-      if (!user) {
-        shouldRedirectToLogin = true;
-      } else {
-        const { data: profile } = await supabase
-          .from("profiles")
-          .select("role")
-          .eq("id", user.id)
-          .single();
+      let targetUserId = userIdCookie;
+      if (!targetUserId && userEmail) {
+        const uRes = await client.query("SELECT id FROM auth.users WHERE lower(email) = lower($1)", [userEmail]);
+        if (uRes.rows.length > 0) targetUserId = uRes.rows[0].id;
+      }
 
-        if (profile?.role !== "admin") {
+      if (targetUserId) {
+        const pRes = await client.query("SELECT role FROM public.profiles WHERE id = $1", [targetUserId]);
+        if (pRes.rows.length > 0) {
+          const userRole = pRes.rows[0].role;
+          if (userRole !== "admin") {
+            shouldRedirectToDashboard = true;
+          }
+        } else if (mockRole !== "admin") {
           shouldRedirectToDashboard = true;
         }
+      } else if (mockRole !== "admin") {
+        shouldRedirectToDashboard = true;
       }
+      await client.end();
     } catch (error) {
-      console.warn("Database connection issue in admin layout, permitting simulated sandbox access:", error);
-      isOffline = true;
+      console.warn("Database connection issue in admin layout:", error);
+      if (mockRole !== "admin") {
+        shouldRedirectToDashboard = true;
+      }
     }
   }
 
