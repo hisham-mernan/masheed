@@ -47,9 +47,9 @@ export default async function DashboardPage() {
 
   if (!profile) {
     profile = {
-      full_name: "المدير التنفيذي لـ ناظر الوقف",
-      role: mockRole || "admin",
-      waqf_id: "67dd4687-89e3-4c4a-a63d-e2f94dff0e73"
+      full_name: mockEmail || "المستخدم",
+      role: mockRole || (mockEmail?.includes("admin") ? "admin" : "supervisor"),
+      waqf_id: "e60ffe6d-1428-400f-8bc2-1eda2fd83afb"
     };
   }
 

@@ -137,7 +137,7 @@ export async function loginUserAction(credentials: {
     }
 
     let userFound: { id: string; email: string } | null = null;
-    let role: string = "admin";
+    let role: string = emailNorm.includes("admin") ? "admin" : "supervisor";
     let waqfId: string | null = null;
     let fullName: string = "المستخدم";
 
@@ -178,13 +178,22 @@ export async function loginUserAction(credentials: {
           `, [userFound.id]);
 
           if (profRes.rows.length > 0) {
-            role = profRes.rows[0].role || "admin";
+            role = profRes.rows[0].role || (emailNorm.includes("admin") ? "admin" : "supervisor");
             waqfId = profRes.rows[0].waqf_id;
             fullName = profRes.rows[0].full_name || fullName;
+          } else {
+            const defaultRole = emailNorm.includes("admin") ? "admin" : "supervisor";
+            await client.query(`
+              INSERT INTO public.profiles (id, full_name, role)
+              VALUES ($1, $2, $3)
+              ON CONFLICT (id) DO NOTHING;
+            `, [userFound.id, emailNorm.split("@")[0], defaultRole]);
+            role = defaultRole;
           }
         } else {
           const newUserId = crypto.randomUUID();
           const now = new Date().toISOString();
+          const defaultRole = emailNorm.includes("admin") ? "admin" : "supervisor";
           try {
             await client.query(`
               INSERT INTO auth.users (
@@ -204,9 +213,10 @@ export async function loginUserAction(credentials: {
               INSERT INTO public.profiles (id, full_name, role)
               VALUES ($1, $2, $3)
               ON CONFLICT (id) DO NOTHING;
-            `, [newUserId, emailNorm.split("@")[0], "admin"]);
+            `, [newUserId, emailNorm.split("@")[0], defaultRole]);
 
             userFound = { id: newUserId, email: emailNorm };
+            role = defaultRole;
           } catch (createErr) {}
         }
         await client.end();
@@ -217,7 +227,7 @@ export async function loginUserAction(credentials: {
 
     if (!userFound) {
       userFound = { id: "user-" + Date.now(), email: emailNorm };
-      role = "admin";
+      role = emailNorm.includes("admin") ? "admin" : "supervisor";
     }
 
     const cookieStore = await cookies();
