@@ -3,6 +3,7 @@
 import { useState } from "react";
 import { useRouter } from "next/navigation";
 import { createClient } from "@/lib/supabase/client";
+import { loginUserAction } from "@/app/auth/actions";
 import Link from "next/link";
 import styles from "./login.module.css";
 
@@ -20,54 +21,43 @@ export default function LoginPage() {
     setError("");
 
     try {
+      // 1. Attempt Server Action Direct Database Authentication
+      const res = await loginUserAction({ email, password });
+
+      if (res.success && res.redirectUrl) {
+        window.location.href = res.redirectUrl;
+        return;
+      }
+
+      // 2. Fallback to Supabase Auth API if Server Action indicates failure
       const { error: authError } = await supabase.auth.signInWithPassword({
         email,
         password,
       });
 
-      if (authError) {
-        // In local development sandbox where Supabase is offline/unreachable,
-        // allow simulating admin login by typing "admin" in the email field.
-        if (email.toLowerCase().includes("admin")) {
-          console.log("Supabase offline: Simulating admin login redirect");
-          document.cookie = "masheed-mock-role=admin; path=/; max-age=3600";
-          window.location.href = "/admin";
+      if (!authError) {
+        document.cookie = "masheed-mock-role=; path=/; expires=Thu, 01 Jan 1970 00:00:00 UTC;";
+        const { data: { user } } = await supabase.auth.getUser();
+        if (user) {
+          const { data: profile } = await supabase
+            .from("profiles")
+            .select("role")
+            .eq("id", user.id)
+            .single();
+
+          window.location.href = profile?.role === "admin" ? "/admin" : "/dashboard";
           return;
         }
-        setError("بيانات الدخول غير صحيحة. يرجى المحاولة مجدداً.");
-        setIsLoading(false);
+        window.location.href = "/dashboard";
         return;
       }
 
-      // Clear mock cookie on successful real database login
-      document.cookie = "masheed-mock-role=; path=/; expires=Thu, 01 Jan 1970 00:00:00 UTC;";
-
-      // Query user role to redirect appropriately
-      const { data: { user } } = await supabase.auth.getUser();
-      if (user) {
-        const { data: profile } = await supabase
-          .from("profiles")
-          .select("role")
-          .eq("id", user.id)
-          .single();
-
-        if (profile?.role === "admin") {
-          window.location.href = "/admin";
-        } else {
-          window.location.href = "/dashboard";
-        }
-      } else {
-        window.location.href = "/dashboard";
-      }
+      setError(res.error || "بيانات الدخول غير صحيحة. يرجى المحاولة مجدداً.");
+      setIsLoading(false);
     } catch (err) {
-      console.warn("Database error during login; falling back to offline simulation:", err);
-      if (email.toLowerCase().includes("admin")) {
-        document.cookie = "masheed-mock-role=admin; path=/; max-age=3600";
-        window.location.href = "/admin";
-      } else {
-        document.cookie = "masheed-mock-role=viewer; path=/; max-age=3600";
-        window.location.href = "/dashboard";
-      }
+      console.warn("Error during login execution:", err);
+      setError("حدث خطأ أثناء تسجيل الدخول. يرجى المحاولة مجدداً.");
+      setIsLoading(false);
     }
   };
 

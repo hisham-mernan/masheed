@@ -35,6 +35,7 @@ export default function SignupPageClient() {
     try {
       const res = await registerUserAction({
         email,
+        password,
         fullName,
         userType,
         waqfName: userType === "WAQF" ? waqfName : undefined,

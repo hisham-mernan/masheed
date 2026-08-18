@@ -20,12 +20,54 @@ export default async function DashboardLayout({
 
   const cookieStore = await cookies();
   const mockRole = cookieStore.get("masheed-mock-role")?.value;
+  const userEmail = cookieStore.get("masheed-user-email")?.value;
+  const userIdCookie = cookieStore.get("masheed-user-id")?.value;
 
-  if (mockRole) {
+  if (userIdCookie || userEmail) {
+    try {
+      const { Client } = require("pg");
+      const client = new Client({
+        connectionString: "postgresql://postgres:oQ%3C_PpAmv85M-b%21%28@db.wyxyrehrpsohkaoanldm.supabase.co:5432/postgres",
+        ssl: { rejectUnauthorized: false }
+      });
+      await client.connect();
+
+      let targetUserId = userIdCookie;
+      if (!targetUserId && userEmail) {
+        const uRes = await client.query("SELECT id FROM auth.users WHERE lower(email) = lower($1)", [userEmail]);
+        if (uRes.rows.length > 0) targetUserId = uRes.rows[0].id;
+      }
+
+      if (targetUserId) {
+        const pRes = await client.query("SELECT full_name, role, waqf_id FROM public.profiles WHERE id = $1", [targetUserId]);
+        if (pRes.rows.length > 0) {
+          profile = pRes.rows[0];
+        }
+      }
+
+      if (profile?.waqf_id) {
+        const wRes = await client.query("SELECT id, name FROM public.waqfs WHERE id = $1", [profile.waqf_id]);
+        if (wRes.rows.length > 0) {
+          waqfs = wRes.rows;
+        }
+      }
+
+      if (!waqfs) {
+        const allWaqfs = await client.query("SELECT id, name FROM public.waqfs LIMIT 10");
+        waqfs = allWaqfs.rows;
+      }
+
+      await client.end();
+    } catch (e) {
+      console.warn("Direct DB session query in dashboard layout warning:", e);
+    }
+  }
+
+  if (!profile && mockRole) {
     user = { email: mockRole === "admin" ? "admin@masheed.com" : "user@masheed.com" };
     profile = { full_name: "المدير التنفيذي لـ ناظر الوقف", role: "admin", waqf_id: "67dd4687-89e3-4c4a-a63d-e2f94dff0e73" };
     waqfs = [{ id: "67dd4687-89e3-4c4a-a63d-e2f94dff0e73", name: "أوقاف النماء والازدهار التنموية" }];
-  } else {
+  } else if (!profile) {
     try {
       const supabase = await createClient();
       const { data: { user: authUser } } = await supabase.auth.getUser();
@@ -46,7 +88,6 @@ export default async function DashboardLayout({
         .select("id, name");
       waqfs = dbWaqfs;
 
-      // Default fallback to Waqf profile if missing
       if (!profile || !profile.full_name) {
         const { data: generalProfile } = await supabase
           .from("profiles")
