@@ -47,13 +47,6 @@ export default async function proxy(request: NextRequest) {
   const isLoginRoute = pathname === '/login';
   const isRegisterRoute = pathname === '/register';
 
-  // Subdomain Routing for system.masheedwaqf.com:
-  // Direct root path `/` on system subdomain to `/login` (if guest) or `/dashboard` (if authenticated)
-  if (isSystemSubdomain && isRootRoute) {
-    const url = request.nextUrl.clone();
-    url.pathname = isAuthenticated ? (mockRole === 'admin' ? '/admin' : '/dashboard') : '/login';
-    return NextResponse.redirect(url);
-  }
 
   // Redirect unauthenticated users away from protected routes
   if ((isDashboardRoute || isAdminRoute) && !isAuthenticated) {
