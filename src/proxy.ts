@@ -37,10 +37,23 @@ export default async function proxy(request: NextRequest) {
 
   const isAuthenticated = hasSupabaseUser || !!mockEmail || !!mockUserId || !!mockRole;
 
-  const isDashboardRoute = request.nextUrl.pathname.startsWith('/dashboard');
-  const isAdminRoute = request.nextUrl.pathname.startsWith('/admin');
-  const isLoginRoute = request.nextUrl.pathname === '/login';
-  const isRegisterRoute = request.nextUrl.pathname === '/register';
+  const host = request.headers.get('host') || '';
+  const isSystemSubdomain = host.startsWith('system.') || host.includes('system.masheedwaqf.com');
+
+  const pathname = request.nextUrl.pathname;
+  const isRootRoute = pathname === '/';
+  const isDashboardRoute = pathname.startsWith('/dashboard');
+  const isAdminRoute = pathname.startsWith('/admin');
+  const isLoginRoute = pathname === '/login';
+  const isRegisterRoute = pathname === '/register';
+
+  // Subdomain Routing for system.masheedwaqf.com:
+  // Direct root path `/` on system subdomain to `/login` (if guest) or `/dashboard` (if authenticated)
+  if (isSystemSubdomain && isRootRoute) {
+    const url = request.nextUrl.clone();
+    url.pathname = isAuthenticated ? (mockRole === 'admin' ? '/admin' : '/dashboard') : '/login';
+    return NextResponse.redirect(url);
+  }
 
   // Redirect unauthenticated users away from protected routes
   if ((isDashboardRoute || isAdminRoute) && !isAuthenticated) {
