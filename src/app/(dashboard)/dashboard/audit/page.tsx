@@ -1,38 +1,59 @@
-"use client";
-
 import styles from "./audit.module.css";
+import { createClient } from "@/lib/supabase/server";
+import { createHash } from "crypto";
+import AuditLogList from "@/components/dashboard/AuditLogList";
+import { getWaqfScope, scopeQuery } from "@/lib/waqf-scope";
 
-const auditLogs = [
-  { id: "LOG-551", user: "Admin", action: "تعديل صك", target: "عمارة الخزامى", time: "منذ ١٥ دقيقة", hash: "sha256:8f3c...9a21" },
-  { id: "LOG-550", user: "PropMgr", action: "إضافة عقد", target: "مزرعة النخيل", time: "منذ ساعة", hash: "sha256:d4e1...f0b3" },
-  { id: "LOG-549", user: "Admin", action: "صرف توزيع", target: "أيتام الرياض", time: "منذ ٣ ساعات", hash: "sha256:2b9e...7c14" },
-  { id: "LOG-548", user: "System", action: "تكامل ZATCA", target: "الفاتورة الضريبية", time: "منذ ٦ ساعات", hash: "sha256:1a5d...e8f9" },
-];
+export default async function AuditPage() {
+  const supabase = await createClient();
+  const { data: { user } } = await supabase.auth.getUser();
+  const { data: profile } = await supabase.from("profiles").select("is_platform_admin").eq("id", user?.id).single();
+  const scope = profile?.is_platform_admin ? await getWaqfScope() : null;
 
-export default function AuditPage() {
+  const { data: rawLogs } = await scopeQuery(
+    supabase.from("audit_logs").select(`
+      id,
+      action,
+      entity_type,
+      entity_id,
+      changes,
+      created_at,
+      profiles ( full_name )
+    `), scope
+  ).order("created_at", { ascending: false }).limit(50);
+
+  const logs = (rawLogs || []).map((log) => ({
+    id: log.id,
+    action: log.action,
+    entity_type: log.entity_type,
+    changes: log.changes,
+    created_at: log.created_at,
+    user_name: (log.profiles as any)?.full_name || null,
+    hash: createHash("sha256")
+      .update(JSON.stringify({ id: log.id, action: log.action, entity: log.entity_id, changes: log.changes }))
+      .digest("hex"),
+  }));
+
   return (
     <div className="fade-in">
       <div className={styles.header}>
         <h1 className={styles.title}>الرقابة والامتثال (Trust Layer)</h1>
-        <p className={styles.subtitle}>سجل أحداث غير قابل للتغيير ومراقبة للامتثال الشرعي والنظامي.</p>
+        <p className={styles.subtitle}>سجل أحداث حقيقي من قاعدة البيانات — اضغط على أي حدث لعرض من قام به وما الذي تغيّر بالضبط.</p>
       </div>
 
       <div className={styles.topGrid}>
         <div className={`${styles.complianceCard} glass-card`}>
           <div className={styles.complianceHeader}>
-            <h3>مؤشر الامتثال العام</h3>
-            <span className={styles.percentage}>٩٨٪</span>
+            <h3>إجمالي الأحداث الموثقة</h3>
+            <span className={styles.percentage}>{logs.length}</span>
           </div>
-          <div className={styles.progressBar}>
-            <div className={styles.progress} style={{ width: '98%' }}></div>
-          </div>
-          <p className={styles.complianceNote}>جميع المصارف متوافقة مع شروط الواقف.</p>
+          <p className={styles.complianceNote}>كل عملية على الأصول والمعاملات والمستفيدين والتوزيعات والمهام والمستندات تُسجل تلقائياً مع هوية المستخدم.</p>
         </div>
 
         <div className={`${styles.zatcaCard} glass-card`}>
           <div className={styles.zatcaInfo}>
-            <h3>الفوترة الإلكترونية (ZATCA)</h3>
-            <span className={styles.statusActive}>متصل - المرحلة الثانية</span>
+            <h3>سلامة السجل</h3>
+            <span className={styles.statusActive}>كل حدث مختوم ببصمة SHA-256</span>
           </div>
           <div className={styles.zatcaIcon}>🛡️</div>
         </div>
@@ -40,30 +61,13 @@ export default function AuditPage() {
 
       <div className={`${styles.logContainer} glass-card`}>
         <div className={styles.logHeader}>
-          <h3>سجل الأحداث (Immutable Audit Log)</h3>
+          <h3>سجل الأحداث (Audit Log)</h3>
           <div className={styles.shieldInfo}>
             <span className={styles.shieldIcon}>🔒</span>
-            الحركات مشفرة ومحمية بـ Hash
+            البيانات مباشرة من جدول audit_logs
           </div>
         </div>
-        
-        <div className={styles.logList}>
-          {auditLogs.map((log) => (
-            <div key={log.id} className={styles.logItem}>
-              <div className={styles.logTime}>{log.time}</div>
-              <div className={styles.logUser}>
-                <strong>{log.user}</strong>
-              </div>
-              <div className={styles.logAction}>
-                <span>{log.action}</span> - <em>{log.target}</em>
-              </div>
-              <div className={styles.logId}>#{log.id}</div>
-              <div className={styles.logHash} title={log.hash}>
-                {log.hash.slice(0, 12)}...
-              </div>
-            </div>
-          ))}
-        </div>
+        <AuditLogList logs={logs} />
       </div>
     </div>
   );

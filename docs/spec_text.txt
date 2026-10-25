@@ -1,0 +1,4916 @@
+
+===== PAGE 1 =====
+MASHEED  
+Master  Product  Specification  (MPS)  
+Phase  1  
+Masheed  ERP  
+Waqf  by  Masheed  Investment  Marketplace  
+Version:  1.0  
+ 
+Table  of  Contents  
+PART  1  —  Product  Foundation  
+1.  Executive  Summary  2.  Vision  3.  Mission  4.  Product  Philosophy  5.  Design  Principles  6.  Business  Objectives  7.  Problems  We  Solve  8.  Product  Ecosystem  9.  Core  Concepts  10.  Regulatory  Philosophy  11.  AI  Philosophy  
+ 
+PART  2  —  Masheed  ERP  
+●  Waqf  Management  ●  Waqif  Management  
+===== PAGE 2 =====
+●  Beneficiary  Management  ●  Nazer  Management  ●  Organization  Management  ●  Asset  Management  ●  Financial  Management  ●  Investments  ●  Governance  ●  Compliance  ●  Consultation  Services  ●  AI  Assistant  ●  Reports  ●  Documents  
+ 
+PART  3  —  Waqf  by  Masheed  
+●  Marketplace  ●  Listings  ●  Due  Diligence  ●  Investment  Workflow  ●  Investors  ●  Organizations  ●  Returns  ●  Portfolio  ●  Listing  Management  ●  AI  Matching  
+ 
+PART  4  —  Shared  Platform  
+●  Authentication  ●  Permissions  ●  Notifications  ●  Files  ●  Audit  Logs  ●  Search  ●  AI  ●  Settings  
+ 
+===== PAGE 3 =====
+PART  1  
+Executive  Summary  
+1.1  Overview  
+Masheed  is  a  vertically  integrated  technology  platform  built  specifically  for  the  Saudi  Arabian  
+Awqaf
+ 
+sector.
+ 
+Unlike  generic  ERP  solutions  that  focus  primarily  on  accounting  or  property  management,  
+Masheed
+ 
+is
+ 
+designed
+ 
+around
+ 
+the
+ 
+regulatory,
+ 
+operational,
+ 
+governance,
+ 
+and
+ 
+investment
+ 
+lifecycle
+ 
+of
+ 
+endowments.
+ 
+The  platform  consists  of  two  tightly  integrated  products:  
+1.  Masheed  ERP  
+An  enterprise  operating  system  for  Awqaf  organizations  that  enables  them  to  manage  every  
+aspect
+ 
+of
+ 
+their
+ 
+operations,
+ 
+including:
+ 
+●  Waqf  registration  ●  Governance  ●  Financial  management  ●  Assets  ●  Beneficiaries  ●  Investments  ●  Documents  ●  Compliance  ●  AI-powered  recommendations  ●  Expert  consultations  
+The  ERP  is  designed  to  ensure  that  every  operational  activity  aligns  with  the  conditions  of  the  
+Waqif,
+ 
+supports
+ 
+regulatory
+ 
+compliance,
+ 
+and
+ 
+promotes
+ 
+long-term
+ 
+sustainability.
+ 
+ 
+2.  Waqf  by  Masheed  
+A  regulated  digital  investment  marketplace  that  connects  qualified  Awqaf  with  investors.  
+The  marketplace  enables  Awqaf  organizations  to  publish  investment  opportunities  after  passing  
+structured
+ 
+legal,
+ 
+financial,
+ 
+governance,
+ 
+and
+ 
+compliance
+ 
+reviews.
+ 
+===== PAGE 4 =====
+Investors  can  then  evaluate,  compare,  and  invest  in  opportunities  through  a  transparent,  
+data-rich
+ 
+platform.
+ 
+ 
+1.2  Product  Vision  
+To  become  the  digital  operating  system  for  the  Awqaf  sector  by  providing  the  infrastructure  
+required
+ 
+to
+ 
+manage,
+ 
+govern,
+ 
+grow,
+ 
+and
+ 
+invest
+ 
+in
+ 
+endowments
+ 
+while
+ 
+preserving
+ 
+the
+ 
+intentions
+ 
+of
+ 
+the
+ 
+Waqif
+ 
+and
+ 
+supporting
+ 
+national
+ 
+development
+ 
+goals.
+ 
+ 
+1.3  Mission  
+To  modernize  the  management  of  Awqaf  through  intelligent  software  that  combines  enterprise  
+resource
+ 
+planning,
+ 
+governance,
+ 
+regulatory
+ 
+compliance,
+ 
+expert
+ 
+consultation,
+ 
+and
+ 
+investment
+ 
+enablement
+ 
+into
+ 
+a
+ 
+single
+ 
+integrated
+ 
+ecosystem.
+ 
+ 
+1.4  Target  Users  
+ERP  
+●  Awqaf  Organizations  ●  Private  Awqaf  ●  Family  Awqaf  ●  Public  Awqaf  ●  Corporate  Awqaf  ●  Foundations  ●  Nazers  ●  Board  Members  ●  CEOs  ●  Financial  Managers  ●  Asset  Managers  ●  Auditors  ●  Compliance  Officers  ●  Consultants  ●  Legal  Advisors  
+ 
+===== PAGE 5 =====
+Marketplace  
+●  Individual  Investors  ●  Institutional  Investors  ●  Family  Offices  ●  Foundations  ●  Investment  Companies  ●  Endowment  Organizations  ●  Banks  (future)  ●  Real  Estate  Funds  (future)  
+ 
+2  Product  Philosophy  
+Masheed  is  not  an  accounting  system.  
+It  is  not  a  property  management  system.  
+It  is  not  a  CRM.  
+It  is  not  an  investment  marketplace.  
+It  is  not  a  document  management  system.  
+Instead,  
+Masheed  is  an  Operating  System  for  Awqaf .  
+Every  module  exists  to  support  one  or  more  of  the  following  objectives:  
+1.  Protect  the  Waqf.  2.  Preserve  the  Waqif's  conditions.  3.  Improve  governance.  4.  Ensure  regulatory  compliance.  5.  Increase  operational  efficiency.  6.  Enhance  transparency.  7.  Improve  investment  readiness.  8.  Increase  sustainability.  9.  Enable  informed  decision-making  through  AI.  10.  Maximize  the  long-term  social  and  financial  impact  of  the  Waqf.  
+Every  feature  added  to  the  platform  must  support  at  least  one  of  these  objectives.  
+ 
+===== PAGE 6 =====
+3  Core  Design  Principles  
+The  entire  platform  should  follow  these  principles.  
+Principle  1  —  Waqif  First  
+Every  workflow,  approval,  financial  transaction,  investment,  and  distribution  must  respect  the  
+Waqif's
+ 
+documented
+ 
+conditions.
+ 
+The
+ 
+system
+ 
+should
+ 
+actively
+ 
+prevent
+ 
+actions
+ 
+that
+ 
+conflict
+ 
+with
+ 
+those
+ 
+conditions
+ 
+and
+ 
+provide
+ 
+clear
+ 
+explanations
+ 
+when
+ 
+a
+ 
+restriction
+ 
+is
+ 
+triggered.
+ 
+ 
+Principle  2  —  Compliance  by  Design  
+Compliance  should  be  embedded  into  every  workflow  rather  than  treated  as  a  separate  
+checklist.
+ 
+Users
+ 
+should
+ 
+receive
+ 
+guidance
+ 
+and
+ 
+warnings
+ 
+before
+ 
+non-compliant
+ 
+actions
+ 
+are
+ 
+completed.
+ 
+ 
+Principle  3  —  Governance  by  Default  
+Governance  should  be  part  of  the  normal  operation  of  the  platform  through  structured  
+approvals,
+ 
+audit
+ 
+logs,
+ 
+segregation
+ 
+of
+ 
+duties,
+ 
+conflict-of-interest
+ 
+declarations,
+ 
+and
+ 
+board
+ 
+oversight.
+ 
+ 
+Principle  4  —  AI  as  a  Co-Pilot  
+Artificial  intelligence  should  assist  users  by  analyzing  information,  highlighting  risks,  
+recommending
+ 
+actions,
+ 
+and
+ 
+automating
+ 
+repetitive
+ 
+work.
+ 
+AI
+ 
+should
+ 
+never
+ 
+silently
+ 
+override
+ 
+human
+ 
+decisions
+ 
+or
+ 
+regulatory
+ 
+requirements.
+ 
+ 
+Principle  5  —  Transparency  
+Every  important  action  within  the  system  should  be  traceable,  with  complete  visibility  into  who  
+performed
+ 
+it,
+ 
+when
+ 
+it
+ 
+occurred,
+ 
+what
+ 
+changed,
+ 
+and
+ 
+why
+ 
+it
+ 
+changed.
+ 
+===== PAGE 7 =====
+ 
+Principle  6  —  One  Source  of  Truth  
+Each  Waqf  should  have  a  single,  unified  digital  profile  containing  its  legal  documents,  
+governance
+ 
+structure,
+ 
+assets,
+ 
+finances,
+ 
+beneficiaries,
+ 
+investments,
+ 
+compliance
+ 
+status,
+ 
+consultations,
+ 
+and
+ 
+historical
+ 
+records.
+ 
+This
+ 
+profile
+ 
+becomes
+ 
+the
+ 
+authoritative
+ 
+source
+ 
+for
+ 
+both
+ 
+ERP
+ 
+operations
+ 
+and
+ 
+investment
+ 
+marketplace
+ 
+eligibility.
+ 
+ 
+4  Product  Ecosystem  
+The  platform  consists  of  two  integrated  products  built  on  a  shared  foundation.  
+Masheed  Platform  │  ├──  Masheed  ERP  │    ├──  Waqf  Management  │    ├──  Asset  Management  │    ├──  Financial  Management  │    ├──  Governance  │    ├──  Compliance  │    ├──  Beneficiaries  │    ├──  Consultation  Services  │    └──  Reporting  │  ├──  Waqf  by  Masheed  │    ├──  Opportunity  Listings  │    ├──  Due  Diligence  │    ├──  Investment  Workflow  │    ├──  Investor  Portal  │    ├──  Portfolio  Management  │    └──  Listing  Administration  │  └──  Shared  Services     ├──  Authentication     ├──  Organizations     ├──  Users  &  Roles     ├──  Documents     ├──  Notifications     ├──  Audit  Logs  
+===== PAGE 8 =====
+   ├──  AI  Services     └──  Search    
+PART  2  —  Masheed  ERP  
+Chapter  1  —  ERP  Architecture   
+1.1  ERP  Philosophy  
+Masheed  ERP  is  not  organized  around  accounting  or  departments.  Instead,  it  is  organized  
+around
+ 
+the
+ 
+lifecycle
+ 
+of
+ 
+a
+ 
+Waqf.
+ 
+Every  piece  of  data  belongs  to  a  Waqf,  and  every  action  taken  within  the  system  contributes  to  
+one
+ 
+or
+ 
+more
+ 
+of
+ 
+the
+ 
+following
+ 
+objectives:
+ 
+●  Preserve  the  Waqif's  conditions.  ●  Protect  and  grow  Waqf  assets.  ●  Ensure  regulatory  compliance.  ●  Improve  governance.  ●  Support  informed  decision-making.  ●  Enable  investment  readiness.  
+This  philosophy  influences  every  module,  workflow,  permission,  and  AI  recommendation  
+throughout
+ 
+the
+ 
+platform.
+ 
+ 
+1.2  High-Level  ERP  Structure  
+The  ERP  is  divided  into  eight  functional  domains:  
+Masheed  ERP   ├──  Foundation  │    ├──  Organizations  │    ├──  Users  
+===== PAGE 9 =====
+│    ├──  Roles  &  Permissions  │    ├──  Settings  │    ├──  Notifications  │    └──  Audit  Logs  │  ├──  Waqf  Management  │    ├──  Waqf  Profile  │    ├──  Waqif  │    ├──  Waqf  Conditions  │    ├──  Beneficiaries  │    ├──  Governance  │    └──  Compliance  │  ├──  Asset  Management  │    ├──  Properties  │    ├──  Land  │    ├──  Buildings  │    ├──  Equipment  │    ├──  Vehicles  │    ├──  Investments  │    └──  Tokenization  Readiness  │  ├──  Finance  │    ├──  Accounting  │    ├──  Revenues  │    ├──  Expenses  │    ├──  Budgets  │    ├──  Distributions  │    ├──  Contracts  │    └──  Financial  Reports  │  ├──  Operations  │    ├──  Tasks  │    ├──  Maintenance  │    ├──  Documents  │    ├──  Meetings  │    ├──  Approvals  │    └──  Calendar  │  ├──  Compliance  │    ├──  Regulations  │    ├──  Violations  │    ├──  Risk  Register  │    ├──  Internal  Audit  
+===== PAGE 10 =====
+│    ├──  AI  Compliance  Officer  │    └──  Compliance  Reports  │  ├──  Consultancy  │    ├──  Experts  │    ├──  Consultations  │    ├──  Requests  │    ├──  Recommendations  │    └──  Knowledge  Base  │  └──  Marketplace  Integration     ├──  Listing  Readiness     ├──  Due  Diligence     ├──  Listing  Requests     ├──  Investment  Documents     └──  Marketplace  Sync   
+1.3  Core  Platform  Objects  
+Everything  in  Masheed  revolves  around  a  small  number  of  core  entities.  
+Organization   ↓   Waqf   ↓   Assets   ↓   Income   ↓   Expenses   ↓   Beneficiaries  
+===== PAGE 11 =====
+ ↓   Compliance   ↓   Investment  Readiness   ↓   Marketplace  
+Every  module  references  these  core  entities  instead  of  maintaining  isolated  records.  
+ 
+1.4  Digital  Twin  Architecture  
+Each  Waqf  has  a  complete  digital  representation  within  the  platform.  
+WAQF   Identity  │  ├──  Name  ├──  Type  ├──  Registration  ├──  Status  ├──  Documents  └──  History   Governance  │  ├──  Board  ├──  Nazer  ├──  Policies  ├──  Committees  └──  Meetings   Financial  │  ├──  Revenues  
+===== PAGE 12 =====
+├──  Expenses  ├──  Budget  ├──  Investments  ├──  Distributions  └──  Statements   Assets  │  ├──  Properties  ├──  Land  ├──  Buildings  ├──  Equipment  ├──  Vehicles  └──  Investments   Beneficiaries  │  ├──  Individuals  ├──  Organizations  ├──  Distribution  Rules  └──  Payment  History   Compliance  │  ├──  Violations  ├──  Warnings  ├──  Risks  ├──  Audits  └──  AI  Monitoring   Marketplace  │  ├──  Readiness  ├──  Listings  ├──  Due  Diligence  └──  Investors   Consultations  │  ├──  Requests  ├──  Experts  ├──  Reports  └──  Recommendations  
+===== PAGE 13 =====
+This  digital  twin  becomes  the  single  source  of  truth  for  both  the  ERP  and  the  investment  
+marketplace.
+ 
+ 
+1.5  Navigation  Structure  
+The  left  sidebar  should  remain  consistent  across  all  pages.  
+Dashboard   Workspace   My  Tasks   ──────────────────────   WAQF   •  Waqfs   •  Waqifs   •  Beneficiaries   •  Governance   •  Compliance   ──────────────────────   Assets   •  Properties   •  Investments   •  Maintenance   •  Contracts   ──────────────────────   
+===== PAGE 14 =====
+Finance   •  Accounting   •  Revenues   •  Expenses   •  Budgets   •  Distributions   ──────────────────────   Operations   •  Calendar   •  Documents   •  Meetings   •  Workflows   ──────────────────────   Consultancy   •  Experts   •  Requests   •  AI  Assistant   ──────────────────────   Marketplace   •  Listing  Readiness   •  Listing  Requests   •  Marketplace  Status   
+===== PAGE 15 =====
+──────────────────────   Reports   Analytics   Settings   
+1.6  Dashboard  Philosophy  
+Every  user  should  see  a  role-based  dashboard.  
+There  should  never  be  a  "generic  dashboard."  
+Examples:  
+CEO  Dashboard  
+●  Total  Waqf  Value  ●  Asset  Growth  ●  Revenue  Trend  ●  Compliance  Score  ●  Governance  Score  ●  Investment  Readiness  ●  High  Risk  Items  ●  AI  Recommendations  
+ 
+Financial  Manager  
+●  Cash  Position  ●  Outstanding  Payments  ●  Budget  Utilization  ●  Revenue  ●  Expenses  ●  Profitability  ●  Financial  Risks  
+ 
+Nazer  
+===== PAGE 16 =====
+●  Compliance  Alerts  ●  Beneficiary  Issues  ●  Waqif  Condition  Violations  ●  Governance  Tasks  ●  Pending  Approvals  ●  AI  Recommendations  
+ 
+Asset  Manager  
+●  Occupancy  ●  Maintenance  ●  Asset  Health  ●  Valuation  ●  Insurance  ●  Rental  Performance  
+ 
+Compliance  Officer  
+●  Violations  ●  Upcoming  Deadlines  ●  Internal  Audits  ●  Risk  Register  ●  Missing  Documents  ●  Conflict  of  Interest  Declarations  
+ 
+1.7  Universal  Object  Layout  
+Every  major  object  in  the  ERP  should  use  a  consistent  layout.  
+For  example:  
+Asset   Overview   Details   Financial  
+===== PAGE 17 =====
+ Documents   Activities   History   Compliance   AI  Analysis   Relationships  
+The  same  pattern  applies  to:  
+●  Waqf  ●  Property  ●  Beneficiary  ●  Contract  ●  Investment  ●  Consultation  ●  Listing  ●  Organization  
+This  consistency  reduces  the  learning  curve  for  users.  
+ 
+1.8  Universal  Record  Header  
+Every  record  should  display  a  standardized  header  with  quick  insights  and  actions.  
+Property  #A-1024   Status   Compliance  Score   Risk  Score   Investment  Score   AI  Health  Score  
+===== PAGE 18 =====
+ Owner   Created  By   Last  Updated   Marketplace  Status   Quick  Actions   Approve   Archive   Generate  Report   Request  Consultation   Open  AI  Assistant   View  History   
+1.9  Global  Search  
+Masheed  should  offer  a  platform-wide  intelligent  search.  
+Users  can  search  by:  
+●  Waqf  Name  ●  Waqif  ●  Beneficiary  ●  Property  ●  Asset  ID  ●  Contract  ●  Invoice  ●  Consultant  ●  Listing  ●  Investor  ●  Regulation  ●  AI  Recommendation  
+===== PAGE 19 =====
+Search  results  should  include:  
+●  Matching  records  ●  Related  records  ●  Recent  activity  ●  AI-generated  suggestions  
+Example:  
+Searching  for  "Al  Noor  Waqf"  could  return:  
+●  Waqf  Profile  ●  Associated  Properties  ●  Financial  Statements  ●  Active  Compliance  Issues  ●  Marketplace  Listing  ●  Consultation  History  ●  Related  Documents  
+ 
+1.10  Universal  Status  System  
+Every  workflow  in  the  ERP  should  follow  standardized  lifecycle  statuses.  
+Draft   ↓   Submitted   ↓   Under  Review   ↓   Pending  Information   ↓   Approved   ↓  
+===== PAGE 20 =====
+ Active   ↓   Suspended   ↓   Completed   ↓   Archived  
+Additional  statuses  can  be  added  by  specific  modules,  but  these  remain  the  foundation  for  
+consistency.
+ 
+ 
+1.11  Cross-Module  Relationships  
+One  of  Masheed's  key  differentiators  is  that  modules  are  deeply  interconnected  rather  than  
+operating
+ 
+in
+ 
+isolation.
+ 
+For  example:  
+●  A  property  is  linked  to  its  Waqf,  revenue  records,  maintenance  history,  insurance  
+policies,
+ 
+legal
+ 
+documents,
+ 
+and
+ 
+marketplace
+ 
+readiness.
+ ●  A  beneficiary  is  connected  to  distribution  rules,  payment  history,  Waqif  conditions,  and  
+audit
+ 
+records.
+ ●  A  listing  request  references  financial  statements,  governance  documents,  compliance  
+status,
+ 
+and
+ 
+asset
+ 
+valuations
+ 
+automatically.
+ 
+This  interconnected  model  enables  AI  to  analyze  complete  business  contexts  rather  than  
+fragmented
+ 
+data.
+ 
+ 
+1.12  AI  Everywhere  
+Every  page  in  the  ERP  should  include  contextual  AI  assistance.  
+===== PAGE 21 =====
+Instead  of  one  generic  chatbot,  the  AI  understands  the  current  screen  and  offers  relevant  
+actions.
+ 
+Examples  include:  
+●  Explaining  a  regulation  affecting  the  current  Waqf.  ●  Detecting  missing  documents  before  submission.  ●  Summarizing  financial  performance.  ●  Suggesting  governance  improvements.  ●  Drafting  consultation  requests.  ●  Predicting  maintenance  needs.  ●  Highlighting  marketplace  readiness  gaps.  
+The  AI  should  always  explain  why  it  makes  a  recommendation  and  reference  the  supporting  
+data,
+ 
+maintaining
+ 
+transparency
+ 
+and
+ 
+user
+ 
+trust.
+ 
+PART  2  —  ERP  
+Chapter  2  —  Waqf  Management  Module  
+ 
+2.1  Purpose  
+The  Waqf  Management  Module  is  the  core  of  Masheed  ERP.  
+Every  other  module  within  the  platform  is  directly  or  indirectly  connected  to  a  Waqf.  
+Rather  than  treating  a  Waqf  as  a  simple  record,  Masheed  represents  it  as  a  complete  digital  
+entity
+ 
+that
+ 
+encapsulates
+ 
+its
+ 
+legal
+ 
+identity,
+ 
+governance
+ 
+structure,
+ 
+financial
+ 
+activities,
+ 
+assets,
+ 
+beneficiaries,
+ 
+regulatory
+ 
+status,
+ 
+historical
+ 
+changes,
+ 
+and
+ 
+investment
+ 
+readiness.
+ 
+The  module  serves  as  the  authoritative  source  of  truth  for  all  information  related  to  an  individual  
+Waqf.
+ 
+ 
+2.2  Objectives  
+===== PAGE 22 =====
+The  module  should  enable  organizations  to:  
+●  Register  and  manage  multiple  Awqaf.  ●  Preserve  and  enforce  the  Waqif's  intentions.  ●  Maintain  complete  legal  documentation.  ●  Track  governance  structures.  ●  Monitor  compliance.  ●  Link  all  assets  and  financial  activities.  ●  Prepare  Waqf  for  investment.  ●  Generate  regulatory  reports.  ●  Support  AI-driven  decision  making.  
+ 
+2.3  Waqf  Lifecycle  
+Every  Waqf  follows  a  standardized  lifecycle.  
+Idea   ↓   Draft   ↓   Registration   ↓   Legal  Verification   ↓   Governance  Setup   ↓   Asset  Registration   ↓   Financial  Setup  
+===== PAGE 23 =====
+ ↓   Operational   ↓   Investment  Ready   ↓   Marketplace  Listed   ↓   Archived  
+Each  stage  unlocks  additional  capabilities  while  enforcing  completion  of  mandatory  
+requirements.
+ 
+ 
+2.4  Waqf  Profile  Structure  
+Every  Waqf  profile  consists  of  the  following  sections:  
+Overview   Legal  Information   Founder  (Waqif)   Waqf  Conditions   Governance   Beneficiaries   Assets   Financial  Overview   Compliance  
+===== PAGE 24 =====
+ Investment  Readiness   Marketplace   Documents   Consultations   AI  Insights   Timeline   Audit  History  
+This  unified  structure  allows  users  to  navigate  the  complete  context  of  a  Waqf  from  a  single  
+location.
+ 
+ 
+2.5  Waqf  Header  
+Every  Waqf  page  begins  with  a  summary  card.  
+WAQF  NAME   Current  Status   Registration  Number   Organization   Total  Asset  Value   Annual  Revenue   Beneficiaries   Compliance  Score   Governance  Score   Investment  Readiness  
+===== PAGE 25 =====
+ Marketplace  Status   AI  Health  Score   Quick  Actions  
+Quick  actions  include:  
+●  Edit  ●  Upload  Document  ●  Add  Asset  ●  Add  Beneficiary  ●  Create  Consultation  ●  Generate  Report  ●  Request  Marketplace  Listing  ●  Open  AI  Assistant  
+ 
+2.6  Waqf  Data  Model  
+Section  A  —  Identity  
+Field  Type  Required  
+Waqf  ID  UUID  ✓  
+Arabic  Name  Text  ✓  
+English  Name  Text   
+Short  Name  Text   
+Internal  Code  Text  ✓  
+Waqf  Type  Dropdown  ✓  
+Waqf  Category  Dropdown  ✓  
+Registration  Number  Text  ✓  
+Registration  Date  Date  ✓  
+===== PAGE 26 =====
+Establishment  Date  Date   
+Status  Enum  ✓  
+Description  Rich  Text   
+Vision  Rich  Text   
+Mission  Rich  Text    
+Section  B  —  Classification  
+Fields  
+Public  Waqf  
+Private  Waqf  
+Family  Waqf  
+Corporate  Waqf  
+Educational  
+Health  
+Mosque  
+Real  Estate  
+Agricultural  
+Cash  Waqf  
+Investment  Waqf  
+Mixed  
+Users  may  select  multiple  operational  categories  while  maintaining  a  single  legal  classification.  
+ 
+Section  C  —  Legal  Information  
+Fields  
+===== PAGE 27 =====
+Registration  Authority  
+License  Number  
+Commercial  Registration  
+National  Address  
+Tax  Registration  
+Municipality  Registration  
+Legal  Representative  
+Legal  Status  
+Expiration  Dates  
+Official  Website  
+Email  
+Phone  
+Government  Portal  Links  
+ 
+Section  D  —  Address  
+Country  
+Region  
+City  
+District  
+Street  
+Building  Number  
+Postal  Code  
+Latitude  
+Longitude  
+===== PAGE 28 =====
+Google  Maps  
+Location  Documents  
+ 
+2.7  Waqif  (Founder)  Information  
+Unlike  traditional  systems,  Masheed  treats  the  Waqif  as  a  first-class  entity  with  historical  and  
+legal
+ 
+significance.
+ 
+Each  Waqf  may  have  one  or  more  founders.  
+For  each  Waqif:  
+Field  Type  
+Waqif  ID  UUID  
+Full  Name   
+Arabic  Name   
+Nationality   
+National  ID  /  Iqama   
+Date  of  Birth   
+Date  of  Death  (if  applicable)   
+Contact  Details   
+Biography   
+Relationship  to  Waqf   
+Founder  Type  (Individual  /  Organization)   
+Legal  Documents   
+Power  of  Attorney   
+Notes   
+The  system  maintains  a  permanent  record  even  if  the  founder  is  deceased.  
+===== PAGE 29 =====
+ 
+2.8  Waqf  Conditions  Engine  (Core  
+Differentiator)
+ 
+This  is  one  of  Masheed's  most  important  innovations.  
+Instead  of  storing  the  Waqf  deed  as  a  PDF,  every  condition  is  transformed  into  structured,  
+machine-readable
+ 
+rules.
+ 
+Each  condition  becomes  an  object  with:  
+Field  
+Condition  Number  
+Category  
+Original  Arabic  Text  
+Simplified  Interpretation  
+AI  Explanation  
+Related  Assets  
+Related  Beneficiaries  
+Related  Investments  
+Related  Financial  Rules  
+Priority  
+Mandatory  /  Optional  
+Effective  Date  
+Expiration  Date  
+Current  Status  
+Regulatory  Notes  
+Each  condition  can  then  drive  business  logic  throughout  the  platform.  
+===== PAGE 30 =====
+For  example:  
+●  Restrict  investments  to  certain  asset  classes.  ●  Limit  distributions  to  specified  beneficiaries.  ●  Require  board  approval  for  asset  sales.  ●  Prevent  use  of  funds  outside  defined  purposes.  
+This  engine  ensures  that  operational  decisions  remain  aligned  with  the  Waqif's  intent.  
+ 
+2.9  AI  Waqif  Interpreter  
+When  a  Waqf  deed  is  uploaded,  the  AI  should:  
+●  Extract  all  conditions.  ●  Identify  beneficiaries.  ●  Detect  governing  rules.  ●  Summarize  the  document.  ●  Highlight  ambiguities.  ●  Suggest  legal  review  if  necessary.  ●  Generate  structured  conditions  automatically.  
+The  user  reviews  and  confirms  the  extracted  information  before  it  becomes  active.  
+ 
+2.10  Beneficiary  Framework  
+Rather  than  simply  listing  beneficiaries,  the  system  models  their  relationships  and  entitlements.  
+Each  beneficiary  record  includes:  
+●  Identity  ●  Type  (Individual,  Family,  Organization,  Public)  ●  Eligibility  Criteria  ●  Supporting  Documents  ●  Distribution  Rules  ●  Payment  Method  ●  Status  ●  Priority  ●  Historical  Payments  
+===== PAGE 31 =====
+●  Related  Conditions  ●  AI  Eligibility  Score  
+The  framework  supports  future  rule-based  distribution  automation  while  preserving  manual  
+oversight
+ 
+where
+ 
+required.
+ 
+ 
+2.11  Waqf  Timeline  
+Every  important  event  becomes  part  of  the  Waqf's  permanent  history.  
+Examples  include:  
+●  Waqf  created  ●  Deed  updated  ●  Asset  acquired  ●  Asset  sold  ●  Beneficiary  added  ●  Distribution  completed  ●  Consultation  requested  ●  Compliance  issue  detected  ●  Governance  decision  recorded  ●  Marketplace  listing  submitted  ●  Listing  approved  ●  Listing  closed  
+Users  can  filter  the  timeline  by  category,  date,  user,  or  event  type.  
+ 
+2.12  Waqf  Health  Score  (Masheed  
+Innovation)
+ 
+Every  Waqf  receives  a  continuously  updated  health  score  composed  of  multiple  dimensions:  
+●  Legal  Completeness  ●  Governance  Maturity  ●  Financial  Stability  ●  Asset  Quality  ●  Compliance  Status  
+===== PAGE 32 =====
+●  Documentation  Completeness  ●  Operational  Performance  ●  Risk  Profile  ●  Investment  Readiness  ●  AI  Confidence  
+Each  dimension  contributes  to  an  overall  score  from  0  to  100,  with  recommendations  for  
+improvement.
+ 
+This  provides  executives  and  regulators  with  a  concise  view  of  the  Waqf's  operational  health.  
+ 
+2.13  Automations  
+The  module  should  automatically:  
+●  Detect  missing  legal  documents.  ●  Notify  users  of  expiring  registrations.  ●  Validate  required  fields  before  activation.  ●  Generate  onboarding  tasks.  ●  Trigger  governance  setup  after  registration.  ●  Recommend  consultations  for  detected  issues.  ●  Calculate  Health  Score.  ●  Update  Investment  Readiness.  ●  Synchronize  with  the  Marketplace  module  when  eligibility  changes.  
+ 
+2.14  Reports  
+The  Waqf  Management  module  should  generate:  
+●  Waqf  Master  Profile  ●  Legal  Information  Report  ●  Waqif  Summary  ●  Beneficiary  Register  ●  Conditions  Register  ●  Governance  Summary  ●  Compliance  Overview  ●  Health  Score  Report  ●  Investment  Readiness  Report  
+===== PAGE 33 =====
+●  Executive  Summary  
+All  reports  should  be  exportable  in  PDF  and  Excel,  with  configurable  branding  for  each  
+organization.
+ 
+PART  2  —  ERP  
+Chapter  3  —  Asset  Management  
+ 
+3.1  Purpose  
+The  Asset  Management  Module  enables  Awqaf  organizations  to  register,  manage,  monitor,  
+maintain,
+ 
+value,
+ 
+develop,
+ 
+and
+ 
+optimize
+ 
+every
+ 
+asset
+ 
+owned
+ 
+by
+ 
+a
+ 
+Waqf.
+ 
+The  module  serves  as  the  operational  foundation  of  the  ERP  because  assets  are  the  primary  
+source
+ 
+of
+ 
+sustainability,
+ 
+revenue
+ 
+generation,
+ 
+and
+ 
+long-term
+ 
+impact.
+ 
+Unlike  conventional  ERP  systems,  Masheed  combines:  
+●  Asset  Registry  ●  Property  Management  ●  Financial  Performance  ●  Maintenance  ●  Compliance  ●  Governance  ●  Risk  Analysis  ●  AI  Intelligence  ●  Investment  Readiness  
+into  a  unified  asset  management  experience.  
+ 
+3.2  Objectives  
+The  module  shall:  
+===== PAGE 34 =====
+●  Maintain  a  complete  digital  inventory  of  assets.  ●  Protect  Waqf  assets.  ●  Maximize  utilization.  ●  Improve  maintenance  planning.  ●  Monitor  financial  performance.  ●  Track  legal  ownership.  ●  Calculate  asset  value.  ●  Measure  investment  potential.  ●  Support  Tokenization  Readiness.  ●  Prepare  assets  for  marketplace  listing.  
+ 
+3.3  Asset  Lifecycle  
+Every  asset  follows  a  structured  lifecycle.  
+Identification   ↓   Registration   ↓   Legal  Verification   ↓   Valuation   ↓   Operational   ↓   Revenue  Generation   ↓   Maintenance   
+===== PAGE 35 =====
+↓   Improvement   ↓   Investment  Evaluation   ↓   Marketplace  Ready   ↓   Disposed  (if  legally  permitted)  
+The  system  must  record  every  transition  with  timestamps,  approvals,  and  supporting  
+documentation.
+ 
+ 
+3.4  Supported  Asset  Types  
+Masheed  should  support  a  broad  range  of  asset  classes,  including:  
+Real  Estate  
+●  Residential  Buildings  ●  Commercial  Buildings  ●  Towers  ●  Villas  ●  Hotels  ●  Apartments  ●  Offices  ●  Warehouses  ●  Retail  Shops  ●  Mixed-use  Developments  
+ 
+Land  
+●  Agricultural  Land  
+===== PAGE 36 =====
+●  Commercial  Land  ●  Residential  Land  ●  Industrial  Land  ●  Undeveloped  Land  
+ 
+Financial  Assets  
+●  Cash  Waqf  ●  Investment  Funds  ●  Sukuk  ●  Equities  (where  permitted)  ●  Murabaha  Investments  ●  Deposits  
+ 
+Movable  Assets  
+●  Vehicles  ●  Equipment  ●  Machinery  ●  Furniture  ●  Technology  Equipment  
+ 
+Intellectual  Assets  
+●  Trademarks  ●  Patents  ●  Copyrights  ●  Software  ●  Licenses  
+ 
+Other  Assets  
+●  Endowment  Projects  ●  Operating  Businesses  ●  Future  Developments  ●  Renewable  Energy  Projects  
+===== PAGE 37 =====
+ 
+3.5  Asset  Object  Structure  
+Each  asset  becomes  a  "Digital  Asset  Twin."  
+Asset   Overview   ↓   Ownership   ↓   Legal   ↓   Financial   ↓   Operations   ↓   Maintenance   ↓   Compliance   ↓   Governance   ↓   Risk   ↓  
+===== PAGE 38 =====
+ Investment   ↓   Marketplace   ↓   AI  Intelligence   ↓   History   
+3.6  Asset  Information  
+Identity  
+Field  Required  
+Asset  ID  ✓  
+Asset  Code  ✓  
+Arabic  Name  ✓  
+English  Name   
+Internal  Reference  
+ 
+Waqf  ✓  
+Organization  ✓  
+Asset  Type  ✓  
+Asset  Category  ✓  
+Asset  Status  ✓  
+ 
+===== PAGE 39 =====
+Physical  Information  
+Fields  
+GPS  Coordinates  
+Address  
+District  
+City  
+Region  
+Country  
+Building  Number  
+Parcel  Number  
+Municipality  Number  
+Land  Area  
+Building  Area  
+Number  of  Floors  
+Parking  Spaces  
+Construction  Year  
+Renovation  Date  
+Occupancy  Rate  
+Accessibility  Rating  
+Energy  Rating  
+Google  Maps  Link  
+Drone  Images  
+360°  Images  
+Virtual  Tour  
+===== PAGE 40 =====
+Blueprint  Files  
+BIM  Model  (future)  
+ 
+Ownership  
+Fields  
+Ownership  Type  
+Title  Deed  Number  
+Title  Deed  Copy  
+Government  Registration  
+Registration  Authority  
+Acquisition  Date  
+Acquisition  Method  
+Purchase  Price  
+Current  Owner  
+Previous  Owner  
+Restrictions  
+Mortgage  Status  
+Encumbrances  
+Legal  Notes  
+ 
+Financial  
+Fields  
+Current  Value  
+===== PAGE 41 =====
+Book  Value  
+Market  Value  
+Replacement  Cost  
+Insurance  Value  
+Last  Valuation  
+Valuation  Company  
+Annual  Revenue  
+Monthly  Revenue  
+Expenses  
+Maintenance  Cost  
+Net  Income  
+ROI  
+Occupancy  Revenue  
+Revenue  Trend  
+Expense  Trend  
+Projected  Revenue  
+AI  Revenue  Forecast  
+ 
+Insurance  
+Fields  
+Provider  
+Policy  Number  
+Coverage  
+Expiration  
+===== PAGE 42 =====
+Premium  
+Claims  
+Risk  Rating  
+Renewal  Reminder  
+ 
+Compliance  
+Fields  
+Inspection  Status  
+Legal  Compliance  
+Environmental  Compliance  
+Safety  Compliance  
+Municipality  Compliance  
+AI  Compliance  Score  
+Inspection  Reports  
+Pending  Violations  
+Deadlines  
+ 
+Governance  
+Fields  
+Approval  Authority  
+Board  Approval  Required  
+Selling  Restrictions  
+Leasing  Restrictions  
+===== PAGE 43 =====
+Waqif  Restrictions  
+Committee  
+Approvals  
+Policy  References  
+ 
+Marketplace  
+Fields  
+Investment  Ready  
+Marketplace  Eligible  
+Listing  Status  
+Listing  Date  
+Expected  ROI  
+Investor  Interest  
+Funding  Status  
+Investment  Score  
+ 
+3.7  Asset  Dashboard  
+Every  asset  should  display:  
+Asset  Value   Monthly  Revenue   Net  Profit   Occupancy   
+===== PAGE 44 =====
+Compliance   Maintenance   Risk   AI  Health   Marketplace   Quick  Actions   
+3.8  Maintenance  Module  
+Every  asset  contains  a  full  maintenance  center.  
+Maintenance  Types  
+●  Preventive  ●  Corrective  ●  Emergency  ●  Predictive  ●  Inspection  ●  Cleaning  ●  Renovation  
+Every  maintenance  request  includes:  
+●  Request  ID  ●  Priority  ●  Category  ●  Assigned  Team  ●  Contractor  ●  Cost  ●  Start  Date  ●  End  Date  ●  Photos  ●  Documents  ●  Before  Images  ●  After  Images  ●  AI  Summary  ●  Completion  Report  
+===== PAGE 45 =====
+ 
+3.9  AI  Maintenance  Planner  
+The  AI  continuously  evaluates:  
+Age  
+Weather  
+Usage  
+Occupancy  
+Revenue  
+Previous  Repairs  
+Inspection  Results  
+Sensor  Data  (future)  
+and  predicts:  
+Expected  failure  
+Remaining  useful  life  
+Optimal  maintenance  date  
+Budget  estimate  
+Recommended  contractor  type  
+Risk  of  postponement  
+ 
+3.10  Asset  Risk  Engine  
+Each  asset  receives  a  continuously  updated  risk  assessment.  
+Risk  Categories  
+===== PAGE 46 =====
+Operational  
+Financial  
+Legal  
+Environmental  
+Insurance  
+Market  
+Governance  
+Compliance  
+Cyber  (for  smart  assets)  
+Natural  Disaster  
+Each  risk  includes:  
+Probability  
+Impact  
+Risk  Owner  
+Mitigation  Plan  
+Review  Date  
+AI  Recommendation  
+Status  
+ 
+3.11  AI  Asset  Intelligence  
+Instead  of  just  reporting  numbers,  the  AI  should  answer  questions  like:  
+"This  property's  rental  yield  is  18%  below  similar  assets."  
+"Maintenance  costs  have  increased  by  22%  over  the  last  year."  
+===== PAGE 47 =====
+"This  building  should  undergo  a  new  valuation."  
+"This  asset  qualifies  for  marketplace  listing."  
+"This  asset  should  not  be  listed  because  it  conflicts  with  Waqif  Condition  #7."  
+"The  insurance  coverage  expires  in  38  days."  
+"This  building  has  generated  positive  cash  flow  for  24  consecutive  months."  
+ 
+3.12  Asset  Health  Score  
+Every  asset  receives  a  score  from  0–100  based  on  weighted  criteria:  
+Dimension  Weight  
+Legal  Status  10%  
+Documentation  Completeness  
+10%  
+Maintenance  Condition  15%  
+Financial  Performance  20%  
+Occupancy  10%  
+Compliance  15%  
+Governance  10%  
+Investment  Readiness  10%  
+This  score  feeds  into  the  overall  Waqf  Health  Score.  
+ 
+3.13  Asset  Relationships  
+Assets  should  never  exist  in  isolation.  
+Each  asset  is  linked  to:  
+===== PAGE 48 =====
+●  Waqf  ●  Waqif  Conditions  ●  Beneficiaries  (where  applicable)  ●  Revenue  Records  ●  Expense  Records  ●  Contracts  ●  Insurance  Policies  ●  Maintenance  Requests  ●  Legal  Documents  ●  Valuations  ●  Risks  ●  Compliance  Findings  ●  Consultations  ●  Marketplace  Listings  ●  AI  Recommendations  
+These  relationships  allow  impact  analysis.  For  example,  if  an  asset's  valuation  drops  
+significantly,
+ 
+the
+ 
+system
+ 
+can
+ 
+identify
+ 
+affected
+ 
+investment
+ 
+opportunities,
+ 
+revenue
+ 
+projections,
+ 
+and
+ 
+beneficiary
+ 
+distributions.
+ 
+ 
+3.14  Smart  Automations  
+The  Asset  Management  module  should  automatically:  
+●  Create  recurring  maintenance  schedules.  ●  Alert  users  when  insurance  or  legal  documents  are  nearing  expiration.  ●  Recommend  asset  revaluations  based  on  market  conditions  or  elapsed  time.  ●  Detect  abnormal  expense  spikes.  ●  Flag  occupancy  declines.  ●  Update  investment  readiness  after  major  changes.  ●  Trigger  consultation  requests  for  high-risk  assets.  ●  Synchronize  asset  information  with  the  Marketplace  module  when  listing  eligibility  
+changes.
+ 
+ 
+3.15  Reports  
+The  module  should  provide:  
+===== PAGE 49 =====
+●  Asset  Register  ●  Asset  Portfolio  Summary  ●  Property  Performance  Report  ●  Occupancy  Report  ●  Maintenance  Report  ●  Insurance  Report  ●  Valuation  History  ●  Asset  Health  Report  ●  Risk  Register  ●  Compliance  Report  ●  Marketplace  Eligibility  Report  ●  Executive  Portfolio  Dashboard  
+Enhancement  Proposal  —  "Asset  
+Command
+ 
+Center"
+ 
+Rather  than  treating  assets  as  individual  pages,  I  recommend  creating  an  Asset  Command  
+Center
+.
+ 
+This  would  be  a  visual  control  room  where  managers  can:  
+●  View  all  assets  on  an  interactive  map.  ●  Filter  by  Waqf,  city,  value,  risk,  occupancy,  or  compliance.  ●  See  AI-generated  alerts  in  real  time.  ●  Compare  asset  performance  across  portfolios.  ●  Launch  maintenance,  inspections,  or  consultations  directly  from  the  map.  ●  Identify  assets  ready  for  investment  listing  with  a  single  click.  
+This  feature  would  be  one  of  Masheed's  strongest  differentiators  and  give  executives  an  
+immediate
+ 
+operational
+ 
+overview
+ 
+that
+ 
+is
+ 
+not
+ 
+commonly
+ 
+found
+ 
+in
+ 
+traditional
+ 
+ERP
+ 
+systems.
+ 
+PART  2  —  ERP  Chapter  4  —  Financial  Management  4.1  Purpose   The  Financial  Management  module  provides  a  complete  financial  operating  system  for  Awqaf  
+organizations.
+ 
+It
+ 
+combines
+ 
+accounting,
+ 
+budgeting,
+ 
+treasury,
+ 
+distributions,
+ 
+investment
+ 
+accounting,
+ 
+and
+ 
+financial
+ 
+governance
+ 
+into
+ 
+a
+ 
+unified
+ 
+platform
+ 
+that
+ 
+is
+ 
+aware
+ 
+of
+ 
+Waqf-specific
+ 
+regulations
+ 
+and
+ 
+the
+ 
+conditions
+ 
+of
+ 
+each
+ 
+Waqif.
+  Unlike  conventional  accounting  systems,  every  financial  transaction  in  Masheed  is  evaluated  
+within
+ 
+the
+ 
+context
+ 
+of:
+ 
+===== PAGE 50 =====
+ Waqf  purpose.  Waqif  conditions.  Beneficiary  rights.  Governance  policies.  Regulatory  requirements.  Investment  readiness.   The  objective  is  not  only  to  record  financial  activity  but  to  ensure  that  all  financial  decisions  are  
+compliant,
+ 
+transparent,
+ 
+and
+ 
+aligned
+ 
+with
+ 
+the
+ 
+long-term
+ 
+sustainability
+ 
+of
+ 
+the
+ 
+Waqf.
+  4.2  Financial  Architecture  Financial  Management   ├──  Chart  of  Accounts  ├──  General  Ledger  ├──  Journals  ├──  Cost  Centers  ├──  Budgets  ├──  Revenues  ├──  Expenses  ├──  Treasury  ├──  Investments  ├──  Distributions  ├──  Financial  Statements  ├──  Cash  Flow  ├──  Forecasting  ├──  Compliance  ├──  AI  Financial  Intelligence  └──  Marketplace  Readiness  4.3  Chart  of  Accounts   Unlike  generic  ERPs,  the  chart  of  accounts  should  ship  with  a  Waqf-optimized  template,  while  
+allowing
+ 
+organizations
+ 
+to
+ 
+customize
+ 
+it.
+  Major  Categories   Assets   Cash  Bank  Accounts  Receivables  Investment  Assets  Real  Estate  
+===== PAGE 51 =====
+Equipment  Other  Assets   Liabilities   Payables  Accrued  Expenses  Deposits  Financing  (where  legally  applicable)   Equity  /  Endowment  Funds   Principal  Endowment  Restricted  Endowment  Unrestricted  Funds  Reserve  Fund  Development  Fund   Revenue   Rental  Income  Agricultural  Income  Investment  Returns  Donations  Grants  Other  Income   Expenses   Maintenance  Operations  Salaries  Utilities  Professional  Services  Consultancy  Legal  Insurance  Administrative  Costs   Beneficiary  Distributions   Family  Distribution  Educational  Programs  Healthcare  
+===== PAGE 52 =====
+Mosque  Operations  Community  Programs  Other  Approved  Uses  4.4  Financial  Dimensions   Every  transaction  should  support  multiple  dimensions.   Example:   Dimension  Example  Waqf  Al  Noor  Waqf  Asset  Tower  A  Project  Expansion  Project  Department  Operations  Cost  Center  Maintenance  Beneficiary  Group  Students  Funding  Source  Rental  Income  Condition  Reference  Condition  #5  Marketplace  Impact  Yes   These  dimensions  allow  advanced  reporting  and  compliance  validation.   4.5  Revenue  Management   Supported  revenue  sources  include:   Rental  Income  Investment  Returns  Donations  Cash  Waqf  Returns  Agricultural  Revenue  Business  Operations  Licensing  Service  Revenue  Government  Support  Other  Approved  Sources   Each  revenue  record  includes:   Revenue  ID  Revenue  Type  Waqf  Asset  Customer/Tenant  
+===== PAGE 53 =====
+Contract  Invoice  Payment  Method  Amount  Tax  Treatment  Currency  Collection  Status  Collection  Date  AI  Risk  Flag  Compliance  Status  4.6  Expense  Management   Every  expense  should  be  linked  to  its  business  purpose.   Required  fields  include:   Expense  ID  Category  Vendor  Invoice  Cost  Center  Asset  Waqf  Funding  Source  Related  Condition  Beneficiary  Impact  Board  Approval  Required  Supporting  Documents  Approval  Workflow  AI  Compliance  Status   The  system  should  prevent  payment  until  required  approvals  are  complete.   4.7  Treasury  Management   Treasury  features  include:   Multi-bank  account  management.  Cash  positions.  Scheduled  payments.  Payment  approvals.  Forecasted  balances.  Investment  liquidity.  Reserve  monitoring.  
+===== PAGE 54 =====
+Cash  concentration  reports.   The  dashboard  should  show:   Available  Cash  Restricted  Funds  Upcoming  Obligations  Expected  Income  Liquidity  Ratio  Burn  Rate  AI  Cash  Forecast  4.8  Budget  Management   Budget  structure:   Annual  Budget   ↓   Departments   ↓   Projects   ↓   Assets   ↓   Cost  Centers   ↓   Monthly  Allocation   Budget  capabilities:   Draft  Review  Approval  Revision  Freeze  
+===== PAGE 55 =====
+Variance  Analysis  Forecasting  4.9  Distribution  Management   This  module  is  unique  to  Awqaf.   Every  beneficiary  distribution  must  comply  with:   Waqif  Conditions  Distribution  Rules  Beneficiary  Eligibility  Available  Funds  Governance  Policies   Distribution  workflow:   Generate  Distribution  Proposal   ↓   AI  Validation   ↓   Condition  Verification   ↓   Beneficiary  Verification   ↓   Approval   ↓   Payment   ↓   Receipt   ↓   
+===== PAGE 56 =====
+Audit  Log   Distribution  fields:   Distribution  ID  Beneficiary  Amount  Distribution  Reason  Related  Waqif  Condition  Funding  Source  Approval  Reference  Payment  Date  Payment  Method  Status  4.10  Financial  Compliance  Engine   Before  any  transaction  is  posted,  Masheed  performs  automated  validation.   Checks  include:   Is  this  expense  allowed  under  the  Waqif's  conditions?  Is  sufficient  budget  available?  Does  the  transaction  require  board  approval?  Does  it  exceed  approval  limits?  Is  the  funding  source  valid?  Does  it  affect  beneficiary  allocations?  Are  required  documents  attached?  Does  it  create  a  compliance  violation?   Transactions  that  fail  validation  should  be  blocked  or  routed  for  additional  review.   4.11  AI  Financial  Intelligence   The  AI  continuously  analyzes  financial  data  and  provides  insights  such  as:   Revenue  growth  trends.  Expense  anomalies.  Budget  overruns.  Cash  flow  risks.  Investment  performance.  Distribution  sustainability.  Forecasted  liquidity.  Cost-saving  opportunities.  Revenue  optimization  recommendations.  
+===== PAGE 57 =====
+ It  should  also  explain  why  it  generated  each  recommendation.   4.12  Marketplace  Financial  Readiness   The  Marketplace  depends  on  reliable  financial  information.   The  ERP  should  calculate  a  Financial  Readiness  Score  based  on:   Availability  of  audited  statements.  Revenue  stability.  Cash  flow  health.  Asset  profitability.  Debt  exposure.  Budget  discipline.  Documentation  completeness.  Financial  governance.   This  score  becomes  part  of  the  overall  Listing  Readiness  assessment.   4.13  Financial  Dashboard   The  executive  dashboard  should  include:   Executive  KPIs  Total  Assets  Net  Asset  Growth  Annual  Revenue  Operating  Expenses  Net  Surplus  Distribution  Ratio  Cash  Position  Budget  Utilization  Investment  Return  Financial  Health  Score  AI  Panel   Examples:   Rental  income  has  increased  by  12%  compared  to  last  year.   Maintenance  costs  for  Tower  A  exceed  the  portfolio  average  by  18%.   Cash  reserves  will  fall  below  the  recommended  threshold  in  approximately  95  days.  
+===== PAGE 58 =====
+ This  Waqf  is  financially  ready  for  marketplace  listing.   4.14  Reports   The  module  should  generate:   Financial  Statements  Balance  Sheet  Income  Statement  Cash  Flow  Statement  Trial  Balance  General  Ledger  Journal  Entries  Waqf  Reports  Revenue  Analysis  Expense  Analysis  Distribution  Report  Budget  Variance  Treasury  Report  Financial  Health  Report  Marketplace  Readiness  Funding  Source  Report  Executive  Reports  Financial  Performance  Dashboard  AI  Financial  Summary  Forecast  Report  Investment  Return  Analysis  Sustainability  Report  4.15  Financial  Health  Score  (Masheed  Innovation)   Each  Waqf  receives  a  Financial  Health  Score  from  0–100  based  on  weighted  dimensions:   Dimension  Weight  Liquidity  15%  Revenue  Stability  20%  Expense  Control  15%  Budget  Adherence  10%  Distribution  Sustainability  15%  Asset  Profitability  15%  Documentation  Completeness  5%  Compliance  5%   
+===== PAGE 59 =====
+The  score  contributes  to  the  overall  Waqf  Health  Score  and  is  displayed  on  executive  
+dashboards.
+  4.16  Approval  Matrix  (Enterprise  Feature)   Financial  approvals  should  be  fully  configurable.   Example:   Transaction  Type  Amount  Required  Approvals  Expense  ≤  SAR  10,000  Department  Manager  Expense  SAR  10,001–100,000  Manager  +  Finance  Expense  >  SAR  100,000  Finance  +  CEO  +  Nazer  Asset  Sale  Any  Amount  Board  +  Nazer  +  Legal  Beneficiary  Distribution  Configurable  Based  on  Waqf  policy   Approval  limits  should  be  configurable  per  organization  and  per  Waqf.   4.17  Audit  &  Traceability   Every  financial  action  must  be  fully  traceable.   For  each  transaction,  the  system  records:   Who  created  it.  Who  modified  it.  Who  approved  it.  Approval  timestamps.  Linked  documents.  Related  Waqif  conditions.  AI  validation  results.  Compliance  checks.  Before/after  changes.  Reason  for  changes.   Nothing  should  be  permanently  deleted;  records  should  be  versioned  and  auditable.   Enhancement  Proposal  —  "Financial  Command  Center"   Instead  of  a  traditional  accounting  dashboard,  Masheed  should  include  a  Financial  Command  
+Center
+ 
+that
+ 
+combines
+ 
+accounting,
+ 
+compliance,
+ 
+governance,
+ 
+and
+ 
+AI
+ 
+into
+ 
+one
+ 
+executive
+ 
+view.
+  It  should  answer  questions  such  as:   
+===== PAGE 60 =====
+Which  Waqf  requires  immediate  financial  attention?  Which  assets  generate  the  highest  returns?  Which  distributions  are  pending  approval?  Which  expenses  may  violate  Waqif  conditions?  Which  Waqf  is  financially  ready  to  be  listed  on  Waqf  by  Masheed?  Which  financial  risks  could  affect  long-term  sustainability?   This  transforms  finance  from  a  historical  reporting  function  into  a  proactive  decision-support  
+system.
+  
+PART  2  —  ERP  
+Chapter  5  —  Governance  &  Compliance  
+Engine
+ 
+ 
+5.1  Philosophy  
+Governance  should  never  be  something  users  think  about  once  a  year.  
+It  should  happen  automatically.  
+Every  approval.  
+Every  meeting.  
+Every  payment.  
+Every  investment.  
+Every  beneficiary.  
+Every  policy.  
+Every  decision.  
+Everything  should  automatically  follow  governance  rules.  
+===== PAGE 61 =====
+The  user  should  never  ask  
+"Am  I  compliant?"  
+The  system  should  already  know.  
+ 
+5.2  Governance  Architecture  
+Governance  Engine   ├──  Board  Management  ├──  Nazer  Management  ├──  Committees  ├──  Decision  Register  ├──  Policies  ├──  Conflict  of  Interest  ├──  Delegation  Matrix  ├──  Internal  Controls  ├──  Risk  Management  ├──  Compliance  Engine  ├──  Internal  Audit  ├──  Regulatory  Calendar  ├──  AI  Governance  Advisor  └──  Governance  Reports   
+5.3  Governance  Dashboard  
+The  dashboard  should  immediately  answer:  
+Governance  Health  
+95%  
+ 
+Compliance  Score  
+91%  
+===== PAGE 62 =====
+ 
+Board  Meetings  
+4  Pending  
+ 
+Policies  
+36  Active  
+2  Need  Review  
+ 
+Internal  Audit  
+3  Findings  
+ 
+Critical  Risks  
+5  
+ 
+AI  Recommendations  
+8  
+ 
+Marketplace  Readiness  
+88%  
+ 
+===== PAGE 63 =====
+5.4  Governance  Score  
+Every  Waqf  receives  a  Governance  Score.  
+The  score  is  calculated  using:  
+Component  Weight  
+Board  Governance  
+15%  
+Policies  10%  
+Risk  Management  15%  
+Internal  Controls  10%  
+Compliance  20%  
+Transparency  10%  
+Documentation  10%  
+Internal  Audit  10%  
+The  Governance  Score  becomes  one  of  the  primary  KPIs  of  the  platform.  
+ 
+5.5  Board  Management  
+Every  Waqf  should  maintain  a  structured  digital  board.  
+Each  member  includes:  
+●  Name  ●  Role  ●  Appointment  Date  ●  Term  ●  Qualifications  ●  Contact  Information  ●  Independence  Status  ●  Committees  ●  Voting  Rights  
+===== PAGE 64 =====
+●  Attendance  ●  Conflict  of  Interest  Declaration  ●  Documents  ●  Performance  Review  ●  Status  
+ 
+Board  Dashboard  
+●  Members  ●  Attendance  ●  Decisions  ●  Voting  History  ●  Committees  ●  Upcoming  Meetings  ●  Expiring  Terms  
+ 
+5.6  Committee  Management  
+Supported  committees:  
+●  Investment  ●  Audit  ●  Governance  ●  Risk  ●  Finance  ●  Asset  Management  
+Organizations  can  create  additional  committees.  
+Each  committee  includes:  
+Purpose  
+Members  
+Responsibilities  
+Authority  
+Meeting  Schedule  
+===== PAGE 65 =====
+Decisions  
+Performance  
+ 
+5.7  Meeting  Management  
+Meeting  workflow  
+Create  Meeting   ↓   Agenda   ↓   Invite  Members   ↓   AI  Agenda  Suggestions   ↓   Meeting   ↓   AI  Minutes   ↓   Voting   ↓   Decision  Register   ↓   Tasks  
+===== PAGE 66 =====
+ ↓   Follow-up   
+Meeting  fields  
+Meeting  ID  
+Meeting  Type  
+Committee  
+Location  
+Virtual  Link  
+Agenda  
+Attendees  
+Quorum  
+Minutes  
+Attachments  
+Voting  Results  
+Decisions  
+Tasks  
+Recording  
+AI  Summary  
+ 
+5.8  Decision  Register  
+One  of  Masheed's  strongest  differentiators.  
+Every  decision  becomes  searchable  forever.  
+===== PAGE 67 =====
+Fields  
+Decision  ID  
+Meeting  
+Decision  Type  
+Description  
+Reason  
+Related  Assets  
+Related  Waqf  
+Related  Investment  
+Related  Beneficiaries  
+Approvals  
+Responsible  Person  
+Implementation  Date  
+Status  
+AI  Impact  Analysis  
+ 
+Example  
+Decision  
+Sell  Property  
+↓  
+AI  
+"This  decision  affects:  
+•  Annual  revenue  
+•  Beneficiary  distributions  
+===== PAGE 68 =====
+•  Marketplace  listing  
+•  Waqif  Condition  #4  
+Please  review."  
+ 
+5.9  Policy  Management  
+Organizations  should  manage  every  internal  policy  inside  Masheed.  
+Examples  
+Investment  Policy  
+Conflict  of  Interest  Policy  
+Procurement  Policy  
+Asset  Policy  
+Maintenance  Policy  
+Risk  Policy  
+Financial  Policy  
+Consultation  Policy  
+Document  Policy  
+Marketplace  Policy  
+ 
+Every  policy  includes  
+Version  
+Approval  Date  
+Review  Date  
+Owner  
+===== PAGE 69 =====
+Documents  
+Related  Regulations  
+Related  Workflows  
+Training  Status  
+AI  Summary  
+ 
+5.10  Conflict  of  Interest  Module  
+Every  executive  
+Every  board  member  
+Every  consultant  
+Every  approver  
+must  periodically  submit  a  declaration.  
+Fields  
+Declaration  Date  
+Organization  
+Relationships  
+Financial  Interests  
+Related  Companies  
+Related  Assets  
+Family  Relationships  
+Potential  Conflicts  
+Supporting  Documents  
+Approval  
+===== PAGE 70 =====
+AI  Conflict  Analysis  
+ 
+AI  example  
+"Board  Member  A  owns  Company  X."  
+↓  
+Company  X  submitted  quotation.  
+↓  
+AI  blocks  approval.  
+↓  
+Governance  Alert.  
+ 
+5.11  Delegation  Matrix  
+Every  approval  follows  configurable  authority.  
+Example  
+Expense   ↓   Department  Head   ↓   Finance   ↓   CEO   ↓   Nazer  
+===== PAGE 71 =====
+ ↓   Board  
+Approval  authority  depends  on:  
+Amount  
+Asset  
+Risk  
+Waqf  
+Investment  
+Policy  
+Users  never  need  to  memorize  approval  rules.  
+The  system  routes  them  automatically.  
+ 
+5.12  Risk  Register  
+Every  risk  is  managed  centrally.  
+Risk  Categories  
+Financial  
+Operational  
+Legal  
+Compliance  
+Investment  
+Cybersecurity  
+Asset  
+Reputation  
+===== PAGE 72 =====
+Governance  
+Strategic  
+Market  
+Environmental  
+ 
+Every  Risk  
+Risk  ID  
+Category  
+Description  
+Probability  
+Impact  
+Owner  
+Controls  
+Mitigation  
+Target  Date  
+Residual  Risk  
+AI  Risk  Score  
+ 
+AI  predicts  
+Emerging  risks  
+Trend  
+Mitigation  
+Priority  
+ 
+===== PAGE 73 =====
+5.13  Internal  Controls  Library  
+Every  process  can  include  controls.  
+Example  
+Payment  
+↓  
+Invoice  Required  
+↓  
+Approval  Required  
+↓  
+Budget  Check  
+↓  
+Condition  Check  
+↓  
+Compliance  Check  
+↓  
+Payment  
+Controls  are  configurable.  
+ 
+5.14  Internal  Audit  
+Audit  Types  
+Financial  
+Asset  
+Governance  
+===== PAGE 74 =====
+Compliance  
+Investment  
+IT  
+Operational  
+ 
+Audit  workflow  
+Planning  
+↓  
+Checklist  
+↓  
+Evidence  
+↓  
+Findings  
+↓  
+Recommendations  
+↓  
+Management  Response  
+↓  
+Follow-up  
+↓  
+Closed  
+ 
+5.15  Regulatory  Calendar  
+===== PAGE 75 =====
+Every  regulatory  deadline  appears  automatically.  
+Examples  
+Annual  Reports  
+Financial  Statements  
+Board  Reviews  
+Policy  Reviews  
+Asset  Valuation  
+Insurance  Renewal  
+Registration  Renewal  
+Marketplace  Renewal  
+Consultation  Review  
+Audit  Schedule  
+ 
+AI  sends  reminders  before  deadlines.  
+ 
+5.16  Compliance  Engine  
+This  is  where  Masheed  becomes  truly  unique.  
+Instead  of  storing  regulations,  
+Masheed  stores  Compliance  Rules .  
+Example  
+Rule  
+Annual  Asset  Valuation  
+↓  
+===== PAGE 76 =====
+Frequency  
+12  months  
+↓  
+Applies  To  
+Real  Estate  
+↓  
+Responsible  
+Asset  Manager  
+↓  
+Deadline  
+365  Days  
+↓  
+Penalty  
+Medium  
+↓  
+Automation  
+Generate  Task  
+Notify  Manager  
+Update  Dashboard  
+If  overdue  
+↓  
+Decrease  Compliance  Score  
+ 
+Every  regulation  becomes  executable  logic.  
+===== PAGE 77 =====
+ 
+5.17  Compliance  Dashboard  
+Shows  
+Compliance  %  
+Violations  
+Warnings  
+Upcoming  Deadlines  
+Pending  Reviews  
+Risk  Level  
+Marketplace  Eligibility  
+AI  Summary  
+Trend  
+ 
+5.18  Violation  Management  
+Every  violation  includes:  
+Violation  ID  
+Related  Regulation  
+Category  
+Description  
+Severity  
+Date  
+Detected  By  
+===== PAGE 78 =====
+Assigned  To  
+Root  Cause  
+Corrective  Action  
+Evidence  
+Due  Date  
+Status  
+AI  Recommendation  
+Lessons  Learned  
+Repeat  Count  
+This  creates  a  historical  compliance  record  for  each  Waqf.  
+ 
+5.19  AI  Governance  Advisor  
+Unlike  a  chatbot,  this  is  a  proactive  governance  assistant.  
+It  continuously  monitors:  
+●  Governance  documents.  ●  Board  decisions.  ●  Policy  reviews.  ●  Audit  findings.  ●  Risks.  ●  Financial  approvals.  ●  Waqif  conditions.  ●  Marketplace  readiness.  
+Example  recommendations:  
+"The  Investment  Policy  is  due  for  review  in  15  days."  
+"Two  board  members  have  missed  three  consecutive  meetings."  
+"An  upcoming  asset  sale  requires  board  approval  under  your  delegation  matrix."  
+"This  marketplace  listing  cannot  proceed  until  the  latest  valuation  is  uploaded."  
+===== PAGE 79 =====
+Every  recommendation  includes  the  underlying  reasoning  and  links  directly  to  the  affected  
+records.
+ 
+ 
+5.20  Governance  Reports  
+The  module  should  generate:  
+Governance  Reports  
+●  Governance  Health  Report  ●  Board  Effectiveness  Report  ●  Committee  Performance  ●  Decision  Register  ●  Policy  Status  Report  ●  Delegation  Matrix  Report  
+ 
+Compliance  Reports  
+●  Compliance  Scorecard  ●  Violation  Register  ●  Regulatory  Calendar  ●  Compliance  Trend  Analysis  ●  Corrective  Action  Status  
+ 
+Risk  Reports  
+●  Enterprise  Risk  Register  ●  Heat  Map  ●  Top  10  Risks  ●  Risk  Trend  ●  Mitigation  Progress  
+ 
+Audit  Reports  
+●  Annual  Audit  Plan  
+===== PAGE 80 =====
+●  Audit  Findings  ●  Management  Responses  ●  Outstanding  Actions  ●  Audit  Closure  Report  
+ 
+5.21  Executive  Command  Center  
+(Masheed
+ 
+Flagship
+ 
+Feature)
+ 
+This  is  the  screen  I  want  every  CEO  and  Nazer  to  open  every  morning.  
+It  combines:  
+Organization  Health   ↓   Waqf  Health   ↓   Governance   ↓   Compliance   ↓   Financial   ↓   Assets   ↓   Marketplace   ↓   
+===== PAGE 81 =====
+AI  Priorities   ↓   Critical  Actions  Today  
+Instead  of  searching  through  modules,  executives  immediately  see:  
+●  The  three  most  urgent  compliance  issues.  ●  Waqf  Health  Score  by  portfolio.  ●  High-risk  assets.  ●  Pending  board  decisions.  ●  Marketplace  opportunities  blocked  by  missing  governance  items.  ●  AI-recommended  actions  ranked  by  impact.  
+ 
+5.22  Governance  Integration  with  Waqf  by  
+Masheed
+ 
+Governance  should  directly  influence  marketplace  eligibility.  
+A  listing  cannot  proceed  if  required  governance  conditions  are  not  met.  
+The  Marketplace  receives  governance  signals  such  as:  
+●  Governance  Score.  ●  Compliance  Score.  ●  Outstanding  violations.  ●  Required  approvals.  ●  Current  audit  status.  ●  Asset  valuation  validity.  ●  Conflict-of-interest  status.  ●  Board  approval  confirmation.  ●  Policy  compliance.  
+This  ensures  only  qualified  and  well-governed  opportunities  are  presented  to  investors.  
+ 
+Major  Architectural  Recommendation  (Most  Important  So  
+Far)
+ 
+===== PAGE 82 =====
+I  believe  Masheed  needs  one  more  foundational  engine  before  we  build  the  Marketplace:  
+The  Workflow  Engine  
+Almost  every  enterprise  platform  (Salesforce,  ServiceNow,  SAP,  Microsoft  Dynamics)  has  a  
+configurable
+ 
+workflow
+ 
+engine.
+ 
+For  Masheed,  every  process  should  be  workflow-driven ,  not  hard-coded.  
+Examples:  
+●  New  Waqf  registration.  ●  Asset  acquisition.  ●  Asset  sale.  ●  Beneficiary  approval.  ●  Consultation  request.  ●  Marketplace  listing.  ●  Financial  approval.  ●  Policy  review.  ●  Risk  mitigation.  ●  Audit  findings.  ●  Board  decisions.  
+Each  workflow  should  be  configurable  with:  
+●  Stages.  ●  Required  fields.  ●  Required  documents.  ●  Approval  rules.  ●  Notifications.  ●  SLA  timers.  ●  AI  checkpoints.  ●  Escalation  rules.  ●  Completion  criteria.  
+PART  3  —  Waqf  by  Masheed  
+Chapter  1  —  Product  Architecture  
+ 
+===== PAGE 83 =====
+1.1  Vision  
+Waqf  by  Masheed  is  a  regulated  investment  marketplace  that  enables  qualified  Awqaf  
+organizations
+ 
+to
+ 
+present
+ 
+investment
+ 
+opportunities
+ 
+to
+ 
+investors
+ 
+through
+ 
+a
+ 
+transparent,
+ 
+governed,
+ 
+and
+ 
+AI-assisted
+ 
+platform.
+ 
+Unlike  traditional  crowdfunding  or  investment  platforms,  every  opportunity  originates  from  
+Masheed
+ 
+ERP,
+ 
+where
+ 
+its
+ 
+governance,
+ 
+compliance,
+ 
+financial
+ 
+health,
+ 
+asset
+ 
+information,
+ 
+and
+ 
+legal
+ 
+documentation
+ 
+are
+ 
+continuously
+ 
+synchronized.
+ 
+This  ensures  investors  always  evaluate  opportunities  using  current  and  verified  information  
+rather
+ 
+than
+ 
+static
+ 
+documents.
+ 
+ 
+1.2  Objectives  
+The  marketplace  should:  
+●  Increase  access  to  capital  for  Awqaf.  ●  Improve  investment  transparency.  ●  Standardize  due  diligence.  ●  Reduce  manual  paperwork.  ●  Increase  investor  confidence.  ●  Ensure  regulatory  compliance.  ●  Connect  investors  with  qualified  opportunities.  ●  Monitor  opportunities  throughout  their  lifecycle.  ●  Enable  continuous  reporting  after  investment.  
+ 
+1.3  Marketplace  Philosophy  
+Investment  should  never  begin  with  uploading  a  PDF.  
+Investment  begins  with  trust.  
+Trust  is  generated  through  verified  operational  data  from  the  ERP.  
+Every  listing  should  answer  four  key  questions:  
+●  Is  the  Waqf  well  governed?  
+===== PAGE 84 =====
+●  Is  the  opportunity  financially  sound?  ●  Does  the  opportunity  comply  with  the  Waqif's  conditions?  ●  Can  investors  make  informed  decisions  based  on  reliable  data?  
+ 
+1.4  Platform  Architecture  
+Waqf  by  Masheed   ├──  Marketplace  Home  ├──  Opportunity  Explorer  ├──  Investment  Opportunities  ├──  Investor  Dashboard  ├──  Waqf  Profiles  ├──  Due  Diligence  Center  ├──  AI  Investment  Assistant  ├──  Portfolio  ├──  Reporting  Center  ├──  Notifications  ├──  Documents  └──  Administration   
+1.5  User  Types  
+Investors  
+●  Individual  Investors  ●  Family  Offices  ●  Companies  ●  Foundations  ●  Institutional  Investors  ●  Government  Investors  (future)  
+ 
+Opportunity  Owners  
+●  Waqf  Organizations  
+===== PAGE 85 =====
+●  Nazer  ●  CEOs  ●  Investment  Managers  
+ 
+Platform  Administrators  
+●  Listing  Review  Team  ●  Compliance  Officers  ●  Legal  Review  ●  Financial  Analysts  ●  Governance  Review  ●  Marketplace  Managers  
+ 
+Consultants  
+●  Legal  Advisors  ●  Financial  Consultants  ●  Valuation  Experts  ●  Engineering  Consultants  ●  Sharia  Advisors  ●  Governance  Specialists  
+Unlike  the  ERP,  consultants  can  be  invited  into  the  marketplace  to  participate  in  due  diligence  
+without
+ 
+accessing
+ 
+unrelated
+ 
+organizational
+ 
+data.
+ 
+ 
+1.6  Marketplace  Navigation  
+Home   Discover   Investment  Opportunities   Saved  Opportunities   My  Investments   
+===== PAGE 86 =====
+Reports   Messages   Documents   Notifications   AI  Investment  Advisor   Profile   Settings   
+1.7  Opportunity  Lifecycle  
+Every  opportunity  follows  a  structured  lifecycle.  
+Draft   ↓   Internal  Review   ↓   Document  Collection   ↓   Financial  Review   ↓   Legal  Review   ↓   Governance  Review   ↓   
+===== PAGE 87 =====
+Compliance  Review   ↓   Valuation  Verification   ↓   Risk  Assessment   ↓   Investment  Committee   ↓   Approved   ↓   Published   ↓   Open  for  Investment   ↓   Fully  Funded   ↓   Operational   ↓   Performance  Monitoring   ↓   Closed  
+Unlike  most  marketplaces,  opportunities  remain  active  after  funding  to  provide  ongoing  reporting  
+and
+ 
+oversight.
+ 
+===== PAGE 88 =====
+ 
+1.8  Opportunity  Profile  
+Each  investment  opportunity  should  contain:  
+Overview   ↓   Investment  Summary   ↓   Waqf  Profile   ↓   Asset  Details   ↓   Financial  Analysis   ↓   Expected  Returns   ↓   Timeline   ↓   Governance   ↓   Compliance   ↓   Risk  Analysis  
+===== PAGE 89 =====
+ ↓   Documents   ↓   Updates   ↓   Questions  &  Answers   ↓   Investment  Terms   ↓   Performance  Reports  
+This  structure  gives  investors  a  comprehensive  view  before  committing  funds.  
+ 
+1.9  Opportunity  Header  
+Every  listing  displays  a  standardized  summary.  
+Opportunity  Name   Investment  Type   Funding  Goal   Minimum  Investment   Target  Return   Funding  Progress   Investment  Period   
+===== PAGE 90 =====
+Governance  Score   Compliance  Score   Risk  Rating   Marketplace  Rating   Status   Invest  Button   Save   Share   
+1.10  Opportunity  Information  
+Identity  
+●  Opportunity  ID  ●  Opportunity  Name  (Arabic  &  English)  ●  Opportunity  Code  ●  Related  Waqf  ●  Related  Asset(s)  ●  Opportunity  Type  ●  Sector  ●  Description  ●  Objectives  
+ 
+Financial  
+●  Funding  Goal  ●  Minimum  Investment  ●  Maximum  Investment  (if  applicable)  ●  Funding  Model  ●  Investment  Currency  ●  Project  Cost  ●  Expected  Revenue  ●  Expected  Expenses  
+===== PAGE 91 =====
+●  Net  Return  Projection  ●  Break-even  Point  ●  Exit  Strategy  (if  applicable)  
+ 
+Timeline  
+●  Submission  Date  ●  Approval  Date  ●  Funding  Start  ●  Funding  End  ●  Project  Start  ●  Estimated  Completion  ●  Reporting  Frequency  
+ 
+Governance  
+Automatically  synchronized  from  the  ERP:  
+●  Governance  Score  ●  Board  Approval  Status  ●  Policy  Compliance  ●  Active  Audit  Findings  ●  Delegation  Approval  ●  Governance  Notes  
+ 
+Compliance  
+Automatically  synchronized:  
+●  Compliance  Score  ●  Outstanding  Violations  ●  Regulatory  Status  ●  Required  Licenses  ●  Legal  Restrictions  ●  Waqif  Condition  Validation  
+ 
+Risk  
+===== PAGE 92 =====
+The  marketplace  should  present  a  structured  risk  profile  covering:  
+●  Market  Risk  ●  Financial  Risk  ●  Operational  Risk  ●  Construction  Risk  (where  applicable)  ●  Legal  Risk  ●  Governance  Risk  ●  Compliance  Risk  ●  Environmental  Risk  
+Each  risk  includes:  
+●  Severity  ●  Likelihood  ●  Mitigation  Actions  ●  Current  Status  
+ 
+1.11  Investor  Dashboard  
+Each  investor  should  have  a  personalized  dashboard  showing:  
+●  Active  Investments  ●  Portfolio  Value  ●  Expected  Returns  ●  Received  Returns  ●  Investment  Performance  ●  Pending  Opportunities  ●  Saved  Opportunities  ●  Watchlist  ●  AI  Recommendations  ●  Notifications  ●  Required  Actions  
+ 
+1.12  AI  Investment  Advisor  
+Rather  than  simply  recommending  opportunities,  the  AI  should  provide  explainable  investment  
+insights.
+ 
+===== PAGE 93 =====
+Examples:  
+●  "This  opportunity  has  demonstrated  stable  rental  income  over  the  past  three  years."  ●  "Funding  has  reached  72%,  with  participation  from  three  institutional  investors."  ●  "The  project's  compliance  score  improved  after  completing  the  latest  governance  
+review."
+ ●  "Projected  maintenance  costs  may  affect  expected  returns  in  Year  4."  
+The  AI  should  also  answer  investor  questions  using  verified  ERP  data  rather  than  generating  
+unsupported
+ 
+assumptions.
+ 
+ 
+1.13  Marketplace  KPIs  
+The  marketplace  should  monitor:  
+Platform  Metrics  
+●  Total  Listed  Opportunities  ●  Active  Opportunities  ●  Total  Capital  Raised  ●  Average  Funding  Time  ●  Investor  Growth  ●  Funding  Success  Rate  ●  Average  Governance  Score  ●  Average  Compliance  Score  
+Opportunity  Metrics  
+●  Page  Views  ●  Investor  Interest  ●  Saved  Opportunities  ●  Questions  Submitted  ●  Conversion  Rate  ●  Funding  Progress  ●  Time  to  Funding  
+These  metrics  help  administrators  optimize  the  platform  and  identify  high-performing  opportunity  
+types.
+ 
+ 
+===== PAGE 94 =====
+1.14  Marketplace  Notifications  
+Events  that  trigger  notifications  include:  
+●  Listing  submitted.  ●  Review  started.  ●  Additional  information  requested.  ●  Governance  issue  detected.  ●  Listing  approved.  ●  Listing  published.  ●  New  investor  question.  ●  Investment  received.  ●  Funding  milestone  reached.  ●  Opportunity  fully  funded.  ●  Periodic  performance  report  published.  ●  Compliance  issue  affecting  an  active  listing.  
+ 
+1.15  Integration  with  Masheed  ERP  
+The  marketplace  should  never  duplicate  ERP  data .  
+Instead,  it  consumes  approved  information  from  the  ERP  through  controlled  synchronization.  
+Examples:  
+Pulled  from  ERP  
+●  Waqf  Profile  ●  Asset  Details  ●  Financial  Summaries  ●  Governance  Score  ●  Compliance  Score  ●  Health  Score  ●  Documents  ●  AI  Readiness  Score  
+Managed  within  Marketplace  
+●  Funding  Progress  ●  Investor  Activity  ●  Questions  &  Answers  
+===== PAGE 95 =====
+●  Marketing  Content  ●  Public  Updates  ●  Investor  Communications  
+This  architecture  ensures  consistency  and  eliminates  conflicting  records.  
+ 
+Architectural  Recommendation  —  Opportunity  Digital  
+Twin
+ 
+Just  as  every  Waqf  has  a  Digital  Twin  in  the  ERP,  every  marketplace  opportunity  should  have  its  
+own
+ 
+Opportunity
+ 
+Digital
+ 
+Twin
+.
+ 
+It  should  continuously  aggregate:  
+●  Live  ERP  data.  ●  Funding  status.  ●  Investor  engagement.  ●  Project  milestones.  ●  Financial  performance.  ●  Compliance  updates.  ●  Governance  changes.  ●  AI  insights.  
+This  means  an  opportunity  is  no  longer  a  static  listing  but  a  living  investment  record  that  evolves  
+throughout
+ 
+its
+ 
+lifecycle.
+ 
+It
+ 
+also
+ 
+lays
+ 
+the
+ 
+foundation
+ 
+for
+ 
+future
+ 
+features
+ 
+such
+ 
+as
+ 
+secondary
+ 
+investment
+ 
+markets,
+ 
+performance
+ 
+benchmarking,
+ 
+and
+ 
+advanced
+ 
+portfolio
+ 
+analytics
+ 
+without
+ 
+redesigning
+ 
+the
+ 
+platform
+ 
+architecture.
+ 
+PART  3  —  Waqf  by  Masheed  
+Chapter  2  —  Listing  Management  &  Due  
+Diligence
+ 
+Engine
+ 
+ 
+2.1  Philosophy  
+===== PAGE 96 =====
+A  listing  is  not  a  document.  
+A  listing  is  a  certification  that  a  Waqf  has  reached  a  level  of  operational,  financial,  governance,  
+and
+ 
+regulatory
+ 
+maturity
+ 
+that
+ 
+makes
+ 
+it
+ 
+suitable
+ 
+for
+ 
+investment.
+ 
+The  Marketplace  should  therefore  reject  the  idea  of  manually  reviewing  random  submissions.  
+Instead,  Masheed  continuously  evaluates  readiness  using  data  already  available  in  the  ERP.  
+Listing  becomes  the  final  step—not  the  first.  
+ 
+2.2  Listing  Sources  
+An  opportunity  can  originate  from  three  sources:  
+A.  From  Masheed  ERP  (Recommended)  
+The  organization  is  already  using  Masheed  ERP.  
+The  system  automatically  identifies  assets  or  projects  that  are  investment-ready  and  suggests  
+creating
+ 
+a
+ 
+listing.
+ 
+ 
+B.  Direct  Marketplace  Submission  
+Organizations  not  yet  using  the  ERP  can  submit  a  listing  manually.  
+The  system  creates  a  temporary  workspace  where  they  complete  all  required  information  before  
+review.
+ 
+This  onboarding  flow  should  encourage  migration  to  the  full  ERP  over  time.  
+ 
+C.  Administrator-Initiated  
+Marketplace  administrators  may  create  listings  on  behalf  of  organizations  participating  in  
+strategic
+ 
+programs
+ 
+or
+ 
+government
+ 
+initiatives.
+ 
+ 
+===== PAGE 97 =====
+2.3  Listing  Lifecycle  
+Draft   ↓   Readiness  Assessment   ↓   Document  Collection   ↓   Financial  Review   ↓   Legal  Review   ↓   Governance  Review   ↓   Compliance  Review   ↓   Technical  Review   ↓   Risk  Review   ↓   Investment  Committee   ↓   Approved   
+===== PAGE 98 =====
+↓   Published   ↓   Funding   ↓   Monitoring   ↓   Completed  
+Each  stage  has:  
+●  Required  fields  ●  Required  documents  ●  Responsible  users  ●  SLA  ●  AI  validation  ●  Approval  requirements  ●  Exit  criteria  
+ 
+2.4  Listing  Workspace  
+Every  listing  should  have  its  own  workspace.  
+Overview   ↓   Progress   ↓   Documents   ↓  
+===== PAGE 99 =====
+ Financials   ↓   Legal   ↓   Governance   ↓   Compliance   ↓   Technical   ↓   Risks   ↓   AI  Analysis   ↓   Questions   ↓   Review  History   ↓   Approvals  
+Users  never  leave  the  workspace  during  the  listing  process.  
+ 
+===== PAGE 100 =====
+2.5  Listing  Readiness  Score  
+Instead  of  saying  
+Ready  /  Not  Ready  
+Masheed  calculates  a  Listing  Readiness  Score  (0–100).  
+Category  Weight  
+Asset  Quality  15%  
+Financial  Readiness  20%  
+Governance  15%  
+Compliance  20%  
+Documentation  10%  
+Risk  Profile  10%  
+Market  Attractiveness  10%  
+Example  
+Overall  Readiness   89%   Financial   94%   Governance   92%   Compliance   97%   Documentation   80%  
+===== PAGE 101 =====
+ Risk   85%   Recommendation   Upload  the  latest  engineering  report  before  submitting.   
+2.6  Required  Information  
+Every  listing  should  collect  structured  information.  
+Opportunity  Information  
+●  Opportunity  Name  ●  Opportunity  Code  ●  Opportunity  Type  ●  Investment  Category  ●  Sector  ●  Description  ●  Objectives  ●  Expected  Impact  ●  Funding  Model  ●  Funding  Goal  ●  Investment  Period  ●  Expected  Exit  Strategy  ●  Currency  
+ 
+Related  Waqf  
+●  Waqf  ●  Organization  ●  Related  Asset(s)  ●  Related  Project(s)  ●  Investment  Manager  ●  Nazer  ●  Primary  Contact  
+===== PAGE 102 =====
+ 
+Financial  Information  
+●  Capital  Requirement  ●  Project  Budget  ●  Revenue  Projection  ●  Expense  Projection  ●  Cash  Flow  Projection  ●  IRR  ●  ROI  ●  NPV  ●  Payback  Period  ●  Funding  Sources  ●  Financial  Assumptions  
+ 
+Legal  Information  
+●  Ownership  Documents  ●  Title  Deeds  ●  Government  Approvals  ●  Licenses  ●  Contracts  ●  Easements  ●  Existing  Obligations  ●  Pending  Litigation  ●  Legal  Opinion  
+ 
+Governance  
+Automatically  synchronized:  
+●  Governance  Score  ●  Board  Approval  ●  Committee  Approval  ●  Policy  Compliance  ●  Conflict  of  Interest  Status  ●  Delegation  Approval  
+===== PAGE 103 =====
+ 
+Compliance  
+Automatically  synchronized:  
+●  Compliance  Score  ●  Outstanding  Violations  ●  Regulatory  Status  ●  Required  Reports  ●  Valuation  Status  ●  Waqif  Condition  Validation  
+ 
+Technical  Information  
+●  Engineering  Reports  ●  Site  Plans  ●  Images  ●  Videos  ●  BIM  Models  (future)  ●  Feasibility  Study  ●  Environmental  Studies  ●  Market  Study  
+ 
+2.7  Required  Documents  
+The  system  should  maintain  a  configurable  checklist.  
+Examples  include:  
+Legal  
+●  Waqf  Deed  ●  Registration  Certificate  ●  Title  Deeds  ●  Commercial  Registration  (if  applicable)  ●  Government  Licenses  
+===== PAGE 104 =====
+ 
+Financial  
+●  Audited  Financial  Statements  ●  Budget  ●  Cash  Flow  ●  Valuation  Report  ●  Revenue  History  
+ 
+Governance  
+●  Board  Resolution  ●  Committee  Approval  ●  Investment  Policy  ●  Governance  Report  
+ 
+Technical  
+●  Engineering  Report  ●  Feasibility  Study  ●  Architectural  Drawings  ●  Environmental  Assessment  ●  Market  Analysis  
+Administrators  should  be  able  to  customize  required  documents  by  opportunity  type.  
+ 
+2.8  AI  Document  Review  
+The  AI  should  review  every  uploaded  document.  
+Examples:  
+●  Missing  signatures.  ●  Expired  documents.  ●  Inconsistent  values.  ●  Missing  pages.  ●  Low  scan  quality.  
+===== PAGE 105 =====
+●  Incorrect  document  type.  ●  Conflicting  information.  ●  Missing  approvals.  
+The  AI  provides  a  confidence  score  and  flags  items  requiring  human  review.  
+ 
+2.9  Due  Diligence  Engine  
+Instead  of  a  single  review  step,  Masheed  divides  due  diligence  into  specialized  tracks.  
+Financial   ↓   Legal   ↓   Technical   ↓   Governance   ↓   Compliance   ↓   Risk   ↓   Investment   ↓   Final  Review  
+Each  track  can  progress  independently,  reducing  bottlenecks.  
+===== PAGE 106 =====
+ 
+2.10  Review  Assignments  
+Each  review  is  assigned  to  one  or  more  reviewers.  
+Reviewer  fields:  
+●  Reviewer  ●  Role  ●  Department  ●  Assigned  Date  ●  Due  Date  ●  Status  ●  Comments  ●  Recommendation  ●  Attachments  ●  AI  Summary  
+The  system  tracks  turnaround  time  and  SLA  compliance.  
+ 
+2.11  Issue  Management  
+Reviewers  create  structured  issues  rather  than  exchanging  emails.  
+Issue  fields:  
+●  Issue  ID  ●  Category  ●  Severity  ●  Description  ●  Requested  Action  ●  Assigned  To  ●  Due  Date  ●  Resolution  ●  Evidence  ●  Status  
+Issues  remain  linked  to  the  listing  for  future  audits.  
+===== PAGE 107 =====
+ 
+2.12  AI  Listing  Advisor  
+The  AI  continuously  evaluates  the  listing.  
+Examples:  
+"The  projected  occupancy  rate  is  significantly  higher  than  comparable  projects."  
+"The  valuation  report  expires  in  18  days."  
+"This  opportunity  meets  governance  requirements  but  is  missing  an  environmental  
+assessment."
+ 
+"Funding  assumptions  rely  heavily  on  optimistic  rental  growth."  
+Each  recommendation  links  to  supporting  data  and  relevant  regulations  where  applicable.  
+ 
+2.13  Listing  Approval  Matrix  
+Every  listing  follows  configurable  approvals.  
+Example:  
+Stage  Required  Approver  
+Financial  Review  Financial  Analyst  
+Legal  Review  Legal  Advisor  
+Governance  Review  
+Governance  Officer  
+Compliance  Review  Compliance  Officer  
+Technical  Review  Engineering  Reviewer  
+Investment  Review  Investment  Committee  
+Final  Approval  Marketplace  Director  
+===== PAGE 108 =====
+Organizations  can  configure  additional  approval  steps  based  on  investment  size  or  asset  class.  
+ 
+2.14  Public  Listing  Generation  
+After  approval,  Masheed  automatically  generates  the  public-facing  investment  page.  
+Public  information  includes:  
+●  Opportunity  Summary  ●  Investment  Highlights  ●  Funding  Goal  ●  Timeline  ●  Expected  Returns  ●  Asset  Overview  ●  Governance  &  Compliance  Badges  ●  Key  Documents  approved  for  public  release  ●  FAQs  ●  Contact  Information  
+Sensitive  ERP  data  remains  private.  
+ 
+2.15  Post-Publication  Monitoring  
+Publication  is  not  the  end  of  the  workflow.  
+The  platform  continuously  monitors:  
+●  Governance  changes.  ●  Compliance  violations.  ●  Financial  deterioration.  ●  Asset  status.  ●  Major  legal  events.  ●  Expired  documents.  ●  Risk  level  changes.  
+If  critical  thresholds  are  crossed,  the  platform  can:  
+●  Display  investor  warnings.  ●  Suspend  new  investments.  
+===== PAGE 109 =====
+●  Request  corrective  actions.  ●  Escalate  to  administrators.  
+ 
+2.16  Listing  Analytics  
+Each  listing  should  display  analytics  such  as:  
+●  Views  ●  Unique  Visitors  ●  Investor  Interest  ●  Saved  Listings  ●  Questions  Submitted  ●  Average  Time  on  Page  ●  Conversion  Rate  ●  Funding  Progress  ●  Funding  Velocity  ●  Completion  Rate  
+These  insights  help  organizations  improve  future  opportunities.  
+ 
+Major  Recommendation  —  Investment  
+Data
+ 
+Room
+ 
+I  strongly  recommend  that  every  listing  automatically  includes  a  secure  Investment  Data  
+Room
+,
+ 
+similar
+ 
+to
+ 
+those
+ 
+used
+ 
+in
+ 
+private
+ 
+equity
+ 
+and
+ 
+institutional
+ 
+transactions.
+ 
+Instead  of  attaching  documents  to  emails,  all  approved  documents  are  stored  in  a  
+permission-controlled
+ 
+workspace
+ 
+with:
+ 
+●  Folder-based  organization.  ●  Version  history.  ●  Watermarked  downloads.  ●  Granular  access  permissions.  ●  Activity  logs  (who  viewed  or  downloaded  what).  ●  Q&A  linked  to  specific  documents.  ●  Digital  acknowledgments  (e.g.,  confidentiality  acceptance).  ●  AI-powered  document  search  and  summarization.  
+===== PAGE 110 =====
+This  elevates  Waqf  by  Masheed  from  a  simple  marketplace  to  an  institutional-grade  investment  
+platform
+ 
+suitable
+ 
+for
+ 
+large
+ 
+investors.
+ 
+PART  3  —  Waqf  by  Masheed  
+Chapter  3  —  Investor  Management  &  
+Portfolio
+ 
+Intelligence
+ 
+ 
+3.1  Purpose  
+The  Investor  Management  module  provides  a  comprehensive  digital  experience  for  individuals  
+and
+ 
+institutions
+ 
+investing
+ 
+through
+ 
+Waqf
+ 
+by
+ 
+Masheed.
+ 
+It  enables  investors  to  discover  opportunities,  complete  onboarding,  manage  investments,  
+monitor
+ 
+portfolio
+ 
+performance,
+ 
+receive
+ 
+reports,
+ 
+participate
+ 
+in
+ 
+governance
+ 
+communications
+ 
+where
+ 
+applicable,
+ 
+and
+ 
+receive
+ 
+AI-powered
+ 
+insights
+ 
+throughout
+ 
+the
+ 
+investment
+ 
+lifecycle.
+ 
+Rather  than  focusing  only  on  transactions,  the  platform  aims  to  build  long-term  investor  
+confidence
+ 
+through
+ 
+transparency,
+ 
+continuous
+ 
+reporting,
+ 
+and
+ 
+verified
+ 
+operational
+ 
+data
+ 
+synchronized
+ 
+from
+ 
+Masheed
+ 
+ERP.
+ 
+ 
+3.2  Investor  Lifecycle  
+Every  investor  follows  a  structured  journey.  
+Visitor   ↓   Register   ↓   Identity  Verification  
+===== PAGE 111 =====
+ ↓   Profile  Completion   ↓   Investment  Preferences   ↓   Risk  Profile   ↓   Eligible  Investor   ↓   Investment   ↓   Portfolio  Management   ↓   Performance  Monitoring   ↓   Reinvestment  
+The  system  should  preserve  the  complete  history  of  the  investor  relationship.  
+ 
+3.3  Investor  Types  
+Supported  investor  categories  include:  
+Individual  
+===== PAGE 112 =====
+●  Saudi  Citizens  ●  GCC  Citizens  ●  Residents  (where  permitted)  ●  International  Investors  (future)  
+ 
+Organizations  
+●  Companies  ●  Family  Offices  ●  Foundations  ●  Charitable  Organizations  ●  Financial  Institutions  ●  Government  Entities  
+ 
+Classification  
+Investor  profiles  should  include  configurable  classifications  such  as:  
+●  Retail  ●  Professional  ●  Institutional  ●  Strategic  Partner  ●  Anchor  Investor  
+These  classifications  may  influence  investment  limits,  approval  requirements,  and  available  
+opportunities.
+ 
+ 
+3.4  Investor  Profile  
+Each  investor  has  a  unified  profile  containing:  
+Identity  
+●  Investor  ID  ●  Investor  Type  ●  Arabic  Name  ●  English  Name  
+===== PAGE 113 =====
+●  Nationality  ●  National  ID  /  Commercial  Registration  ●  Date  of  Registration  ●  Status  
+ 
+Contact  
+●  Mobile  ●  Email  ●  Address  ●  Preferred  Language  ●  Preferred  Communication  Method  
+ 
+Investment  Information  
+●  Preferred  Investment  Size  ●  Preferred  Sectors  ●  Geographic  Preferences  ●  Investment  Objectives  ●  Investment  Experience  ●  Investment  Horizon  ●  Liquidity  Preference  
+ 
+Compliance  
+●  Identity  Verification  Status  ●  Document  Status  ●  Risk  Classification  ●  Approval  Status  ●  Internal  Notes  
+ 
+Activity  
+●  Opportunities  Viewed  
+===== PAGE 114 =====
+●  Saved  Opportunities  ●  Active  Investments  ●  Historical  Investments  ●  Messages  ●  Documents  ●  Notifications  
+ 
+3.5  Investor  Dashboard  
+Every  investor  should  have  a  personalized  dashboard.  
+Portfolio  Value   ↓   Active  Investments   ↓   Projected  Returns   ↓   Received  Returns   ↓   Investment  Performance   ↓   Watchlist   ↓   New  Opportunities   ↓   AI  Recommendations   
+===== PAGE 115 =====
+↓   Pending  Actions   
+Dashboard  Widgets  
+Portfolio  Summary  
+Total  Invested  
+Current  Portfolio  Value  
+Projected  Return  
+Portfolio  Growth  
+Cash  Available  
+Upcoming  Distributions  
+Portfolio  Risk  
+Average  Governance  Score  
+Average  Compliance  Score  
+ 
+3.6  Portfolio  Management  
+Instead  of  showing  a  list  of  investments,  Masheed  builds  a  living  portfolio.  
+Each  investment  displays:  
+●  Investment  Amount  ●  Ownership  Percentage  (where  applicable)  ●  Investment  Date  ●  Opportunity  Status  ●  Current  Performance  ●  Project  Milestones  ●  Expected  Returns  ●  Received  Returns  ●  Risk  Rating  ●  Governance  Status  
+===== PAGE 116 =====
+●  Compliance  Status  
+ 
+Portfolio  filters  
+By  Waqf  
+By  Asset  
+By  Sector  
+By  Return  
+By  Risk  
+By  Status  
+By  Investment  Year  
+ 
+3.7  Portfolio  Analytics  
+The  platform  should  calculate:  
+Total  Portfolio  Value  
+Total  Invested  Capital  
+Projected  Annual  Return  
+Historical  Return  
+Portfolio  Diversification  
+Average  Risk  
+Average  Governance  Score  
+Average  Compliance  Score  
+Cash  Yield  
+Asset  Allocation  
+===== PAGE 117 =====
+Geographic  Allocation  
+Sector  Allocation  
+Investment  Concentration  
+ 
+3.8  Investment  Timeline  
+Every  investment  includes  a  timeline.  
+Opportunity  Published   ↓   Investment  Submitted   ↓   Investment  Approved   ↓   Funding  Completed   ↓   Project  Started   ↓   Milestone  Updates   ↓   Revenue  Generation   ↓   Returns  Distributed   ↓  
+===== PAGE 118 =====
+ Investment  Closed  
+Every  milestone  should  contain  supporting  documents,  updates,  and  communications.  
+ 
+3.9  Returns  Management  
+The  system  should  track:  
+Projected  Returns  
+Actual  Returns  
+Distribution  Schedule  
+Payment  History  
+Outstanding  Returns  
+Delayed  Payments  
+Tax  Information  (if  applicable)  
+Bank  Transfers  
+Payment  Receipts  
+Return  Forecast  
+Variance  Analysis  
+ 
+Investors  can  compare  projected  versus  actual  performance  over  time.  
+ 
+3.10  Communication  Center  
+Every  investment  should  include  secure  communications.  
+Supported  communication  types:  
+===== PAGE 119 =====
+Announcements  
+Questions  
+Answers  
+Document  Requests  
+Milestone  Updates  
+Board  Announcements  (where  applicable)  
+Financial  Updates  
+Compliance  Notices  
+Investor  Surveys  
+System  Notifications  
+Every  conversation  becomes  part  of  the  investment  record.  
+ 
+3.11  Document  Center  
+Each  investor  has  a  personal  document  repository.  
+Documents  include:  
+Investment  Agreements  
+Certificates  
+Reports  
+Financial  Statements  
+Distribution  Statements  
+Invoices  
+Receipts  
+Legal  Notices  
+===== PAGE 120 =====
+Project  Updates  
+Meeting  Documents  (if  shared)  
+Downloaded  Reports  
+Each  document  includes  version  history  and  download  tracking.  
+ 
+3.12  Watchlist  
+Investors  may  bookmark  opportunities.  
+Watchlist  features:  
+Price  /  Funding  Updates  
+Funding  Progress  
+Governance  Changes  
+Compliance  Changes  
+Deadline  Reminders  
+New  Documents  
+AI  Alerts  
+Investors  receive  notifications  when  significant  changes  occur.  
+ 
+3.13  Personalized  Recommendations  
+Masheed  should  recommend  opportunities  based  on:  
+Investment  history  
+Preferred  sectors  
+Investment  size  
+===== PAGE 121 =====
+Geographic  preference  
+Risk  profile  
+Portfolio  diversification  
+Governance  preference  
+Historical  engagement  
+Recommendations  should  always  explain  the  reasoning  behind  the  suggestion.  
+ 
+3.14  AI  Portfolio  Advisor  
+Instead  of  a  generic  chatbot,  the  AI  acts  as  a  portfolio  analyst.  
+Example  insights:  
+"Your  portfolio  is  heavily  concentrated  in  commercial  real  estate."  
+"This  new  healthcare  Waqf  opportunity  would  improve  diversification."  
+"Three  investments  have  improved  their  governance  score  this  quarter."  
+"Expected  annual  returns  have  increased  by  6%  compared  to  last  year."  
+"One  project  is  behind  schedule  by  45  days."  
+The  AI  should  never  make  investment  decisions  for  the  investor  but  should  surface  relevant  
+information
+ 
+and
+ 
+explain
+ 
+its
+ 
+reasoning.
+ 
+ 
+3.15  Investor  Reports  
+The  platform  should  generate:  
+Portfolio  Statement  
+Investment  Summary  
+Annual  Performance  Report  
+===== PAGE 122 =====
+Returns  Report  
+Cash  Flow  Report  
+Distribution  History  
+Risk  Analysis  
+Governance  Summary  
+Compliance  Summary  
+Tax  Summary  (where  applicable)  
+Executive  Portfolio  Report  
+Reports  should  support  scheduled  delivery  and  on-demand  generation.  
+ 
+3.16  Investor  Notifications  
+Notifications  include:  
+New  Opportunity  
+Funding  Progress  
+Investment  Confirmed  
+Document  Available  
+Return  Distributed  
+Project  Update  
+Governance  Update  
+Compliance  Update  
+Risk  Alert  
+Milestone  Completed  
+Question  Answered  
+===== PAGE 123 =====
+Listing  Closed  
+Investors  can  configure  notification  preferences  by  channel  and  event  type.  
+ 
+3.17  Investor  Security  
+Because  investors  are  handling  sensitive  financial  information,  the  platform  should  support:  
+●  Multi-factor  authentication  (MFA).  ●  Device  management.  ●  Login  history.  ●  Session  management.  ●  Suspicious  login  detection.  ●  Download  controls  for  confidential  documents.  ●  Activity  history.  ●  Consent  management.  
+ 
+3.18  Portfolio  Health  Score  (Masheed  
+Innovation)
+ 
+Each  investor  receives  a  Portfolio  Health  Score  that  summarizes  the  quality  of  their  investments.  
+Suggested  dimensions:  
+Dimension  Weight  
+Diversification  20%  
+Portfolio  Risk  20%  
+Governance  Quality  15%  
+Compliance  Quality  15%  
+Return  Performance  20%  
+Liquidity  &  Maturity  Profile  10%  
+===== PAGE 124 =====
+This  score  is  informational  and  helps  investors  identify  opportunities  to  strengthen  their  portfolio.  
+ 
+3.19  Institutional  Investor  Workspace  
+For  institutional  investors,  provide  additional  capabilities:  
+●  Multi-user  access  with  permissions.  ●  Internal  approval  workflows  before  investing.  ●  Investment  committee  notes.  ●  Portfolio  benchmarking.  ●  Consolidated  reporting.  ●  Bulk  document  downloads.  ●  Custom  reporting.  ●  Relationship  manager  contact.  ●  API  integration  for  internal  systems  (future).  
+This  allows  banks,  foundations,  and  family  offices  to  use  the  platform  without  relying  on  
+individual
+ 
+user
+ 
+accounts.
+ 
+ 
+3.20  Executive  Investor  Dashboard  
+(Flagship
+ 
+Feature)
+ 
+The  executive  dashboard  should  answer:  
+How  much  have  I  invested?   ↓   How  is  my  portfolio  performing?   ↓   Which  projects  need  attention?   ↓   Where  are  my  returns  coming  from?  
+===== PAGE 125 =====
+ ↓   Which  opportunities  match  my  strategy?   ↓   What  actions  should  I  take  today?  
+It  should  combine:  
+●  Live  portfolio  value.  ●  Expected  distributions.  ●  Portfolio  diversification.  ●  Governance  trends.  ●  Compliance  alerts.  ●  Project  milestones.  ●  AI-generated  priorities.  
+This  dashboard  becomes  the  investor's  daily  command  center.  
+ 
+Major  Recommendation  —  Investor  Trust  
+Center
+ 
+I  recommend  introducing  an  Investor  Trust  Center ,  a  unique  feature  that  reinforces  confidence  
+in
+ 
+every
+ 
+investment.
+ 
+Instead  of  presenting  only  financial  metrics,  each  opportunity  and  portfolio  should  expose  
+measurable
+ 
+trust
+ 
+indicators
+ 
+such
+ 
+as:
+ 
+●  Verified  by  Masheed  ERP.  ●  Governance  Score.  ●  Compliance  Score.  ●  Last  independent  valuation  date.  ●  Latest  financial  reporting  date.  ●  Document  completeness.  ●  Active  audit  status.  ●  Number  of  resolved  compliance  findings.  ●  Reporting  timeliness.  ●  Transparency  rating.  
+===== PAGE 126 =====
+These  indicators  create  a  standardized  "trust  framework"  that  investors  can  compare  across  
+opportunities,
+ 
+encouraging
+ 
+Awqaf
+ 
+organizations
+ 
+to
+ 
+improve
+ 
+governance
+ 
+and
+ 
+reporting
+ 
+quality—not
+ 
+just
+ 
+financial
+ 
+performance.
+ 
+PART  3  —  Waqf  by  Masheed  
+Chapter  4  —  Investment  Execution  &  
+Capital
+ 
+Management
+ 
+ 
+4.1  Philosophy  
+Investment  is  not  a  payment.  
+Investment  is  the  beginning  of  a  long-term  relationship  between:  
+●  Investor  ●  Waqf  ●  Asset  ●  Project  ●  Beneficiaries  ●  Governance  
+Every  Riyal  entering  the  platform  should  always  answer:  
+●  Where  did  it  come  from?  ●  Who  approved  it?  ●  Which  opportunity  is  it  allocated  to?  ●  Where  is  it  today?  ●  How  has  it  been  used?  ●  What  returns  has  it  generated?  
+Masheed  should  make  this  traceability  available  at  every  stage.  
+ 
+4.2  Investment  Lifecycle  
+===== PAGE 127 =====
+Investor  Registration   ↓   Opportunity  Selection   ↓   Investment  Simulation   ↓   Commitment   ↓   Review   ↓   Payment   ↓   Verification   ↓   Allocation   ↓   Investment  Certificate   ↓   Project  Execution   ↓   Performance  Monitoring   ↓   
+===== PAGE 128 =====
+Returns  Distribution   ↓   Investment  Closure  
+Every  stage  should  be  timestamped,  versioned,  and  auditable.  
+ 
+4.3  Investment  Workflow  
+An  investor  should  experience  the  following  journey:  
+Step  1  
+Review  Opportunity  
+↓  
+Step  2  
+Run  Investment  Calculator  
+↓  
+Step  3  
+Review  Expected  Returns  
+↓  
+Step  4  
+Accept  Terms  
+↓  
+Step  5  
+Identity  Confirmation  
+↓  
+===== PAGE 129 =====
+Step  6  
+Payment  
+↓  
+Step  7  
+Payment  Verification  
+↓  
+Step  8  
+Investment  Allocation  
+↓  
+Step  9  
+Digital  Investment  Certificate  
+↓  
+Step  10  
+Portfolio  Update  
+ 
+4.4  Investment  Object  
+Every  investment  should  become  its  own  object.  
+Investment   Overview   ↓   Investor   ↓   
+===== PAGE 130 =====
+Opportunity   ↓   Financial  Details   ↓   Documents   ↓   Payments   ↓   Returns   ↓   Updates   ↓   Governance   ↓   Compliance   ↓   Timeline   ↓   AI  Analysis   
+4.5  Investment  Fields  
+Identity  
+===== PAGE 131 =====
+Investment  ID  
+Investment  Number  
+Investment  Date  
+Status  
+Investor  
+Opportunity  
+Related  Waqf  
+Related  Asset  
+Investment  Manager  
+Currency  
+ 
+Financial  
+Investment  Amount  
+Allocated  Amount  
+Committed  Amount  
+Paid  Amount  
+Remaining  Amount  
+Investment  Share  
+Expected  ROI  
+Expected  IRR  
+Expected  Payback  
+Expected  Distribution  Frequency  
+Funding  Round  
+Funding  Source  
+===== PAGE 132 =====
+ 
+Status  
+Committed  
+Pending  Payment  
+Paid  
+Verified  
+Allocated  
+Active  
+Completed  
+Cancelled  
+Refunded  
+Suspended  
+ 
+Documents  
+Agreement  
+Certificate  
+Receipts  
+Payment  Proof  
+Supporting  Documents  
+Communication  History  
+Audit  Log  
+ 
+===== PAGE 133 =====
+4.6  Investment  Calculator  
+Before  investing,  users  can  simulate  scenarios.  
+Input:  
+Investment  Amount  
+Holding  Period  
+Expected  Revenue  
+Projected  Occupancy  
+Market  Assumptions  
+Expected  Costs  
+ 
+Outputs:  
+Projected  Annual  Return  
+Total  Return  
+Cash  Flow  
+Payback  Period  
+IRR  
+Sensitivity  Analysis  
+Best  Case  
+Expected  Case  
+Worst  Case  
+The  calculator  should  clearly  state  that  results  are  projections  based  on  assumptions.  
+ 
+4.7  Payment  Management  
+===== PAGE 134 =====
+Supported  payment  methods  should  be  configurable.  
+Examples:  
+●  Bank  Transfer  ●  Mada  ●  Visa  ●  Mastercard  ●  Apple  Pay  ●  SADAD  (future)  ●  Open  Banking  (future)  
+Each  payment  records:  
+Payment  ID  
+Amount  
+Method  
+Reference  Number  
+Date  
+Status  
+Verification  
+Gateway  Response  
+Supporting  Documents  
+Refund  Status  
+ 
+4.8  Capital  Allocation  Engine  
+This  is  one  of  Masheed's  differentiators.  
+Money  should  not  simply  go  into  one  account.  
+Instead,  allocations  should  be  transparent.  
+Example:  
+===== PAGE 135 =====
+SAR  1,000,000  
+↓  
+Land  Development  
+35%  
+↓  
+Construction  
+40%  
+↓  
+Professional  Services  
+8%  
+↓  
+Contingency  
+7%  
+↓  
+Reserve  
+10%  
+Every  allocation  should  be  visible  to  investors.  
+ 
+4.9  Funding  Progress  
+Every  opportunity  should  display:  
+Funding  Goal  
+Current  Funding  
+Remaining  Amount  
+===== PAGE 136 =====
+Number  of  Investors  
+Average  Investment  
+Largest  Investment  
+Funding  Velocity  
+Funding  Deadline  
+Projected  Completion  
+Funding  Milestones  
+ 
+4.10  Digital  Investment  Certificate  
+Every  completed  investment  generates  a  digital  certificate.  
+Certificate  includes:  
+Certificate  Number  
+Investor  
+Opportunity  
+Waqf  
+Investment  Amount  
+Date  
+Reference  
+QR  Code  
+Verification  Link  
+Digital  Signature  
+Certificate  Version  
+Status  
+===== PAGE 137 =====
+The  certificate  should  be  verifiable  through  a  public  verification  page  without  exposing  
+confidential
+ 
+information.
+ 
+ 
+4.11  Project  Execution  Monitoring  
+Once  funding  is  complete,  investors  should  continue  receiving  updates.  
+Project  dashboard  includes:  
+Completion  Percentage  
+Current  Milestone  
+Budget  Used  
+Budget  Remaining  
+Schedule  Variance  
+Issues  
+Photos  
+Progress  Reports  
+AI  Summary  
+Upcoming  Milestones  
+ 
+4.12  Milestone  Management  
+Every  project  should  define  milestones.  
+Each  milestone  includes:  
+Milestone  Name  
+Description  
+Target  Date  
+===== PAGE 138 =====
+Actual  Date  
+Budget  
+Status  
+Evidence  
+Photos  
+Documents  
+Approvals  
+AI  Progress  Summary  
+Milestone  completion  can  trigger  automated  investor  notifications.  
+ 
+4.13  Returns  Distribution  
+The  platform  should  support  configurable  distribution  schedules.  
+Examples:  
+Monthly  
+Quarterly  
+Semi-Annual  
+Annual  
+Custom  
+For  each  distribution:  
+Distribution  ID  
+Related  Investment  
+Amount  
+Date  
+===== PAGE 139 =====
+Method  
+Status  
+Supporting  Statement  
+Receipt  
+Variance  Explanation  
+ 
+4.14  Post-Investment  Reporting  
+Investors  should  receive  recurring  reports  including:  
+Project  Progress  
+Financial  Performance  
+Revenue  
+Expenses  
+Budget  Variance  
+Governance  Updates  
+Compliance  Updates  
+Risk  Changes  
+AI  Commentary  
+Reports  can  be  scheduled  or  generated  on  demand.  
+ 
+4.15  Exception  Management  
+The  platform  should  detect  and  manage  exceptions  such  as:  
+●  Delayed  project  milestones.  ●  Budget  overruns.  
+===== PAGE 140 =====
+●  Funding  shortages.  ●  Governance  violations.  ●  Compliance  breaches.  ●  Material  legal  events.  ●  Significant  changes  in  projected  returns.  
+Each  exception  should  include:  
+Severity  
+Root  Cause  
+Impact  
+Mitigation  Plan  
+Responsible  Party  
+Expected  Resolution  
+Investor  Communication  Status  
+ 
+4.16  AI  Investment  Monitor  
+The  AI  should  continuously  monitor  funded  opportunities  and  provide  contextual  insights.  
+Examples:  
+"Construction  progress  is  12%  behind  schedule."  
+"Current  expenditures  remain  within  approved  budget."  
+"Revenue  projections  have  improved  due  to  higher  occupancy."  
+"A  recently  identified  compliance  issue  may  delay  the  next  milestone."  
+Recommendations  should  always  reference  supporting  ERP  data.  
+ 
+4.17  Investment  Timeline  
+===== PAGE 141 =====
+Every  investment  should  maintain  a  complete  historical  timeline.  
+Opportunity  Published   ↓   Investment  Committed   ↓   Payment  Received   ↓   Allocation  Completed   ↓   Funding  Closed   ↓   Project  Started   ↓   Milestone  1   ↓   Milestone  2   ↓   Revenue  Started   ↓   Returns  Distributed   ↓   Investment  Closed  
+Nothing  should  be  removed  from  the  timeline;  corrections  are  appended  as  new  events.  
+===== PAGE 142 =====
+ 
+4.18  Administrative  Dashboard  
+Marketplace  administrators  should  monitor:  
+●  Total  Capital  Raised.  ●  Active  Funding  Campaigns.  ●  Pending  Payments.  ●  Allocation  Status.  ●  Upcoming  Distributions.  ●  Funding  Deadlines.  ●  High-Risk  Projects.  ●  Delayed  Milestones.  ●  Investor  Support  Requests.  
+This  dashboard  becomes  the  operational  control  center  for  marketplace  management.  
+ 
+4.19  Reports  
+The  module  should  generate:  
+Investment  Reports  
+●  Investment  Register  ●  Capital  Allocation  Report  ●  Funding  Progress  Report  ●  Distribution  Report  ●  Payment  Report  ●  Refund  Report  ●  Project  Performance  Report  
+Executive  Reports  
+●  Capital  Raised  by  Period  ●  Investor  Participation  Analysis  ●  Funding  Success  Rate  ●  Average  Investment  Size  ●  Return  Performance  ●  Portfolio  Growth  
+===== PAGE 143 =====
+●  Marketplace  Health  Report  
+ 
+4.20  Investment  Integrity  Engine  (Masheed  
+Innovation)
+ 
+This  engine  continuously  validates  that  investment  capital  is  being  managed  according  to  
+approved
+ 
+plans.
+ 
+It  compares:  
+●  Planned  vs.  actual  capital  deployment.  ●  Planned  vs.  actual  project  milestones.  ●  Budgeted  vs.  actual  expenditures.  ●  Governance  approvals  vs.  executed  actions.  ●  Compliance  requirements  vs.  current  status.  
+When  significant  deviations  occur,  the  engine  generates  alerts,  requests  explanations  from  the  
+organization,
+ 
+and
+ 
+surfaces
+ 
+material
+ 
+issues
+ 
+to
+ 
+marketplace
+ 
+administrators.
+ 
+This
+ 
+creates
+ 
+a
+ 
+transparent
+ 
+chain
+ 
+of
+ 
+accountability
+ 
+from
+ 
+fundraising
+ 
+through
+ 
+project
+ 
+execution.
+ 
+ 
+Major  Recommendation  —  Public  
+Transparency
+ 
+Portal
+ 
+One  feature  that  I  believe  could  become  a  defining  differentiator  for  Masheed  is  a  Public  
+Transparency
+ 
+Portal
+.
+ 
+For  each  published  opportunity,  organizations  could  optionally  expose  a  curated  public  
+dashboard
+ 
+showing:
+ 
+●  Funding  progress.  ●  Project  milestone  completion.  ●  High-level  financial  progress.  ●  Governance  status.  ●  Compliance  status.  ●  Latest  updates.  ●  Photos  and  videos.  
+===== PAGE 144 =====
+●  Community  impact  metrics.  ●  Number  of  beneficiaries  served.  
+This  portal  would  not  reveal  confidential  investor  or  ERP  data,  but  it  would  demonstrate  
+accountability
+ 
+and
+ 
+strengthen
+ 
+trust
+ 
+among
+ 
+investors,
+ 
+beneficiaries,
+ 
+regulators,
+ 
+and
+ 
+the
+ 
+public.
+ 
+It
+ 
+aligns
+ 
+closely
+ 
+with
+ 
+the
+ 
+governance
+ 
+and
+ 
+transparency
+ 
+principles
+ 
+underpinning
+ 
+the
+ 
+Awqaf
+ 
+sector
+ 
+and
+ 
+could
+ 
+become
+ 
+one
+ 
+of
+ 
+Masheed's
+ 
+most
+ 
+recognizable
+ 
+features.
+ 
+PART  4  —  Cross-Platform  Modules  
+Chapter  1  —  Notifications  &  
+Communication
+ 
+Center
+ 
+ 
+1.1  Purpose  
+The  Notification  &  Communication  Center  serves  as  the  centralized  communication  hub  across  
+the
+ 
+entire
+ 
+Masheed
+ 
+ecosystem.
+ 
+It
+ 
+ensures
+ 
+that
+ 
+users
+ 
+receive
+ 
+timely,
+ 
+relevant,
+ 
+and
+ 
+actionable
+ 
+information
+ 
+through
+ 
+configurable
+ 
+channels
+ 
+while
+ 
+maintaining
+ 
+a
+ 
+complete
+ 
+communication
+ 
+history
+ 
+for
+ 
+audit
+ 
+and
+ 
+traceability.
+ 
+The  system  should  support  both  system-generated  events  and  user-to-user  collaboration,  
+ensuring
+ 
+that
+ 
+no
+ 
+important
+ 
+governance,
+ 
+compliance,
+ 
+investment,
+ 
+or
+ 
+operational
+ 
+event
+ 
+is
+ 
+missed.
+ 
+ 
+1.2  Communication  Architecture  
+Communication  Center   ├──  Notifications  ├──  Inbox  ├──  Announcements  ├──  Chat  ├──  Email  ├──  SMS  ├──  Push  Notifications  
+===== PAGE 145 =====
+├──  WhatsApp  (Future)  ├──  In-App  Alerts  ├──  Scheduled  Messages  ├──  Broadcast  Messages  └──  Communication  Logs   
+1.3  Notification  Categories  
+The  platform  should  support  categorized  notifications.  
+ERP  
+●  Asset  Updates  ●  Financial  Alerts  ●  Compliance  Alerts  ●  Governance  Actions  ●  Maintenance  Requests  ●  Consultations  ●  Workflow  Approvals  ●  Risk  Alerts  ●  AI  Recommendations  
+ 
+Marketplace  
+●  Listing  Status  ●  New  Investments  ●  Funding  Progress  ●  Investor  Questions  ●  Returns  Distribution  ●  Milestone  Updates  ●  Listing  Approval  ●  Opportunity  Expiration  
+ 
+System  
+●  Login  Alerts  ●  Password  Changes  ●  Role  Changes  
+===== PAGE 146 =====
+●  Security  Alerts  ●  New  Features  ●  Scheduled  Maintenance  
+ 
+1.4  Notification  Object  
+Each  notification  should  include:  
+●  Notification  ID  ●  Category  ●  Title  ●  Description  ●  Related  Module  ●  Related  Record  ●  Priority  ●  Severity  ●  Sender  ●  Recipient(s)  ●  Delivery  Channel  ●  Created  Date  ●  Read  Date  ●  Expiration  Date  ●  Status  ●  Action  Button  ●  Deep  Link  
+ 
+1.5  Priority  Levels  
+Notifications  should  support  configurable  priorities.  
+●  Critical  ●  High  ●  Medium  ●  Low  ●  Informational  
+Critical  notifications  may  require  acknowledgment  before  dismissal.  
+===== PAGE 147 =====
+ 
+1.6  Delivery  Channels  
+Users  should  be  able  to  receive  notifications  through  multiple  channels.  
+Supported  channels:  
+●  In-App  ●  Email  ●  SMS  ●  Push  Notifications  ●  Browser  Notifications  ●  WhatsApp  (Future)  ●  Microsoft  Teams  (Future)  ●  Slack  (Future)  
+Organizations  can  enable  or  disable  channels  globally.  
+ 
+1.7  Notification  Preferences  
+Each  user  can  configure:  
+●  Preferred  channels  ●  Quiet  hours  ●  Language  ●  Daily  digest  ●  Weekly  summary  ●  Immediate  alerts  ●  AI  recommendation  frequency  ●  Security  alerts  (mandatory)  
+Preferences  can  also  be  overridden  by  organizational  policies  for  critical  events.  
+ 
+1.8  Notification  Center  
+The  notification  center  should  support:  
+===== PAGE 148 =====
+●  Unread  counter  ●  Search  ●  Filters  ●  Categories  ●  Pinning  ●  Snooze  ●  Archive  ●  Bulk  actions  ●  Read  all  ●  Mark  as  important  
+ 
+1.9  Inbox  
+The  inbox  stores  all  communication.  
+Supported  message  types:  
+●  Direct  Messages  ●  Workflow  Requests  ●  Approval  Requests  ●  Consultation  Messages  ●  Marketplace  Messages  ●  AI  Messages  ●  System  Messages  
+Messages  should  support  attachments,  mentions,  reactions,  and  threaded  replies.  
+ 
+1.10  Chat  
+Instead  of  a  generic  chat,  conversations  should  be  contextual.  
+Examples:  
+Every  asset  can  have  a  discussion.  
+Every  investment  can  have  a  discussion.  
+Every  consultation  can  have  a  discussion.  
+===== PAGE 149 =====
+Every  workflow  can  have  a  discussion.  
+Every  listing  can  have  a  discussion.  
+Supported  features:  
+●  Threaded  conversations  ●  Mentions  (@User)  ●  File  sharing  ●  Voice  notes  (future)  ●  Read  receipts  ●  Typing  indicators  ●  Emoji  reactions  ●  AI  conversation  summary  
+ 
+1.11  Announcements  
+Organizations  can  publish  announcements.  
+Examples:  
+●  New  Policy  ●  Board  Decision  ●  System  Update  ●  Regulatory  Announcement  ●  Upcoming  Event  ●  Marketplace  Campaign  
+Each  announcement  includes:  
+●  Audience  ●  Start  Date  ●  End  Date  ●  Priority  ●  Attachments  ●  Required  Acknowledgment  ●  Read  Statistics  
+ 
+1.12  Workflow  Notifications  
+===== PAGE 150 =====
+Every  workflow  automatically  generates  notifications.  
+Example:  
+Request  Submitted   ↓   Assigned   ↓   Under  Review   ↓   Approved   ↓   Completed   ↓   Closed  
+Users  receive  updates  at  each  stage.  
+ 
+1.13  AI  Notification  Assistant  
+The  AI  should  reduce  notification  fatigue.  
+Instead  of  sending  dozens  of  alerts,  it  can  group  them  intelligently.  
+Example:  
+Instead  of:  
+●  12  document  expirations  ●  8  maintenance  reminders  ●  5  policy  reviews  
+===== PAGE 151 =====
+The  AI  sends:  
+"Today  requires  your  attention  in  three  areas:  document  renewals,  maintenance  
+planning,
+ 
+and
+ 
+policy
+ 
+reviews.
+ 
+There
+ 
+are
+ 
+25
+ 
+pending
+ 
+actions
+ 
+affecting
+ 
+five
+ 
+Waqf
+ 
+entities."
+ 
+The  user  can  then  expand  each  section.  
+ 
+1.14  Escalation  Rules  
+Notifications  should  escalate  automatically.  
+Example:  
+Approval  pending  48  hours  
+↓  
+Reminder  
+↓  
+Still  pending  
+↓  
+Manager  notified  
+↓  
+Still  pending  
+↓  
+Department  Head  
+↓  
+Still  pending  
+↓  
+Executive  Dashboard  
+===== PAGE 152 =====
+ 
+Escalation  rules  should  be  configurable.  
+ 
+1.15  Communication  Logs  
+Every  communication  event  should  be  recorded.  
+Fields:  
+●  Communication  ID  ●  Sender  ●  Recipient  ●  Channel  ●  Related  Record  ●  Timestamp  ●  Delivery  Status  ●  Read  Status  ●  Response  Time  ●  Attachments  ●  Audit  Reference  
+ 
+1.16  Broadcast  Center  
+Administrators  can  send  broadcast  messages.  
+Audience  examples:  
+●  All  Users  ●  Finance  Team  ●  Investors  ●  Board  Members  ●  Marketplace  Reviewers  ●  Consultants  ●  Organization-specific  Users  
+Scheduling  and  targeting  rules  should  be  supported.  
+ 
+===== PAGE 153 =====
+1.17  Notification  Templates  
+Templates  should  be  configurable  using  placeholders.  
+Example:  
+Hello  {{UserName}}   Your  investment  in  {{OpportunityName}}  has  been  successfully  confirmed.   Amount:  {{InvestmentAmount}}   Thank  you.  
+Supported  placeholders  include  user,  organization,  Waqf,  asset,  workflow,  and  investment  
+variables.
+ 
+ 
+1.18  Reports  
+The  module  should  provide:  
+●  Notification  Delivery  Report  ●  Read  Rate  Analysis  ●  Communication  Activity  ●  Response  Time  Analysis  ●  Announcement  Engagement  ●  Escalation  Report  ●  Broadcast  Performance  
+ 
+1.19  Command  Center  Widget  
+The  executive  dashboard  should  summarize  communications:  
+●  Critical  Notifications  ●  Pending  Approvals  ●  Unread  Messages  
+===== PAGE 154 =====
+●  Escalated  Issues  ●  AI  Daily  Briefing  ●  Upcoming  Deadlines  
+Executives  should  immediately  know  which  communications  require  attention  without  opening  
+multiple
+ 
+modules.
+ 
+ 
+Major  Recommendation  —  Unified  Activity  
+Feed
+ 
+Instead  of  forcing  users  to  open  different  modules,  Masheed  should  provide  a  unified  activity  
+feed
+ 
+similar
+ 
+to
+ 
+GitHub,
+ 
+Notion,
+ 
+or
+ 
+Microsoft
+ 
+Teams.
+ 
+Example:  
+09:05   Investment  Opportunity  approved   ↓   09:12   Board  Decision  recorded   ↓   09:18   Maintenance  request  completed   ↓   09:35   Compliance  score  increased   ↓   09:40  
+===== PAGE 155 =====
+ AI  Recommendation  generated   ↓   09:42   Investor  committed  SAR  250,000   ↓   09:55   Project  milestone  completed  
+Every  item  should  be  clickable,  filterable,  and  linked  directly  to  its  source  record.  This  feed  
+becomes
+ 
+the
+ 
+"heartbeat"
+ 
+of
+ 
+the
+ 
+platform,
+ 
+giving
+ 
+users
+ 
+real-time
+ 
+visibility
+ 
+into
+ 
+everything
+ 
+happening
+ 
+across
+ 
+the
+ 
+ERP
+ 
+and
+ 
+the
+ 
+marketplace.
+ 
+PART  4  —  Cross-Platform  Modules  
+Chapter  2  —  User,  Roles  &  Authorization  
+Management
+ 
+ 
+2.1  Purpose  
+The  Authorization  Management  module  provides  enterprise-grade  identity,  access  control,  and  
+security
+ 
+for
+ 
+the
+ 
+entire
+ 
+Masheed
+ 
+ecosystem.
+ 
+It  governs  access  across:  
+●  Masheed  ERP  ●  Waqf  by  Masheed  ●  Administration  Portal  ●  Mobile  Applications  ●  APIs  ●  AI  Services  
+===== PAGE 156 =====
+●  Future  Integrations  
+The  system  should  ensure  every  user  can  access  only  the  information,  actions,  and  
+workflows
+ 
+they
+ 
+are
+ 
+explicitly
+ 
+authorized
+ 
+to
+ 
+perform
+,
+ 
+while
+ 
+maintaining
+ 
+complete
+ 
+traceability
+ 
+of
+ 
+all
+ 
+permission
+ 
+changes.
+ 
+ 
+2.2  Identity  Architecture  
+Identity  Platform   ├──  Organizations  ├──  Users  ├──  Roles  ├──  Permission  Sets  ├──  Groups  ├──  Teams  ├──  Delegation  ├──  API  Clients  ├──  Authentication  ├──  Authorization  ├──  Sessions  ├──  MFA  ├──  SSO  └──  Audit   
+2.3  User  Types  
+Internal  Users  
+●  Super  Administrator  ●  Organization  Administrator  ●  CEO  ●  Nazer  ●  CFO  ●  Finance  Manager  ●  Asset  Manager  ●  Investment  Manager  ●  Governance  Officer  ●  Compliance  Officer  
+===== PAGE 157 =====
+●  Legal  Officer  ●  Risk  Manager  ●  Procurement  Officer  ●  HR  Officer  ●  Internal  Auditor  ●  Board  Member  ●  Committee  Member  ●  Executive  Assistant  
+ 
+Marketplace  Users  
+●  Investor  ●  Institutional  Investor  ●  Opportunity  Owner  ●  Marketplace  Reviewer  ●  Marketplace  Administrator  ●  Support  Team  
+ 
+External  Users  
+●  Consultant  ●  Auditor  ●  Valuation  Company  ●  Law  Firm  ●  Engineering  Consultant  ●  Government  Reviewer  ●  External  Accountant  
+ 
+System  Users  
+●  AI  Agents  ●  API  Integrations  ●  Scheduled  Jobs  ●  Webhooks  ●  Background  Workers  
+ 
+===== PAGE 158 =====
+2.4  User  Profile  
+Each  user  should  contain:  
+Identity  
+●  User  ID  ●  Employee  ID  (optional)  ●  Arabic  Name  ●  English  Name  ●  Email  ●  Mobile  ●  Username  ●  Profile  Photo  ●  Organization  ●  Department  ●  Position  ●  Manager  ●  Preferred  Language  ●  Time  Zone  
+ 
+Security  
+●  MFA  Enabled  ●  Password  Status  ●  Last  Login  ●  Last  Password  Change  ●  Failed  Login  Attempts  ●  Active  Sessions  ●  Trusted  Devices  ●  IP  Restrictions  ●  Account  Status  
+ 
+Authorization  
+●  Assigned  Roles  ●  Permission  Sets  ●  Teams  
+===== PAGE 159 =====
+●  Groups  ●  Delegated  Permissions  ●  Temporary  Permissions  ●  Data  Scope  ●  Approval  Limits  
+ 
+2.5  Role  Hierarchy  
+Platform  Super  Admin   ↓   Platform  Operations   ↓   Organization  Admin   ↓   Executive  Management   ↓   Department  Managers   ↓   Specialists   ↓   Employees   ↓   External  Users   ↓   Read  Only  
+===== PAGE 160 =====
+Organizations  can  customize  this  hierarchy.  
+ 
+2.6  Permission  Model  
+Permissions  should  be  granular.  
+Examples:  
+Module  Permissions  
+●  View  Assets  ●  Create  Assets  ●  Edit  Assets  ●  Delete  Assets  ●  Archive  Assets  ●  Export  Assets  
+ 
+Financial  
+●  Create  Payments  ●  Approve  Payments  ●  Reverse  Journals  ●  Close  Accounting  Period  ●  Export  Financial  Reports  
+ 
+Marketplace  
+●  Create  Listing  ●  Review  Listing  ●  Approve  Listing  ●  Publish  Listing  ●  Suspend  Listing  ●  View  Investors  
+ 
+Governance  
+===== PAGE 161 =====
+●  Create  Board  Meeting  ●  Vote  ●  Approve  Decisions  ●  Manage  Policies  ●  Manage  Risks  
+ 
+2.7  Permission  Levels  
+Every  object  should  support:  
+View  
+Create  
+Edit  
+Delete  
+Approve  
+Reject  
+Assign  
+Export  
+Print  
+Share  
+Archive  
+Restore  
+Configure  
+Administrate  
+Execute  Workflow  
+Override  
+ 
+===== PAGE 162 =====
+2.8  Record-Level  Security  
+Users  may  only  access  records  matching  defined  rules.  
+Examples:  
+Asset  belongs  to  Organization  A  
+↓  
+Only  Organization  A  
+Finance  
+Asset  Manager  
+CEO  
+can  access  it.  
+ 
+Another  example:  
+Investor  
+↓  
+Can  only  access  
+their  own  investments  
+their  own  documents  
+their  own  reports  
+ 
+2.9  Field-Level  Security  
+Some  users  may  open  a  record  but  not  every  field.  
+Example  
+Asset  
+===== PAGE 163 =====
+Market  Value  
+CEO  ✓  
+Finance  ✓  
+Asset  Manager  ✓  
+Maintenance  ✗  
+Investor  ✗  
+ 
+Another  example  
+Salary  
+HR  ✓  
+CEO  ✓  
+Manager  ✗  
+ 
+2.10  Attribute-Based  Security  (ABAC)  
+Access  decisions  can  consider  attributes.  
+Examples:  
+User  Department  
+Location  
+Organization  
+Country  
+Role  
+Project  
+Investment  Amount  
+===== PAGE 164 =====
+Risk  Level  
+Workflow  Stage  
+Classification  
+Time  
+Device  
+IP  Address  
+ 
+Example  Rule  
+Finance  Managers  
+can  approve  expenses  
+ONLY  
+Department  =  Finance  
+AND  
+Amount  <  SAR  100,000  
+AND  
+Working  Hours  
+AND  
+Within  Assigned  Organization  
+ 
+2.11  Temporary  Permissions  
+Managers  can  grant  temporary  access.  
+Fields  
+Who  Granted  
+===== PAGE 165 =====
+Who  Received  
+Reason  
+Start  Date  
+End  Date  
+Approval  
+Automatic  Expiration  
+Audit  Log  Reference  
+ 
+2.12  Delegation  
+Example  
+CEO  on  vacation  
+↓  
+Delegates  
+Financial  Approvals  
+↓  
+CFO  
+↓  
+Valid  
+July  1–15  
+↓  
+Automatically  expires  
+Delegation  applies  only  to  selected  permissions.  
+ 
+===== PAGE 166 =====
+2.13  Groups  &  Teams  
+Support:  
+Departments  
+Projects  
+Investment  Committees  
+Board  Committees  
+Regional  Offices  
+Working  Groups  
+Review  Teams  
+Notifications,  workflows,  and  approvals  can  target  groups  rather  than  individual  users.  
+ 
+2.14  Authentication  
+Supported  methods:  
+●  Email  &  Password  ●  MFA  ●  SMS  OTP  ●  Authenticator  Apps  ●  Passkeys  (future)  ●  Biometric  Login  (mobile)  ●  SAML  SSO  ●  OAuth  2.0  ●  OpenID  Connect  ●  Government  Identity  Providers  (future)  
+ 
+2.15  Session  Management  
+Administrators  can  view:  
+===== PAGE 167 =====
+●  Active  Sessions  ●  Device  ●  Browser  ●  Operating  System  ●  IP  Address  ●  Login  Time  ●  Last  Activity  ●  Risk  Score  
+Actions:  
+●  Terminate  Session  ●  Force  Logout  ●  Reset  MFA  ●  Require  Password  Change  
+ 
+2.16  AI  Permission  Advisor  
+The  AI  analyzes  permission  assignments.  
+Examples:  
+"12  users  have  excessive  financial  permissions."  
+"Three  users  have  not  used  their  approval  permissions  in  six  months."  
+"A  temporary  permission  expired  but  remains  active  due  to  configuration."  
+"The  Compliance  Officer  lacks  access  to  the  new  Risk  module."  
+ 
+2.17  Reports  
+●  User  Register  ●  Role  Matrix  ●  Permission  Matrix  ●  Login  Activity  ●  Failed  Logins  ●  Delegation  Report  ●  Temporary  Access  Report  
+===== PAGE 168 =====
+●  MFA  Adoption  ●  Access  Review  Report  ●  Segregation  of  Duties  Report  
+ 
+2.18  Enterprise  Recommendation  
+Implement  Segregation  of  Duties  (SoD)  rules  from  the  beginning.  
+Examples:  
+A  user  cannot  simultaneously:  
+●  Create  a  payment  and  approve  the  same  payment.  ●  Create  a  listing  and  perform  the  final  listing  approval.  ●  Record  an  audit  finding  and  close  the  same  finding.  ●  Create  a  governance  policy  and  approve  its  publication  without  an  independent  reviewer.  
+This  dramatically  strengthens  governance  and  is  expected  by  enterprise  customers.  
+ 
+MASHEED  Master  Product  Specification  
+PART  4  —  Cross-Platform  Modules  
+Chapter  3  —  Audit  Logs  &  Activity  History  
+ 
+3.1  Purpose  
+Every  meaningful  action  in  Masheed  must  be  traceable.  
+The  audit  system  should  be  immutable,  searchable,  exportable,  and  compliant  with  enterprise  
+governance
+ 
+requirements.
+ 
+===== PAGE 169 =====
+Nothing  important  should  happen  without  leaving  an  audit  trail.  
+ 
+3.2  What  Must  Be  Audited  
+The  system  should  log:  
+●  Logins  and  logouts.  ●  Failed  authentication  attempts.  ●  Password  changes.  ●  MFA  changes.  ●  User  creation  and  deactivation.  ●  Permission  changes.  ●  Role  assignments.  ●  Record  creation.  ●  Record  updates.  ●  Record  deletion  requests.  ●  Soft  deletes  and  restores.  ●  Workflow  approvals.  ●  Workflow  rejections.  ●  Financial  postings.  ●  Investment  transactions.  ●  AI-generated  recommendations  (and  whether  they  were  accepted  or  dismissed).  ●  File  uploads/downloads.  ●  API  requests.  ●  Configuration  changes.  ●  Report  exports.  ●  Bulk  operations.  
+ 
+3.3  Audit  Record  
+Every  audit  event  includes:  
+●  Audit  ID  ●  Timestamp  (UTC)  ●  User  /  Service  Account  ●  Organization  ●  Module  ●  Entity  Type  
+===== PAGE 170 =====
+●  Entity  ID  ●  Action  ●  Before  Values  ●  After  Values  ●  Changed  Fields  ●  IP  Address  ●  Device  ●  Browser  ●  Session  ID  ●  Correlation  ID  (to  trace  multi-step  workflows)  ●  Source  (Web,  Mobile,  API,  Integration)  ●  Outcome  (Success  /  Failure)  ●  Reason  (where  required)  
+ 
+3.4  Version  History  
+Every  business  record  should  support  versioning.  
+Users  can:  
+●  View  all  previous  versions.  ●  Compare  versions  side-by-side.  ●  Restore  an  earlier  version  (where  business  rules  permit).  ●  See  who  made  each  change  and  why.  
+ 
+3.5  Timeline  View  
+Every  record  should  expose  a  unified  timeline.  
+Example  for  an  Asset:  
+Created   ↓   Valuation  Updated   ↓  
+===== PAGE 171 =====
+ Maintenance  Scheduled   ↓   Insurance  Renewed   ↓   Listed  for  Investment   ↓   Funding  Completed   ↓   Compliance  Review   ↓   Inspection  Completed  
+This  timeline  becomes  the  historical  narrative  of  the  record.  
+ 
+3.6  Search  &  Investigation  
+Audit  logs  should  support  advanced  filters:  
+●  Date  range.  ●  User.  ●  Organization.  ●  Module.  ●  Entity.  ●  Action.  ●  IP  address.  ●  Device.  ●  Outcome.  ●  Severity.  
+Investigators  should  be  able  to  reconstruct  an  entire  workflow  from  a  single  Correlation  ID.  
+===== PAGE 172 =====
+ 
+3.7  Retention  &  Integrity  
+●  Configurable  retention  policies.  ●  Tamper-evident  storage.  ●  Export  for  regulators.  ●  Legal  hold  capability.  ●  Cryptographic  integrity  checks  (future  enhancement).  
+ 
+PART  4  —  Cross-Platform  Modules  
+Chapter  4  —  Settings  &  Configuration  
+ 
+4.1  Philosophy  
+Masheed  should  be  configured,  not  customized .  
+Nearly  every  business  rule  should  be  manageable  through  configuration,  allowing  organizations  
+to
+ 
+adapt
+ 
+the
+ 
+platform
+ 
+without
+ 
+requiring
+ 
+software
+ 
+development.
+ 
+ 
+4.2  Configuration  Hierarchy  
+Platform   ↓   Tenant  (Organization)   ↓   Waqf  
+===== PAGE 173 =====
+ ↓   Department   ↓   Module   ↓   Workflow   ↓   User  
+Higher-level  settings  define  defaults,  while  lower  levels  may  override  them  where  permitted.  
+ 
+4.3  Platform  Settings  
+Examples:  
+●  Supported  Languages  ●  Supported  Currencies  ●  Time  Zones  ●  Number  Formats  ●  Date  Formats  ●  Email  Providers  ●  SMS  Providers  ●  Payment  Providers  ●  File  Storage  ●  AI  Providers  ●  Security  Policies  ●  Branding  Defaults  ●  Maintenance  Mode  
+ 
+4.4  Organization  Settings  
+===== PAGE 174 =====
+Each  organization  can  configure:  
+●  Company  profile.  ●  Logo  and  branding.  ●  Contact  details.  ●  Working  days.  ●  Business  hours.  ●  Fiscal  year.  ●  Approval  thresholds.  ●  Notification  defaults.  ●  Default  document  templates.  ●  Default  workflows.  ●  Department  structure.  ●  Cost  centers.  ●  Organizational  hierarchy.  
+ 
+4.5  Module  Settings  
+Every  module  should  expose  configurable  options.  
+Examples:  
+Assets:  
+●  Custom  asset  categories.  ●  Valuation  frequency.  ●  Maintenance  intervals.  
+Finance:  
+●  Fiscal  calendar.  ●  Chart  of  accounts.  ●  Approval  limits.  ●  Budget  rules.  
+Marketplace:  
+●  Listing  review  stages.  ●  Required  documents.  ●  Funding  limits.  ●  Visibility  rules.  
+===== PAGE 175 =====
+Governance:  
+●  Board  term  limits.  ●  Committee  structures.  ●  Policy  review  cycles.  
+ 
+4.6  Dynamic  Fields  
+Administrators  should  be  able  to  add  custom  fields  to  almost  any  entity.  
+Supported  types:  
+●  Text  ●  Number  ●  Currency  ●  Date  ●  Date  &  Time  ●  Boolean  ●  Dropdown  ●  Multi-select  ●  User  ●  Organization  ●  File  ●  URL  ●  Formula  ●  Lookup  ●  Rich  Text  
+Fields  should  support  validation,  conditional  visibility,  and  API  exposure.  
+ 
+4.7  Branding  
+Organizations  can  configure:  
+●  Logos.  ●  Color  palette.  ●  Email  templates.  ●  Report  templates.  
+===== PAGE 176 =====
+●  PDF  headers  and  footers.  ●  Public  marketplace  branding  (within  platform  guidelines).  
+ 
+4.8  Localization  
+Support:  
+●  Arabic  (RTL)  ●  English  (LTR)  
+Future-ready  architecture  should  allow  adding  additional  languages  without  code  changes.  
+Localization  should  include:  
+●  UI  text.  ●  Dates.  ●  Numbers.  ●  Currency.  ●  Reports.  ●  Email  templates.  ●  Notifications.  
+ 
+4.9  Feature  Flags  
+Administrators  should  enable  or  disable  features  at:  
+●  Platform  level.  ●  Organization  level.  ●  Beta  group.  ●  Individual  user  (for  testing).  
+This  supports  phased  rollouts  and  enterprise  pilots.  
+ 
+4.10  Configuration  Packages  
+===== PAGE 177 =====
+Organizations  should  be  able  to  export  and  import  configuration  packages  containing:  
+●  Roles.  ●  Permission  sets.  ●  Workflows.  ●  Notification  templates.  ●  Document  templates.  ●  Custom  fields.  ●  Approval  matrices.  ●  Settings.  
+This  makes  onboarding  new  organizations  dramatically  faster.  
+PART  4  —  Cross-Platform  Modules  
+Chapter  5  —  Workflow  &  Business  
+Process
+ 
+Engine
+ 
+(WBPE)
+ 
+ 
+5.1  Vision  
+The  Workflow  &  Business  Process  Engine  (WBPE)  is  the  orchestration  layer  that  powers  every  
+business
+ 
+process
+ 
+across
+ 
+Masheed
+ 
+ERP
+ 
+and
+ 
+Waqf
+ 
+by
+ 
+Masheed.
+ 
+Rather  than  embedding  workflows  directly  into  each  module,  the  engine  provides  a  centralized,  
+configurable
+ 
+platform
+ 
+that
+ 
+allows
+ 
+administrators
+ 
+to
+ 
+design,
+ 
+automate,
+ 
+monitor,
+ 
+and
+ 
+optimize
+ 
+business
+ 
+processes
+ 
+without
+ 
+software
+ 
+development.
+ 
+Every  approval,  review,  task,  escalation,  notification,  and  AI  checkpoint  should  be  orchestrated  
+by
+ 
+this
+ 
+engine.
+ 
+ 
+5.2  Workflow  Philosophy  
+Everything  is  a  workflow.  
+===== PAGE 178 =====
+Examples:  
+New  Waqf   ↓   Register   ↓   Review   ↓   Approve   ↓   Activate  Investment  Listing   ↓   Documents   ↓   Legal   ↓   Finance   ↓   Governance   ↓   Compliance   ↓   Investment  Committee  
+===== PAGE 179 =====
+ ↓   Publish  Maintenance  Request   ↓   Submit   ↓   Review   ↓   Assign   ↓   Execute   ↓   Inspect   ↓   Close  Board  Decision   ↓   Meeting   ↓   Vote   ↓   Approve   ↓  
+===== PAGE 180 =====
+ Assign  Tasks   ↓   Monitor   ↓   Close  
+Nothing  should  bypass  the  Workflow  Engine.  
+ 
+5.3  Engine  Architecture  
+Workflow  Engine   ├──  Workflow  Designer  ├──  Process  Templates  ├──  Stage  Designer  ├──  Approval  Engine  ├──  Assignment  Engine  ├──  Rule  Engine  ├──  Automation  Engine  ├──  SLA  Engine  ├──  Notification  Engine  ├──  AI  Decision  Engine  ├──  Escalation  Engine  ├──  Forms  Engine  ├──  Document  Engine  ├──  Audit  Engine  ├──  Analytics  Engine  └──  API  Engine   
+5.4  Workflow  Object  
+Every  workflow  becomes  a  first-class  object.  
+Fields  
+===== PAGE 181 =====
+●  Workflow  ID  ●  Workflow  Name  ●  Description  ●  Category  ●  Module  ●  Organization  ●  Status  ●  Version  ●  Owner  ●  Created  Date  ●  Last  Published  ●  Active  Version  ●  Draft  Version  
+ 
+5.5  Workflow  Categories  
+ERP  
+●  Asset  Management  ●  Finance  ●  Governance  ●  Compliance  ●  Consultation  ●  Procurement  ●  Maintenance  ●  Risk  ●  Audit  
+Marketplace  
+●  Listing  Review  ●  Investment  Approval  ●  Due  Diligence  ●  Investor  Verification  ●  Distribution  Approval  
+Platform  
+●  User  Provisioning  ●  Organization  Onboarding  ●  API  Access  ●  Subscription  Changes  
+===== PAGE 182 =====
+●  Feature  Requests  
+ 
+5.6  Workflow  Designer  
+Administrators  should  build  workflows  visually.  
+Start   ↓   Create  Record   ↓   Assign  Reviewer   ↓   Wait   ↓   Approval   ↓   AI  Review   ↓   Decision   ↓   Notification   ↓   Finish  
+Every  node  should  be  draggable.  
+===== PAGE 183 =====
+No  code  required.  
+ 
+5.7  Stage  Object  
+Each  workflow  contains  stages.  
+Fields  
+Stage  ID  
+Stage  Name  
+Description  
+Owner  
+SLA  
+Status  
+Entry  Conditions  
+Exit  Conditions  
+Required  Permissions  
+Required  Fields  
+Required  Documents  
+Notifications  
+Automation  
+Escalation  
+AI  Actions  
+ 
+5.8  Entry  Requirements  
+===== PAGE 184 =====
+Every  stage  may  define:  
+Required  Fields  
+Example  
+Asset  Registration  
+Required  
+✓  Asset  Name  
+✓  Waqf  
+✓  Asset  Type  
+✓  GPS  
+✓  Ownership  
+Cannot  continue  until  completed.  
+ 
+Required  Documents  
+Example  
+Listing  Review  
+✓  Valuation  Report  
+✓  Title  Deed  
+✓  Financial  Statements  
+✓  Board  Resolution  
+ 
+Required  Approvals  
+Example  
+Cannot  enter  Investment  Committee  stage  
+until  
+===== PAGE 185 =====
+Legal  ✓  
+Finance  ✓  
+Governance  ✓  
+Compliance  ✓  
+ 
+5.9  Exit  Rules  
+A  stage  finishes  only  when  rules  are  satisfied.  
+Example  
+Finance  Review  
+Must  satisfy:  
+Budget  verified  
+Financial  statements  uploaded  
+ROI  calculated  
+Reviewer  signed  
+No  critical  findings  
+↓  
+Move  to  next  stage  
+ 
+5.10  Assignment  Engine  
+Assignments  support:  
+Specific  User  
+Role  
+===== PAGE 186 =====
+Department  
+Committee  
+Dynamic  Rule  
+Round  Robin  
+Least  Busy  User  
+Geographic  Assignment  
+Organization  
+AI  Recommendation  
+Example  
+Engineering  Report  
+↓  
+Assign  
+Engineering  Consultant  
+↓  
+If  unavailable  
+↓  
+Next  Certified  Consultant  
+ 
+5.11  Approval  Engine  
+Supported  approvals  
+Single  Approval  
+Sequential  Approval  
+Parallel  Approval  
+===== PAGE 187 =====
+Majority  Vote  
+Unanimous  Vote  
+Committee  Vote  
+Conditional  Approval  
+Delegated  Approval  
+Weighted  Voting  (future)  
+ 
+Example  
+CEO   ↓   Finance   ↓   Legal   ↓   Board   ↓   Approved  
+or  
+Finance   Legal   Governance   (all  parallel)   ↓   
+===== PAGE 188 =====
+Investment  Committee   
+5.12  Conditional  Logic  
+Examples  
+If  
+Investment  >  SAR  5M  
+↓  
+Add  Board  Review  
+ 
+If  
+Risk  High  
+↓  
+Require  Compliance  Review  
+ 
+If  
+Government  Asset  
+↓  
+Require  Government  Approval  
+ 
+If  
+International  Investor  
+↓  
+Require  Additional  Verification  
+ 
+===== PAGE 189 =====
+Rules  support:  
+AND  
+OR  
+NOT  
+Nested  conditions  
+Expressions  
+Calculated  fields  
+External  API  responses  
+ 
+5.13  Forms  Engine  
+Every  stage  may  have  its  own  form.  
+Supported  components  
+Text  
+Rich  Text  
+Currency  
+Number  
+Dropdown  
+Multi  Select  
+Checkbox  
+Radio  
+User  
+Organization  
+Asset  Lookup  
+===== PAGE 190 =====
+Investment  Lookup  
+Date  
+Time  
+File  Upload  
+Repeating  Tables  
+Digital  Signature  
+AI  Generated  Fields  
+Formula  Fields  
+Hidden  Fields  
+Conditional  Fields  
+ 
+5.14  Automation  Engine  
+Automations  include  
+Create  Task  
+Create  Meeting  
+Generate  Document  
+Send  Notification  
+Assign  User  
+Generate  AI  Summary  
+Create  Consultation  
+Update  Status  
+Call  API  
+Generate  Report  
+===== PAGE 191 =====
+Schedule  Reminder  
+Start  Another  Workflow  
+ 
+Example  
+Investment  Approved  
+↓  
+Generate  Agreement  
+↓  
+Generate  Certificate  
+↓  
+Notify  Investor  
+↓  
+Update  Portfolio  
+↓  
+Sync  ERP  
+ 
+5.15  SLA  Engine  
+Every  stage  supports  SLAs.  
+Example  
+Legal  Review  
+Target  
+5  Days  
+↓  
+===== PAGE 192 =====
+After  3  Days  
+Reminder  
+↓  
+After  5  Days  
+Escalate  
+↓  
+After  7  Days  
+Manager  
+↓  
+After  10  Days  
+Executive  Dashboard  
+ 
+Dashboard  
+SLA  Met  
+SLA  Breached  
+Average  Completion  
+Longest  Running  
+ 
+5.16  Escalation  Engine  
+Escalation  actions  
+Reminder  
+Manager  Notification  
+Reassignment  
+===== PAGE 193 =====
+Priority  Increase  
+Executive  Alert  
+Temporary  Delegation  
+Workflow  Pause  
+Workflow  Cancellation  
+ 
+5.17  AI  Workflow  Assistant  
+AI  assists  throughout  the  workflow.  
+Examples  
+"Required  document  appears  expired."  
+"Previous  similar  workflow  averaged  4  days."  
+"Recommend  assigning  Reviewer  Ahmed  based  on  workload."  
+"Financial  assumptions  differ  significantly  from  historical  projects."  
+"Predicted  approval  probability:  92%."  
+"Expected  completion  in  11  days."  
+AI  suggestions  remain  advisory  unless  explicitly  configured  otherwise.  
+ 
+5.18  Workflow  Analytics  
+Every  workflow  should  provide  analytics.  
+KPIs  
+Average  Completion  Time  
+Average  Time  Per  Stage  
+===== PAGE 194 =====
+Approval  Rate  
+Rejection  Rate  
+Rework  Rate  
+SLA  Compliance  
+Bottlenecks  
+Most  Delayed  Stage  
+Reviewer  Performance  
+AI  Prediction  Accuracy  
+Automation  Savings  
+ 
+Visualizations  
+Funnel  
+Cycle  Time  
+Stage  Heatmap  
+Completion  Trend  
+Organization  Comparison  
+ 
+5.19  Workflow  Templates  
+Masheed  should  ship  with  ready-made  templates.  
+Examples  
+ERP  
+●  Asset  Registration  ●  Asset  Disposal  ●  Asset  Valuation  ●  Maintenance  
+===== PAGE 195 =====
+●  Procurement  ●  Budget  Approval  ●  Payment  Approval  ●  Beneficiary  Distribution  ●  Board  Decision  ●  Internal  Audit  ●  Consultation  Request  
+Marketplace  
+●  Listing  Application  ●  Listing  Review  ●  Due  Diligence  ●  Investor  Verification  ●  Investment  Subscription  ●  Capital  Distribution  ●  Project  Monitoring  
+Administration  
+●  Organization  Onboarding  ●  User  Onboarding  ●  Permission  Request  ●  Feature  Activation  ●  Subscription  Upgrade  
+ 
+5.20  Business  Rules  Engine  
+Separate  business  rules  from  workflows.  
+Example  
+Rule  
+Maximum  approval  amount  
+↓  
+SAR  100,000  
+↓  
+Used  by  
+===== PAGE 196 =====
+Finance  
+Procurement  
+Investments  
+Marketplace  
+Changing  the  rule  updates  all  dependent  workflows  automatically.  
+ 
+5.21  Workflow  Versioning  
+Every  workflow  supports:  
+Draft  
+Published  
+Archived  
+Rollback  
+Comparison  
+Change  History  
+Approval  before  publishing  
+Organizations  can  test  a  draft  workflow  before  activating  it.  
+ 
+5.22  Cross-Workflow  Orchestration  
+One  workflow  can  trigger  another.  
+Example  
+Asset  Acquisition  
+↓  
+===== PAGE 197 =====
+Generate  Legal  Review  
+↓  
+Generate  Insurance  Workflow  
+↓  
+Generate  Initial  Valuation  
+↓  
+Generate  Compliance  Review  
+↓  
+Generate  Maintenance  Plan  
+↓  
+Ready  
+This  enables  end-to-end  automation  without  manual  intervention.  
+ 
+5.23  Workflow  APIs  
+Every  workflow  should  expose  APIs  for:  
+●  Start  Workflow  ●  Advance  Stage  ●  Reject  Stage  ●  Pause  Workflow  ●  Resume  Workflow  ●  Cancel  Workflow  ●  Query  Status  ●  Upload  Documents  ●  Retrieve  Timeline  ●  Subscribe  to  Events  
+This  allows  integrations  with  government  systems,  payment  providers,  CRMs,  or  future  mobile  
+applications.
+ 
+ 
+===== PAGE 198 =====
+5.24  Workflow  Command  Center  (Flagship  
+Feature)
+ 
+This  should  become  one  of  the  most  powerful  screens  in  Masheed.  
+Executives  see:  
+Total  Active  Workflows   ↓   Pending  Approvals   ↓   SLA  Breaches   ↓   Critical  Escalations   ↓   AI  Predicted  Delays   ↓   Average  Completion  Time   ↓   Bottleneck  Departments   ↓   Organization  Performance   ↓   Today's  Priority  Actions  
+Users  can  drill  down  from  every  KPI  directly  into  the  affected  workflows.  
+===== PAGE 199 =====
+ 
+5.25  Process  Mining  &  Continuous  
+Improvement
+ 
+(Future
+ 
+Enterprise
+ 
+Edition)
+ 
+This  is  a  feature  very  few  platforms  in  the  region  offer.  
+The  engine  should  continuously  analyze  completed  workflows  to  discover:  
+●  Repeated  bottlenecks.  ●  Unnecessary  approval  steps.  ●  Frequently  returned  submissions.  ●  High-performing  reviewers.  ●  Average  processing  times  by  organization.  ●  AI  recommendations  for  workflow  optimization.  
+For  example:  
+"The  Legal  Review  stage  causes  42%  of  total  processing  delays."  
+"Removing  one  duplicate  approval  step  could  reduce  listing  approval  time  by  18%."  
+These  insights  help  organizations  improve  operations  without  manually  analyzing  reports.  
+ 
+Major  Architectural  Recommendation  —  
+Event-Driven
+ 
+Platform
+ 
+This  is  probably  my  strongest  technical  recommendation  for  the  entire  Masheed  architecture.  
+Don't  make  modules  call  each  other  directly.  
+Instead,  introduce  an  Event  Bus .  
+For  example:  
+Investment  Approved   ↓   
+===== PAGE 200 =====
+Event  Published   ↓   Finance  Module  reacts   ↓   Notification  Module  reacts   ↓   Document  Module  reacts   ↓   Portfolio  Module  reacts   ↓   Audit  Module  reacts   ↓   AI  Module  reacts   ↓   Marketplace  updates  
+Every  major  action  should  publish  events,  and  every  module  subscribes  only  to  the  events  it  
+needs.
+ 
+This  gives  you:  
+●  Loose  coupling  between  modules.  ●  Easier  scalability.  ●  Better  maintainability.  ●  Simpler  integrations.  ●  Future  microservices  readiness.  ●  Real-time  updates  across  ERP  and  Marketplace.  
+This  architecture  will  make  Masheed  significantly  easier  to  evolve  over  the  next  5–10  years.  
+===== PAGE 201 =====
+PART  5  —  Platform  Administration  Portal  
+ 
+1.1  Vision  
+The  Platform  Administration  Portal  is  the  centralized  management  system  for  the  Masheed  
+SaaS
+ 
+platform.
+ 
+It  provides  complete  visibility  and  control  over  all  organizations,  users,  subscriptions,  platform  
+services,
+ 
+AI
+ 
+resources,
+ 
+integrations,
+ 
+monitoring,
+ 
+security,
+ 
+billing,
+ 
+support,
+ 
+and
+ 
+marketplace
+ 
+operations.
+ 
+It  is  isolated  from  customer  environments  and  follows  strict  security  and  segregation-of-duty  
+principles.
+ 
+ 
+1.2  Portal  Architecture  
+Platform  Administration   ├──  Executive  Dashboard  ├──  Organization  Management  ├──  Subscription  &  Licensing  ├──  Marketplace  Operations  ├──  User  Administration  ├──  Support  Center  ├──  AI  Operations  ├──  Platform  Configuration  ├──  Feature  Flags  ├──  Monitoring  &  Observability  ├──  Security  Operations  ├──  Audit  Center  ├──  Integrations  ├──  Billing  ├──  Incident  Management  ├──  System  Jobs  ├──  Notifications  ├──  Reports  └──  Developer  Center  
+===== PAGE 202 =====
+ 
+1.3  Platform  Roles  
+The  portal  should  support  separate  platform  roles.  
+Executive  
+●  Platform  Owner  ●  CEO  ●  CTO  ●  COO  
+ 
+Operations  
+●  Platform  Administrator  ●  Tenant  Manager  ●  Marketplace  Operations  Manager  ●  Customer  Success  Manager  ●  Support  Manager  
+ 
+Security  
+●  Security  Administrator  ●  Compliance  Officer  ●  SOC  Analyst  ●  Identity  Administrator  
+ 
+Technical  
+●  DevOps  Engineer  ●  Cloud  Engineer  ●  AI  Engineer  ●  Database  Administrator  ●  Integration  Engineer  
+ 
+===== PAGE 203 =====
+Financial  
+●  Billing  Administrator  ●  Finance  Manager  
+ 
+Read  Only  
+●  Executive  Viewer  ●  Auditor  
+ 
+1.4  Executive  Dashboard  
+This  becomes  the  heartbeat  of  the  business.  
+Widgets  include:  
+Platform  Health  
+Total  Organizations  
+Active  Users  
+Monthly  Active  Users  
+Marketplace  Capital  Raised  
+Number  of  Active  Investments  
+Platform  Revenue  
+MRR  
+ARR  
+Churn  Rate  
+Trial  Conversions  
+Support  Tickets  
+Critical  Incidents  
+===== PAGE 204 =====
+System  Availability  
+Average  API  Response  Time  
+AI  Usage  
+Storage  Consumption  
+Background  Jobs  
+Security  Alerts  
+Failed  Logins  
+Top  Organizations  
+Growth  Trends  
+ 
+1.5  Organization  Management  
+Every  customer  organization  becomes  a  tenant.  
+Organization  Profile  
+●  Organization  ID  ●  Organization  Name  ●  Arabic  Name  ●  Registration  Number  ●  Subscription  Plan  ●  Status  ●  Region  ●  Industry  ●  Onboarding  Date  ●  Renewal  Date  ●  Assigned  Customer  Success  Manager  
+ 
+Organization  Actions  
+Create  
+Suspend  
+===== PAGE 205 =====
+Archive  
+Delete  (Soft)  
+Reactivate  
+Transfer  Ownership  
+Clone  Configuration  
+Upgrade  Plan  
+Downgrade  Plan  
+Reset  Trial  
+Generate  Health  Report  
+ 
+1.6  Organization  Health  Score  
+Each  organization  receives  a  health  score  based  on:  
+●  User  adoption.  ●  Workflow  completion.  ●  AI  utilization.  ●  Login  frequency.  ●  Marketplace  participation.  ●  Data  completeness.  ●  Configuration  maturity.  ●  Support  ticket  volume.  ●  Compliance  posture.  
+Organizations  with  declining  health  are  automatically  flagged  for  Customer  Success  follow-up.  
+ 
+1.7  Subscription  &  Licensing  
+Supported  plans  
+●  Trial  
+===== PAGE 206 =====
+●  Starter  ●  Professional  ●  Enterprise  ●  Government  ●  Custom  
+Each  subscription  tracks:  
+●  Plan  ●  Billing  Cycle  ●  Renewal  Date  ●  License  Count  ●  Active  Users  ●  Storage  Usage  ●  AI  Credits  (if  applicable)  ●  Marketplace  Access  ●  Enabled  Modules  ●  Add-ons  
+ 
+1.8  Marketplace  Operations  
+Internal  team  dashboard.  
+Manage:  
+●  Listing  Approvals  ●  Marketplace  Moderation  ●  Suspended  Listings  ●  Fraud  Review  ●  Investor  Complaints  ●  Organization  Verification  ●  Featured  Opportunities  ●  Public  Content  Approval  
+KPIs:  
+●  Listings  Awaiting  Review  ●  Average  Review  Time  ●  Funding  Volume  ●  Investor  Growth  ●  Organization  Growth  
+===== PAGE 207 =====
+ 
+1.9  User  Administration  
+Platform  admins  can:  
+Search  users  globally.  
+Reset  passwords.  
+Unlock  accounts.  
+Reset  MFA.  
+Transfer  ownership.  
+Deactivate  users.  
+View  login  history.  
+Terminate  sessions.  
+View  organization  memberships.  
+Assign  support  access.  
+No  admin  should  directly  impersonate  a  user  without  explicit  logging  and  authorization.  
+ 
+1.10  Support  Center  
+Every  support  request  becomes  a  structured  case.  
+Fields:  
+●  Case  ID  ●  Customer  ●  Priority  ●  Severity  ●  Module  ●  Assigned  Engineer  ●  SLA  
+===== PAGE 208 =====
+●  Status  ●  Root  Cause  ●  Resolution  ●  Linked  Audit  Events  ●  Linked  Errors  
+Support  agents  should  be  able  to  request  temporary  diagnostic  access  through  an  approval  
+workflow.
+ 
+ 
+1.11  AI  Operations  
+Manage:  
+●  AI  Providers  ●  Active  Models  ●  Prompt  Templates  ●  AI  Agents  ●  Rate  Limits  ●  Token  Usage  ●  AI  Costs  ●  AI  Performance  ●  AI  Error  Logs  ●  AI  Accuracy  Metrics  
+The  portal  should  allow  switching  AI  providers  without  changing  business  modules.  
+ 
+1.12  Feature  Flags  
+Roll  out  features  gradually.  
+Scopes:  
+●  Global  ●  Subscription  Plan  ●  Organization  ●  Region  ●  Beta  Group  ●  Individual  Tenant  
+===== PAGE 209 =====
+Examples:  
+Enable  Tokenization  Module  
+Enable  Mobile  App  
+Enable  AI  Consultation  
+Enable  New  Marketplace  UI  
+Enable  Government  Integration  
+Enable  Arabic  OCR  
+ 
+1.13  Monitoring  &  Observability  
+Platform  health  should  include:  
+Application  Health  
+Database  Health  
+Queue  Health  
+Background  Jobs  
+Cache  Health  
+API  Health  
+Storage  
+Search  Index  
+AI  Services  
+Email  Provider  
+SMS  Provider  
+Payment  Gateway  
+Government  Integrations  
+===== PAGE 210 =====
+Map  Services  
+Every  service  reports:  
+Status  
+Latency  
+Availability  
+Error  Rate  
+Last  Incident  
+ 
+1.14  Security  Operations  Center  (SOC)  
+Monitor:  
+Failed  Logins  
+Impossible  Travel  
+Brute  Force  Attempts  
+Suspicious  API  Calls  
+Privilege  Escalation  
+Inactive  Admin  Accounts  
+Expired  Certificates  
+Compromised  Credentials  
+Unusual  Data  Exports  
+Abnormal  AI  Usage  
+Security  alerts  should  integrate  with  SIEM  platforms  in  enterprise  deployments.  
+ 
+===== PAGE 211 =====
+1.15  Billing  Center  
+Manage:  
+Invoices  
+Payments  
+Credits  
+Discounts  
+Coupons  
+Taxes  
+Refunds  
+Usage  Billing  
+Marketplace  Fees  
+Enterprise  Contracts  
+Billing  Reports  
+Future  support:  
+Consumption-based  billing  for  AI  usage  and  storage.  
+ 
+1.16  Incident  Management  
+Every  outage  or  operational  issue  should  be  tracked.  
+Fields:  
+●  Incident  ID  ●  Severity  ●  Impacted  Services  ●  Start  Time  ●  Resolution  Time  ●  Root  Cause  
+===== PAGE 212 =====
+●  Timeline  ●  Customer  Impact  ●  Postmortem  ●  Preventive  Actions  
+Executives  should  see  live  incident  status  from  the  dashboard.  
+ 
+1.17  Background  Jobs  
+Monitor:  
+Scheduled  Jobs  
+Failed  Jobs  
+Retries  
+Long-running  Jobs  
+Queue  Length  
+Average  Processing  Time  
+Dead  Letter  Queue  
+Examples:  
+Nightly  Reports  
+AI  Analysis  
+Marketplace  Synchronization  
+Notification  Delivery  
+Document  OCR  
+Backup  Jobs  
+ 
+1.18  Global  Audit  Center  
+===== PAGE 213 =====
+Unlike  tenant  audit  logs,  this  tracks  platform  operations.  
+Examples:  
+Subscription  upgraded.  
+Tenant  suspended.  
+Feature  flag  changed.  
+Admin  login.  
+Support  access  granted.  
+Marketplace  listing  removed.  
+AI  provider  switched.  
+Configuration  changed.  
+These  logs  should  never  be  editable.  
+ 
+1.19  Reports  
+Executive  Reports  
+●  Platform  Growth  ●  Revenue  ●  Customer  Acquisition  ●  Churn  ●  AI  Usage  ●  Marketplace  Performance  ●  Customer  Health  ●  Incident  Analysis  ●  Security  Overview  
+Operational  Reports  
+●  Support  SLA  ●  Tenant  Adoption  ●  Login  Statistics  ●  API  Usage  ●  Storage  Growth  
+===== PAGE 214 =====
+●  Queue  Performance  ●  Billing  Status  ●  Marketplace  Moderation  
+ 
+1.20  Developer  Center  
+Manage:  
+API  Keys  
+OAuth  Clients  
+Webhooks  
+SDK  Access  
+Sandbox  Environments  
+API  Usage  Analytics  
+Rate  Limits  
+Developer  Documentation  
+Webhook  Logs  
+Version  Management  
+Future:  
+Partner  Marketplace  
+ 
+1.21  Disaster  Recovery  &  Business  
+Continuity
+ 
+The  administration  portal  should  include  operational  controls  for  resilience:  
+●  Backup  management.  ●  Restore  testing.  
+===== PAGE 215 =====
+●  Disaster  recovery  plans.  ●  Multi-region  failover  status.  ●  Recovery  Point  Objective  (RPO)  monitoring.  ●  Recovery  Time  Objective  (RTO)  monitoring.  ●  Business  continuity  checklists.  ●  Scheduled  resilience  drills.  ●  Backup  verification  reports.  
+Platform  administrators  should  be  able  to  verify  that  backups  are  valid  and  periodically  test  
+restoration
+ 
+procedures
+ 
+without
+ 
+affecting
+ 
+production
+ 
+tenants.
+ 
+ 
+1.22  Customer  Success  Workspace  
+This  is  a  module  that  many  SaaS  platforms  overlook  but  becomes  invaluable  as  the  customer  
+base
+ 
+grows.
+ 
+Each  organization  should  have  a  dedicated  Customer  Success  workspace  containing:  
+●  Onboarding  progress.  ●  Assigned  Customer  Success  Manager.  ●  Adoption  score.  ●  Training  completion.  ●  Feature  utilization.  ●  Open  support  cases.  ●  Executive  contacts.  ●  Success  plans.  ●  Renewal  risk.  ●  Expansion  opportunities.  ●  Meeting  history.  ●  Health  trends.  
+The  system  can  proactively  recommend  customer  engagement  when  adoption  declines  or  
+renewal
+ 
+risk
+ 
+increases.
+ 
+ 
+1.23  Marketplace  Governance  Center  
+Since  Masheed  operates  a  regulated  investment  marketplace,  platform  administrators  need  a  
+dedicated
+ 
+governance
+ 
+console
+ 
+to
+ 
+oversee
+ 
+marketplace
+ 
+integrity.
+ 
+===== PAGE 216 =====
+Capabilities  include:  
+●  Monitor  listing  review  queues.  ●  Track  review  SLAs.  ●  Review  flagged  opportunities.  ●  Manage  public  content.  ●  Handle  investor  complaints.  ●  Suspend  or  reinstate  listings.  ●  Review  AI-generated  risk  alerts.  ●  Escalate  potential  fraud  or  governance  issues.  ●  Publish  marketplace-wide  announcements.  ●  Monitor  transparency  and  reporting  compliance.  
+This  module  ensures  the  marketplace  remains  trusted,  fair,  and  compliant  while  providing  
+administrators
+ 
+with
+ 
+centralized
+ 
+operational
+ 
+oversight.
+ 
+ 
+Final  Recommendation  —  Platform  
+Command
+ 
+Center
+ 
+Rather  than  relying  on  multiple  disconnected  dashboards,  I  recommend  creating  a  Platform  
+Command
+ 
+Center
+ 
+as
+ 
+the
+ 
+first
+ 
+screen
+ 
+every
+ 
+Masheed
+ 
+operator
+ 
+sees
+ 
+after
+ 
+logging
+ 
+in.
+ 
+It  should  consolidate:  
+●  Platform  health.  ●  Critical  incidents.  ●  Security  alerts.  ●  Customer  health.  ●  Marketplace  activity.  ●  AI  operations.  ●  Support  queues.  ●  Financial  metrics.  ●  Infrastructure  status.  ●  Pending  approvals.  ●  Executive  KPIs.  
+From  this  single  screen,  administrators  should  be  able  to  drill  into  any  area  of  the  platform  with  
+one
+ 
+click.
+ 
+This
+ 
+becomes
+ 
+the
+ 
+operational
+ 
+nerve
+ 
+center
+ 
+for
+ 
+Masheed
+ 
+and
+ 
+gives
+ 
+leadership,
+ 
+operations,
+ 
+engineering,
+ 
+and
+ 
+customer
+ 
+success
+ 
+a
+ 
+unified
+ 
+view
+ 
+of
+ 
+the
+ 
+entire
+ 
+ecosystem.
+ 
+ 

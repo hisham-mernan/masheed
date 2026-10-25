@@ -10,11 +10,12 @@ const stats = [
     label: "قيمة الأصول المدارة",
     sublabel: "ريال سعودي",
     icon: (
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" width="24" height="24">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" width="28" height="28">
         <rect x="2" y="3" width="20" height="14" rx="2"/>
         <path d="M8 21h8M12 17v4"/>
       </svg>
     ),
+    color: "#8561AD"
   },
   {
     value: 100,
@@ -22,11 +23,12 @@ const stats = [
     label: "امتثال نظامي",
     sublabel: "وفق معايير الهيئة العامة للأوقاف",
     icon: (
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" width="24" height="24">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" width="28" height="28">
         <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
         <polyline points="9 12 11 14 15 10"/>
       </svg>
     ),
+    color: "#10B981"
   },
   {
     value: 18,
@@ -34,10 +36,11 @@ const stats = [
     label: "نمو العوائد",
     sublabel: "متوسط نمو سنوي للريع الوقفي",
     icon: (
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" width="24" height="24">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" width="28" height="28">
         <path d="M3 3v18h18"/><polyline points="18 9 12 15 9 12 3 18"/>
       </svg>
     ),
+    color: "#F59E0B"
   },
   {
     value: 10,
@@ -45,11 +48,12 @@ const stats = [
     label: "موديول متخصص",
     sublabel: "يغطي كامل دورة حياة الوقف",
     icon: (
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" width="24" height="24">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" width="28" height="28">
         <rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/>
         <rect x="14" y="14" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/>
       </svg>
     ),
+    color: "#3B82F6"
   },
 ];
 
@@ -93,21 +97,26 @@ export default function Stats() {
 
   return (
     <section ref={sectionRef} className={styles.stats}>
+      <div className={styles.bgGlow}></div>
       <div className="container">
         <div className={styles.grid}>
           {stats.map((stat, i) => (
-            <div key={i} className={`${styles.card} reveal`} style={{ transitionDelay: `${i * 80}ms` }}>
-              <div className={styles.iconWrap}>{stat.icon}</div>
-              <div className={styles.value}>
-                <span
-                  className={styles.number}
-                  ref={el => { counterRefs.current[i] = el; }}
-                >
-                  ٠
-                </span>
+            <div key={i} className={`${styles.card} glass-card reveal`} style={{ transitionDelay: `${i * 100}ms` }}>
+              <div className={styles.iconWrap} style={{ color: stat.color, background: `linear-gradient(135deg, ${stat.color}15, transparent)`, border: `1px solid ${stat.color}30` }}>
+                {stat.icon}
               </div>
-              <div className={styles.label}>{stat.label}</div>
-              <div className={styles.sublabel}>{stat.sublabel}</div>
+              <div className={styles.content}>
+                <div className={styles.value}>
+                  <span
+                    className={styles.number}
+                    ref={el => { counterRefs.current[i] = el; }}
+                  >
+                    ٠
+                  </span>
+                </div>
+                <div className={styles.label}>{stat.label}</div>
+                <div className={styles.sublabel}>{stat.sublabel}</div>
+              </div>
             </div>
           ))}
         </div>

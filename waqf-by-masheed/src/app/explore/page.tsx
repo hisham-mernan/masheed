@@ -1,9 +1,10 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import Link from "next/link";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
+import { createClient } from "@/lib/supabase";
 import {
   Building2,
   Coins,
@@ -102,8 +103,33 @@ export default function ExplorePage() {
   const [filterType, setFilterType] = useState<string>("ALL");
   const [filterYield, setFilterYield] = useState<string>("ALL");
   const [searchQuery, setSearchQuery] = useState("");
+  const [liveAwqaf, setLiveAwqaf] = useState<typeof MOCK_AWQAF | null>(null);
 
-  const filteredAwqaf = MOCK_AWQAF.filter((waqf) => {
+  // بيانات حية: طلبات الطرح المعتمدة/المتداولة من نظام مَشيد ERP (نفس قاعدة البيانات)
+  useEffect(() => {
+    const supabase = createClient();
+    supabase
+      .from("public_listings")
+      .select("id, target_funding, price_per_share, shares_count, status, asset_name, asset_category, waqf_name")
+      .then(({ data, error }) => {
+        if (error || !data || data.length === 0) return;
+        const CAT_MAP: Record<string, string> = { real_estate: "REAL_ESTATE", cash: "CASH", investment: "CASH", other: "LANDS" };
+        setLiveAwqaf(data.map((l: any) => ({
+          id: l.id,
+          title: `صكوك ${l.asset_name || "أصل وقفي"}`,
+          description: `طرح استثماري لأصل وقفي تابع لـ ${l.waqf_name || "وقف"} — ${l.status === "trading" ? "متداول الآن في السوق" : "معتمد للطرح"}.`,
+          type: CAT_MAP[l.asset_category] || "REAL_ESTATE",
+          totalTokens: Number(l.shares_count || 0),
+          availableTokens: Number(l.shares_count || 0),
+          tokenPrice: Number(l.price_per_share || 0),
+          yieldDestinations: ["GENERAL"],
+          yieldRate: 0,
+        })));
+      });
+  }, []);
+
+  const source = liveAwqaf && liveAwqaf.length > 0 ? liveAwqaf : MOCK_AWQAF;
+  const filteredAwqaf = source.filter((waqf) => {
     if (nationality === "FOREIGNER" && waqf.type !== "CASH") return false;
     if (filterType !== "ALL" && waqf.type !== filterType) return false;
     if (filterYield !== "ALL" && !waqf.yieldDestinations.includes(filterYield)) return false;

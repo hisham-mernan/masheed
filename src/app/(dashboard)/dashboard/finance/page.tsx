@@ -1,204 +1,103 @@
-"use client";
-
-import React, { useState } from "react";
+import { createClient } from "@/lib/supabase/server";
 import Link from "next/link";
+import ExportButton from "@/components/dashboard/ExportButton";
+import styles from "../assets/assets.module.css";
+import { getWaqfScope, scopeQuery } from "@/lib/waqf-scope";
 
-interface Transaction {
-  id: string;
-  type: "income" | "expense" | "distribution";
-  typeAr: string;
-  amount: number;
-  waqfName: string;
-  assetName: string;
-  costCenter: string;
-  fundingSource: string;
-  description: string;
-  date: string;
-}
+export default async function FinancePage({ searchParams }: { searchParams: Promise<{ success?: string; error?: string }> }) {
+  const params = await searchParams;
+  const supabase = await createClient();
+  const { data: { user } } = await supabase.auth.getUser();
+  const { data: profile } = await supabase.from("profiles").select("role, is_platform_admin").eq("id", user?.id).single();
+  const canWrite = ["admin", "supervisor"].includes(profile?.role || "");
+  const scope = profile?.is_platform_admin ? await getWaqfScope() : null;
+  const { data: transactions } = await scopeQuery(
+    supabase.from("transactions").select("*, assets(name)"), scope
+  ).order("created_at", { ascending: false });
 
-interface BeneficiaryShare {
-  name: string;
-  sharesOwned: number;
-  walletBalance: number;
-}
-
-export default function FinancePage() {
-  const [transactions, setTransactions] = useState<Transaction[]>([
-    { id: "TX-901", type: "income", typeAr: "إيراد (Ri'a)", amount: 750000, waqfName: "وقف برج الخزامى", assetName: "برج الخزامى السكني", costCenter: "الإيجارات العامة", fundingSource: "عوائد إيجارية", description: "دفعة الإيجارات السنوية للمحلات والمكاتب", date: "2026-07-01" },
-    { id: "TX-902", type: "expense", typeAr: "مصروف صيانة", amount: 150000, waqfName: "وقف برج الخزامى", assetName: "برج الخزامى السكني", costCenter: "صيانة وتشغيل", fundingSource: "الريع المحتجز", description: "أعمال تجديد وصيانة المصاعد الكهربائية", date: "2026-07-03" },
-    { id: "TX-903", type: "distribution", typeAr: "توزيع للمستفيدين", amount: 300000, waqfName: "وقف العائلة المرموز", assetName: "محفظة صكوك بنك الإنماء", costCenter: "حساب المستفيدين", fundingSource: "توزيعات الصكوك", description: "توزيع ريع الأرباح الدورية للربع الثاني", date: "2026-07-05" }
-  ]);
-
-  const [distributionAmount, setDistributionAmount] = useState(100000);
-  const [selectedWaqf, setSelectedWaqf] = useState("خزامي");
-  const [calculatedPayouts, setCalculatedPayouts] = useState<any[]>([]);
-
-  const beneficiaries: Record<string, BeneficiaryShare[]> = {
-    خزامي: [
-      { name: "جمعية رعاية الأيتام بالرياض", sharesOwned: 60, walletBalance: 125000 },
-      { name: "مركز الأبحاث الطبية والخيرية", sharesOwned: 40, walletBalance: 82000 }
-    ],
-    عائلة: [
-      { name: "ابن الواقف الأول (أحمد)", sharesOwned: 50, walletBalance: 31000 },
-      { name: "ابنة الواقف الثانية (سارة)", sharesOwned: 30, walletBalance: 18500 },
-      { name: "ابن الواقف الثالث (خالد)", sharesOwned: 20, walletBalance: 12200 }
-    ]
-  };
-
-  const handleCalculateDistribution = (e: React.FormEvent) => {
-    e.preventDefault();
-    const targetBeneficiaries = selectedWaqf === "خزامي" ? beneficiaries.خزامي : beneficiaries.عائلة;
-    const totalShares = targetBeneficiaries.reduce((sum, b) => sum + b.sharesOwned, 0);
-
-    const payouts = targetBeneficiaries.map(b => {
-      const payoutAmount = (b.sharesOwned / totalShares) * distributionAmount;
-      return {
-        name: b.name,
-        sharesOwned: b.sharesOwned,
-        payout: payoutAmount,
-        newBalance: b.walletBalance + payoutAmount
-      };
-    });
-
-    setCalculatedPayouts(payouts);
-  };
-
-  const handleConfirmDistribution = () => {
-    if (calculatedPayouts.length === 0) return;
-    
-    // Add transaction
-    const newTx: Transaction = {
-      id: `TX-${Math.floor(1000 + Math.random() * 9000)}`,
-      type: "distribution",
-      typeAr: "توزيع ريع",
-      amount: distributionAmount,
-      waqfName: selectedWaqf === "خزامي" ? "وقف برج الخزامى" : "وقف العائلة المرموز",
-      assetName: selectedWaqf === "خزامي" ? "برج الخزامى السكني" : "محفظة صكوك بنك الإنماء",
-      costCenter: "حساب المستفيدين",
-      fundingSource: "عائد ريع الأصول",
-      description: `توزيع غلة الوقف المعتمد بقيمة ${distributionAmount.toLocaleString()} ر.س`,
-      date: new Date().toISOString().split("T")[0]
-    };
-
-    setTransactions(prev => [newTx, ...prev]);
-    setCalculatedPayouts([]);
-    alert("تم اعتماد التوزيع المالي بنجاح وقيد المبالغ في محافظ المستفيدين الرقمية.");
+  const formatType = (type: string) => {
+    switch (type) {
+      case "income": return "إيراد (Ri'a)";
+      case "expense": return "مصروف (صيانة/إدارة)";
+      case "distribution": return "توزيع (للمستفيدين)";
+      default: return type;
+    }
   };
 
   return (
-    <div className="fade-in" style={{ padding: "2rem", color: "#1A1A2E", direction: "rtl", fontFamily: "Cairo, sans-serif" }}>
-      {/* Header */}
-      <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: "2rem" }}>
-        <div>
-          <h1 style={{ fontSize: "2rem", fontWeight: "700", color: "#1A1A2E" }}>الإدارة المالية والتوزيعات (Finance Ledger)</h1>
-          <p style={{ color: "#64748B", marginTop: "0.25rem" }}>تتبع الحسابات العامة، الأبعاد المالية، وقيد الإيرادات والمصروفات وصرف الريع للمستفيدين</p>
+    <div className="fade-in">
+      {params?.error && (
+        <div style={{ background: "#FEF2F2", border: "1px solid #FECACA", color: "#DC2626", padding: "0.75rem 1rem", borderRadius: "6px", marginBottom: "1rem" }}>
+          {params.error}
         </div>
-        <div style={{ display: "flex", gap: "1rem" }}>
-          <button onClick={() => alert("تصدير الدفاتر المالية")} style={{ background: "#ffffff", border: "1px solid #E4E7EF", padding: "0.6rem 1.2rem", borderRadius: "8px", color: "#8561AD", cursor: "pointer", fontSize: "0.9rem", fontWeight: "bold", boxShadow: "0 2px 4px rgba(0,0,0,0.02)" }}>تصدير الدفاتر 📥</button>
-          <Link href="/dashboard/finance/add" style={{ textDecoration: 'none', background: "#8561AD", color: "#fff", padding: "0.6rem 1.2rem", borderRadius: "8px", fontWeight: "600", fontSize: "0.9rem", boxShadow: "0 4px 12px rgba(133, 97, 173, 0.2)" }}>تسجيل عملية مالية +</Link>
+      )}
+      {params?.success && (
+        <div style={{ background: "#F0FDF4", border: "1px solid #BBF7D0", color: "#15803D", padding: "0.75rem 1rem", borderRadius: "6px", marginBottom: "1rem" }}>
+          تم تسجيل المعاملة بنجاح وتوثيقها في سجل المراجعة.
+        </div>
+      )}
+      <div className={styles.header}>
+        <div className={styles.titleInfo}>
+          <h1>المالية والمصارف (دفتر الأستاذ)</h1>
+          <p>إدارة وتوثيق الإيرادات والمصروفات والتوزيعات النقدية للأوقاف.</p>
+        </div>
+        <div className={styles.actions}>
+          <Link href="/dashboard/reports/finance" className={styles.secBtn} style={{ textDecoration: 'none' }}>📄 تقرير PDF</Link>
+          <ExportButton data={transactions || []} filename="سجل_المالية" className={styles.secBtn} />
+          {canWrite && (
+            <Link href="/dashboard/finance/add" className="btn-primary" style={{ textDecoration: 'none' }}>تسجيل معاملة +</Link>
+          )}
         </div>
       </div>
 
-      <div style={{ display: "grid", gridTemplateColumns: "1.8fr 1.2fr", gap: "2rem" }}>
-        {/* General Ledger Table with Dimensions */}
-        <div style={{ background: "#ffffff", border: "1px solid #E4E7EF", borderRadius: "16px", padding: "1.5rem", boxShadow: "0 4px 12px rgba(0,0,0,0.03)" }}>
-          <h3 style={{ fontSize: "1.2rem", fontWeight: "600", marginBottom: "1rem", color: "#8561AD" }}> دفتر الأستاذ متعدد الأبعاد (Multi-Dimensional Ledger)</h3>
-          <table style={{ width: "100%", borderCollapse: "collapse", textAlign: "right", fontSize: "0.85rem" }}>
-            <thead>
-              <tr style={{ borderBottom: "2px solid #E2E8F0", color: "#64748B" }}>
-                <th style={{ padding: "0.75rem" }}>الرمز</th>
-                <th style={{ padding: "0.75rem" }}>النوع</th>
-                <th style={{ padding: "0.75rem" }}>المبلغ</th>
-                <th style={{ padding: "0.75rem" }}>الوقف والأصل</th>
-                <th style={{ padding: "0.75rem" }}>مركز التكلفة ومصدر التمويل</th>
-                <th style={{ padding: "0.75rem" }}>الوصف والتاريخ</th>
+      <div style={{ display: "flex", gap: "0.5rem", marginTop: "1rem", flexWrap: "wrap" }}>
+        {[
+          { href: "/dashboard/finance/revenues", label: "💰 الإيرادات والريع" },
+          { href: "/dashboard/finance/expenses", label: "🧾 المصروفات" },
+          { href: "/dashboard/finance/budgets", label: "📊 الميزانيات" },
+          { href: "/dashboard/finance/distributions", label: "💸 التوزيعات" },
+        ].map(l => (
+          <Link key={l.href} href={l.href} className={styles.secBtn} style={{ textDecoration: "none" }}>{l.label}</Link>
+        ))}
+      </div>
+
+      <div className={`${styles.ledgerContainer} glass-card`} style={{ marginTop: '2rem' }}>
+        <table className={styles.table}>
+          <thead>
+            <tr>
+              <th>رقم المعاملة</th>
+              <th>النوع</th>
+              <th>المبلغ (ر.س)</th>
+              <th>الأصل المرتبط</th>
+              <th>الوصف</th>
+              <th>التاريخ</th>
+            </tr>
+          </thead>
+          <tbody>
+            {transactions && transactions.length > 0 ? transactions.map((t) => (
+              <tr key={t.id}>
+                <td><code className={styles.code}>{t.id.split("-")[0]}</code></td>
+                <td>
+                  <span className={`${styles.status} ${t.type === 'income' ? styles.active : t.type === 'expense' ? styles.suspended : ''}`}>
+                    {formatType(t.type)}
+                  </span>
+                </td>
+                <td style={{ color: t.type === 'income' ? '#10B981' : '#EF4444', fontWeight: 'bold' }}>
+                  {t.type === 'income' ? '+' : '-'}{Number(t.amount).toLocaleString()}
+                </td>
+                <td>{t.asset_id ? <Link href={`/dashboard/assets/${t.asset_id}`} style={{ color: "#8561AD", textDecoration: "none" }}>{(t.assets as any)?.name}</Link> : "—"}</td>
+                <td>{t.description || "—"}</td>
+                <td>{new Date(t.transaction_date).toLocaleDateString("ar-SA")}</td>
               </tr>
-            </thead>
-            <tbody>
-              {transactions.map(t => (
-                <tr key={t.id} style={{ borderBottom: "1px solid #E2E8F0", transition: "background 0.2s" }} onMouseEnter={(e) => e.currentTarget.style.background = "#F8FAFC"} onMouseLeave={(e) => e.currentTarget.style.background = "transparent"}>
-                  <td style={{ padding: "0.75rem" }}><code style={{ color: "#8561AD", fontWeight: "bold" }}>{t.id}</code></td>
-                  <td style={{ padding: "0.75rem" }}>
-                    <span style={{
-                      background: t.type === "income" ? "rgba(16, 185, 129, 0.1)" : t.type === "expense" ? "rgba(239, 68, 68, 0.1)" : "rgba(59, 130, 246, 0.1)",
-                      color: t.type === "income" ? "#10b981" : t.type === "expense" ? "#ef4444" : "#3b82f6",
-                      padding: "0.2rem 0.5rem",
-                      borderRadius: "4px",
-                      fontSize: "0.75rem",
-                      fontWeight: "bold"
-                    }}>
-                      {t.typeAr}
-                    </span>
-                  </td>
-                  <td style={{ padding: "0.75rem", fontWeight: "bold", fontSize: "0.95rem", color: t.type === "income" ? "#10b981" : "#ef4444" }}>
-                    {t.type === "income" ? "+" : "-"}{t.amount.toLocaleString()} ر.س
-                  </td>
-                  <td style={{ padding: "0.75rem", color: "#1A1A2E" }}>
-                    <div><strong>{t.waqfName}</strong></div>
-                    <div style={{ fontSize: "0.75rem", color: "#64748B" }}>{t.assetName}</div>
-                  </td>
-                  <td style={{ padding: "0.75rem", color: "#1A1A2E" }}>
-                    <div>مركز: {t.costCenter}</div>
-                    <div style={{ fontSize: "0.75rem", color: "#64748B" }}>مصدر: {t.fundingSource}</div>
-                  </td>
-                  <td style={{ padding: "0.75rem", color: "#1A1A2E" }}>
-                    <div>{t.description}</div>
-                    <div style={{ fontSize: "0.75rem", color: "#64748B" }}>{t.date}</div>
-                  </td>
-                </tr>
-              ))}
-            </tbody>
-          </table>
-        </div>
-
-        {/* Yield Distribution proposal section */}
-        <div style={{ display: "flex", flexDirection: "column", gap: "2rem" }}>
-          <div style={{ background: "#ffffff", border: "1px solid #E4E7EF", borderRadius: "16px", padding: "1.5rem", boxShadow: "0 4px 12px rgba(0,0,0,0.03)" }}>
-            <h3 style={{ fontSize: "1.1rem", fontWeight: "600", marginBottom: "0.5rem", color: "#8561AD" }}>💰 مقترح توزيع الريع الدوري (Yield Payout Calculator)</h3>
-            <p style={{ fontSize: "0.75rem", color: "#64748B", marginBottom: "1.5rem" }}>حساب مبالغ التوزيع آلياً بناءً على عدد الأسهم وحصص الملكية للمستفيدين المسجلين</p>
-            
-            <form onSubmit={handleCalculateDistribution} style={{ display: "flex", flexDirection: "column", gap: "1rem" }}>
-              <div>
-                <label style={{ display: "block", fontSize: "0.85rem", color: "#1A1A2E", marginBottom: "0.25rem", fontWeight: "bold" }}>الوقف المستهدف:</label>
-                <select value={selectedWaqf} onChange={(e) => setSelectedWaqf(e.target.value)} style={{ width: "100%", padding: "0.6rem", background: "#F8FAFC", color: "#1A1A2E", border: "1px solid #E2E8F0", borderRadius: "6px", fontSize: "0.85rem" }}>
-                  <option value="خزامي">وقف برج الخزامى الخيري</option>
-                  <option value="عائلة">وقف العائلة المرموز (الأهلي)</option>
-                </select>
-              </div>
-
-              <div>
-                <label style={{ display: "block", fontSize: "0.85rem", color: "#1A1A2E", marginBottom: "0.25rem", fontWeight: "bold" }}>المبلغ الإجمالي للتوزيع (ر.س):</label>
-                <input
-                  type="number"
-                  value={distributionAmount}
-                  onChange={(e) => setDistributionAmount(Number(e.target.value))}
-                  style={{ width: "100%", padding: "0.6rem", background: "#F8FAFC", border: "1px solid #E2E8F0", borderRadius: "6px", color: "#1A1A2E", fontSize: "0.85rem" }}
-                />
-              </div>
-
-              <button type="submit" style={{ width: "100%", padding: "0.7rem", background: "#8561AD", color: "#fff", border: "none", borderRadius: "6px", cursor: "pointer", fontWeight: "bold", boxShadow: "0 4px 12px rgba(133, 97, 173, 0.2)" }}>
-                احتساب حصص التوزيع
-              </button>
-            </form>
-
-            {calculatedPayouts.length > 0 && (
-              <div style={{ marginTop: "1.5rem" }}>
-                <h4 style={{ fontSize: "0.9rem", color: "#8561AD", marginBottom: "0.75rem", fontWeight: "bold" }}>الحصص المحتسبة للمستفيدين:</h4>
-                <div style={{ display: "flex", flexDirection: "column", gap: "0.5rem", fontSize: "0.8rem", background: "#F8FAFC", padding: "0.75rem", borderRadius: "8px", border: "1px solid #E2E8F0", color: "#1A1A2E" }}>
-                  {calculatedPayouts.map((p, idx) => (
-                    <div key={idx} style={{ display: "flex", justifyContent: "space-between", padding: "0.25rem 0", borderBottom: idx < calculatedPayouts.length - 1 ? "1px dashed #E2E8F0" : "none" }}>
-                      <span>{p.name} ({p.sharesOwned}%)</span>
-                      <strong>{p.payout.toLocaleString(undefined, { maximumFractionDigits: 2 })} ر.س</strong>
-                    </div>
-                  ))}
-                </div>
-                <button onClick={handleConfirmDistribution} style={{ width: "100%", padding: "0.7rem", background: "#10b981", color: "#fff", border: "none", borderRadius: "6px", cursor: "pointer", fontWeight: "bold", marginTop: "1rem", boxShadow: "0 4px 12px rgba(16, 185, 129, 0.2)" }}>
-                  اعتماد وصرف المبالغ الموزعة ✔️
-                </button>
-              </div>
+            )) : (
+              <tr>
+                <td colSpan={6} style={{ textAlign: 'center', padding: '2rem', color: 'var(--text-muted)' }}>
+                  لا توجد معاملات مالية بعد. قم بتسجيل الإيرادات أو المصروفات أولاً.
+                </td>
+              </tr>
             )}
-          </div>
-        </div>
+          </tbody>
+        </table>
       </div>
     </div>
   );

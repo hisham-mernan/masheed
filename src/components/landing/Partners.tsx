@@ -3,72 +3,55 @@
 import styles from "./Partners.module.css";
 
 const partners = [
-  {
-    abbr: "GAW",
-    nameAr: "الهيئة العامة للأوقاف",
-    nameEn: "General Authority for Awqaf",
-    color: "#1B5E20",
-  },
-  {
-    abbr: "MOJ",
-    nameAr: "وزارة العدل",
-    nameEn: "Ministry of Justice",
-    color: "#0D47A1",
-  },
-  {
-    abbr: "ZATCA",
-    nameAr: "هيئة الزكاة والضريبة والجمارك",
-    nameEn: "ZATCA Phase 2",
-    color: "#7B1FA2",
-  },
-  {
-    abbr: "NCA",
-    nameAr: "الهيئة الوطنية للأمن السيبراني",
-    nameEn: "Nat. Cybersecurity Authority",
-    color: "#E65100",
-  },
-  {
-    abbr: "2030",
-    nameAr: "رؤية المملكة",
-    nameEn: "Saudi Vision 2030",
-    color: "#006064",
-  },
+  { name: "الهيئة العامة للأوقاف", role: "شريك تشريعي" },
+  { name: "وزارة العدل", role: "تكامل بيانات" },
+  { name: "ZATCA", role: "امتثال وفوترة" },
+  { name: "البنك المركزي السعودي", role: "تكامل مالي" },
+  { name: "الهيئة السعودية للبيانات", role: "أمن سيبراني" },
 ];
-
-function PartnerCard({ p }: { p: typeof partners[0] }) {
-  return (
-    <div className={styles.partnerCard}>
-      <div className={styles.partnerLogo} style={{ background: p.color + "15", borderColor: p.color + "30" }}>
-        <span className={styles.partnerAbbr} style={{ color: p.color }}>{p.abbr}</span>
-      </div>
-      <div className={styles.partnerInfo}>
-        <span className={styles.partnerNameAr}>{p.nameAr}</span>
-        <span className={styles.partnerNameEn}>{p.nameEn}</span>
-      </div>
-    </div>
-  );
-}
 
 export default function Partners() {
   return (
     <section id="partners" className={styles.partners}>
       <div className="container">
-        <p className={styles.label}>
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" width="16" height="16">
-            <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
-          </svg>
-          توافق تنظيمي وشراكة استراتيجية مع
-        </p>
-      </div>
+        <div className={styles.header}>
+          <p className={styles.label}>شركاء النجاح والتكامل</p>
+          <div className={styles.divider}></div>
+        </div>
 
-      {/* Marquee track */}
-      <div className={styles.marqueeWrapper}>
-        <div className={styles.fadeLeft}></div>
-        <div className={styles.fadeRight}></div>
-        <div className={styles.marqueeTrack}>
-          {[...partners, ...partners].map((p, i) => (
-            <PartnerCard key={i} p={p} />
-          ))}
+        <div className={styles.marquee}>
+          {/* First Track */}
+          <div className={styles.marqueeInner}>
+            {partners.map((partner, i) => (
+              <div key={`p1-${i}`} className={styles.partnerItem}>
+                <div className={styles.partnerIcon}>
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" width="24" height="24" style={{ opacity: 0.5 }}>
+                    <path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/>
+                  </svg>
+                </div>
+                <div>
+                  <div className={styles.partnerName}>{partner.name}</div>
+                  <div className={styles.partnerRole}>{partner.role}</div>
+                </div>
+              </div>
+            ))}
+          </div>
+          {/* Second Track for seamless loop */}
+          <div className={styles.marqueeInner} aria-hidden="true">
+            {partners.map((partner, i) => (
+              <div key={`p2-${i}`} className={styles.partnerItem}>
+                <div className={styles.partnerIcon}>
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" width="24" height="24" style={{ opacity: 0.5 }}>
+                    <path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/>
+                  </svg>
+                </div>
+                <div>
+                  <div className={styles.partnerName}>{partner.name}</div>
+                  <div className={styles.partnerRole}>{partner.role}</div>
+                </div>
+              </div>
+            ))}
+          </div>
         </div>
       </div>
     </section>

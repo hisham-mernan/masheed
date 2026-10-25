@@ -1,85 +1,65 @@
-"use client";
+import { createClient } from "@/lib/supabase/server";
+import Link from "next/link";
+import { getWaqfScope, scopeQuery } from "@/lib/waqf-scope";
+import styles from "../../assets/assets.module.css";
 
-import React, { useState } from "react";
+export default async function ExpensesPage() {
+  const supabase = await createClient();
+  const { data: { user } } = await supabase.auth.getUser();
+  const { data: profile } = await supabase.from("profiles").select("role, is_platform_admin").eq("id", user?.id).single();
+  const scope = profile?.is_platform_admin ? await getWaqfScope() : null;
 
-interface Expense {
-  id: string;
-  category: string;
-  vendor: string;
-  amount: number;
-  waqfName: string;
-  assetName: string;
-  date: string;
-  status: "Approved" | "Pending" | "Rejected";
-}
+  const { data: expenses } = await scopeQuery(
+    supabase.from("transactions").select("*, assets(name), waqfs(name)").eq("type", "expense"), scope
+  ).order("transaction_date", { ascending: false });
 
-export default function ExpensesPage() {
-  const [expenses] = useState<Expense[]>([
-    { id: "EXP-801", category: "صيانة وتشغيل", vendor: "شركة المقاولات الوطنية", amount: 45000, waqfName: "وقف برج الخزامى", assetName: "برج الخزامى السكني", date: "2026-07-01", status: "Approved" },
-    { id: "EXP-802", category: "مرافق وخدمات (كهرباء)", vendor: "الشركة السعودية الكهربائية", amount: 12400, waqfName: "وقف برج الخزامى", assetName: "برج الخزامى السكني", date: "2026-07-03", status: "Approved" },
-    { id: "EXP-803", category: "رسوم تأمين ورخص", vendor: "التعاونية للتأمين", amount: 8500, waqfName: "مزرعة النخيل المشتركة", assetName: "مزرعة النخيل التصديرية", date: "2026-07-05", status: "Pending" }
-  ]);
+  const total = (expenses || []).reduce((s, r) => s + Number(r.amount || 0), 0);
+  const monthStart = new Date(); monthStart.setDate(1); monthStart.setHours(0, 0, 0, 0);
+  const monthTotal = (expenses || []).filter(r => new Date(r.transaction_date) >= monthStart).reduce((s, r) => s + Number(r.amount || 0), 0);
 
   return (
-    <div className="fade-in" style={{ padding: "2rem", color: "#1A1A2E", direction: "rtl", fontFamily: "Cairo, sans-serif" }}>
-      <div style={{ marginBottom: "2rem" }}>
-        <h1 style={{ fontSize: "2rem", fontWeight: "700", color: "#1A1A2E" }}>إدارة المصروفات والتكاليف (Expense Management)</h1>
-        <p style={{ color: "#64748B", marginTop: "0.25rem" }}>تسجيل وتتبع مصروفات التشغيل، فواتير الصيانة، وضوابط الصرف الشرعية والامتثال</p>
+    <div className="fade-in">
+      <div className={styles.header}>
+        <div className={styles.titleInfo}>
+          <h1>المصروفات التشغيلية</h1>
+          <p>مصروفات الصيانة والإدارة والتشغيل الموثقة في دفتر الأستاذ.</p>
+        </div>
+        <div className={styles.actions}>
+          <Link href="/dashboard/finance" className={styles.secBtn} style={{ textDecoration: "none" }}>دفتر الأستاذ الكامل ←</Link>
+        </div>
       </div>
 
-      <div style={{ display: "grid", gridTemplateColumns: "2fr 1fr", gap: "2rem" }}>
-        {/* Expenses List */}
-        <div style={{ background: "#ffffff", border: "1px solid #E4E7EF", borderRadius: "16px", padding: "1.5rem", boxShadow: "0 4px 12px rgba(0,0,0,0.03)" }}>
-          <h3 style={{ fontSize: "1.2rem", fontWeight: "600", marginBottom: "1rem", color: "#8561AD" }}>📋 سجل المصروفات الفعال (Expense Ledger)</h3>
-          <table style={{ width: "100%", borderCollapse: "collapse", textAlign: "right", fontSize: "0.9rem" }}>
-            <thead>
-              <tr style={{ borderBottom: "2px solid #E2E8F0", color: "#64748B" }}>
-                <th style={{ padding: "0.75rem" }}>المعرف</th>
-                <th style={{ padding: "0.75rem" }}>الفئة والبيان</th>
-                <th style={{ padding: "0.75rem" }}>المستفيد / المورد</th>
-                <th style={{ padding: "0.75rem" }}>الأصل المستهدف</th>
-                <th style={{ padding: "0.75rem" }}>المبلغ</th>
-                <th style={{ padding: "0.75rem" }}>الحالة</th>
-              </tr>
-            </thead>
-            <tbody>
-              {expenses.map(exp => (
-                <tr key={exp.id} style={{ borderBottom: "1px solid #E2E8F0" }}>
-                  <td style={{ padding: "0.75rem" }}><code style={{ color: "#8561AD", fontWeight: "bold" }}>{exp.id}</code></td>
-                  <td style={{ padding: "0.75rem" }}>
-                    <div><strong>{exp.category}</strong></div>
-                    <div style={{ fontSize: "0.75rem", color: "#64748B" }}>التاريخ: {exp.date}</div>
-                  </td>
-                  <td style={{ padding: "0.75rem" }}>{exp.vendor}</td>
-                  <td style={{ padding: "0.75rem" }}>{exp.assetName}</td>
-                  <td style={{ padding: "0.75rem", fontWeight: "bold", color: "#ef4444" }}>-{exp.amount.toLocaleString()} ر.س</td>
-                  <td style={{ padding: "0.75rem" }}>
-                    <span style={{
-                      background: exp.status === "Approved" ? "rgba(16, 185, 129, 0.1)" : "rgba(251, 191, 36, 0.1)",
-                      color: exp.status === "Approved" ? "#10b981" : "#f59e0b",
-                      padding: "0.2rem 0.5rem",
-                      borderRadius: "4px",
-                      fontSize: "0.75rem",
-                      fontWeight: "bold"
-                    }}>
-                      {exp.status === "Approved" ? "معتمد وصرف" : "قيد المراجعة"}
-                    </span>
-                  </td>
-                </tr>
-              ))}
-            </tbody>
-          </table>
-        </div>
-
-        {/* Sidebar Info */}
-        <div style={{ display: "flex", flexDirection: "column", gap: "2rem" }}>
-          <div style={{ background: "#ffffff", border: "1px solid #E4E7EF", borderRadius: "16px", padding: "1.5rem", boxShadow: "0 4px 12px rgba(0,0,0,0.03)" }}>
-            <h3 style={{ fontSize: "1.1rem", fontWeight: "600", marginBottom: "1rem", color: "#8561AD" }}>💡 امتثال المصاريف للشروط</h3>
-            <div style={{ fontSize: "0.85rem", color: "#64748B", lineHeight: "1.6" }}>
-              يتم فلترة وفحص كل فاتورة ترفع للنظام للتأكد من موافقتها لشروط الصرف المحددة في صك الوقف، ومطابقتها للميزانية التقديرية المعتمدة للربع الحالي.
-            </div>
+      <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(160px, 1fr))", gap: "1rem", marginTop: "1.5rem" }}>
+        {[
+          { label: "إجمالي المصروفات", value: `${Math.round(total).toLocaleString()} ر.س`, color: "#EF4444" },
+          { label: "مصروفات الشهر الحالي", value: `${Math.round(monthTotal).toLocaleString()} ر.س`, color: "#F59E0B" },
+          { label: "عدد المصروفات", value: expenses?.length ?? 0, color: "#3B82F6" },
+        ].map(s => (
+          <div key={s.label} className="glass-card" style={{ padding: "1rem 1.25rem", borderTop: `3px solid ${s.color}` }}>
+            <div style={{ fontSize: "1.2rem", fontWeight: 800 }}>{s.value}</div>
+            <div style={{ fontSize: "0.78rem", color: "var(--text-muted)" }}>{s.label}</div>
           </div>
-        </div>
+        ))}
+      </div>
+
+      <div className={`${styles.ledgerContainer} glass-card`} style={{ marginTop: "1.5rem" }}>
+        <table className={styles.table}>
+          <thead><tr><th>الرمز</th><th>البند / الوصف</th><th>الأصل</th><th>الوقف</th><th>التاريخ</th><th>المبلغ</th></tr></thead>
+          <tbody>
+            {expenses && expenses.length > 0 ? expenses.map(r => (
+              <tr key={r.id}>
+                <td><code className={styles.code}>{r.id.split("-")[0]}</code></td>
+                <td><strong>{r.description || "مصروف"}</strong></td>
+                <td>{(r.assets as any)?.name || "—"}</td>
+                <td style={{ fontSize: "0.8rem" }}>{(r.waqfs as any)?.name || "—"}</td>
+                <td>{new Date(r.transaction_date).toLocaleDateString("ar-SA")}</td>
+                <td style={{ color: "#EF4444", fontWeight: 700 }}>−{Number(r.amount).toLocaleString()} ر.س</td>
+              </tr>
+            )) : (
+              <tr><td colSpan={6} style={{ textAlign: "center", padding: "2rem", color: "var(--text-muted)" }}>لا توجد مصروفات مسجلة.</td></tr>
+            )}
+          </tbody>
+        </table>
       </div>
     </div>
   );

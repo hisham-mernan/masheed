@@ -3,7 +3,6 @@
 import { useState } from "react";
 import { useRouter } from "next/navigation";
 import { createClient } from "@/lib/supabase/client";
-import { loginUserAction } from "@/app/auth/actions";
 import Link from "next/link";
 import styles from "./login.module.css";
 
@@ -20,47 +19,20 @@ export default function LoginPage() {
     setIsLoading(true);
     setError("");
 
-    try {
-      // 1. Attempt Server Action Direct Database Authentication
-      const res = await loginUserAction({ email, password });
+    const { error: authError } = await supabase.auth.signInWithPassword({
+      email,
+      password,
+    });
 
-      if (res.success && res.redirectUrl) {
-        window.location.href = res.redirectUrl;
-        return;
-      }
 
-      // 2. Fallback to Supabase Auth API if Server Action indicates failure
-      const { error: authError } = await supabase.auth.signInWithPassword({
-        email,
-        password,
-      });
-
-      if (!authError) {
-        document.cookie = "masheed-mock-role=; path=/; expires=Thu, 01 Jan 1970 00:00:00 UTC;";
-        const { data: { user } } = await supabase.auth.getUser();
-        if (user) {
-          const { data: profile } = await supabase
-            .from("profiles")
-            .select("role")
-            .eq("id", user.id)
-            .single();
-
-          window.location.href = profile?.role === "admin" ? "/admin" : "/dashboard";
-          return;
-        }
-        window.location.href = "/dashboard";
-        return;
-      }
-
-      setError(res.error || "بيانات الدخول غير صحيحة. يرجى المحاولة مجدداً.");
+    if (authError) {
+      setError("بيانات الدخول غير صحيحة. يرجى المحاولة مجدداً.");
       setIsLoading(false);
-    } catch (err) {
-      console.warn("Error during login execution, completing client-side authentication:", err);
-      const userRole = email.toLowerCase().includes("admin") ? "admin" : "supervisor";
-      document.cookie = `masheed-user-email=${encodeURIComponent(email)}; path=/; max-age=2592000`;
-      document.cookie = `masheed-mock-role=${userRole}; path=/; max-age=2592000`;
-      window.location.href = userRole === "admin" ? "/admin" : "/dashboard";
+      return;
     }
+
+    router.push("/dashboard");
+    router.refresh();
   };
 
   return (
@@ -172,7 +144,7 @@ export default function LoginPage() {
             <p>ليس لديك حساب؟ <Link href="/register" className={styles.supabase}>إنشاء حساب جديد</Link></p>
             <p style={{ marginTop: '0.5rem' }}>الأمان مدعوم بـ <span className={styles.supabase}>Supabase</span> &nbsp;|&nbsp; رؤية ٢٠٣٠</p>
             <div className={styles.links}>
-              <a href="#">نسيت كلمة المرور؟</a>
+              <Link href="/forgot-password">نسيت كلمة المرور؟</Link>
               <a href="#">الدعم الفني</a>
             </div>
           </div>

@@ -1,16 +1,17 @@
 .compliance {
-  padding: 5rem 0;
-  background: white;
+  padding: 8rem 0;
+  position: relative;
+  background: var(--color-background);
+  overflow: hidden;
 }
 
 .grid {
   display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 4rem;
+  grid-template-columns: 1.2fr 1fr;
+  gap: 6rem;
   align-items: center;
 }
 
-/* ── Content ── */
 .content {
   display: flex;
   flex-direction: column;
@@ -18,186 +19,195 @@
 }
 
 .title {
-  font-size: clamp(1.6rem, 3vw, 2.4rem);
+  font-size: clamp(2rem, 4vw, 3rem);
   font-weight: 800;
-  line-height: 1.25;
-  letter-spacing: -0.03em;
-}
-
-.highlight {
-  background: linear-gradient(135deg, #8561AD, #6B46A0);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
+  letter-spacing: -0.02em;
+  line-height: 1.2;
 }
 
 .desc {
-  font-size: 1rem;
+  font-size: 1.1rem;
   color: var(--color-text-muted);
   line-height: 1.8;
+  max-width: 600px;
 }
 
+/* ── List ── */
 .list {
+  list-style: none;
   display: flex;
   flex-direction: column;
-  gap: 1rem;
-  list-style: none;
+  gap: 1.5rem;
+  margin-top: 1rem;
 }
 
 .listItem {
   display: flex;
   align-items: flex-start;
-  gap: 0.85rem;
-  padding: 1rem 1.25rem;
-  background: var(--color-background);
-  border: 1px solid var(--color-border);
-  border-radius: var(--radius-md);
-  transition: border-color 200ms, background 200ms;
-}
-
-.listItem:hover {
-  border-color: rgba(133,97,173,0.3);
-  background: var(--color-primary-light);
+  gap: 1rem;
 }
 
 .check {
-  width: 26px;
-  height: 26px;
+  width: 28px;
+  height: 28px;
   border-radius: 50%;
-  background: var(--color-primary);
-  color: white;
+  background: rgba(16, 185, 129, 0.15);
+  color: #10B981;
   display: flex;
   align-items: center;
   justify-content: center;
   flex-shrink: 0;
-  margin-top: 1px;
+  margin-top: 2px;
+  border: 1px solid rgba(16, 185, 129, 0.3);
+  box-shadow: 0 0 10px rgba(16, 185, 129, 0.1);
 }
 
 .itemTitle {
-  font-size: 0.9rem;
+  display: block;
+  font-size: 1.1rem;
   font-weight: 700;
-  color: var(--color-accent);
+  color: var(--color-text);
+  margin-bottom: 0.25rem;
 }
 
 .itemDesc {
-  font-size: 0.875rem;
+  font-size: 0.95rem;
   color: var(--color-text-muted);
-  line-height: 1.7;
+  line-height: 1.6;
 }
 
-/* ── Score Card ── */
+/* ── Visual ── */
 .visual {
   position: relative;
   display: flex;
   justify-content: center;
+  animation: fadeInUp 800ms 200ms var(--ease-out) both;
+}
+
+.glowBehind {
+  position: absolute;
+  width: 450px;
+  height: 450px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(16, 185, 129, 0.08) 0%, transparent 60%);
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 0;
+  animation: pulseGlow 8s ease-in-out infinite alternate;
 }
 
 .scoreCard {
-  width: 100%;
-  max-width: 380px;
-  padding: 2rem;
-  display: flex;
-  flex-direction: column;
-  gap: 1.25rem;
-  background: white !important;
-  border: 1.5px solid var(--color-border) !important;
-  box-shadow: var(--shadow-md) !important;
   position: relative;
   z-index: 2;
+  width: 100%;
+  max-width: 420px;
+  padding: 2.5rem;
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
 }
 
 .scoreHeader {
   display: flex;
   align-items: center;
-  gap: 0.85rem;
+  gap: 1rem;
 }
 
 .scoreIcon {
-  width: 42px;
-  height: 42px;
-  background: var(--color-primary-light);
+  width: 48px;
+  height: 48px;
   border-radius: var(--radius-md);
+  background: rgba(16, 185, 129, 0.1);
+  color: #10B981;
   display: flex;
   align-items: center;
   justify-content: center;
-  color: var(--color-primary);
+  border: 1px solid rgba(16, 185, 129, 0.2);
 }
 
 .scoreLabel {
-  font-size: 0.9rem;
+  font-size: 1.1rem;
   font-weight: 700;
-  color: var(--color-accent);
+  color: var(--color-text);
 }
 
 .scoreSublabel {
-  font-size: 0.72rem;
+  font-size: 0.75rem;
   color: var(--color-text-muted);
   font-family: 'Inter', sans-serif;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  margin-top: 0.15rem;
 }
 
 .scoreValue {
-  font-size: 3.5rem;
+  font-size: 4rem;
   font-weight: 800;
-  color: var(--color-primary);
-  font-family: 'Cairo', sans-serif;
+  color: #10B981;
+  font-family: var(--font-heading);
   line-height: 1;
-  text-align: center;
 }
 
 .scoreBarTrack {
   width: 100%;
   height: 8px;
-  background: var(--color-primary-light);
-  border-radius: var(--radius-full);
+  background: var(--color-border);
+  border-radius: 4px;
   overflow: hidden;
 }
 
 .scoreBarFill {
   height: 100%;
-  width: 0;
-  background: linear-gradient(90deg, #8561AD, #6B46A0);
-  border-radius: var(--radius-full);
-  transition: width 1.5s var(--ease-out);
+  width: 0; /* Animated via JS */
+  background: linear-gradient(90deg, #10B981, #34D399);
+  border-radius: 4px;
+  transition: width 1.5s cubic-bezier(0.16, 1, 0.3, 1);
+  box-shadow: 0 0 10px rgba(16, 185, 129, 0.2);
 }
 
 .scoreMeta {
-  text-align: center;
-  font-size: 0.78rem;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 0.85rem;
   color: var(--color-text-muted);
-  font-family: 'Inter', sans-serif;
+}
+
+.metaDot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: #10B981;
+  animation: pulse-ring 2s infinite;
 }
 
 .integrations {
   display: flex;
-  gap: 0.5rem;
-  justify-content: center;
   flex-wrap: wrap;
+  gap: 0.5rem;
+  margin-top: 0.5rem;
 }
 
 .integrationTag {
-  padding: 0.25rem 0.65rem;
-  background: var(--color-background);
-  border: 1px solid var(--color-border);
+  padding: 0.3rem 0.75rem;
   border-radius: var(--radius-full);
-  font-size: 0.72rem;
-  font-weight: 600;
+  font-size: 0.75rem;
   font-family: 'Inter', sans-serif;
+  font-weight: 600;
   color: var(--color-text-muted);
+  background: rgba(0, 0, 0, 0.03);
+  border: 1px solid var(--color-border);
 }
 
-.glowBehind {
-  position: absolute;
-  inset: -40px;
-  background: radial-gradient(circle at center, rgba(133,97,173,0.12), transparent 70%);
-  z-index: 0;
-  animation: glow-pulse 4s ease-in-out infinite;
-}
-
-/* ── Responsive ── */
-@media (max-width: 900px) {
+@media (max-width: 1024px) {
   .grid {
     grid-template-columns: 1fr;
-    gap: 2.5rem;
+    gap: 4rem;
   }
-  .compliance { padding: 3.5rem 0; }
+  .visual { justify-content: center; }
+}
+
+@media (max-width: 640px) {
+  .compliance { padding: 5rem 0; }
 }

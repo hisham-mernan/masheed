@@ -1,6 +1,6 @@
 const { Client } = require('pg');
 
-const DB_URL = "postgresql://postgres.qlcjzvcnvxjhjdfqvyud:t3%2B-6yZ%2FGs%25%2FFuW@aws-0-eu-west-1.pooler.supabase.com:6543/postgres";
+const DB_URL = process.env.DATABASE_URL;
 
 async function verify() {
   const client = new Client({

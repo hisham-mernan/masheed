@@ -1,67 +1,71 @@
-"use client";
+import { createClient } from "@/lib/supabase/server";
+import Link from "next/link";
+import { getWaqfScope, scopeQuery } from "@/lib/waqf-scope";
+import styles from "../../assets/assets.module.css";
 
-import React, { useState } from "react";
+export default async function MarketplaceStatusPage() {
+  const supabase = await createClient();
+  const { data: { user } } = await supabase.auth.getUser();
+  const { data: profile } = await supabase.from("profiles").select("is_platform_admin").eq("id", user?.id).single();
+  const scope = profile?.is_platform_admin ? await getWaqfScope() : null;
 
-interface TradeItem {
-  id: string;
-  assetName: string;
-  totalVolume: number;
-  lastPrice: number;
-  dailyChange: number;
-}
+  const { data: listings } = await scopeQuery(
+    supabase.from("listing_requests").select("*, assets(name), waqfs(name)").in("status", ["approved", "trading"]), scope
+  ).order("created_at", { ascending: false });
 
-export default function StatusPage() {
-  const [items] = useState<TradeItem[]>([
-    { id: "TRD-01", assetName: "صكوك برج الخزامى السكني", totalVolume: 1250000, lastPrice: 104.5, dailyChange: 2.1 },
-    { id: "TRD-02", assetName: "صكوك محفظة الإنماء الصحية", totalVolume: 820000, lastPrice: 99.8, dailyChange: -0.4 }
-  ]);
+  const trading = (listings || []).filter(l => l.status === "trading");
+  const totalVolume = trading.reduce((s, l) => s + Number(l.target_funding || 0), 0);
 
   return (
-    <div className="fade-in" style={{ padding: "2rem", color: "#1A1A2E", direction: "rtl", fontFamily: "Cairo, sans-serif" }}>
-      <div style={{ marginBottom: "2rem" }}>
-        <h1 style={{ fontSize: "2rem", fontWeight: "700", color: "#1A1A2E" }}>حالة سوق تداول الصكوك الوقفية (Marketplace Status)</h1>
-        <p style={{ color: "#64748B", marginTop: "0.25rem" }}>استعراض حركة الأسعار، حجم التداولات اليومية، وعمليات العرض والطلب لصكوك أصولك في منصة التداول</p>
+    <div className="fade-in">
+      <div className={styles.header}>
+        <div className={styles.titleInfo}>
+          <h1>حالة السوق والتداول</h1>
+          <p>الصكوك المعتمدة والمتداولة في سوق وقف باي مشيد وتقدم التمويل.</p>
+        </div>
+        <div className={styles.actions}>
+          <Link href="/dashboard/marketplace" className={styles.secBtn} style={{ textDecoration: "none" }}>طلبات الطرح ←</Link>
+        </div>
       </div>
 
-      <div style={{ display: "grid", gridTemplateColumns: "2fr 1fr", gap: "2rem" }}>
-        {/* Marketplace Items Table */}
-        <div style={{ background: "#ffffff", border: "1px solid #E4E7EF", borderRadius: "16px", padding: "1.5rem", boxShadow: "0 4px 12px rgba(0,0,0,0.03)" }}>
-          <h3 style={{ fontSize: "1.2rem", fontWeight: "600", marginBottom: "1rem", color: "#8561AD" }}>📈 أسعار التداول والنشاط اليومي</h3>
-          <table style={{ width: "100%", borderCollapse: "collapse", textAlign: "right", fontSize: "0.9rem" }}>
-            <thead>
-              <tr style={{ borderBottom: "2px solid #E2E8F0", color: "#64748B" }}>
-                <th style={{ padding: "0.75rem" }}>المعرف</th>
-                <th style={{ padding: "0.75rem" }}>اسم صكوك الوقف</th>
-                <th style={{ padding: "0.75rem" }}>حجم التداول الكلي</th>
-                <th style={{ padding: "0.75rem" }}>آخر سعر إغلاق</th>
-                <th style={{ padding: "0.75rem" }}>التغيير اليومي</th>
-              </tr>
-            </thead>
-            <tbody>
-              {items.map(item => (
-                <tr key={item.id} style={{ borderBottom: "1px solid #E2E8F0" }}>
-                  <td style={{ padding: "0.75rem" }}><code style={{ color: "#8561AD", fontWeight: "bold" }}>{item.id}</code></td>
-                  <td style={{ padding: "0.75rem" }}><strong>{item.assetName}</strong></td>
-                  <td style={{ padding: "0.75rem" }}>{item.totalVolume.toLocaleString()} ر.س</td>
-                  <td style={{ padding: "0.75rem", fontWeight: "bold" }}>{item.lastPrice} ر.س</td>
-                  <td style={{ padding: "0.75rem", color: item.dailyChange >= 0 ? "#10b981" : "#ef4444", fontWeight: "bold" }}>
-                    {item.dailyChange >= 0 ? "+" : ""}{item.dailyChange}٪
-                  </td>
-                </tr>
-              ))}
-            </tbody>
-          </table>
-        </div>
-
-        {/* Sidebar Info */}
-        <div style={{ display: "flex", flexDirection: "column", gap: "2rem" }}>
-          <div style={{ background: "#ffffff", border: "1px solid #E4E7EF", borderRadius: "16px", padding: "1.5rem", boxShadow: "0 4px 12px rgba(0,0,0,0.03)" }}>
-            <h3 style={{ fontSize: "1.1rem", fontWeight: "600", marginBottom: "1rem", color: "#8561AD" }}>💡 سيولة الصكوك</h3>
-            <div style={{ fontSize: "0.85rem", color: "#64748B", lineHeight: "1.6" }}>
-              يمكن للمستثمرين بيع وشراء حصص الملكية بسهولة، ويتم تسجيل جميع التحويلات وصكوك الملكية آلياً بمساعدة تقنيات العقود الذكية لضمان سلامة وموثوقية المعاملات.
-            </div>
+      <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(160px, 1fr))", gap: "1rem", marginTop: "1.5rem" }}>
+        {[
+          { label: "صكوك متداولة", value: trading.length, color: "#10B981" },
+          { label: "معتمدة بانتظار التداول", value: (listings || []).filter(l => l.status === "approved").length, color: "#3B82F6" },
+          { label: "حجم التمويل المتداول", value: `${Math.round(totalVolume).toLocaleString()} ر.س`, color: "#8561AD" },
+        ].map(s => (
+          <div key={s.label} className="glass-card" style={{ padding: "1rem 1.25rem", borderTop: `3px solid ${s.color}` }}>
+            <div style={{ fontSize: "1.2rem", fontWeight: 800 }}>{s.value}</div>
+            <div style={{ fontSize: "0.78rem", color: "var(--text-muted)" }}>{s.label}</div>
           </div>
-        </div>
+        ))}
+      </div>
+
+      <div className={`${styles.ledgerContainer} glass-card`} style={{ marginTop: "1.5rem" }}>
+        <table className={styles.table}>
+          <thead><tr><th>الرمز</th><th>الصك</th><th>الوقف</th><th>سعر السهم</th><th>عدد الأسهم</th><th>التمويل المستهدف</th><th>الحالة</th></tr></thead>
+          <tbody>
+            {listings && listings.length > 0 ? listings.map(l => (
+              <tr key={l.id}>
+                <td><code className={styles.code}>{l.id.split("-")[0]}</code></td>
+                <td><strong>صكوك {(l.assets as any)?.name || "—"}</strong></td>
+                <td style={{ fontSize: "0.8rem" }}>{(l.waqfs as any)?.name || "—"}</td>
+                <td style={{ fontWeight: 700 }}>{Number(l.price_per_share).toLocaleString()} ر.س</td>
+                <td>{l.shares_count ? Number(l.shares_count).toLocaleString() : "—"}</td>
+                <td style={{ fontWeight: 700 }}>{Number(l.target_funding).toLocaleString()} ر.س</td>
+                <td>
+                  <span style={{ padding: "0.2rem 0.55rem", borderRadius: "6px", fontSize: "0.75rem", fontWeight: 700, background: l.status === "trading" ? "#F0FDF4" : "#EFF6FF", color: l.status === "trading" ? "#15803D" : "#1D4ED8" }}>
+                    {l.status === "trading" ? "📈 متداول" : "معتمد"}
+                  </span>
+                </td>
+              </tr>
+            )) : (
+              <tr><td colSpan={7} style={{ textAlign: "center", padding: "2rem", color: "var(--text-muted)" }}>
+                لا توجد صكوك معتمدة أو متداولة بعد — اعتمد طلب طرح من صفحة وقف باي مشيد أولاً.
+              </td></tr>
+            )}
+          </tbody>
+        </table>
       </div>
     </div>
   );

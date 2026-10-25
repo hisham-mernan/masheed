@@ -6,8 +6,6 @@ import { createClient } from "@/lib/supabase/client";
 import Link from "next/link";
 import styles from "../login/login.module.css";
 
-import { registerMainUserAction } from "./actions";
-
 export default function RegisterPage() {
   const [fullName, setFullName] = useState("");
   const [waqfName, setWaqfName] = useState("");
@@ -16,6 +14,7 @@ export default function RegisterPage() {
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState("");
   const router = useRouter();
+  const supabase = createClient();
 
   const handleRegister = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -23,20 +22,40 @@ export default function RegisterPage() {
     setError("");
 
     try {
-      const res = await registerMainUserAction({
-        fullName,
-        waqfName,
+      // Sign up the user with metadata
+      // The database trigger 'handle_new_user' will automatically create the Waqf and Profile
+      const { data: authData, error: authError } = await supabase.auth.signUp({
         email,
+        password,
+        options: {
+          data: {
+            full_name: fullName,
+            waqf_name: waqfName,
+          },
+        },
       });
 
-      if (!res.success) {
-        throw new Error(res.error || "حدث خطأ أثناء التسجيل.");
-      }
+      if (authError) throw authError;
 
-      router.push("/dashboard");
+      // If sign up is successful, check if user is logged in (session exists)
+      // Note: If email confirmation is ON, there won't be a session yet.
+      if (authData.session) {
+        router.push("/dashboard");
+      } else {
+        setError("تم إنشاء الحساب! يرجى التحقق من بريدك الإلكتروني لتنشيط الحساب.");
+        setIsLoading(false);
+        return;
+      }
+      
       router.refresh();
     } catch (err: any) {
       console.error("Detailed Registration error:", err);
+      // Fallback for objects that don't serialize well
+      if (typeof err === 'object' && err !== null) {
+        console.error("Error keys:", Object.keys(err));
+        console.error("Error message property:", err.message);
+      }
+      
       setError(err.message || "حدث خطأ أثناء إنشاء الحساب. يرجى المحاولة مجدداً.");
       setIsLoading(false);
     }

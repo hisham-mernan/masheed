@@ -1,12 +1,5 @@
 import type { Metadata } from "next";
-import { IBM_Plex_Sans_Arabic } from "next/font/google";
 import "./globals.css";
-
-const ibmPlex = IBM_Plex_Sans_Arabic({
-  subsets: ["arabic"],
-  weight: ["300", "400", "500", "600", "700"],
-  variable: "--font-sans",
-});
 
 export const metadata: Metadata = {
   title: "وقف مشيد | أثر يبقى",
@@ -19,7 +12,38 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="ar" dir="rtl" className={ibmPlex.variable}>
+    <html lang="ar" dir="rtl">
+      <head>
+        {/* Preload the critical Thmanyah faces used above the fold */}
+        <link
+          rel="preload"
+          href="/fonts/thmanyah/thmanyah-serif-display-Black.woff2"
+          as="font"
+          type="font/woff2"
+          crossOrigin="anonymous"
+        />
+        <link
+          rel="preload"
+          href="/fonts/thmanyah/thmanyah-serif-display-Bold.woff2"
+          as="font"
+          type="font/woff2"
+          crossOrigin="anonymous"
+        />
+        <link
+          rel="preload"
+          href="/fonts/thmanyah/thmanyah-sans-Regular.woff2"
+          as="font"
+          type="font/woff2"
+          crossOrigin="anonymous"
+        />
+        <link
+          rel="preload"
+          href="/fonts/thmanyah/thmanyah-sans-Medium.woff2"
+          as="font"
+          type="font/woff2"
+          crossOrigin="anonymous"
+        />
+      </head>
       <body className="font-sans">
         {children}
       </body>

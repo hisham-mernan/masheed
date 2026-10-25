@@ -1,0 +1,78 @@
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin-bottom: 1.5rem;
+}
+
+.header h1 { font-size: 1.5rem; font-weight: 700; }
+.header p { color: var(--text-muted, #64748B); font-size: 0.9rem; margin-top: 0.25rem; }
+
+.scopeBar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 1rem;
+  background: white;
+  border: 1px solid var(--color-border, #E4E7EF);
+  border-radius: 12px;
+  padding: 0.85rem 1.25rem;
+  margin-bottom: 1.5rem;
+}
+
+.scopeInfo { display: flex; align-items: center; gap: 0.5rem; flex-wrap: wrap; }
+.scopeLabel { color: var(--text-muted, #64748B); font-size: 0.85rem; }
+.scopeHint { color: var(--text-muted, #94A3B8); font-size: 0.75rem; }
+
+.periodTabs { display: flex; gap: 0.4rem; flex-wrap: wrap; }
+.periodTab {
+  padding: 0.4rem 0.9rem;
+  border-radius: 8px;
+  font-size: 0.82rem;
+  font-weight: 600;
+  color: var(--text-muted, #64748B);
+  background: var(--color-background, #F0F2F8);
+  text-decoration: none;
+  transition: all 150ms;
+}
+.periodTab:hover { color: #8561AD; }
+.periodActive { background: #8561AD; color: white; }
+.periodActive:hover { color: white; }
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+  gap: 1.25rem;
+}
+
+.card {
+  display: flex;
+  flex-direction: column;
+  padding: 1.5rem;
+  transition: transform 200ms, box-shadow 200ms;
+}
+.card:hover { transform: translateY(-3px); }
+
+.cardIcon {
+  width: 48px;
+  height: 48px;
+  border-radius: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.4rem;
+  margin-bottom: 1rem;
+}
+
+.cardBody h3 { font-size: 1.05rem; font-weight: 700; }
+.cardEn { font-size: 0.72rem; color: var(--text-muted, #94A3B8); letter-spacing: 0.04em; text-transform: uppercase; }
+.cardBody p { font-size: 0.85rem; color: var(--text-muted, #64748B); margin-top: 0.5rem; line-height: 1.6; }
+
+.cardFooter {
+  margin-top: 1rem;
+  padding-top: 0.85rem;
+  border-top: 1px dashed var(--color-border, #E4E7EF);
+  font-size: 0.85rem;
+  font-weight: 700;
+}

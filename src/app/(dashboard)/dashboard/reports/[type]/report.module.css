@@ -1,0 +1,172 @@
+.toolbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1.25rem;
+  gap: 1rem;
+  flex-wrap: wrap;
+}
+
+.backLink {
+  color: #8561AD;
+  text-decoration: none;
+  font-size: 0.9rem;
+  font-weight: 600;
+}
+
+.report {
+  background: white;
+  border-radius: 16px;
+  border: 1px solid var(--color-border, #E4E7EF);
+  padding: 2.5rem;
+  max-width: 900px;
+  margin: 0 auto;
+  color: #1E293B;
+}
+
+/* ── Brand header ── */
+.brandHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding-bottom: 1.5rem;
+  border-bottom: 3px solid #8561AD;
+  margin-bottom: 1.5rem;
+}
+
+.brandRight { display: flex; align-items: center; gap: 0.9rem; }
+.brandLogo {
+  width: 52px;
+  height: 52px;
+  border-radius: 14px;
+  background: linear-gradient(135deg, #8561AD, #6B46A0);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  font-size: 1.5rem;
+  font-weight: 700;
+  font-family: 'Cairo', sans-serif;
+}
+.brandName { font-size: 1.35rem; font-weight: 800; color: #4C1D95; line-height: 1.2; }
+.brandNameEn { font-size: 0.72rem; color: #64748B; letter-spacing: 0.08em; text-transform: uppercase; }
+.brandSub { font-size: 0.8rem; color: #64748B; margin-top: 0.15rem; }
+
+.reportMeta { text-align: left; font-size: 0.78rem; color: #475569; line-height: 1.9; }
+.reportMeta strong { color: #1E293B; }
+
+/* ── Title block ── */
+.titleBlock {
+  text-align: center;
+  margin: 1.75rem 0;
+  padding: 1.25rem;
+  background: linear-gradient(135deg, #F5F3FF, #EDE9FE);
+  border-radius: 12px;
+}
+.titleBlock h1 { font-size: 1.4rem; font-weight: 800; color: #4C1D95; }
+.titleBlock .titleEn { font-size: 0.8rem; color: #7C3AED; letter-spacing: 0.06em; text-transform: uppercase; margin-top: 0.2rem; }
+.titleBlock .waqfLine { font-size: 0.95rem; color: #334155; margin-top: 0.6rem; font-weight: 600; }
+.titleBlock .periodLine { font-size: 0.8rem; color: #64748B; margin-top: 0.2rem; }
+
+/* ── Stats ── */
+.statsGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+  gap: 0.85rem;
+  margin-bottom: 1.75rem;
+}
+.statCard {
+  border: 1px solid #E4E7EF;
+  border-radius: 10px;
+  padding: 0.9rem 1rem;
+  border-top: 3px solid var(--accent, #8561AD);
+}
+.statValue { font-size: 1.15rem; font-weight: 800; color: #0F172A; }
+.statValue small { font-size: 0.7rem; font-weight: 600; color: #64748B; }
+.statLabel { font-size: 0.75rem; color: #64748B; margin-top: 0.25rem; }
+
+/* ── Sections ── */
+.section { margin-bottom: 1.75rem; }
+.sectionTitle {
+  font-size: 1rem;
+  font-weight: 700;
+  color: #4C1D95;
+  margin-bottom: 0.75rem;
+  padding-bottom: 0.4rem;
+  border-bottom: 1.5px solid #EDE9FE;
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+}
+.sectionTitle .en { font-size: 0.68rem; color: #94A3B8; letter-spacing: 0.05em; text-transform: uppercase; font-weight: 600; }
+
+/* ── Table ── */
+.table { width: 100%; border-collapse: collapse; font-size: 0.82rem; }
+.table th {
+  background: #F5F3FF;
+  color: #4C1D95;
+  font-weight: 700;
+  padding: 0.55rem 0.7rem;
+  text-align: right;
+  border-bottom: 2px solid #DDD6FE;
+}
+.table td { padding: 0.5rem 0.7rem; border-bottom: 1px solid #F1F5F9; }
+.table tr:nth-child(even) td { background: #FAFAFE; }
+.tfoot td { font-weight: 800; background: #F5F3FF !important; border-top: 2px solid #DDD6FE; }
+
+.pos { color: #059669; font-weight: 700; }
+.neg { color: #DC2626; font-weight: 700; }
+
+/* ── CSS bar chart ── */
+.chart { display: flex; align-items: flex-end; gap: 6px; height: 160px; padding: 0.5rem 0.25rem 0; }
+.chartCol { flex: 1; display: flex; flex-direction: column; align-items: center; justify-content: flex-end; gap: 2px; height: 100%; }
+.bars { display: flex; align-items: flex-end; gap: 3px; height: 100%; }
+.bar { width: 12px; border-radius: 3px 3px 0 0; min-height: 2px; }
+.barIncome { background: linear-gradient(180deg, #34D399, #059669); }
+.barExpense { background: linear-gradient(180deg, #F87171, #DC2626); }
+.chartLabel { font-size: 0.62rem; color: #64748B; margin-top: 4px; }
+.legend { display: flex; gap: 1.25rem; justify-content: center; margin-top: 0.6rem; font-size: 0.75rem; color: #475569; }
+.legendDot { display: inline-block; width: 10px; height: 10px; border-radius: 3px; margin-left: 5px; vertical-align: middle; }
+
+/* ── Breakdown bars ── */
+.breakRow { display: flex; align-items: center; gap: 0.75rem; margin-bottom: 0.55rem; font-size: 0.82rem; }
+.breakLabel { width: 130px; color: #334155; flex-shrink: 0; }
+.breakTrack { flex: 1; background: #F1F5F9; border-radius: 6px; height: 16px; overflow: hidden; }
+.breakFill { height: 100%; border-radius: 6px; }
+.breakVal { width: 110px; text-align: left; font-weight: 700; color: #0F172A; flex-shrink: 0; font-size: 0.78rem; }
+
+.note {
+  background: #FFFBEB;
+  border: 1px solid #FDE68A;
+  border-radius: 10px;
+  padding: 0.85rem 1rem;
+  font-size: 0.8rem;
+  color: #92400E;
+  line-height: 1.7;
+  margin-bottom: 1.5rem;
+}
+
+/* ── Footer ── */
+.footer {
+  margin-top: 2rem;
+  padding-top: 1.25rem;
+  border-top: 2px solid #EDE9FE;
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  font-size: 0.75rem;
+  color: #64748B;
+  line-height: 1.9;
+}
+.footer .sig { text-align: center; }
+.footer .sigLine { margin-top: 2rem; border-top: 1px solid #94A3B8; padding-top: 0.3rem; min-width: 180px; font-weight: 600; color: #334155; }
+
+.empty { text-align: center; color: #94A3B8; padding: 1.5rem; font-size: 0.85rem; }
+
+/* ── Print ── */
+@media print {
+  @page { size: A4; margin: 12mm; }
+  .toolbar { display: none !important; }
+  .report { border: none; border-radius: 0; padding: 0; max-width: none; box-shadow: none; }
+  .section, .statsGrid, .titleBlock { break-inside: avoid; }
+}

@@ -1,7 +1,10 @@
 @import url('https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;500;600;700;800&family=Noto+Sans+Arabic:wght@300;400;500;600;700&family=Inter:wght@300;400;500;600;700&display=swap');
 
+
+
 /* ═══════════════════════════════════════════
    MASHEED — Global Design System Tokens
+   Created for Light Theme with ultra-luxurious feel.
    ═══════════════════════════════════════════ */
 :root {
   /* ── Core Brand Palette ── */
@@ -70,8 +73,8 @@
 
 /* ─── Typography by Direction ─── */
 [dir="rtl"] {
-  --font-heading: 'Cairo', 'Noto Sans Arabic', sans-serif;
-  --font-body:    'Cairo', 'Noto Sans Arabic', sans-serif;
+  --font-heading: var(--font-thmanyah-display), 'Cairo', sans-serif;
+  --font-body:    var(--font-thmanyah-sans), 'Cairo', sans-serif;
 }
 [dir="ltr"] {
   --font-heading: 'Inter', sans-serif;

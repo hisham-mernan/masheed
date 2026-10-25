@@ -1,0 +1,121 @@
+.header {
+  position: fixed;
+  top: 1rem;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 92%;
+  max-width: 1060px;
+  z-index: 100;
+  transition: all 400ms var(--ease-spring);
+}
+
+.headerInner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  padding: 0.7rem 1.5rem;
+  background: var(--glass-bg);
+  backdrop-filter: var(--glass-blur);
+  -webkit-backdrop-filter: var(--glass-blur);
+  border: var(--glass-border);
+  border-radius: var(--radius-full);
+  box-shadow: var(--shadow-md);
+  transition: padding 300ms var(--ease-out), box-shadow 300ms var(--ease-out), background 300ms;
+}
+
+.header.scrolled .headerInner {
+  padding: 0.55rem 1.5rem;
+  box-shadow: var(--shadow-lg);
+  background: rgba(255, 255, 255, 0.92);
+}
+
+.logoGroup {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  text-decoration: none;
+  flex-shrink: 0;
+}
+
+.logoMark {
+  width: 40px;
+  height: 40px;
+  background: linear-gradient(135deg, var(--color-primary) 0%, #17573F 100%);
+  color: white;
+  border-radius: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: var(--font-heading);
+  font-weight: 800;
+  font-size: 1.25rem;
+  box-shadow: var(--shadow-primary);
+  transition: transform 300ms var(--ease-spring);
+}
+
+.logoGroup:hover .logoMark {
+  transform: rotate(5deg) scale(1.05);
+}
+
+.logoText {
+  font-family: var(--font-heading);
+  font-weight: 700;
+  font-size: 1.2rem;
+  color: var(--color-text);
+  letter-spacing: -0.01em;
+  white-space: nowrap;
+}
+
+.nav {
+  display: flex;
+  align-items: center;
+  gap: 1.5rem;
+}
+
+.navLink {
+  font-size: 0.92rem;
+  font-weight: 600;
+  color: var(--color-text-muted);
+  transition: color 200ms;
+  white-space: nowrap;
+}
+
+.navLink:hover {
+  color: var(--color-primary);
+}
+
+.actions {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  flex-shrink: 0;
+}
+
+.marketBtn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  background: #17573F;
+  color: #F5EFE2;
+  padding: 0.55rem 1.35rem;
+  border-radius: var(--radius-full);
+  font-weight: 600;
+  font-size: 0.92rem;
+  box-shadow: 0 8px 24px -8px rgba(23, 87, 63, 0.5);
+  transition: transform 200ms var(--ease-spring), box-shadow 200ms, filter 150ms;
+  white-space: nowrap;
+}
+
+.marketBtn:hover {
+  transform: translateY(-2px);
+  filter: brightness(1.1);
+  box-shadow: 0 12px 30px -8px rgba(23, 87, 63, 0.6);
+}
+
+@media (max-width: 860px) {
+  .nav { display: none; }
+  .header { width: 95%; }
+  .logoText { font-size: 1.05rem; }
+  .marketBtn { padding: 0.5rem 1rem; font-size: 0.85rem; }
+}

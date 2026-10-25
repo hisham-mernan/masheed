@@ -46,9 +46,3 @@ next-env.d.ts
 .trae/
 .gemini/
 skills-lock.json
-
-# local database scripts containing passwords
-/create_admin_user.js
-/apply_schema.js
-/fix_db.js
-/scripts/*.js

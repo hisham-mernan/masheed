@@ -1,86 +1,78 @@
-"use client";
+import { createClient } from "@/lib/supabase/server";
+import Link from "next/link";
+import { getWaqfScope, scopeQuery } from "@/lib/waqf-scope";
+import styles from "../../assets/assets.module.css";
 
-import React, { useState } from "react";
+export default async function ReadinessPage() {
+  const supabase = await createClient();
+  const { data: { user } } = await supabase.auth.getUser();
+  const { data: profile } = await supabase.from("profiles").select("is_platform_admin").eq("id", user?.id).single();
+  const scope = profile?.is_platform_admin ? await getWaqfScope() : null;
 
-interface ChecklistItem {
-  id: string;
-  task: string;
-  checked: boolean;
-  score: number;
-}
-
-export default function ReadinessPage() {
-  const [items, setItems] = useState<ChecklistItem[]>([
-    { id: "1", task: "توثيق صك الوقف في وزارة الموارد البشرية والتنمية الاجتماعية", checked: true, score: 25 },
-    { id: "2", task: "إعداد القوائم المالية المدققة للسنتين الماضيتين", checked: true, score: 25 },
-    { id: "3", task: "تعيين مجلس نظارة سارٍ وغير متداخل المصالح", checked: true, score: 25 },
-    { id: "4", task: "فحص وتقييم الحالة العقارية الفنية للأصول المستهدفة", checked: false, score: 25 }
+  const [{ data: docs }, { data: tx }, { data: decisions }, { data: assets }, { data: contracts }, { data: meetings }] = await Promise.all([
+    scopeQuery(supabase.from("documents").select("id"), scope),
+    scopeQuery(supabase.from("transactions").select("id"), scope),
+    scopeQuery(supabase.from("decisions").select("id, status"), scope),
+    scopeQuery(supabase.from("assets").select("id, name, valuation, status"), scope),
+    scopeQuery(supabase.from("contracts").select("id, status").eq("status", "active"), scope),
+    scopeQuery(supabase.from("meetings").select("id, status"), scope),
   ]);
 
-  const totalScore = items.reduce((sum, item) => sum + (item.checked ? item.score : 0), 0);
-
-  const toggleCheck = (id: string) => {
-    setItems(prev => prev.map(item => {
-      if (item.id === id) {
-        return { ...item, checked: !item.checked };
-      }
-      return item;
-    }));
-  };
+  // معايير الجاهزية محسوبة من البيانات الفعلية
+  const checks = [
+    { task: "توثيق صك الوقف والمستندات الرسمية في النظام", done: (docs?.length ?? 0) > 0, score: 25, fix: "/dashboard/ocr" },
+    { task: "سجل مالي فعّال (قيود دفتر أستاذ موثقة)", done: (tx?.length ?? 0) >= 3, score: 25, fix: "/dashboard/finance" },
+    { task: "حوكمة فعّالة: اجتماعات وقرارات موثقة لمجلس النظارة", done: (meetings?.length ?? 0) > 0 && (decisions?.length ?? 0) > 0, score: 25, fix: "/dashboard/governance" },
+    { task: "أصول مقيّمة بعقود نشطة (جاهزية فنية وتشغيلية)", done: (assets || []).some(a => Number(a.valuation) > 0) && (contracts?.length ?? 0) > 0, score: 25, fix: "/dashboard/contracts" },
+  ];
+  const totalScore = checks.reduce((s, c) => s + (c.done ? c.score : 0), 0);
+  const verdict = totalScore === 100 ? { text: "جاهز للطرح ✅", color: "#15803D" } : totalScore >= 50 ? { text: "قريب من الجاهزية — أكمل المتطلبات", color: "#B45309" } : { text: "غير جاهز بعد", color: "#DC2626" };
 
   return (
-    <div className="fade-in" style={{ padding: "2rem", color: "#1A1A2E", direction: "rtl", fontFamily: "Cairo, sans-serif" }}>
-      <div style={{ marginBottom: "2rem" }}>
-        <h1 style={{ fontSize: "2rem", fontWeight: "700", color: "#1A1A2E" }}>جاهزية طرح صكوك الوقف الاستثمارية (Listing Readiness Score)</h1>
-        <p style={{ color: "#64748B", marginTop: "0.25rem" }}>فحص جاهزية أصولك قانونياً وحوكمياً ومالياً لطرحها في سوق أوقاف مشيد كفرص استثمارية للمساهمين</p>
+    <div className="fade-in">
+      <div className={styles.header}>
+        <div className={styles.titleInfo}>
+          <h1>جاهزية طرح الصكوك</h1>
+          <p>فحص جاهزية الوقف قانونياً وحوكمياً ومالياً للطرح في سوق وقف باي مشيد — محسوب من بياناتك الفعلية.</p>
+        </div>
+        <div className={styles.actions}>
+          <Link href="/dashboard/marketplace" className={styles.secBtn} style={{ textDecoration: "none" }}>طلبات الطرح ←</Link>
+        </div>
       </div>
 
-      <div style={{ display: "grid", gridTemplateColumns: "1.8fr 1.2fr", gap: "2rem" }}>
-        {/* Readiness Checklist */}
-        <div style={{ background: "#ffffff", border: "1px solid #E4E7EF", borderRadius: "16px", padding: "1.5rem", boxShadow: "0 4px 12px rgba(0,0,0,0.03)" }}>
-          <h3 style={{ fontSize: "1.2rem", fontWeight: "600", marginBottom: "1rem", color: "#8561AD" }}>📋 قائمة معايير التدقيق المالي والقانوني</h3>
-          <div style={{ display: "flex", flexDirection: "column", gap: "1rem" }}>
-            {items.map(item => (
-              <div 
-                key={item.id} 
-                onClick={() => toggleCheck(item.id)}
-                style={{ 
-                  display: "flex", 
-                  alignItems: "center", 
-                  gap: "1rem", 
-                  padding: "1rem", 
-                  background: item.checked ? "#F0E7FF" : "#F8FAFC", 
-                  border: item.checked ? "1px solid #8561AD" : "1px solid #E2E8F0", 
-                  borderRadius: "8px",
-                  cursor: "pointer",
-                  transition: "all 0.2s"
-                }}
-              >
-                <div style={{ width: "20px", height: "20px", borderRadius: "4px", border: "2px solid #8561AD", display: "flex", alignItems: "center", justifyContent: "center", background: item.checked ? "#8561AD" : "transparent", color: "#fff", fontWeight: "bold", fontSize: "0.75rem" }}>
-                  {item.checked && "✓"}
-                </div>
-                <div style={{ flex: 1 }}>
-                  <strong style={{ fontSize: "0.95rem", color: "#1A1A2E" }}>{item.task}</strong>
-                  <div style={{ fontSize: "0.75rem", color: "#64748B", marginTop: "0.15rem" }}>وزن التقييم: {item.score} نقاط الجاهزية</div>
-                </div>
+      <div style={{ display: "grid", gridTemplateColumns: "1.6fr 1fr", gap: "1.5rem", marginTop: "1.5rem" }}>
+        <div className="glass-card" style={{ padding: "1.5rem" }}>
+          <h3 style={{ fontSize: "1rem", fontWeight: 700, color: "#8561AD", marginBottom: "1rem" }}>📋 معايير التدقيق</h3>
+          {checks.map((c, i) => (
+            <div key={i} style={{ display: "flex", alignItems: "center", gap: "1rem", padding: "0.9rem 1rem", marginBottom: "0.6rem", borderRadius: "8px", background: c.done ? "#F0E7FF" : "#F8FAFC", border: `1px solid ${c.done ? "#8561AD" : "#E2E8F0"}` }}>
+              <div style={{ width: 22, height: 22, borderRadius: "6px", border: "2px solid #8561AD", background: c.done ? "#8561AD" : "transparent", color: "white", display: "flex", alignItems: "center", justifyContent: "center", fontWeight: 700, fontSize: "0.8rem", flexShrink: 0 }}>
+                {c.done && "✓"}
               </div>
-            ))}
-          </div>
+              <span style={{ flex: 1, fontSize: "0.88rem" }}>{c.task}</span>
+              <span style={{ fontSize: "0.78rem", fontWeight: 700, color: c.done ? "#8561AD" : "#94A3B8" }}>{c.score} نقطة</span>
+              {!c.done && <Link href={c.fix} style={{ fontSize: "0.75rem", color: "#8561AD", fontWeight: 700, textDecoration: "none" }}>أكمل من هنا ←</Link>}
+            </div>
+          ))}
         </div>
 
-        {/* Readiness Result */}
-        <div style={{ display: "flex", flexDirection: "column", gap: "2rem" }}>
-          <div style={{ background: "#ffffff", border: "1px solid #E4E7EF", borderRadius: "16px", padding: "1.5rem", boxShadow: "0 4px 12px rgba(0,0,0,0.03)", textAlign: "center" }}>
-            <h3 style={{ fontSize: "1.1rem", fontWeight: "600", marginBottom: "1rem", color: "#8561AD" }}>مؤشر نقاط الجاهزية الكلية</h3>
-            <div style={{ display: "inline-flex", width: "120px", height: "120px", borderRadius: "50%", background: totalScore >= 75 ? "rgba(16, 185, 129, 0.1)" : "rgba(251, 191, 36, 0.1)", border: `3px solid ${totalScore >= 75 ? "#10b981" : "#f59e0b"}`, alignItems: "center", justifyContent: "center", fontSize: "2rem", fontWeight: "bold", color: totalScore >= 75 ? "#10b981" : "#f59e0b", marginBottom: "1rem" }}>
-              {totalScore}٪
+        <div className="glass-card" style={{ padding: "1.5rem", textAlign: "center", alignSelf: "start" }}>
+          <h3 style={{ fontSize: "1rem", fontWeight: 700, color: "#8561AD" }}>درجة الجاهزية</h3>
+          <div style={{ position: "relative", width: 150, height: 150, margin: "1.25rem auto" }}>
+            <svg viewBox="0 0 120 120" style={{ transform: "rotate(-90deg)" }}>
+              <circle cx="60" cy="60" r="52" fill="none" stroke="#F1F5F9" strokeWidth="12" />
+              <circle cx="60" cy="60" r="52" fill="none" stroke={totalScore === 100 ? "#10B981" : "#8561AD"} strokeWidth="12" strokeLinecap="round"
+                strokeDasharray={`${(totalScore / 100) * 326.7} 326.7`} />
+            </svg>
+            <div style={{ position: "absolute", inset: 0, display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "center" }}>
+              <span style={{ fontSize: "2rem", fontWeight: 800 }}>{totalScore}٪</span>
             </div>
-            <p style={{ fontSize: "0.85rem", color: "#64748B", lineHeight: "1.6" }}>
-              {totalScore >= 100 
-                ? "أصولك جاهزة تماماً للطرح الاستثماري وسحب الصكوك في سوق أوقاف مشيد." 
-                : "يرجى استكمال بنود القائمة السابقة لتصل نقاط الجاهزية إلى ١٠٠٪ لبدء الطرح الفعلي."}
-            </p>
           </div>
+          <div style={{ fontWeight: 700, color: verdict.color }}>{verdict.text}</div>
+          {totalScore === 100 && (
+            <Link href="/dashboard/marketplace" className="btn-primary" style={{ display: "inline-block", marginTop: "1rem", textDecoration: "none" }}>
+              ابدأ طلب الطرح ←
+            </Link>
+          )}
         </div>
       </div>
     </div>
