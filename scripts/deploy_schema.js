@@ -2,7 +2,8 @@ const { Client } = require('pg');
 const fs = require('fs');
 
 const DB_URL = process.env.DATABASE_URL;
-const SQL_FILE = 'supabase/migrations/initial_schema.sql';
+// Full schema for a fresh project (all migrations in order, guarded against re-runs)
+const SQL_FILE = 'supabase/setup_new_database.sql';
 
 async function deploy() {
   const sql = fs.readFileSync(SQL_FILE, 'utf8');

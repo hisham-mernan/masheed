@@ -10,6 +10,14 @@ language sql security definer stable as $$
   select role from public.profiles where id = auth.uid();
 $$;
 
+-- Helper: current user's waqf (security definer, so RLS policies can call it
+-- without re-entering the profiles policies)
+create or replace function public.get_user_waqf_id()
+returns uuid
+language sql security definer stable as $$
+  select waqf_id from public.profiles where id = auth.uid();
+$$;
+
 -- 2. ATOMIC DISTRIBUTION ENGINE
 -- One RPC does the whole workflow: validate -> distribute -> ledger -> audit
 create or replace function public.distribute_yield(p_amount numeric)
