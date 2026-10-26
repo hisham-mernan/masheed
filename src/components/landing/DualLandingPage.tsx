@@ -1,172 +1,287 @@
 "use client";
 
-import React from "react";
-import styles from "./DualLandingPage.module.css";
+import { useEffect, useRef, useState } from "react";
+import { SystemScreen, WaqfScreen } from "./ProductScreens";
+import "./masheed-site.css";
+
+const SYSTEM_URL = process.env.NEXT_PUBLIC_SYSTEM_URL || "https://system.masheedwaqf.com";
+const INVESTMENT_URL = process.env.NEXT_PUBLIC_INVESTMENT_URL || "https://investment.masheedwaqf.com";
+const CONTACT = "mailto:info@masheedwaqf.com";
+
+const LINKS = {
+  systemLogin: `${SYSTEM_URL}/login`,
+  systemStart: `${SYSTEM_URL}/register`,
+  waqfExplore: `${INVESTMENT_URL}/explore`,
+  waqfList: `${CONTACT}?subject=${encodeURIComponent("طلب إدراج فرصة وقفية")}`,
+  demo: `${CONTACT}?subject=${encodeURIComponent("طلب عرض توضيحي — نظام مَشيد")}`,
+};
+
+function Check() {
+  return (
+    <svg viewBox="0 0 24 24" width="17" height="17" fill="none" stroke="currentColor" strokeWidth="2.25" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+      <polyline points="20 6 9 17 4 12" />
+    </svg>
+  );
+}
+
+function Checks({ items }: { items: string[] }) {
+  return (
+    <ul className="mw-checks">
+      {items.map((t) => <li key={t}><Check /><span>{t}</span></li>)}
+    </ul>
+  );
+}
+
+// Window frame that scales a 1440×900 screen to its own width.
+function FitFrame({ children }: { children: (scale: number) => React.ReactNode }) {
+  const ref = useRef<HTMLDivElement>(null);
+  const [scale, setScale] = useState(0.5);
+  useEffect(() => {
+    const el = ref.current;
+    if (!el) return;
+    const ro = new ResizeObserver(() => setScale(el.clientWidth / 1440));
+    ro.observe(el);
+    return () => ro.disconnect();
+  }, []);
+  return <div className="mw-window__frame" ref={ref}>{children(scale)}</div>;
+}
 
 export default function DualLandingPage() {
-  const systemUrl = process.env.NEXT_PUBLIC_SYSTEM_URL || "https://system.masheedwaqf.com";
-  const investmentUrl = process.env.NEXT_PUBLIC_INVESTMENT_URL || "https://investment.masheedwaqf.com";
+  const [split, setSplit] = useState<{ s: number; focus: "" | "sys" | "waqf" }>({ s: 50, focus: "" });
+  const splitRef = useRef<HTMLElement>(null);
+
+  const wide = () => window.matchMedia("(min-width:1081px)").matches;
+  const focus = (side: "sys" | "waqf") => () => { if (wide()) setSplit({ s: side === "sys" ? 60 : 40, focus: side }); };
+  const reset = () => setSplit({ s: 50, focus: "" });
 
   return (
-    <div className={styles.pageWrapper} dir="rtl">
-      {/* Navbar Header */}
-      <header className={styles.header}>
-        <div className={styles.container}>
-          <div className={styles.headerInner}>
-            <a href="#" className={styles.brandLink}>
-              <div className={styles.brandLogo}>م</div>
-              <div className={styles.brandText}>
-                <span className={styles.brandName}>مَشيد | MASHEED WAQF</span>
-                <span className={styles.brandTagline}>منظومة الأوقاف الرقمية</span>
-              </div>
-            </a>
-
-            <div className={styles.headerRight}>
-              <span className={styles.domainPill}>masheedwaqf.com</span>
-              <div className={styles.visionBadge}>
-                <span className={styles.greenDot} />
-                <span>رؤية المملكة 2030</span>
-              </div>
-            </div>
+    <div className="mw" dir="rtl" lang="ar">
+      <header className="mw-header">
+        <div className="mw-wrap mw-header__in">
+          <a className="mw-header__logo" href="#top" aria-label="مَشيد — الرئيسية"><img src="/brand/masheed-lockup.svg" alt="مَشيد" /></a>
+          <nav className="mw-nav" aria-label="القائمة الرئيسية">
+            <a href="#system">نظام مَشيد</a>
+            <a href="#invest">وقف مَشيد</a>
+            <a href="#offer">الخدمات</a>
+            <a href="#about">عن مَشيد</a>
+          </nav>
+          <div className="mw-header__act">
+            <a className="mw-btn mw-btn--ghost mw-btn--sm" href={LINKS.systemLogin}>دخول النظام</a>
+            <a className="mw-btn mw-btn--primary mw-btn--sm" href={CONTACT}>تواصل معنا</a>
           </div>
         </div>
       </header>
 
-      {/* Main Hero Header */}
-      <main className={styles.container}>
-        <section className={styles.heroIntro}>
-          <div className={styles.tagline}>
-            ⚡ منصتان متخصصتان لحلول الأوقاف والاستثمار الرقمي
-          </div>
-          <h1 className={styles.mainTitle}>
-            اختر الوجهة المناسبة <span className={styles.titleGradient}>لاحتياجاتك الوقفية</span>
-          </h1>
-          <p className={styles.subtitle}>
-            منصة مَشيد تتيح حلولاً متكاملة لنظار ومؤسسات الأوقاف لإدارة الأصول والحوكمة، إلى جانب منصة مخصصة للواقفين والمستثمرين لتنمية الصكوك والفرص الوقفية.
-          </p>
-        </section>
-
-        {/* Dual Interactive Portals */}
-        <section className={styles.stageGrid}>
-          {/* System Portal */}
-          <div className={`${styles.portalCard} ${styles.systemPortal}`}>
-            <div className={styles.portalGlow} />
-
-            <div>
-              <div className={styles.portalMeta}>
-                <span className={`${styles.categoryTag} ${styles.systemTag}`}>
-                  🏢 لإدارة وحوكمة الأوقاف
-                </span>
-                <span className={styles.urlCode}>system.masheedwaqf.com</span>
+      <main id="top">
+        <div className="mw-fold">
+          <section
+            className="mw-split"
+            id="split"
+            aria-label="اختر منتجك"
+            ref={splitRef}
+            data-focus={split.focus}
+            style={{ ["--s" as string]: split.s }}
+            onMouseLeave={reset}
+            onBlur={(e) => { if (!splitRef.current?.contains(e.relatedTarget as Node)) reset(); }}
+          >
+            <div className="mw-half mw-half--sys" onMouseEnter={focus("sys")} onFocus={focus("sys")}>
+              <div className="mw-half__in">
+                <span className="mw-half__who">للجهات الوقفية والنُّظّار</span>
+                <p className="mw-half__word" aria-hidden="true">إدارة.</p>
+                <h2 className="mw-half__name"><img src="/brand/masheed-mark.svg" alt="" />نظام مَشيد</h2>
+                <p className="mw-half__desc">أدِر وقفك من مكانٍ واحد: الأصول، المستفيدون، المالية، العقود، والحوكمة — بمسارات اعتمادٍ وسجلٍ تدقيقيٍّ لكل إجراء.</p>
+                <div className="mw-half__cta">
+                  <a className="mw-btn mw-btn--primary mw-btn--lg" href={LINKS.systemStart}>ابدأ مع النظام</a>
+                  <a className="mw-btn mw-btn--ghost mw-btn--lg" href="#system">اعرف أكثر</a>
+                </div>
               </div>
-
-              <h2 className={styles.portalTitle}>نظام مَشيد (Masheed System)</h2>
-              <p className={styles.portalDesc}>
-                المنصة السحابية المعتمدة لرقمنة إدارة العقارات الوقفية، القوائم المالية الوقفية، وتوزيع الريع وحوكمة العمليات بالكامل.
-              </p>
-
-              <div className={styles.personaCard}>
-                <span className={styles.personaIcon}>🎯</span>
-                <span className={styles.personaText}>
-                  مخصص لـ <strong>النظار، مجالس الإدارة، والجمعيات الوقفية</strong>
-                </span>
-              </div>
-
-              <div className={styles.pillsGrid}>
-                <span className={styles.pillItem}>🏢 إدارة الأصول والعقارات</span>
-                <span className={styles.pillItem}>📊 المحاسبة الوقفية والتقارير</span>
-                <span className={styles.pillItem}>⚖️ الامتثال والحوكمة الذكية</span>
-                <span className={styles.pillItem}>👥 حساب وتوزيع الريع آليًا</span>
-              </div>
+              <div className="mw-half__view"><SystemScreen view="dashboard" /></div>
             </div>
 
-            <div className={styles.ctaWrapper}>
-              <a href={systemUrl} className={`${styles.actionButton} ${styles.systemBtn}`}>
-                <span>دخول منصة الإدارة</span>
-                <span className={styles.arrowSymbol}>←</span>
-              </a>
+            <div className="mw-half mw-half--waqf" onMouseEnter={focus("waqf")} onFocus={focus("waqf")}>
+              <div className="mw-half__in">
+                <span className="mw-half__who">للمستثمرين والواقفين</span>
+                <p className="mw-half__word" aria-hidden="true">استثمار.</p>
+                <h2 className="mw-half__name"><img src="/brand/masheed-mark-waqf.svg" alt="" />وقف مَشيد</h2>
+                <p className="mw-half__desc">فرصٌ وقفيةٌ مؤهّلة، تمر بمراجعةٍ ماليةٍ وحوكمةٍ قبل الطرح، بإفصاحٍ كامل ومتابعةٍ حتى التوزيع.</p>
+                <div className="mw-half__cta">
+                  <a className="mw-btn mw-btn--gold mw-btn--lg" href={LINKS.waqfExplore}>استكشف الفرص</a>
+                  <a className="mw-btn mw-btn--line-gold mw-btn--lg" href={LINKS.waqfList}>إدراج فرصة</a>
+                </div>
+              </div>
+              <div className="mw-half__view"><WaqfScreen /></div>
+            </div>
+            <div className="mw-seam" aria-hidden="true" />
+          </section>
+
+          <div className="mw-wrap mw-fold__stats">
+            <div className="mw-stats">
+              <div className="mw-stat"><b>٢</b><span>منتجان متكاملان، منظومة واحدة</span></div>
+              <div className="mw-stat"><b>١٩</b><span>وحدة تشغيلية في نظام مَشيد</span></div>
+              <div className="mw-stat"><b className="is-waqf">٥</b><span>مراحل لإدراج الفرصة الاستثمارية</span></div>
+              <div className="mw-stat"><b>١٠٠٪</b><span>توافق مع متطلبات الهيئة العامة للأوقاف وهيئة الزكاة</span></div>
             </div>
           </div>
+        </div>
 
-          {/* Investment Portal */}
-          <div className={`${styles.portalCard} ${styles.investmentPortal}`}>
-            <div className={styles.portalGlow} />
-
-            <div>
-              <div className={styles.portalMeta}>
-                <span className={`${styles.categoryTag} ${styles.investmentTag}`}>
-                  📈 للواقفين والاستثمار الوقفي
-                </span>
-                <span className={styles.urlCode}>investment.masheedwaqf.com</span>
-              </div>
-
-              <h2 className={styles.portalTitle}>استثمار الأوقاف (Waqf by Masheed)</h2>
-              <p className={styles.portalDesc}>
-                منصة رقمية موثقة تتيح تملك أسهم وصكوك وقفيّة رقمية، المساهمة في المشاريع التنموية، وتتبع الأثر والعوائد بلمسة زر.
-              </p>
-
-              <div className={styles.personaCard}>
-                <span className={styles.personaIcon}>🎯</span>
-                <span className={styles.personaText}>
-                  مخصص لـ <strong>الواقفين، المستثمرين، والمتبرعين</strong>
-                </span>
-              </div>
-
-              <div className={styles.pillsGrid}>
-                <span className={styles.pillItem}>🪙 التوكنة والأسهم الوقفية</span>
-                <span className={styles.pillItem}>📜 صكوك وقفيّة إلكترونية</span>
-                <span className={styles.pillItem}>📈 فرص استثمارية عالية الأثر</span>
-                <span className={styles.pillItem}>🎯 لوحة تتبع الأثر والعوائد</span>
-              </div>
+        <section className="mw-section" id="offer">
+          <div className="mw-wrap">
+            <div className="mw-head mw-head--c">
+              <span className="mw-eyebrow">ماذا نقدّم</span>
+              <h2 className="mw-h2">ثلاثة مسارات مترابطة في بيئةٍ واحدة.</h2>
+              <p className="mw-p">لا نقدّم منتجاً تقنياً منفصلاً عن الخبرة، ولا خدمةً استشاريةً منفصلةً عن البيانات.</p>
             </div>
-
-            <div className={styles.ctaWrapper}>
-              <a href={investmentUrl} className={`${styles.actionButton} ${styles.investmentBtn}`}>
-                <span>تصفح الفرص الاستثمارية</span>
-                <span className={styles.arrowSymbol}>←</span>
-              </a>
+            <div className="mw-offer">
+              <div className="mw-tile">
+                <span className="mw-tile__i">
+                  <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" strokeWidth="2.25" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true"><rect x="3" y="3" width="7" height="7" /><rect x="14" y="3" width="7" height="7" /><rect x="14" y="14" width="7" height="7" /><rect x="3" y="14" width="7" height="7" /></svg>
+                </span>
+                <h3 className="mw-h3">التقنية</h3>
+                <p className="mw-p">البنية الرقمية التي تجمع البيانات وتُدير العمليات وتربط الأطراف.</p>
+                <span className="mw-tile__tags">نظام تشغيلي · بنية بيانات · ذكاء اصطناعي</span>
+              </div>
+              <div className="mw-tile">
+                <span className="mw-tile__i">
+                  <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" strokeWidth="2.25" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true"><path d="M21 15a2 2 0 01-2 2H7l-4 4V5a2 2 0 012-2h14a2 2 0 012 2z" /></svg>
+                </span>
+                <h3 className="mw-h3">الاستشارات</h3>
+                <p className="mw-p">خبرات متخصصة في الوقف والاستثمار والحوكمة والمالية والجوانب الشرعية والقانونية.</p>
+                <span className="mw-tile__tags">استشارات وقفية · حوكمة · مالية · شرعية</span>
+              </div>
+              <div className="mw-tile mw-tile--waqf">
+                <span className="mw-tile__i">
+                  <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" strokeWidth="2.25" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true"><polyline points="23 6 13.5 15.5 8.5 10.5 1 18" /><polyline points="17 6 23 6 23 12" /></svg>
+                </span>
+                <h3 className="mw-h3">الاستثمار</h3>
+                <p className="mw-p">تحويل الفرص المؤهلة إلى فرصٍ قابلةٍ للوصول إلى المستثمرين وفق مسارٍ منظّم.</p>
+                <span className="mw-tile__tags">إدراج · تأهيل · إفصاح · متابعة</span>
+              </div>
             </div>
           </div>
         </section>
 
-        {/* Quick Decision Guide */}
-        <section className={styles.quickGuide}>
-          <h3 className={styles.guideTitle}>كيف تختار المنصة المناسبة؟</h3>
-
-          <div className={styles.guideGrid}>
-            <div className={styles.guideBox}>
-              <div className={styles.guideBoxHeader}>
-                <span className={styles.guideBoxName}>نظام مَشيد (System)</span>
-                <span className={styles.guideBoxTarget}>النظار والمؤسسات</span>
+        <section className="mw-section mw-section--canvas" id="system">
+          <div className="mw-wrap">
+            <div className="mw-feature mw-feature--sys">
+              <div className="mw-feature__copy">
+                <span className="mw-feature__brand"><img src="/brand/masheed-mark.svg" alt="" />نظام مَشيد</span>
+                <h2 className="mw-h2">صورةٌ موحّدة وشاملة لوقفك.</h2>
+                <p className="mw-p">لا ترى الإدارة الرقم فقط، بل تربطه بالأصل أو المشروع أو الاستثمار الذي نتج عنه.</p>
+                <Checks items={["لوحات معلومات بحسب الدور: الناظر، المالي، الأصول، الحوكمة", "محرّك سير أعمال بمراحل ومسؤولين وقواعد تصعيد", "سجل تدقيقي كامل: من قام بماذا ومتى"]} />
+                <div><a className="mw-btn mw-btn--primary" href={LINKS.systemLogin}>جرّب النظام</a></div>
               </div>
-              <p className={styles.guideBoxDesc}>
-                إذا كنت تدير وقفًا قائماً وتحتاج إلى نظام محاسبي وإداري لتنظيم العقارات والمستفيدين والتقارير الرقابية.
-              </p>
+              <div className="mw-window">
+                <div className="mw-window__bar"><i /><i /><i /><span>نظام مَشيد</span></div>
+                <FitFrame>{(s) => <SystemScreen view="assets" style={{ transform: `scale(${s})` }} />}</FitFrame>
+              </div>
             </div>
+          </div>
+        </section>
 
-            <div className={styles.guideBox}>
-              <div className={styles.guideBoxHeader}>
-                <span className={styles.guideBoxName}>استثمار الأوقاف (Investment)</span>
-                <span className={styles.guideBoxTarget}>الواقفون والمساهمون</span>
+        <section className="mw-section mw-dark-warm" id="invest">
+          <div className="mw-wrap">
+            <div className="mw-feature mw-feature--waqf">
+              <div className="mw-feature__copy">
+                <span className="mw-feature__brand"><img src="/brand/masheed-mark-waqf.svg" alt="" />وقف مَشيد</span>
+                <h2 className="mw-h2">الثقة تبدأ قبل الاستثمار.</h2>
+                <p className="mw-p">لا تُطرح الفرصة بمجرد طلب الإدراج؛ بل تمر بمراجعة البيانات المالية والتقييمات المستقلة والمخاطر والحوكمة.</p>
+                <Checks items={["استعراض الفرص ومقارنتها ومحاكاة السيناريوهات", "إفصاح كامل عن الوثائق والمؤشرات المالية", "محفظة شخصية: تقارير دورية وتوزيعات الأرباح"]} />
+                <div className="mw-path"><span>طلب إدراج</span><span>تجهيز</span><span>مراجعة</span><span>اعتماد</span><span>نشر</span></div>
+                <div style={{ display: "flex", gap: 10, flexWrap: "wrap" }}>
+                  <a className="mw-btn mw-btn--gold" href={LINKS.waqfExplore}>استكشف الفرص</a>
+                  <a className="mw-btn mw-btn--line-gold" href={LINKS.waqfList}>اطلب إدراج فرصة</a>
+                </div>
               </div>
-              <p className={styles.guideBoxDesc}>
-                إذا كنت ترغب في المساهمة بوقف جديد، شراء أسهم أو صكوك وقفيّة، أو متابعة العوائد والأثر الاجتماعي لمساهماتك.
-              </p>
+              <div className="mw-window">
+                <div className="mw-window__bar"><i /><i /><i /><span>وقف مَشيد</span></div>
+                <FitFrame>{(s) => <WaqfScreen style={{ transform: `scale(${s})` }} />}</FitFrame>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <section className="mw-section" id="about">
+          <div className="mw-wrap">
+            <div className="mw-ab">
+              <div className="mw-ab__media">
+                <div className="mw-ab__panel"><img src="/brand/masheed-mark.svg" alt="" /></div>
+                <div className="mw-ab__badge"><b>٥</b><span>مؤسسين من خبرات الوقف والمال والتنظيم والتقنية</span></div>
+              </div>
+              <div className="mw-ab__copy">
+                <span className="mw-eyebrow">عن مَشيد</span>
+                <h2 className="mw-h2">من إدارة الوقف إلى بناء منظومةٍ متكاملة.</h2>
+                <p className="mw-p">منظومة سعودية تجمع بين التقنية والخبرة الوقفية والمالية والاستثمارية، لبناء بنيةٍ مؤسسيةٍ تُهيّئ الأوقاف للنمو والاستدامة.</p>
+                <Checks items={["خبرة وقفية وشرعية", "حوكمة ورقابة", "استثمار ومالية", "تقنية مالية وأمن"]} />
+                <div><a className="mw-btn mw-btn--ghost" href={CONTACT}>تحدّث مع الفريق</a></div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <section className="mw-section" style={{ paddingTop: 0 }}>
+          <div className="mw-wrap">
+            <div className="mw-band">
+              <div style={{ display: "flex", flexDirection: "column", gap: 14 }}>
+                <span className="mw-eyebrow mw-eyebrow--light">دورة الأثر الرقمي للأوقاف</span>
+                <h2 className="mw-h2">نحو أوقافٍ أكثر كفاءةً واستدامةً وأثراً.</h2>
+              </div>
+              <ol className="mw-cycle">
+                <li><i>١</i><b>البيانات</b></li>
+                <li><i>٢</i><b>المعرفة</b></li>
+                <li><i>٣</i><b>القرار</b></li>
+                <li><i>٤</i><b>الأثر المستدام</b></li>
+              </ol>
             </div>
           </div>
         </section>
       </main>
 
-      {/* Minimal Footer */}
-      <footer className={styles.footer}>
-        <div className={styles.container}>
-          <div className={styles.footerRow}>
-            <p>© 2026 مَشيد للأوقاف | جميع الحقوق محفوظة</p>
-            <ul className={styles.footerNav}>
-              <li><a href={systemUrl} className={styles.footerNavLink}>نظام الإدارة</a></li>
-              <li><a href={investmentUrl} className={styles.footerNavLink}>استثمار الأوقاف</a></li>
-              <li><a href="#" className={styles.footerNavLink}>الخصوصية والشروط</a></li>
-            </ul>
+      <section className="mw-ctas">
+        <div className="mw-wrap mw-ctas__in">
+          <div>
+            <b>لديك وقفٌ تريد تطويره؟</b>
+            <span>تحدّث مع فريقنا عن النظام أو عن إدراج فرصتك الاستثمارية.</span>
+          </div>
+          <div className="mw-ctas__act">
+            <a className="mw-btn mw-btn--light mw-btn--lg" href={LINKS.demo}>طلب عرض توضيحي</a>
+            <a className="mw-btn mw-btn--line-light mw-btn--lg" href={CONTACT}>تواصل معنا</a>
+          </div>
+        </div>
+      </section>
+
+      <footer className="mw-footer">
+        <div className="mw-wrap">
+          <div className="mw-footer__grid">
+            <div className="mw-footer__brand">
+              <img src="/brand/masheed-lockup.svg" alt="مَشيد" />
+              <p>المنظومة الرقمية المتكاملة لتمكين وتطوير الأوقاف.</p>
+            </div>
+            <div>
+              <h4>المنتجات</h4>
+              <ul>
+                <li><a href={SYSTEM_URL}>نظام مَشيد</a></li>
+                <li><a href={INVESTMENT_URL}>وقف مَشيد</a></li>
+                <li><a href={LINKS.systemStart}>الباقات</a></li>
+              </ul>
+            </div>
+            <div>
+              <h4>الشركة</h4>
+              <ul>
+                <li><a href="#about">عن مَشيد</a></li>
+                <li><a href="#offer">الخدمات</a></li>
+              </ul>
+            </div>
+            <div>
+              <h4>تواصل</h4>
+              <ul>
+                <li><a href={CONTACT}>info@masheedwaqf.com</a></li>
+                <li><a href={LINKS.systemLogin}>دخول النظام</a></li>
+              </ul>
+            </div>
+          </div>
+          <div className="mw-footer__base">
+            <span>© 2026 مَشيد. جميع الحقوق محفوظة.</span>
+            <div><a href="#">سياسة الخصوصية</a><a href="#">الشروط والأحكام</a></div>
           </div>
         </div>
       </footer>
