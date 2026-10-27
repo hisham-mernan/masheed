@@ -49,10 +49,14 @@ export default async function OpportunityPage({ params }: Props) {
                 <h2 className="wb-h3 wb-panel__title">بيانات الفرصة</h2>
                 <div className="wb-rows">
                   {l.waqf_name && <div><span>الجهة الوقفية</span><b>{l.waqf_name}</b></div>}
-                  <div><span>الأصل</span><b>{titleOf(l)}</b></div>
-                  <div><span>نوع الأصل</span><b>{c.label}</b></div>
+                  <div><span>الفرصة</span><b>{titleOf(l)}</b></div>
+                  <div><span>النوع</span><b>{c.label}</b></div>
+                  {l.city && <div><span>المدينة</span><b>{l.city}</b></div>}
+                  {l.expected_return && <div><span>العائد المتوقع (تقديري)</span><b>{l.expected_return}</b></div>}
+                  {l.duration_months && <div><span>مدة الاستثمار</span><b><span className="wb-num">{l.duration_months}</span> شهراً</b></div>}
                   <div><span>الحالة</span><b>{statusLabel(l)}</b></div>
                 </div>
+                {l.description && <p className="wb-p" style={{ whiteSpace: "pre-wrap", marginTop: 16 }}>{l.description}</p>}
               </div>
               <div className="wb-panel">
                 <h2 className="wb-h3 wb-panel__title">قبل أن تستثمر</h2>

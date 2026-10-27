@@ -1,7 +1,7 @@
 import Link from "next/link";
 import Icon from "./Icon";
 import SysHeader from "./SysHeader";
-import { SYS_PLANS, fmt, type Service } from "./data";
+import { fmt, type Plan, type Service } from "./data";
 import "../landing/masheed-site.css"; // product-screen previews (.mw-screen)
 import "./system-site.css";
 
@@ -21,7 +21,7 @@ export function SysShell({ children }: { children: React.ReactNode }) {
 function SysFooter() {
   const cols: [string, [string, string][]][] = [
     ["النظام", [["/packages", "الباقات"], ["/services", "الخدمات"], ["/dashboard", "الدخول إلى النظام"]]],
-    ["الخدمات", [["/services?type=direct", "شراء مباشر"], ["/services?type=request", "بطلب عرض سعر"], ["/services/consult", "جلسة استشارية"]]],
+    ["الخدمات", [["/services?type=direct", "بسعر ثابت"], ["/services?type=request", "بطلب عرض سعر"], ["/services/consulting", "جلسة استشارية"]]],
     ["الشركة", [[MAIN_URL + "/#about", "عن مَشيد"], ["/contact", "تواصل معنا"], [MAIN_URL, "منظومة مَشيد"]]],
   ];
   return (
@@ -112,64 +112,62 @@ export function WbFaq({ items }: { items: [string, string][] }) {
 export function TypeTag({ direct }: { direct: boolean }) {
   return (
     <span className={"wb-tag " + (direct ? "wb-tag--direct" : "wb-tag--request")}>
-      <Icon n={direct ? "cart" : "send"} s={13} />{direct ? "شراء مباشر" : "بطلب عرض سعر"}
+      <Icon n={direct ? "cart" : "send"} s={13} />{direct ? "بسعر ثابت" : "بطلب عرض سعر"}
     </span>
   );
 }
 
+const CTA = { request: "اطلب الخدمة", direct: "اشترك في الخدمة", booking: "احجز جلسة" };
+
 export function ServiceCard({ s }: { s: Service }) {
-  const direct = s.type === "direct";
   return (
     <article className="wb-card wb-card--hover">
-      <div className="wb-card__top"><span className="wb-ico"><Icon n={s.icon} s={22} /></span><TypeTag direct={direct} /></div>
+      <div className="wb-card__top"><span className="wb-ico"><Icon n={s.icon} s={22} /></span><TypeTag direct={s.type !== "request"} /></div>
       <h3 className="wb-h3"><Link href={"/services/" + s.id}>{s.title}</Link></h3>
-      <p className="wb-p">{s.desc}</p>
+      <p className="wb-p">{s.subtitle}</p>
+      <ul className="wb-checks">{s.includes.map((i) => <li key={i}><Icon n="check" s={16} w={2.5} />{i}</li>)}</ul>
       <div className="wb-card__foot">
-        <div className="wb-price">
-          {s.type === "direct"
-            ? <><small>السعر</small><b><span className="wb-num">{fmt(s.price)}</span> <em>ر.س / {s.unit}</em></b></>
-            : <><small>يبدأ من</small><b><span className="wb-num">{fmt(s.from)}</span> <em>ر.س · حسب النطاق</em></b></>}
-        </div>
-        <Link className="wb-link" href={"/services/" + s.id}>{direct ? "اطلب الخدمة" : "اطلب عرضاً"}<Icon n="arrow" s={16} /></Link>
+        <div className="wb-price"><small>السعر</small><b>{s.priceLabel.replace(/^السعر:s*/, "")}</b></div>
+        <Link className="wb-link" href={"/services/" + s.id}>{CTA[s.type]}<Icon n="arrow" s={16} /></Link>
       </div>
     </article>
   );
 }
 
-export function PlanCards() {
+export function PlanCards({ plans }: { plans: Plan[] }) {
   return (
     <div className="wb-plans">
-      {SYS_PLANS.map((p) => (
+      {plans.map((p) => (
         <div key={p.id} className={"wb-plan" + (p.best ? " wb-plan--best" : "")}>
           {p.best && <span className="wb-plan__badge">الأكثر اختياراً</span>}
           <h3 className="wb-plan__name">{p.name}</h3>
           <p className="wb-plan__users">{p.users}</p>
           <div className="wb-plan__price"><b className="wb-num">{fmt(p.price)}</b><span>ر.س / سنوياً</span></div>
           <ul className="wb-checks">{p.feats.map((f) => <li key={f}><Icon n="check" s={16} w={2.5} />{f}</li>)}</ul>
-          <Link className={"wb-btn wb-btn--block " + (p.best ? "wb-btn--pri" : "wb-btn--ghost")} href={"/register?plan=" + p.id}>اشترك في {p.name}</Link>
+          <Link className={"wb-btn wb-btn--block " + (p.best ? "wb-btn--pri" : "wb-btn--ghost")} href={"/register?plan=" + p.id}>ابدأ تجربة مجانية</Link>
         </div>
       ))}
     </div>
   );
 }
 
-// Payment is not taken on the website yet: direct orders are confirmed by the team, who then collect payment.
+// Fixed-price services are booked and paid inside the platform; the others start with a request and a quotation.
 export function SysFlows() {
-  const d: [string, string][] = [["اختر الخدمة والكمية", "السعر ظاهر وشامل الضريبة"], ["أرسل الطلب", "يتواصل معك الفريق لتأكيده وإتمام الدفع"], ["تبدأ الخدمة", "نجدولها معك بعد تأكيد الطلب"]];
-  const r: [string, string][] = [["أرسل طلبك", "صف احتياجك ونطاق العمل المطلوب"], ["مراجعة النطاق", "يراجع خبير طلبك خلال يومي عمل"], ["عرض السعر", "نطاق عمل وجدول زمني ومبلغ واضح"], ["الاعتماد والدفع", "بعد موافقتك على العرض"], ["التنفيذ والتسليم", "تتابع التقدم حتى التسليم النهائي"]];
+  const d: [string, string][] = [["اختر الخدمة", "السعر ظاهر وشامل الضريبة"], ["أنشئ حسابك", "تجربة مجانية للنظام 15 يوماً"], ["احجز وادفع من المنصة", "دفع إلكتروني آمن"]];
+  const r: [string, string][] = [["أرسل طلبك", "من الموقع أو من داخل المنصة"], ["مراجعة الطلب", "يراجع الفريق بياناتك ونطاق العمل"], ["عرض السعر", "يصلك في حسابك على المنصة"], ["الدفع والتنفيذ", "بعد موافقتك على العرض"]];
   return (
     <div className="wb-flows">
       <div className="wb-flow">
         <TypeTag direct />
-        <h3 className="wb-h3">خدمات بنطاقٍ وسعرٍ ثابت</h3>
-        <p className="wb-p">جلسات استشارية، تدريب، إدخال بيانات، ورصيد المساعد الذكي.</p>
+        <h3 className="wb-h3">خدمات بسعرٍ ثابت</h3>
+        <p className="wb-p">الاستشارات (جلسة مرئية 30 دقيقة) والمتابعة التنفيذية السنوية.</p>
         <Steps list={d} />
-        <Link className="wb-btn wb-btn--ghost" href="/services?type=direct">خدمات الشراء المباشر</Link>
+        <Link className="wb-btn wb-btn--ghost" href="/services?type=direct">الخدمات بسعر ثابت</Link>
       </div>
       <div className="wb-flow wb-flow--alt">
         <TypeTag direct={false} />
-        <h3 className="wb-h3">خدمات تُصمَّم على نطاق وقفك</h3>
-        <p className="wb-p">دراسات الجدوى، الحوكمة، المراجعة القانونية، وإعادة هيكلة الأصول.</p>
+        <h3 className="wb-h3">خدمات تُسعَّر بحسب حالتك</h3>
+        <p className="wb-p">تأسيس الوقف، وتقييم الأداء المالي والتشغيلي.</p>
         <Steps list={r} />
         <Link className="wb-btn wb-btn--light" href="/services?type=request">خدمات بطلب عرض سعر</Link>
       </div>

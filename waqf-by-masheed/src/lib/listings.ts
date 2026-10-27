@@ -13,9 +13,16 @@ export type Listing = {
   asset_category: string | null;
   waqf_name: string | null;
   created_at: string;
+  // From the investment application (migration 14); older listings only have the asset
+  title: string | null;
+  category: string | null;
+  description: string | null;
+  city: string | null;
+  expected_return: string | null;
+  duration_months: number | null;
 };
 
-const COLUMNS = "id, target_funding, price_per_share, shares_count, status, asset_name, asset_category, waqf_name, created_at";
+const COLUMNS = "id, target_funding, price_per_share, shares_count, status, asset_name, asset_category, waqf_name, created_at, title, category, description, city, expected_return, duration_months";
 
 function client() {
   const url = process.env.NEXT_PUBLIC_SUPABASE_URL;
@@ -49,8 +56,12 @@ export const CATEGORY: Record<string, { label: string; icon: "home" | "layers" |
   agricultural: { label: "زراعي", icon: "layers" },
   investment: { label: "استثماري", icon: "trendingUp" },
   cash: { label: "نقدي", icon: "dollar" },
+  education: { label: "تعليمي", icon: "layers" },
+  health: { label: "صحي", icon: "layers" },
+  other: { label: "أخرى", icon: "home" },
 };
-export const categoryOf = (l: Listing) => CATEGORY[l.asset_category ?? ""] ?? { label: "أصل وقفي", icon: "home" as const };
-export const titleOf = (l: Listing) => l.asset_name || "فرصة وقفية";
+export const categoryKey = (l: Listing) => l.category || l.asset_category || "";
+export const categoryOf = (l: Listing) => CATEGORY[categoryKey(l)] ?? { label: "أصل وقفي", icon: "home" as const };
+export const titleOf = (l: Listing) => l.title || l.asset_name || "فرصة وقفية";
 export const statusLabel = (l: Listing) => (l.status === "trading" ? "متداولة" : "متاحة للاستثمار");
 export const fmt = (n: number | null | undefined) => Math.round(Number(n) || 0).toLocaleString("en-US");

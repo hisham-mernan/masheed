@@ -56,6 +56,7 @@ export default async function ConsultancyPage() {
         <Link href="/dashboard/consultancy" className={styles.secBtn} style={{ textDecoration: "none", fontWeight: 800 }}>📋 الطلبات</Link>
         <Link href="/dashboard/consultancy/experts" className={styles.secBtn} style={{ textDecoration: "none" }}>🎓 دليل الخبراء</Link>
         <Link href="/dashboard/consultancy/ai" className={styles.secBtn} style={{ textDecoration: "none" }}>🤖 المساعد الذكي</Link>
+        <Link href="/dashboard/bookings/new" className={styles.secBtn} style={{ textDecoration: "none" }}>📅 احجز جلسة مرئية</Link>
       </div>
 
       <div className={`${styles.ledgerContainer} glass-card`} style={{ marginTop: "1.5rem" }}>

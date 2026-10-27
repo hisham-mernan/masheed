@@ -1,65 +1,23 @@
 "use client";
 
-import { useState } from "react";
-import { useRouter } from "next/navigation";
-import { createClient } from "@/lib/supabase/client";
+import { useActionState } from "react";
 import Link from "next/link";
+import { registerAccount, type FormState } from "@/lib/platform-actions";
 import styles from "../login/login.module.css";
 
+const initial: FormState = { status: "idle" };
+
+const FIELDS: { name: "name" | "phone" | "email" | "password"; label: string; type: string; placeholder: string; auto: string; inputMode?: "tel" | "email" }[] = [
+  { name: "name", label: "اسم الجهة أو الوقف", type: "text", placeholder: "وقف الهداية الخيري", auto: "organization" },
+  { name: "phone", label: "رقم الجوال", type: "tel", placeholder: "05xxxxxxxx", auto: "tel", inputMode: "tel" },
+  { name: "email", label: "البريد الإلكتروني", type: "email", placeholder: "name@awqaf.sa", auto: "email", inputMode: "email" },
+  { name: "password", label: "كلمة المرور", type: "password", placeholder: "8 أحرف على الأقل", auto: "new-password" },
+];
+
 export default function RegisterPage() {
-  const [fullName, setFullName] = useState("");
-  const [waqfName, setWaqfName] = useState("");
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
-  const [isLoading, setIsLoading] = useState(false);
-  const [error, setError] = useState("");
-  const router = useRouter();
-  const supabase = createClient();
-
-  const handleRegister = async (e: React.FormEvent) => {
-    e.preventDefault();
-    setIsLoading(true);
-    setError("");
-
-    try {
-      // Sign up the user with metadata
-      // The database trigger 'handle_new_user' will automatically create the Waqf and Profile
-      const { data: authData, error: authError } = await supabase.auth.signUp({
-        email,
-        password,
-        options: {
-          data: {
-            full_name: fullName,
-            waqf_name: waqfName,
-          },
-        },
-      });
-
-      if (authError) throw authError;
-
-      // If sign up is successful, check if user is logged in (session exists)
-      // Note: If email confirmation is ON, there won't be a session yet.
-      if (authData.session) {
-        router.push("/dashboard");
-      } else {
-        setError("تم إنشاء الحساب! يرجى التحقق من بريدك الإلكتروني لتنشيط الحساب.");
-        setIsLoading(false);
-        return;
-      }
-      
-      router.refresh();
-    } catch (err: any) {
-      console.error("Detailed Registration error:", err);
-      // Fallback for objects that don't serialize well
-      if (typeof err === 'object' && err !== null) {
-        console.error("Error keys:", Object.keys(err));
-        console.error("Error message property:", err.message);
-      }
-      
-      setError(err.message || "حدث خطأ أثناء إنشاء الحساب. يرجى المحاولة مجدداً.");
-      setIsLoading(false);
-    }
-  };
+  const [state, action, pending] = useActionState(registerAccount, initial);
+  const ok = state.status === "ok";
+  const notice = state.message;
 
   return (
     <div className={styles.container}>
@@ -78,8 +36,8 @@ export default function RegisterPage() {
           <p className={styles.decorSubtitle}>ابدأ رحلة التحول الرقمي لوقفك<br/>وفق أحدث المعايير العالمية</p>
           <div className={styles.decorStats}>
             <div className={styles.decorStat}>
-              <span className={styles.decorStatVal}>مجاناً</span>
-              <span className={styles.decorStatLabel}>للفترة التجريبية</span>
+              <span className={styles.decorStatVal}>15 يوماً</span>
+              <span className={styles.decorStatLabel}>تجربة مجانية</span>
             </div>
             <div className={styles.decorDivider}></div>
             <div className={styles.decorStat}>
@@ -96,101 +54,45 @@ export default function RegisterPage() {
           <div className={styles.header}>
             <div className={styles.logoSmall}>م</div>
             <h1>إنشاء حساب جديد</h1>
-            <p>سجل بياناتك وبيانات الوقف للبدء</p>
+            <p>جرّب النظام مجاناً لمدة 15 يوماً</p>
           </div>
 
-          <form className={styles.form} onSubmit={handleRegister}>
-            <div className={styles.inputGroup}>
-              <label htmlFor="fullName">الاسم الكامل</label>
-              <div className={styles.inputWrapper}>
-                <input
-                  id="fullName"
-                  type="text"
-                  placeholder="محمد بن عبد الله"
-                  required
-                  value={fullName}
-                  onChange={(e) => setFullName(e.target.value)}
-                  className={`input ${styles.input}`}
-                />
-              </div>
-            </div>
+          {ok ? (
+            <div className={styles.errorBox} role="status" style={{ background: "#F0FDF4", borderColor: "#BBF7D0", color: "#15803D" }}>{notice}</div>
+          ) : (
+            <form className={styles.form} action={action} noValidate>
+              {FIELDS.map((f) => (
+                <div className={styles.inputGroup} key={f.name}>
+                  <label htmlFor={"rg-" + f.name}>{f.label}</label>
+                  <div className={styles.inputWrapper}>
+                    <input
+                      id={"rg-" + f.name}
+                      name={f.name}
+                      type={f.type}
+                      inputMode={f.inputMode}
+                      placeholder={f.placeholder}
+                      autoComplete={f.auto}
+                      defaultValue={f.name === "password" ? undefined : state.values?.[f.name]}
+                      aria-invalid={!!state.errors?.[f.name]}
+                      aria-describedby={state.errors?.[f.name] ? `rg-${f.name}-err` : undefined}
+                      className={`input ${styles.input}`}
+                      dir={f.name === "name" ? undefined : "ltr"}
+                      style={f.name === "name" ? undefined : { textAlign: "right" }}
+                    />
+                  </div>
+                  {state.errors?.[f.name] && <span id={`rg-${f.name}-err`} style={{ color: "#DC2626", fontSize: "0.78rem", fontWeight: 600 }}>{state.errors[f.name]}</span>}
+                </div>
+              ))}
 
-            <div className={styles.inputGroup}>
-              <label htmlFor="waqfName">اسم الوقف / المؤسسة</label>
-              <div className={styles.inputWrapper}>
-                <input
-                  id="waqfName"
-                  type="text"
-                  placeholder="وقف الهداية الخيري"
-                  required
-                  value={waqfName}
-                  onChange={(e) => setWaqfName(e.target.value)}
-                  className={`input ${styles.input}`}
-                />
-              </div>
-            </div>
+              {notice && (
+                <div className={styles.errorBox} role="alert">{notice}</div>
+              )}
 
-            <div className={styles.inputGroup}>
-              <label htmlFor="email">البريد الإلكتروني</label>
-              <div className={styles.inputWrapper}>
-                <input
-                  id="email"
-                  type="email"
-                  placeholder="name@awqaf.sa"
-                  required
-                  value={email}
-                  onChange={(e) => setEmail(e.target.value)}
-                  className={`input ${styles.input}`}
-                  autoComplete="email"
-                />
-              </div>
-            </div>
-
-            <div className={styles.inputGroup}>
-              <label htmlFor="password">كلمة المرور</label>
-              <div className={styles.inputWrapper}>
-                <input
-                  id="password"
-                  type="password"
-                  placeholder="••••••••"
-                  required
-                  value={password}
-                  onChange={(e) => setPassword(e.target.value)}
-                  className={`input ${styles.input}`}
-                  autoComplete="new-password"
-                />
-              </div>
-            </div>
-
-            {error && (
-              <div className={styles.errorBox} style={{ 
-                background: error.includes("تم إنشاء الحساب") ? "#F0FDF4" : "#FEF2F2",
-                borderColor: error.includes("تم إنشاء الحساب") ? "#BBF7D0" : "#FECACA",
-                color: error.includes("تم إنشاء الحساب") ? "#15803D" : "#DC2626"
-              }}>
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" width="16" height="16">
-                  <circle cx="12" cy="12" r="10"/>
-                  {error.includes("تم إنشاء الحساب") ? <polyline points="9 11 12 14 22 4" /> : [<line key="1" x1="12" y1="8" x2="12" y2="12"/>, <line key="2" x1="12" y1="16" x2="12.01" y2="16"/>]}
-                </svg>
-                {error}
-              </div>
-            )}
-
-            <button
-              type="submit"
-              className={`${styles.loginBtn} btn-primary`}
-              disabled={isLoading}
-            >
-              {isLoading ? (
-                <span className={styles.spinner}>
-                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" className={styles.spinnerIcon}>
-                    <path d="M12 2v4M12 18v4M4.93 4.93l2.83 2.83M16.24 16.24l2.83 2.83M2 12h4M18 12h4M4.93 19.07l2.83-2.83M16.24 7.76l2.83-2.83"/>
-                  </svg>
-                  جاري الإنشاء...
-                </span>
-              ) : "إنشاء الحساب والبدء"}
-            </button>
-          </form>
+              <button type="submit" className={`${styles.loginBtn} btn-primary`} disabled={pending}>
+                {pending ? "جارٍ الإنشاء…" : "ابدأ التجربة المجانية"}
+              </button>
+            </form>
+          )}
 
           <div className={styles.footer}>
             <p>لديك حساب بالفعل؟ <Link href="/login" className={styles.supabase}>تسجيل الدخول</Link></p>

@@ -4,6 +4,7 @@ import { PlanCards, SysFlows, SysShell, WbCta, WbFaq, WbHead } from "./parts";
 import { HomeServices } from "./ServicesBrowser";
 import { FitScreen } from "./FitScreen";
 import { SYS_FAQ, SYS_MODS } from "./data";
+import { getPlans, getServices } from "./catalog";
 
 const STATS: [IconName, string, string][] = [
   ["grid", "19", "وحدة تشغيلية مترابطة"],
@@ -13,7 +14,8 @@ const STATS: [IconName, string, string][] = [
 ];
 
 // system.masheedwaqf.com home — ui_kits/system-website SysHome
-export default function SysHome() {
+export default async function SysHome() {
+  const [services, plans] = await Promise.all([getServices(), getPlans()]);
   return (
     <SysShell>
       <section className="wb-hero">
@@ -56,7 +58,7 @@ export default function SysHome() {
         </div>
       </section>
 
-      <section className="wb-sec"><div className="wb-wrap"><HomeServices /></div></section>
+      <section className="wb-sec"><div className="wb-wrap"><HomeServices services={services} /></div></section>
 
       <section className="wb-sec wb-sec--canvas">
         <div className="wb-wrap">
@@ -79,7 +81,7 @@ export default function SysHome() {
       <section className="wb-sec">
         <div className="wb-wrap">
           <WbHead eyebrow="الباقات" title="باقات سنوية تناسب حجم جهتك." action={<Link className="wb-link" href="/packages">قارن الباقات بالتفصيل<Icon n="arrow" s={16} /></Link>} />
-          <PlanCards />
+          <PlanCards plans={plans} />
         </div>
       </section>
 
