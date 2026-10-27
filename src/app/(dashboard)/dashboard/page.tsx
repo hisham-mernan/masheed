@@ -3,6 +3,7 @@ import { createClient } from "@/lib/supabase/server";
 import Link from "next/link";
 import PeriodSelect from "@/components/dashboard/PeriodSelect";
 import { getWaqfScope, scopeQuery } from "@/lib/waqf-scope";
+import NoWaqfHome from "@/components/platform/NoWaqfHome";
 
 const MONTHS_AR = ["يناير","فبراير","مارس","أبريل","مايو","يونيو","يوليو","أغسطس","سبتمبر","أكتوبر","نوفمبر","ديسمبر"];
 
@@ -40,10 +41,11 @@ export default async function DashboardPage({ searchParams }: { searchParams: Pr
 
   const { data: profile } = await supabase
     .from("profiles")
-    .select("full_name, is_platform_admin")
+    .select("full_name, is_platform_admin, waqf_id")
     .eq("id", user?.id)
     .single();
 
+  if (!profile?.is_platform_admin && !profile?.waqf_id) return <NoWaqfHome />;
   const scope = profile?.is_platform_admin ? await getWaqfScope() : null;
 
   const firstName = profile?.full_name ? profile.full_name.split(" ")[0] : "مستخدم";

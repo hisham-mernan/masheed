@@ -1,8 +1,10 @@
 "use client";
 
+import Link from "next/link";
 import { useActionState, useCallback, useEffect, useState } from "react";
 import Icon from "./Icon";
-import { fmt, type Service } from "./data";
+import type { Service } from "./data";
+import { ASSET_RANGES, CONSULT_TYPES, HOLDING_TYPES, ORG_TYPES } from "@/components/platform/options";
 import { submitServiceRequest, type ServiceRequestField, type ServiceRequestState } from "@/lib/site-actions";
 
 const initial: ServiceRequestState = { status: "idle" };
@@ -33,17 +35,14 @@ function Modal({ open, onClose, title, children }: { open: boolean; onClose: () 
   );
 }
 
-// Price box on a service page. Direct services: quantity + order request; scoped services: quote request.
-// No payment is taken here — the team confirms the order and follows up.
+// Price box on a service page. Priced-per-case services open the request form («اطلب الخدمة»);
+// fixed-price ones are bought or booked inside the platform, with the form as a fallback.
 export default function ServiceOrder({ s }: { s: Service }) {
-  const direct = s.type === "direct";
-  const [qty, setQty] = useState(1);
   const [open, setOpen] = useState(false);
   const [state, action, pending] = useActionState(submitServiceRequest, initial);
   const close = useCallback(() => setOpen(false), []);
+  const request = s.type === "request";
 
-  const total = s.type === "direct" ? s.price * qty : 0;
-  const vat = Math.round(total - total / 1.15);
   const err = (f: ServiceRequestField) => state.errors?.[f];
   const field = (f: ServiceRequestField) => ({
     id: `wb-o-${f}`,
@@ -52,110 +51,101 @@ export default function ServiceOrder({ s }: { s: Service }) {
     "aria-invalid": err(f) ? true : undefined,
     "aria-describedby": err(f) ? `wb-o-${f}-err` : undefined,
   });
+  const select = (f: ServiceRequestField, label: string, opts: [string, string][]) => (
+    <div className="wb-field">
+      <label className="wb-label" htmlFor={`wb-o-${f}`}>{label}</label>
+      <select className="wb-input" {...field(f)}>
+        <option value="">— اختر —</option>
+        {opts.map(([v, l]) => <option key={v} value={v}>{l}</option>)}
+      </select>
+    </div>
+  );
+  const pairs = (list: string[]) => list.map((x) => [x, x] as [string, string]);
 
   return (
     <>
       <aside className="wb-box">
-        {s.type === "direct" ? (
+        <div className="wb-price"><small>السعر</small><b style={{ fontSize: 24, lineHeight: 1.45 }}>{s.priceLabel.replace(/^السعر:\s*/, "")}</b></div>
+        {request ? (
           <>
-            <div className="wb-price"><small>السعر لكل {s.unit}</small><b><span className="wb-num">{fmt(s.price)}</span> <em>ر.س</em></b></div>
-            <div className="wb-field">
-              <span className="wb-label" id="wb-qty-label">الكمية</span>
-              <div className="wb-qty" role="group" aria-labelledby="wb-qty-label">
-                <button type="button" onClick={() => setQty(Math.min(20, qty + 1))} aria-label="زيادة"><Icon n="plus" s={16} /></button>
-                <output className="wb-num" aria-live="polite">{qty}</output>
-                <button type="button" onClick={() => setQty(Math.max(1, qty - 1))} aria-label="إنقاص"><Icon n="minus" s={16} /></button>
-              </div>
-            </div>
-            <div className="wb-rows">
-              <div><span>المبلغ قبل الضريبة</span><span><span className="wb-num">{fmt(total - vat)}</span> ر.س</span></div>
-              <div><span>ضريبة القيمة المضافة ١٥٪</span><span><span className="wb-num">{fmt(vat)}</span> ر.س</span></div>
-              <div className="is-total"><span>الإجمالي</span><b><span className="wb-num">{fmt(total)}</span> ر.س</b></div>
-            </div>
-            <button type="button" className="wb-btn wb-btn--pri wb-btn--lg wb-btn--block" onClick={() => setOpen(true)}><Icon n="cart" s={18} />اطلب الخدمة</button>
-            <p className="wb-hint" style={{ margin: 0 }}>لا يُطلب أي دفع الآن؛ يتواصل معك الفريق لتأكيد الطلب وإتمام الدفع.</p>
+            <button type="button" className="wb-btn wb-btn--pri wb-btn--lg wb-btn--block" onClick={() => setOpen(true)}><Icon n="send" s={18} />اطلب الخدمة</button>
+            <p className="wb-hint" style={{ margin: 0 }}>املأ البيانات وسنتواصل معك بعرض سعر يناسب حالتك. لا يُطلب أي دفع قبل موافقتك على العرض.</p>
           </>
         ) : (
           <>
-            <div className="wb-price"><small>يبدأ من</small><b><span className="wb-num">{fmt(s.from)}</span> <em>ر.س</em></b></div>
-            <div className="wb-rows">
-              <div><span>المدة التقديرية</span><b>{s.dur}</b></div>
-              <div><span>الرد على الطلب</span><b>خلال يومي عمل</b></div>
-              <div><span>السعر النهائي</span><b>بحسب النطاق</b></div>
-            </div>
-            <button type="button" className="wb-btn wb-btn--pri wb-btn--lg wb-btn--block" onClick={() => setOpen(true)}><Icon n="send" s={18} />اطلب عرض سعر</button>
-            <p className="wb-hint" style={{ margin: 0 }}>لا يُطلب أي دفع قبل موافقتك على العرض.</p>
+            <Link className="wb-btn wb-btn--pri wb-btn--lg wb-btn--block" href="/register"><Icon n={s.type === "booking" ? "message" : "cart"} s={18} />{s.type === "booking" ? "احجز جلستك من المنصة" : "اشترك من المنصة"}</Link>
+            <p className="wb-hint" style={{ margin: 0 }}>
+              {s.type === "booking" ? "اختر المستشار والموعد (الأحد–الخميس، 9 ص–5 م) وادفع إلكترونياً." : "ادفع إلكترونياً وتُفعَّل الباقة المشمولة فوراً."}{" "}
+              لديك حساب؟ <Link href="/login">سجّل الدخول</Link>
+            </p>
+            <button type="button" className="wb-btn wb-btn--ghost wb-btn--block" onClick={() => setOpen(true)}>أو اطلب تواصل الفريق</button>
           </>
         )}
       </aside>
 
-      <Modal open={open} onClose={close} title={state.status === "ok" ? "" : direct ? "طلب الخدمة" : "طلب عرض سعر"}>
+      <Modal open={open} onClose={close} title={state.status === "ok" ? "" : "اطلب الخدمة"}>
         {state.status === "ok" ? (
           <div className="wb-done" role="status">
             <span className="wb-done__seal"><Icon n="check" s={32} w={2.5} /></span>
             <h3 className="wb-h3" style={{ fontSize: 24 }}>وصلنا طلبك.</h3>
-            <p className="wb-p">رقم الطلب <b className="wb-num">{state.ref}</b>. سيتواصل معك فريق مَشيد {direct ? "لتأكيد الطلب وإتمام الدفع." : "بعد مراجعة النطاق وإعداد عرض السعر."}</p>
+            <p className="wb-p">رقم الطلب <b className="wb-num">{state.ref}</b>. سيتواصل معك فريق مَشيد {request ? "بعرض سعر يناسب حالتك." : "بخصوص طلبك."}</p>
             <button type="button" className="wb-btn wb-btn--pri wb-btn--block" onClick={close}>تم</button>
           </div>
         ) : (
           <form className="wb-form" action={action} noValidate>
             <input type="hidden" name="service" value={s.id} />
-            <input type="hidden" name="quantity" value={qty} />
             {state.status === "error" && state.message && <div className="wb-alert wb-alert--err" role="alert">{state.message}</div>}
-            {s.type === "direct" && (
-              <div className="wb-rows">
-                <div><span>الخدمة</span><b>{s.title}</b></div>
-                <div><span>الكمية</span><b className="wb-num">{qty}</b></div>
-                <div className="is-total"><span>الإجمالي شامل الضريبة</span><b><span className="wb-num">{fmt(total)}</span> ر.س</b></div>
-              </div>
-            )}
+            <div className="wb-rows"><div><span>نوع الخدمة</span><b>{s.title}</b></div></div>
             <div className="wb-form2">
               <div className="wb-field">
-                <label className="wb-label" htmlFor="wb-o-name">الاسم</label>
+                <label className="wb-label" htmlFor="wb-o-name">الاسم الكامل</label>
                 <input className="wb-input" {...field("name")} type="text" autoComplete="name" maxLength={120} />
                 <FieldError f="name" msg={err("name")} />
               </div>
               <div className="wb-field">
-                <label className="wb-label" htmlFor="wb-o-phone">رقم الجوال</label>
-                <input className="wb-input" {...field("phone")} type="tel" inputMode="tel" autoComplete="tel" placeholder="05xxxxxxxx" maxLength={20} />
-                <FieldError f="phone" msg={err("phone")} />
+                <label className="wb-label" htmlFor="wb-o-organization">اسم الجهة أو الوقف</label>
+                <input className="wb-input" {...field("organization")} type="text" autoComplete="organization" maxLength={160} />
+                <FieldError f="organization" msg={err("organization")} />
               </div>
             </div>
             <div className="wb-form2">
               <div className="wb-field">
-                <label className="wb-label" htmlFor="wb-o-organization">اسم الوقف أو الجهة</label>
-                <input className="wb-input" {...field("organization")} type="text" autoComplete="organization" maxLength={160} />
-                <FieldError f="organization" msg={err("organization")} />
+                <label className="wb-label" htmlFor="wb-o-phone">الجوال</label>
+                <input className="wb-input" {...field("phone")} type="tel" inputMode="tel" autoComplete="tel" placeholder="05xxxxxxxx" maxLength={20} />
+                <FieldError f="phone" msg={err("phone")} />
               </div>
               <div className="wb-field">
-                <label className="wb-label" htmlFor="wb-o-email">البريد الإلكتروني<small>(اختياري)</small></label>
-                <input className="wb-input" {...field("email")} type="email" inputMode="email" autoComplete="email" maxLength={160} />
+                <label className="wb-label" htmlFor="wb-o-email">البريد<small>(اختياري)</small></label>
+                <input className="wb-input" {...field("email")} type="email" inputMode="email" autoComplete="email" placeholder="name@company.com" maxLength={160} />
                 <FieldError f="email" msg={err("email")} />
               </div>
             </div>
-            {!direct && (
-              <div className="wb-field">
-                <label className="wb-label" htmlFor="wb-o-size">حجم الوقف التقريبي</label>
-                <select className="wb-input" {...field("size")}>
-                  <option value="">— اختر —</option>
-                  <option>أقل من ١٠ أصول</option>
-                  <option>من ١٠ إلى ٥٠ أصلاً</option>
-                  <option>أكثر من ٥٠ أصلاً</option>
-                </select>
+            <div className="wb-form2">
+              {select("org_type", "نوع الجهة", pairs(ORG_TYPES))}
+              {select("holding_type", "نوع الوقف", pairs(HOLDING_TYPES))}
+            </div>
+            {s.type === "booking" ? (
+              <div className="wb-form2">
+                {select("consult_type", "نوع الاستشارة", Object.entries(CONSULT_TYPES))}
+                <div className="wb-field">
+                  <label className="wb-label" htmlFor="wb-o-preferred_time">موعد مفضّل<small>(اختياري)</small></label>
+                  <input className="wb-input" {...field("preferred_time")} type="text" maxLength={120} placeholder="مثال: الثلاثاء صباحاً" />
+                </div>
               </div>
-            )}
+            ) : select("size", "عدد الأصول تقريباً", pairs(ASSET_RANGES))}
             <div className="wb-field">
-              <label className="wb-label" htmlFor="wb-o-details">{direct ? <>ملاحظات<small>(اختياري)</small></> : "صف النطاق المطلوب"}</label>
-              <textarea className="wb-input" {...field("details")} maxLength={4000}
-                placeholder={direct ? "مثال: نفضّل موعد الجلسة صباحاً" : "مثال: دراسة جدوى لتطوير أرض وقفية في جدة بمساحة ٣,٠٠٠ م²"} />
+              <label className="wb-label" htmlFor="wb-o-details">اكتب لنا باختصار ما تحتاجه</label>
+              <textarea className="wb-input" {...field("details")} maxLength={4000} />
               <FieldError f="details" msg={err("details")} />
             </div>
+            <label className="wb-check"><input type="checkbox" name="consent" defaultChecked={!!state.values} /> أوافق على سياسة الخصوصية</label>
+            <FieldError f="consent" msg={err("consent")} />
             <div className="wb-hp" aria-hidden="true">
               <label htmlFor="wb-o-website">الموقع</label>
               <input id="wb-o-website" name="website" type="text" tabIndex={-1} autoComplete="off" />
             </div>
             <button type="submit" className="wb-btn wb-btn--pri wb-btn--lg wb-btn--block" disabled={pending}>
-              {pending ? "جارٍ الإرسال…" : "إرسال الطلب"}
+              {pending ? "جارٍ الإرسال…" : "أرسل الطلب"}
             </button>
           </form>
         )}

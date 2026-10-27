@@ -1,5 +1,6 @@
 import { createServerClient } from '@supabase/ssr';
 import { NextResponse, type NextRequest } from 'next/server';
+import { computeAccess, gate } from '@/lib/access';
 
 export default async function proxy(request: NextRequest) {
   let supabaseResponse = NextResponse.next({ request });
@@ -55,6 +56,20 @@ export default async function proxy(request: NextRequest) {
     const url = request.nextUrl.clone();
     url.pathname = '/dashboard';
     return NextResponse.redirect(url);
+  }
+
+  // Onboarding, trial and package gate. Runs here because layouts don't re-render on navigation.
+  if (isDashboardRoute && user) {
+    const { data } = await supabase.rpc('my_access');
+    const target = gate(path, computeAccess((Array.isArray(data) ? data[0] : data) ?? null));
+    if (target) {
+      const url = new URL(target, request.url);
+      if (url.pathname !== path) {
+        const res = NextResponse.redirect(url);
+        supabaseResponse.cookies.getAll().forEach((c) => res.cookies.set(c));
+        return res;
+      }
+    }
   }
 
   return supabaseResponse;

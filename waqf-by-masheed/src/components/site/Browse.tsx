@@ -3,7 +3,7 @@
 import { useState } from "react";
 import Icon from "./Icon";
 import { OpCard } from "./parts";
-import { CATEGORY, type Listing } from "@/lib/listings";
+import { CATEGORY, categoryKey, type Listing } from "@/lib/listings";
 
 type Status = "all" | "approved" | "trading";
 type Sort = "new" | "target" | "price";
@@ -14,12 +14,12 @@ export default function Browse({ listings, initialType }: { listings: Listing[];
   const [status, setStatus] = useState<Status>("all");
   const [types, setTypes] = useState<string[]>(initialType && CATEGORY[initialType] ? [initialType] : []);
   const [sort, setSort] = useState<Sort>("new");
-  const present = Object.keys(CATEGORY).filter((k) => listings.some((l) => l.asset_category === k));
+  const present = Object.keys(CATEGORY).filter((k) => listings.some((l) => categoryKey(l) === k));
   const reset = () => { setStatus("all"); setTypes([]); };
   const toggle = (k: string) => setTypes(types.includes(k) ? types.filter((x) => x !== k) : [...types, k]);
 
   const list = listings
-    .filter((l) => (status === "all" || l.status === status) && (!types.length || types.includes(l.asset_category ?? "")))
+    .filter((l) => (status === "all" || l.status === status) && (!types.length || types.includes(categoryKey(l))))
     .sort((a, b) => sort === "target" ? (Number(b.target_funding) || 0) - (Number(a.target_funding) || 0)
       : sort === "price" ? (Number(a.price_per_share) || 0) - (Number(b.price_per_share) || 0)
       : b.created_at.localeCompare(a.created_at));

@@ -4,6 +4,8 @@ import { createClient } from "@/lib/supabase/server";
 import styles from "./layout.module.css";
 import { redirect } from "next/navigation";
 import { getWaqfScope } from "@/lib/waqf-scope";
+import { getAccountContext } from "@/lib/account";
+import AccessBanner from "@/components/platform/AccessBanner";
 
 export default async function DashboardLayout({
   children,
@@ -28,6 +30,7 @@ export default async function DashboardLayout({
     .select("id, name");
 
   const scope = await getWaqfScope();
+  const access = (await getAccountContext())?.access;
   const isPlatformAdmin = !!profile?.is_platform_admin;
   const selectedWaqf = scope === "all" ? "all" : scope || (isPlatformAdmin ? "all" : profile?.waqf_id || "");
 
@@ -100,10 +103,11 @@ export default async function DashboardLayout({
 
   return (
     <div className={styles.layout}>
-      <Sidebar userWaqfs={waqfs || []} openTasks={openTasks || 0} isPlatformAdmin={isPlatformAdmin} selectedWaqf={selectedWaqf} />
+      <Sidebar userWaqfs={waqfs || []} openTasks={openTasks || 0} isPlatformAdmin={isPlatformAdmin} selectedWaqf={selectedWaqf} hasWaqf={!!profile?.waqf_id} />
       <div className={styles.main}>
         <TopNav userProfile={profile} openTasks={openTasks || 0} recentEvents={recentEvents} notifications={notifications} />
         <main className={styles.content}>
+          {access && <AccessBanner access={access} />}
           {children}
         </main>
       </div>

@@ -1,7 +1,8 @@
 "use server";
 
 import { createClient } from "@/lib/supabase/server";
-import { SYS_SERVICES, SYS_TOPICS } from "@/components/system-site/data";
+import { SYS_TOPICS } from "@/components/system-site/data";
+import { getServices } from "@/components/system-site/catalog";
 
 // Shared by the public sites (masheedwaqf.com gateway and the System website).
 
@@ -66,7 +67,7 @@ export async function submitContact(_prev: ContactState, formData: FormData): Pr
   return { status: "ok" };
 }
 
-export type ServiceRequestField = "name" | "phone" | "organization" | "email" | "size" | "details" | "quantity";
+export type ServiceRequestField = "name" | "phone" | "organization" | "email" | "org_type" | "holding_type" | "size" | "consult_type" | "preferred_time" | "details" | "consent";
 
 export type ServiceRequestState = {
   status: "idle" | "ok" | "error";
@@ -76,23 +77,18 @@ export type ServiceRequestState = {
   values?: Partial<Record<ServiceRequestField, string>>;
 };
 
+// Website «اطلب الخدمة» form. Lands in the same service_requests queue as in-platform requests.
 export async function submitServiceRequest(_prev: ServiceRequestState, formData: FormData): Promise<ServiceRequestState> {
-  const get = (k: string) => String(formData.get(k) ?? "").trim();
-  const service = SYS_SERVICES.find((s) => s.id === get("service"));
+  const get = (k: string, max = 4000) => String(formData.get(k) ?? "").trim().slice(0, max);
+  const service = (await getServices()).find((s) => s.id === get("service", 40));
   if (!service) return { status: "error", message: "الخدمة غير موجودة." };
   if (get("website")) return { status: "ok", ref: "REQ-0000" };
 
   const values = {
-    name: get("name"),
-    phone: get("phone"),
-    organization: get("organization"),
-    email: get("email"),
-    size: get("size"),
-    details: get("details"),
-    quantity: get("quantity"),
+    name: get("name", 120), phone: get("phone", 20), organization: get("organization", 160), email: get("email", 160),
+    org_type: get("org_type", 60), holding_type: get("holding_type", 60), size: get("size", 60),
+    consult_type: get("consult_type", 20), preferred_time: get("preferred_time", 120), details: get("details"),
   };
-  const direct = service.type === "direct";
-  const quantity = direct ? Number(toAsciiDigits(values.quantity)) : 1;
   const phone = normalizePhone(values.phone);
 
   const errors: ServiceRequestState["errors"] = {};
@@ -100,8 +96,7 @@ export async function submitServiceRequest(_prev: ServiceRequestState, formData:
   if (!PHONE_RE.test(phone)) errors.phone = "الرجاء إدخال رقم جوال صحيح.";
   if (values.organization.length < 2) errors.organization = "الرجاء إدخال اسم الجهة أو الوقف.";
   if (values.email && !EMAIL_RE.test(values.email)) errors.email = "صيغة البريد الإلكتروني غير صحيحة.";
-  if (!Number.isInteger(quantity) || quantity < 1 || quantity > 20) errors.quantity = "الكمية بين ١ و٢٠.";
-  if (!direct && values.details.length < 5) errors.details = "الرجاء وصف النطاق المطلوب.";
+  if (!formData.get("consent")) errors.consent = "يلزم الموافقة على سياسة الخصوصية.";
   if (Object.keys(errors).length) return { status: "error", errors, values };
 
   // The id is generated here so the visitor gets a reference without reading the row back
@@ -112,15 +107,17 @@ export async function submitServiceRequest(_prev: ServiceRequestState, formData:
     id,
     service_id: service.id,
     service_title: service.title,
-    kind: service.type,
-    quantity,
-    unit_price: direct ? service.price : null,
-    name: values.name.slice(0, 120),
+    kind: "request",
+    name: values.name,
     phone,
-    organization: values.organization.slice(0, 160),
+    organization: values.organization,
     email: values.email || null,
+    org_type: values.org_type || null,
+    holding_type: values.holding_type || null,
     waqf_size: values.size || null,
-    details: values.details.slice(0, 4000) || null,
+    consult_type: ({ financial: "مالية", sharia: "شرعية", legal: "قانونية" } as Record<string, string>)[values.consult_type] || null,
+    preferred_time: values.preferred_time || null,
+    details: values.details || null,
   });
 
   if (error) {

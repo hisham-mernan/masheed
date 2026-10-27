@@ -1,9 +1,7 @@
 import { createClient } from "@/lib/supabase/server";
 import Link from "next/link";
 import { getWaqfScope, scopeQuery } from "@/lib/waqf-scope";
-import ModuleForm from "@/components/dashboard/ModuleForm";
-import StatusButtons from "@/components/dashboard/StatusButtons";
-import { addListingRequest, setListingStatus } from "@/app/actions";
+
 import styles from "../assets/assets.module.css";
 
 const STATUS_AR: Record<string, { label: string; color: string; bg: string }> = {
@@ -20,10 +18,7 @@ export default async function MarketplacePage() {
   const canWrite = ["admin", "supervisor"].includes(profile?.role || "");
   const scope = profile?.is_platform_admin ? await getWaqfScope() : null;
 
-  const [{ data: requests }, { data: assets }] = await Promise.all([
-    scopeQuery(supabase.from("listing_requests").select("*, assets(name), waqfs(name)"), scope).order("created_at", { ascending: false }),
-    scopeQuery(supabase.from("assets").select("id, name"), scope),
-  ]);
+  const { data: requests } = await scopeQuery(supabase.from("listing_requests").select("*, assets(name), waqfs(name)"), scope).order("created_at", { ascending: false });
 
   const trading = (requests || []).filter(r => r.status === "trading");
   const totalFunding = trading.reduce((s, r) => s + Number(r.target_funding || 0), 0);
@@ -32,22 +27,11 @@ export default async function MarketplacePage() {
     <div className="fade-in">
       <div className={styles.header}>
         <div className={styles.titleInfo}>
-          <h1>وقف باي مشيد — طرح الصكوك</h1>
-          <p>طلبات الطرح الاستثماري للأصول الوقفية في السوق الرقمي (Waqf by Masheed) — باعتماد Maker–Checker.</p>
+          <h1>منصة وقف مَشيد — طلبات الإدراج</h1>
+          <p>اعرض فرص وقفك الاستثمارية على منصة وقف مَشيد. يراجع فريق مَشيد كل طلب ومستنداته قبل نشره للمستثمرين.</p>
         </div>
         <div className={styles.actions}>
-          {canWrite && (
-            <ModuleForm
-              action={addListingRequest}
-              triggerLabel="طلب طرح جديد +"
-              fields={[
-                { name: "asset_id", label: "الأصل المطروح", type: "select", required: true, options: (assets || []).map(a => ({ value: a.id, label: a.name })) },
-                { name: "target_funding", label: "التمويل المستهدف (ر.س)", type: "number", required: true, step: "any" },
-                { name: "price_per_share", label: "سعر السهم (ر.س)", type: "number", required: true, step: "any" },
-                { name: "shares_count", label: "عدد الأسهم", type: "number" },
-              ]}
-            />
-          )}
+          {canWrite && !profile?.is_platform_admin && <Link href="/dashboard/marketplace/apply" className="btn-primary" style={{ textDecoration: "none" }}>طلب إدراج فرصة +</Link>}
         </div>
       </div>
 
@@ -73,7 +57,7 @@ export default async function MarketplacePage() {
       <div className={`${styles.ledgerContainer} glass-card`} style={{ marginTop: "1.5rem" }}>
         <table className={styles.table}>
           <thead>
-            <tr><th>الرمز</th><th>الأصل والوقف</th><th>التمويل المستهدف</th><th>سعر السهم</th><th>عدد الأسهم</th><th>الحالة</th>{canWrite && <th>اعتماد</th>}</tr>
+            <tr><th>الرمز</th><th>الأصل والوقف</th><th>التمويل المستهدف</th><th>سعر السهم</th><th>عدد الأسهم</th><th>الحالة</th><th></th></tr>
           </thead>
           <tbody>
             {requests && requests.length > 0 ? requests.map(r => {
@@ -81,24 +65,16 @@ export default async function MarketplacePage() {
               return (
                 <tr key={r.id}>
                   <td><code className={styles.code}>{r.id.split("-")[0]}</code></td>
-                  <td><strong>{(r.assets as any)?.name || "—"}</strong><div style={{ fontSize: "0.75rem", color: "var(--text-muted)" }}>{(r.waqfs as any)?.name}</div></td>
+                  <td><strong>{r.title || (r.assets as any)?.name || "—"}</strong>{r.review_note && <div style={{ fontSize: "0.75rem", color: "#B91C1C" }}>{r.review_note}</div>}<div style={{ fontSize: "0.75rem", color: "var(--text-muted)" }}>{(r.waqfs as any)?.name}</div></td>
                   <td style={{ fontWeight: 700 }}>{Number(r.target_funding).toLocaleString()} ر.س</td>
                   <td>{Number(r.price_per_share).toLocaleString()} ر.س</td>
                   <td>{r.shares_count ? Number(r.shares_count).toLocaleString() : "—"}</td>
                   <td><span style={{ background: st.bg, color: st.color, padding: "0.2rem 0.55rem", borderRadius: "6px", fontSize: "0.75rem", fontWeight: 700 }}>{st.label}</span></td>
-                  {canWrite && (
-                    <td>
-                      {r.status === "pending" && (
-                        <StatusButtons id={r.id} action={setListingStatus} options={[
-                          { value: "approved", label: "اعتماد" },
-                          { value: "rejected", label: "رفض", danger: true },
-                        ]} />
-                      )}
-                      {r.status === "approved" && (
-                        <StatusButtons id={r.id} action={setListingStatus} options={[{ value: "trading", label: "بدء التداول" }]} />
-                      )}
-                    </td>
-                  )}
+                  <td>
+                    {profile?.is_platform_admin && (
+                      <Link href={`/dashboard/marketplace/${r.id}`} style={{ fontWeight: 700 }}>مراجعة</Link>
+                    )}
+                  </td>
                 </tr>
               );
             }) : (
