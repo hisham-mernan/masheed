@@ -2,18 +2,19 @@
 
 import { useEffect, useRef, useState } from "react";
 import { SystemScreen, WaqfScreen } from "./ProductScreens";
+import ContactForm from "./ContactForm";
 import "./masheed-site.css";
 
 const SYSTEM_URL = process.env.NEXT_PUBLIC_SYSTEM_URL || "https://system.masheedwaqf.com";
 const INVESTMENT_URL = process.env.NEXT_PUBLIC_INVESTMENT_URL || "https://investment.masheedwaqf.com";
-const CONTACT = "mailto:info@masheedwaqf.com";
+const EMAIL = "info@masheedwaqf.com";
+// Every contact CTA scrolls to the form at the bottom of the page
+const CONTACT = "#contact";
 
 const LINKS = {
   systemLogin: `${SYSTEM_URL}/login`,
   systemStart: `${SYSTEM_URL}/register`,
   waqfExplore: `${INVESTMENT_URL}/explore`,
-  waqfList: `${CONTACT}?subject=${encodeURIComponent("طلب إدراج فرصة وقفية")}`,
-  demo: `${CONTACT}?subject=${encodeURIComponent("طلب عرض توضيحي — نظام مَشيد")}`,
 };
 
 function Check() {
@@ -73,54 +74,50 @@ export default function DualLandingPage() {
       </header>
 
       <main id="top">
-        <div className="mw-fold">
-          <section
-            className="mw-split"
-            id="split"
-            aria-label="اختر منتجك"
-            ref={splitRef}
-            data-focus={split.focus}
-            style={{ ["--s" as string]: split.s }}
-            onMouseLeave={reset}
-            onBlur={(e) => { if (!splitRef.current?.contains(e.relatedTarget as Node)) reset(); }}
-          >
-            <div className="mw-half mw-half--sys" onMouseEnter={focus("sys")} onFocus={focus("sys")}>
-              <div className="mw-half__in">
-                <span className="mw-half__who">للجهات الوقفية والنُّظّار</span>
-                <p className="mw-half__word" aria-hidden="true">إدارة.</p>
-                <h2 className="mw-half__name"><img src="/brand/masheed-mark.svg" alt="" />نظام مَشيد</h2>
-                <p className="mw-half__desc">أدِر وقفك من مكانٍ واحد: الأصول، المستفيدون، المالية، العقود، والحوكمة — بمسارات اعتمادٍ وسجلٍ تدقيقيٍّ لكل إجراء.</p>
-                <div className="mw-half__cta">
-                  <a className="mw-btn mw-btn--primary mw-btn--lg" href={LINKS.systemStart}>ابدأ مع النظام</a>
-                  <a className="mw-btn mw-btn--ghost mw-btn--lg" href="#system">اعرف أكثر</a>
-                </div>
+        <section
+          className="mw-split"
+          id="split"
+          aria-label="اختر منتجك"
+          ref={splitRef}
+          data-focus={split.focus}
+          style={{ ["--s" as string]: split.s }}
+          onMouseLeave={reset}
+          onBlur={(e) => { if (!splitRef.current?.contains(e.relatedTarget as Node)) reset(); }}
+        >
+          <div className="mw-half mw-half--sys" onMouseEnter={focus("sys")} onFocus={focus("sys")}>
+            <div className="mw-half__in">
+              <span className="mw-half__who">للجهات الوقفية والنُّظّار</span>
+              <p className="mw-half__word" aria-hidden="true">إدارة</p>
+              <h2 className="mw-half__name"><img src="/brand/masheed-mark.svg" alt="" />نظام مَشيد</h2>
+              <p className="mw-half__desc">أدِر وقفك من مكانٍ واحد: الأصول، المستفيدون، المالية، العقود، والحوكمة — بمسارات اعتمادٍ وسجلٍ تدقيقيٍّ لكل إجراء.</p>
+              <div className="mw-half__cta">
+                <a className="mw-btn mw-btn--primary mw-btn--lg" href={LINKS.systemStart}>ابدأ مع النظام</a>
               </div>
-              <div className="mw-half__view"><SystemScreen view="dashboard" /></div>
             </div>
+            <div className="mw-half__view"><SystemScreen view="dashboard" /></div>
+          </div>
 
-            <div className="mw-half mw-half--waqf" onMouseEnter={focus("waqf")} onFocus={focus("waqf")}>
-              <div className="mw-half__in">
-                <span className="mw-half__who">للمستثمرين والواقفين</span>
-                <p className="mw-half__word" aria-hidden="true">استثمار.</p>
-                <h2 className="mw-half__name"><img src="/brand/masheed-mark-waqf.svg" alt="" />وقف مَشيد</h2>
-                <p className="mw-half__desc">فرصٌ وقفيةٌ مؤهّلة، تمر بمراجعةٍ ماليةٍ وحوكمةٍ قبل الطرح، بإفصاحٍ كامل ومتابعةٍ حتى التوزيع.</p>
-                <div className="mw-half__cta">
-                  <a className="mw-btn mw-btn--gold mw-btn--lg" href={LINKS.waqfExplore}>استكشف الفرص</a>
-                  <a className="mw-btn mw-btn--line-gold mw-btn--lg" href={LINKS.waqfList}>إدراج فرصة</a>
-                </div>
+          <div className="mw-half mw-half--waqf" onMouseEnter={focus("waqf")} onFocus={focus("waqf")}>
+            <div className="mw-half__in">
+              <span className="mw-half__who">للمستثمرين والواقفين</span>
+              <p className="mw-half__word" aria-hidden="true">استثمار</p>
+              <h2 className="mw-half__name"><img src="/brand/masheed-mark-waqf.svg" alt="" />وقف مَشيد</h2>
+              <p className="mw-half__desc">فرصٌ وقفيةٌ مؤهّلة، تمر بمراجعةٍ ماليةٍ وحوكمةٍ قبل الطرح، بإفصاحٍ كامل ومتابعةٍ حتى التوزيع.</p>
+              <div className="mw-half__cta">
+                <a className="mw-btn mw-btn--gold mw-btn--lg" href={LINKS.waqfExplore}>استكشف الفرص</a>
               </div>
-              <div className="mw-half__view"><WaqfScreen /></div>
             </div>
-            <div className="mw-seam" aria-hidden="true" />
-          </section>
+            <div className="mw-half__view"><WaqfScreen /></div>
+          </div>
+          <div className="mw-seam" aria-hidden="true" />
+        </section>
 
-          <div className="mw-wrap mw-fold__stats">
-            <div className="mw-stats">
-              <div className="mw-stat"><b>٢</b><span>منتجان متكاملان، منظومة واحدة</span></div>
-              <div className="mw-stat"><b>١٩</b><span>وحدة تشغيلية في نظام مَشيد</span></div>
-              <div className="mw-stat"><b className="is-waqf">٥</b><span>مراحل لإدراج الفرصة الاستثمارية</span></div>
-              <div className="mw-stat"><b>١٠٠٪</b><span>توافق مع متطلبات الهيئة العامة للأوقاف وهيئة الزكاة</span></div>
-            </div>
+        <div className="mw-wrap mw-statsbar">
+          <div className="mw-stats">
+            <div className="mw-stat"><b>٢</b><span>منتجان متكاملان، منظومة واحدة</span></div>
+            <div className="mw-stat"><b>١٩</b><span>وحدة تشغيلية في نظام مَشيد</span></div>
+            <div className="mw-stat"><b className="is-waqf">٥</b><span>مراحل لإدراج الفرصة الاستثمارية</span></div>
+            <div className="mw-stat"><b>١٠٠٪</b><span>توافق مع متطلبات الهيئة العامة للأوقاف وهيئة الزكاة</span></div>
           </div>
         </div>
 
@@ -138,7 +135,6 @@ export default function DualLandingPage() {
                 </span>
                 <h3 className="mw-h3">التقنية</h3>
                 <p className="mw-p">البنية الرقمية التي تجمع البيانات وتُدير العمليات وتربط الأطراف.</p>
-                <span className="mw-tile__tags">نظام تشغيلي · بنية بيانات · ذكاء اصطناعي</span>
               </div>
               <div className="mw-tile">
                 <span className="mw-tile__i">
@@ -146,7 +142,6 @@ export default function DualLandingPage() {
                 </span>
                 <h3 className="mw-h3">الاستشارات</h3>
                 <p className="mw-p">خبرات متخصصة في الوقف والاستثمار والحوكمة والمالية والجوانب الشرعية والقانونية.</p>
-                <span className="mw-tile__tags">استشارات وقفية · حوكمة · مالية · شرعية</span>
               </div>
               <div className="mw-tile mw-tile--waqf">
                 <span className="mw-tile__i">
@@ -154,7 +149,6 @@ export default function DualLandingPage() {
                 </span>
                 <h3 className="mw-h3">الاستثمار</h3>
                 <p className="mw-p">تحويل الفرص المؤهلة إلى فرصٍ قابلةٍ للوصول إلى المستثمرين وفق مسارٍ منظّم.</p>
-                <span className="mw-tile__tags">إدراج · تأهيل · إفصاح · متابعة</span>
               </div>
             </div>
           </div>
@@ -189,7 +183,7 @@ export default function DualLandingPage() {
                 <div className="mw-path"><span>طلب إدراج</span><span>تجهيز</span><span>مراجعة</span><span>اعتماد</span><span>نشر</span></div>
                 <div style={{ display: "flex", gap: 10, flexWrap: "wrap" }}>
                   <a className="mw-btn mw-btn--gold" href={LINKS.waqfExplore}>استكشف الفرص</a>
-                  <a className="mw-btn mw-btn--line-gold" href={LINKS.waqfList}>اطلب إدراج فرصة</a>
+                  <a className="mw-btn mw-btn--line-gold" href={CONTACT}>اطلب إدراج فرصة</a>
                 </div>
               </div>
               <div className="mw-window">
@@ -234,20 +228,48 @@ export default function DualLandingPage() {
             </div>
           </div>
         </section>
+
+        <section className="mw-ctas">
+          <div className="mw-wrap mw-ctas__in">
+            <div>
+              <b>لديك وقفٌ تريد تطويره؟</b>
+              <span>تحدّث مع فريقنا عن النظام أو عن إدراج فرصتك الاستثمارية.</span>
+            </div>
+            <div className="mw-ctas__act">
+              <a className="mw-btn mw-btn--light mw-btn--lg" href={CONTACT}>طلب عرض توضيحي</a>
+              <a className="mw-btn mw-btn--line-light mw-btn--lg" href={CONTACT}>تواصل معنا</a>
+            </div>
+          </div>
+        </section>
+
+        <section className="mw-section mw-section--canvas" id="contact">
+          <div className="mw-wrap">
+            <div className="mw-contact">
+              <div className="mw-contact__copy">
+                <span className="mw-eyebrow">تواصل معنا</span>
+                <h2 className="mw-h2">لنتحدّث عن وقفك.</h2>
+                <p className="mw-p">اترك بياناتك ورسالتك، وسيتواصل معك فريق مَشيد لمناقشة احتياج وقفك: نظام الإدارة، أو إدراج فرصة استثمارية، أو الاستشارات.</p>
+                <ul className="mw-contact__ways">
+                  <li>
+                    <i aria-hidden="true">
+                      <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z" /><polyline points="22,6 12,13 2,6" /></svg>
+                    </i>
+                    <a href={`mailto:${EMAIL}`}>{EMAIL}</a>
+                  </li>
+                  <li>
+                    <i aria-hidden="true">
+                      <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z" /><circle cx="12" cy="10" r="3" /></svg>
+                    </i>
+                    المملكة العربية السعودية
+                  </li>
+                </ul>
+              </div>
+              <div className="mw-contact__card"><ContactForm /></div>
+            </div>
+          </div>
+        </section>
       </main>
 
-      <section className="mw-ctas">
-        <div className="mw-wrap mw-ctas__in">
-          <div>
-            <b>لديك وقفٌ تريد تطويره؟</b>
-            <span>تحدّث مع فريقنا عن النظام أو عن إدراج فرصتك الاستثمارية.</span>
-          </div>
-          <div className="mw-ctas__act">
-            <a className="mw-btn mw-btn--light mw-btn--lg" href={LINKS.demo}>طلب عرض توضيحي</a>
-            <a className="mw-btn mw-btn--line-light mw-btn--lg" href={CONTACT}>تواصل معنا</a>
-          </div>
-        </div>
-      </section>
 
       <footer className="mw-footer">
         <div className="mw-wrap">
@@ -274,7 +296,8 @@ export default function DualLandingPage() {
             <div>
               <h4>تواصل</h4>
               <ul>
-                <li><a href={CONTACT}>info@masheedwaqf.com</a></li>
+                <li><a href={CONTACT}>تواصل معنا</a></li>
+                <li><a href={`mailto:${EMAIL}`}>{EMAIL}</a></li>
                 <li><a href={LINKS.systemLogin}>دخول النظام</a></li>
               </ul>
             </div>

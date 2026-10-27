@@ -1,4 +1,5 @@
 import localFont from 'next/font/local';
+import { Cairo, IBM_Plex_Sans_Arabic } from 'next/font/google';
 import "./globals.css";
 
 const thmanyahDisplay = localFont({
@@ -23,6 +24,20 @@ const thmanyahSans = localFont({
   display: 'swap'
 });
 
+// Fallbacks behind Thmanyah: IBM Plex Sans Arabic first, then Cairo
+const plexArabic = IBM_Plex_Sans_Arabic({
+  subsets: ['arabic', 'latin'],
+  weight: ['400', '500', '600', '700'],
+  variable: '--font-plex-arabic',
+  display: 'swap'
+});
+
+const cairo = Cairo({
+  subsets: ['arabic', 'latin'],
+  variable: '--font-cairo',
+  display: 'swap'
+});
+
 export const metadata = {
   title: "Masheed (مَشيد) | Intelligent Endowment Management",
   description: "Comprehensive ERP and digital ecosystem for the Saudi Awqaf sector. Transforming endowment management through intelligent automation.",
@@ -40,7 +55,7 @@ export default function RootLayout({
 
   return (
     <html lang={locale} dir={dir}>
-      <body className={`fade-in ${thmanyahDisplay.variable} ${thmanyahSans.variable}`}>
+      <body className={`fade-in ${thmanyahDisplay.variable} ${thmanyahSans.variable} ${plexArabic.variable} ${cairo.variable}`}>
         {children}
       </body>
     </html>
