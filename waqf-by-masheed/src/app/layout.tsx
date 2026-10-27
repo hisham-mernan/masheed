@@ -1,9 +1,15 @@
 import type { Metadata } from "next";
+import { Cairo, IBM_Plex_Sans_Arabic } from "next/font/google";
 import "./globals.css";
 
+// Fallbacks behind Thmanyah: IBM Plex Sans Arabic first, then Cairo
+const plexArabic = IBM_Plex_Sans_Arabic({ subsets: ["arabic", "latin"], weight: ["400", "500", "600", "700"], variable: "--font-plex-arabic", display: "swap" });
+const cairo = Cairo({ subsets: ["arabic", "latin"], variable: "--font-cairo", display: "swap" });
+
 export const metadata: Metadata = {
-  title: "وقف مشيد | أثر يبقى",
-  description: "منصة وقف مشيد تتيح لك المساهمة في الأوقاف عبر شراء صكوك وقفية. أصلك محفوظ وثمرته نوجهها حيث شئت.",
+  title: "وقف مَشيد | استثمر في أوقافٍ مؤهّلة",
+  description: "منصة وقف مَشيد: فرص استثمارية من جهات وقفية موثوقة، تمر بمراجعة مالية وحوكمية قبل نشرها.",
+  icons: { icon: "/brand/masheed-mark-waqf.svg" },
 };
 
 export default function RootLayout({
@@ -44,7 +50,7 @@ export default function RootLayout({
           crossOrigin="anonymous"
         />
       </head>
-      <body className="font-sans">
+      <body className={`font-sans ${plexArabic.variable} ${cairo.variable}`}>
         {children}
       </body>
     </html>

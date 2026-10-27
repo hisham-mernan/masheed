@@ -14,7 +14,7 @@ const CONTACT = "#contact";
 const LINKS = {
   systemLogin: `${SYSTEM_URL}/login`,
   systemStart: `${SYSTEM_URL}/register`,
-  waqfExplore: `${INVESTMENT_URL}/explore`,
+  waqfExplore: `${INVESTMENT_URL}/opportunities`,
 };
 
 function Check() {
