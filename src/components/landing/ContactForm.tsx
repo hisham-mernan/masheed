@@ -1,7 +1,7 @@
 "use client";
 
 import { useActionState } from "react";
-import { submitContact, type ContactField, type ContactState } from "@/app/contact/actions";
+import { submitContact, type ContactField, type ContactState } from "@/lib/site-actions";
 
 const initial: ContactState = { status: "idle" };
 

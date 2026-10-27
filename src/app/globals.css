@@ -211,8 +211,10 @@ img { max-width: 100%; height: auto; display: block; }
 }
 
 /* Fade animations */
-.fade-in      { animation: fadeInUp var(--trans-normal) forwards; }
-.fade-in-slow { animation: fadeInUp 600ms var(--ease-out) forwards; }
+/* "backwards", not "forwards": a transform kept after the animation (even translateY(0))
+   on <body> makes every position:fixed element (modals, toasts) position against the page */
+.fade-in      { animation: fadeInUp var(--trans-normal) backwards; }
+.fade-in-slow { animation: fadeInUp 600ms var(--ease-out) backwards; }
 
 /* Staggered children */
 .stagger > *:nth-child(1) { animation-delay: 0ms; }
