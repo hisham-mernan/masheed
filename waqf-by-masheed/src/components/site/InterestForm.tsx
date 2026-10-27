@@ -103,7 +103,7 @@ export default function InterestForm({ listing }: { listing?: { id: string; pric
       <button type="submit" className="wb-btn wb-btn--pri wb-btn--lg wb-btn--block" disabled={pending}>
         {pending ? "جارٍ الإرسال…" : "سجّل اهتمامك"}
       </button>
-      <p className="wb-hint" style={{ margin: 0 }}>تسجيل الاهتمام ليس استثماراً ولا يتطلب أي دفع؛ يتواصل معك الفريق بالتفاصيل والمستندات.</p>
+      <p className="wb-hint" style={{ margin: 0 }}>تسجيل الاهتمام ليس استثماراً ولا يتطلب أي دفع؛ يتواصل معك الفريق بالتفاصيل.</p>
     </form>
   );
 }
