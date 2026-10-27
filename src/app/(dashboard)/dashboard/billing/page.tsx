@@ -15,6 +15,8 @@ export default async function BillingPage({ searchParams }: { searchParams: Prom
     ctx!.supabase.from("payments").select("id, description, amount_halalas, status, created_at, paid_at").eq("account_id", ctx!.account?.id || "").order("created_at", { ascending: false }).limit(20),
   ]);
   const nameOf = (id: string | null) => packages?.find((p) => p.id === id)?.name || id;
+  // Package the user picked on the website before signing up; flagged until they hold a package.
+  const chosen = a.state === "trial" || a.state === "expired" ? (ctx!.user.user_metadata?.chosen_plan as string | undefined) : undefined;
 
   const status =
     a.state === "trial" ? { tone: s.alertInfo, text: `أنت في الفترة التجريبية (مزايا الباقة الأساسية). تبقّى ${a.daysLeft} ${a.daysLeft === 1 ? "يوم" : "يوماً"}.` }
@@ -33,16 +35,16 @@ export default async function BillingPage({ searchParams }: { searchParams: Prom
         {(packages || []).map((p) => {
           const current = a.state === "active" && a.packageId === p.id;
           return (
-            <article key={p.id} className={`${s.card} ${p.best ? s.cardBest : ""}`}>
+            <article key={p.id} className={`${s.card} ${(chosen ? chosen === p.id : p.best) ? s.cardBest : ""}`}>
               <div className={s.cardTop}>
-                <h2>{p.name}{p.best && <span className={`${s.pill} ${s.pOk}`} style={{ marginInlineStart: 8 }}>الأكثر طلباً</span>}</h2>
+                <h2>{p.name}{chosen === p.id ? <span className={`${s.pill} ${s.pOk}`} style={{ marginInlineStart: 8 }}>اخترتها عند التسجيل</span> : p.best && !chosen && <span className={`${s.pill} ${s.pOk}`} style={{ marginInlineStart: 8 }}>الأكثر طلباً</span>}</h2>
                 <small>{p.users_label}</small>
                 <div className={s.price}><span className={s.num}>{SAR(p.price)}</span> ر.س سنوياً</div>
               </div>
               <ul className={s.list}>{(p.features as string[]).map((f) => <li key={f}>{f}</li>)}</ul>
               <form action={buyPackage}>
                 <input type="hidden" name="package" value={p.id} />
-                <button className={`${s.btn} ${s.btnBlock} ${p.best ? "" : s.btnGhost}`}>{current ? "جدّد الباقة" : "اشترك الآن"}</button>
+                <button className={`${s.btn} ${s.btnBlock} ${(chosen ? chosen === p.id : p.best) ? "" : s.btnGhost}`}>{current ? "جدّد الباقة" : "اشترك الآن"}</button>
               </form>
             </article>
           );

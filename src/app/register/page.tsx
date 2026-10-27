@@ -1,11 +1,15 @@
 "use client";
 
-import { useActionState } from "react";
+import { use, useActionState } from "react";
 import Link from "next/link";
 import { registerAccount, type FormState } from "@/lib/platform-actions";
 import styles from "../login/login.module.css";
 
 const initial: FormState = { status: "idle" };
+
+// Package picked on the website's packages page (?plan=). The trial always starts on Basic;
+// the choice is kept on the account so the billing page can point back to it.
+const PLAN_NAMES: Record<string, string> = { basic: "الأساسية", advanced: "المتقدمة", extended: "الموسعة" };
 
 const FIELDS: { name: "name" | "phone" | "email" | "password"; label: string; type: string; placeholder: string; auto: string; inputMode?: "tel" | "email" }[] = [
   { name: "name", label: "اسم الجهة أو الوقف", type: "text", placeholder: "وقف الهداية الخيري", auto: "organization" },
@@ -14,7 +18,9 @@ const FIELDS: { name: "name" | "phone" | "email" | "password"; label: string; ty
   { name: "password", label: "كلمة المرور", type: "password", placeholder: "8 أحرف على الأقل", auto: "new-password" },
 ];
 
-export default function RegisterPage() {
+export default function RegisterPage({ searchParams }: { searchParams: Promise<{ plan?: string }> }) {
+  const { plan: planParam } = use(searchParams);
+  const plan = planParam && PLAN_NAMES[planParam] ? planParam : null;
   const [state, action, pending] = useActionState(registerAccount, initial);
   const ok = state.status === "ok";
   const notice = state.message;
@@ -61,6 +67,16 @@ export default function RegisterPage() {
             <div className={styles.errorBox} role="status" style={{ background: "#F0FDF4", borderColor: "#BBF7D0", color: "#15803D" }}>{notice}</div>
           ) : (
             <form className={styles.form} action={action} noValidate>
+              {plan && (
+                <>
+                  <input type="hidden" name="plan" value={plan} />
+                  <div className={styles.errorBox} role="note" style={{ background: "#F4EEFB", borderColor: "#DCCBF0", color: "#4A2D8A" }}>
+                    {plan === "basic"
+                      ? "اخترت الباقة الأساسية. تبدأ تجربتك المجانية بمزاياها، ويمكنك الاشتراك فيها في أي وقت من «الباقة والفوترة»."
+                      : `اخترت الباقة ${PLAN_NAMES[plan]}. تبدأ تجربتك المجانية بمزايا الباقة الأساسية، ويمكنك الاشتراك في الباقة ${PLAN_NAMES[plan]} في أي وقت من «الباقة والفوترة».`}
+                  </div>
+                </>
+              )}
               {FIELDS.map((f) => (
                 <div className={styles.inputGroup} key={f.name}>
                   <label htmlFor={"rg-" + f.name}>{f.label}</label>

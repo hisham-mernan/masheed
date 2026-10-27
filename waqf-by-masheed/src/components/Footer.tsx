@@ -9,11 +9,11 @@ const FOOTER_LINKS = {
   "الشركة": [
     { label: "عن مشيد", href: "#" },
     { label: "تواصل معنا", href: "#" },
-    { label: "الشروط والأحكام", href: "#" },
+    { label: "الشروط والأحكام", href: "/terms" },
   ],
   "الدعم": [
     { label: "مركز المساعدة", href: "#" },
-    { label: "سياسة الخصوصية", href: "#" },
+    { label: "سياسة الخصوصية", href: "/privacy" },
     { label: "الأمان", href: "#" },
   ],
 };

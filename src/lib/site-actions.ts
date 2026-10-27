@@ -88,6 +88,7 @@ export async function submitServiceRequest(_prev: ServiceRequestState, formData:
     name: get("name", 120), phone: get("phone", 20), organization: get("organization", 160), email: get("email", 160),
     org_type: get("org_type", 60), holding_type: get("holding_type", 60), size: get("size", 60),
     consult_type: get("consult_type", 20), preferred_time: get("preferred_time", 120), details: get("details"),
+    consent: get("consent", 5),
   };
   const phone = normalizePhone(values.phone);
 
@@ -96,7 +97,7 @@ export async function submitServiceRequest(_prev: ServiceRequestState, formData:
   if (!PHONE_RE.test(phone)) errors.phone = "الرجاء إدخال رقم جوال صحيح.";
   if (values.organization.length < 2) errors.organization = "الرجاء إدخال اسم الجهة أو الوقف.";
   if (values.email && !EMAIL_RE.test(values.email)) errors.email = "صيغة البريد الإلكتروني غير صحيحة.";
-  if (!formData.get("consent")) errors.consent = "يلزم الموافقة على سياسة الخصوصية.";
+  if (!values.consent) errors.consent = "يلزم الموافقة على سياسة الخصوصية.";
   if (Object.keys(errors).length) return { status: "error", errors, values };
 
   // The id is generated here so the visitor gets a reference without reading the row back
