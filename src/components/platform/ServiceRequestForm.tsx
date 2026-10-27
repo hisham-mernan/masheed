@@ -49,7 +49,7 @@ export default function ServiceRequestForm({ service, defaults }: { service: str
       </div>
       <div className={s.field}><label htmlFor="sr-waqf_size">عدد الأصول تقريباً</label>{select("waqf_size", ASSET_RANGES)}</div>
       <div className={s.field}><label htmlFor="sr-details">اكتب لنا باختصار ما تحتاجه</label><textarea id="sr-details" name="details" className={s.input} defaultValue={v.details} maxLength={4000} /></div>
-      <label className={s.check}><input type="checkbox" name="consent" defaultChecked={!!state.values} /> أوافق على سياسة الخصوصية</label>
+      <label className={s.check}><input type="checkbox" name="consent" defaultChecked={state.values?.consent === "on"} /> <span>أوافق على <a href="/privacy" target="_blank" rel="noopener">سياسة الخصوصية</a></span></label>
       <FieldError id="sr-consent" msg={e.consent} />
       <button className={`${s.btn} ${s.btnBlock}`} disabled={pending}>{pending ? "جارٍ الإرسال…" : "أرسل الطلب"}</button>
     </form>

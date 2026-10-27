@@ -30,11 +30,11 @@ export default async function proxy(request: NextRequest) {
     data: { user },
   } = await supabase.auth.getUser();
 
-  // /services, /packages and /contact belong to the System website: on the main
+  // /services, /packages, /contact, /privacy and /terms belong to the System website: on the main
   // domain (masheedwaqf.com, www) send them to system.masheedwaqf.com
   const host = request.headers.get('host') || '';
   const path = request.nextUrl.pathname;
-  const isSystemSitePage = path === '/packages' || path === '/contact' || path === '/services' || path.startsWith('/services/');
+  const isSystemSitePage = path === '/packages' || path === '/contact' || path === '/privacy' || path === '/terms' || path === '/services' || path.startsWith('/services/');
   if (isSystemSitePage && host.endsWith('masheedwaqf.com') && !host.startsWith('system.')) {
     const url = new URL(path + request.nextUrl.search, process.env.NEXT_PUBLIC_SYSTEM_URL || 'https://system.masheedwaqf.com');
     return NextResponse.redirect(url, 308);

@@ -39,8 +39,8 @@ const cairo = Cairo({
 });
 
 export const metadata = {
-  title: "Masheed (مَشيد) | Intelligent Endowment Management",
-  description: "Comprehensive ERP and digital ecosystem for the Saudi Awqaf sector. Transforming endowment management through intelligent automation.",
+  title: "مَشيد | المنظومة الرقمية المتكاملة لتمكين وتطوير الأوقاف",
+  description: "منظومة رقمية متكاملة لإدارة الأوقاف وتطويرها: نظام مَشيد لإدارة الجهة الوقفية، ووقف مَشيد لعرض الفرص الاستثمارية.",
   keywords: ["Masheed", "Awqaf", "Saudi Vision 2030", "Endowment ERP", "GAW", "Saudi Arabia"],
 };
 

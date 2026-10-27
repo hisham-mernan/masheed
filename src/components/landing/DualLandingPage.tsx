@@ -304,7 +304,7 @@ export default function DualLandingPage() {
           </div>
           <div className="mw-footer__base">
             <span>© 2026 مَشيد. جميع الحقوق محفوظة.</span>
-            <div><a href="#">سياسة الخصوصية</a><a href="#">الشروط والأحكام</a></div>
+            <div><a href="/privacy">سياسة الخصوصية</a><a href="/terms">الشروط والأحكام</a></div>
           </div>
         </div>
       </footer>

@@ -138,7 +138,7 @@ export default function ServiceOrder({ s }: { s: Service }) {
               <textarea className="wb-input" {...field("details")} maxLength={4000} />
               <FieldError f="details" msg={err("details")} />
             </div>
-            <label className="wb-check"><input type="checkbox" name="consent" defaultChecked={!!state.values} /> أوافق على سياسة الخصوصية</label>
+            <label className="wb-check"><input type="checkbox" name="consent" defaultChecked={state.values?.consent === "on"} /> <span>أوافق على <a href="/privacy" target="_blank" rel="noopener">سياسة الخصوصية</a></span></label>
             <FieldError f="consent" msg={err("consent")} />
             <div className="wb-hp" aria-hidden="true">
               <label htmlFor="wb-o-website">الموقع</label>

@@ -368,3 +368,10 @@ select.wb-input{appearance:none;cursor:pointer;background-image:url("data:image/
 .wq-empty__copy .wb-ico{width:56px;height:56px}
 @media (max-width:1100px){.wb-hero__panel--split,.wq-browse,.wq-detail,.wq-trust,.wq-calc,.wq-empty{grid-template-columns:1fr}.wq-filters{position:static}.wq-how,.wq-how--5,.wq-metrics{grid-template-columns:repeat(2,minmax(0,1fr))}.wq-metrics>div:nth-child(3){border-inline-start:none}.wq-metrics>div:nth-child(n+3){border-top:1px solid var(--color-hairline)}.wq-hv{display:none}}
 @media (max-width:640px){.wb-hero__panel--split{padding:40px 20px}.wq-grid,.wq-how,.wq-how--5,.wq-indic{grid-template-columns:1fr}.wq-calc__in,.wq-calc__out{padding:26px}.wq-calc__big{font-size:40px}.wq-calc__in h2{font-size:28px}.wq-hero-media{height:200px}.wq-empty{padding:22px}.wq-metrics b{font-size:19px}.wq-metrics>div{padding:16px}.wq-kv b{font-size:15px}}
+
+/* Legal pages (privacy, terms) */
+.wb-legal{max-width:820px;padding:36px 40px;display:flex;flex-direction:column;gap:28px}.wb-legal section{display:flex;flex-direction:column;gap:10px}.wb-legal ul{margin:0;padding-inline-start:22px;display:flex;flex-direction:column;gap:6px;font-size:15.5px;color:var(--color-ink-3);line-height:1.8}.wb-legal__date{margin:0;font-size:13.5px;color:var(--color-ink-3)}
+@media (max-width:640px){.wb-legal{padding:24px 20px}}
+/* Filter tabs stay on one line on phones */
+.wb-tabs button{white-space:nowrap}
+@media (max-width:640px){.wb-tabs button{padding:0 8px;font-size:13px;gap:5px}}

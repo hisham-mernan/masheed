@@ -38,12 +38,13 @@ export async function registerAccount(_: FormState, fd: FormData): Promise<FormS
   if (!EMAIL.test(values.email)) errors.email = "البريد الإلكتروني غير صحيح";
   if (password.length < 8) errors.password = "كلمة المرور 8 أحرف على الأقل";
   if (Object.keys(errors).length) return { status: "error", errors, values };
+  const plan = ["basic", "advanced", "extended"].includes(text(fd, "plan", 20)) ? text(fd, "plan", 20) : undefined;
 
   const supabase = await createClient();
   const { data, error } = await supabase.auth.signUp({
     email: values.email,
     password,
-    options: { data: { account_name: values.name, phone } },
+    options: { data: { account_name: values.name, phone, chosen_plan: plan } },
   });
   if (error) {
     const taken = /registered|exists/i.test(error.message);
@@ -81,6 +82,7 @@ export async function requestService(_: FormState, fd: FormData): Promise<FormSt
   const values = {
     name: text(fd, "name", 120), organization: text(fd, "organization", 160), phone: text(fd, "phone", 20), email: text(fd, "email", 160),
     org_type: text(fd, "org_type", 60), holding_type: text(fd, "holding_type", 60), waqf_size: text(fd, "waqf_size", 60), details: text(fd, "details"),
+    consent: text(fd, "consent", 5),
   };
   const errors: Record<string, string> = {};
   if (values.name.length < 2) errors.name = "اكتب الاسم الكامل";
@@ -88,7 +90,7 @@ export async function requestService(_: FormState, fd: FormData): Promise<FormSt
   const phone = phoneOf(values.phone);
   if (!PHONE.test(phone)) errors.phone = "رقم الجوال غير صحيح";
   if (values.email && !EMAIL.test(values.email)) errors.email = "البريد الإلكتروني غير صحيح";
-  if (!fd.get("consent")) errors.consent = "يلزم الموافقة على سياسة الخصوصية";
+  if (!values.consent) errors.consent = "يلزم الموافقة على سياسة الخصوصية";
   if (Object.keys(errors).length) return { status: "error", errors, values };
 
   const { error } = await supabase.from("service_requests").insert({
