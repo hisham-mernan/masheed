@@ -7,11 +7,11 @@ const RIA = [142000, 168000, 151000, 196000, 214000, 238000];
 const DIST = [90000, 104000, 98000, 118000, 126000, 140000];
 
 const ASSETS = [
-  { id: "a3f9c2e1", name: "عمارة الريان السكنية", cat: "عقاري", loc: "جدة، حي الروضة", v: 4200000, ria: 312000, s: "مؤجر" },
-  { id: "7bc14d90", name: "برج النخيل التجاري", cat: "عقاري", loc: "الرياض، طريق الملك فهد", v: 12800000, ria: 596000, s: "نشط" },
+  { id: "a3f9c2e1", name: "عمارة الريان السكنية", cat: "عقاري", loc: "جدة — حي الروضة", v: 4200000, ria: 312000, s: "مؤجر" },
+  { id: "7bc14d90", name: "برج النخيل التجاري", cat: "عقاري", loc: "الرياض — طريق الملك فهد", v: 12800000, ria: 596000, s: "نشط" },
   { id: "e51a0b33", name: "مزرعة الخرج", cat: "زراعي", loc: "الخرج", v: 1150000, ria: 41000, s: "صيانة" },
   { id: "c02f8e17", name: "محفظة صكوك مرابحة", cat: "مالي", loc: "حساب استثماري 4402", v: 5300000, ria: 160000, s: "نشط" },
-  { id: "9d6e2a48", name: "محلات سوق البلد", cat: "عقاري", loc: "جدة، البلد", v: 1050000, ria: 0, s: "شاغر" },
+  { id: "9d6e2a48", name: "محلات سوق البلد", cat: "عقاري", loc: "جدة — البلد", v: 1050000, ria: 0, s: "شاغر" },
 ];
 const TONE: Record<string, string> = { "مؤجر": "success", "نشط": "info", "صيانة": "warning", "شاغر": "danger" };
 const fmt = (n: number) => n.toLocaleString("en-US");
@@ -94,21 +94,21 @@ function Overview() {
               </div>
             ))}
           </div>
-          <p style={{ margin: 0, padding: "12px 20px", fontSize: 12.5, color: "var(--color-ink-4)" }}>من ينشئ الطلب لا يعتمدُه، وكل قرار يُسجَّل في سجل الأحداث.</p>
+          <p style={{ margin: 0, padding: "12px 20px", fontSize: 12.5, color: "var(--color-ink-4)" }}>من ينشئ الطلب لا يعتمدُه — كل قرار يُسجَّل في سجل الأحداث.</p>
           <div style={{ padding: "0 20px 16px" }}><span className="mw-scr-btn mw-scr-btn--p" style={{ width: "100%", justifyContent: "center" }}>فتح مركز الاعتمادات</span></div>
         </div>
       </div>
       <div className="mw-scr-row" style={{ gridTemplateColumns: "repeat(3, minmax(0,1fr))" }}>
         <div className="mw-scr-card">
           <h6>مهام الصيانة</h6>
-          {[["تسرب مياه، عمارة الريان", "اليوم", "danger"], ["صيانة المصاعد، برج النخيل", "٢٨ أكتوبر", "info"], ["فحص دوري، مزرعة الخرج", "٢ نوفمبر", "success"]].map(([t, d, tone]) => (
+          {[["تسرب مياه — عمارة الريان", "اليوم", "danger"], ["صيانة المصاعد — برج النخيل", "٢٨ أكتوبر", "info"], ["فحص دوري — مزرعة الخرج", "٢ نوفمبر", "success"]].map(([t, d, tone]) => (
             <div key={t} className="mw-scr-check"><span>{t}</span><span className={`mw-scr-badge mw-scr-badge--${tone}`}>{d}</span></div>
           ))}
         </div>
         <div className="mw-scr-card">
           <h6>آخر العمليات</h6>
           {[["فيصل المطيري", "إضافة · المالية", "اليوم"], ["نورة القحطاني", "تعديل · الأصول", "أمس"], ["خالد العتيبي", "حذف · المستندات", "٢٢ أكتوبر"]].map(([a, v, t]) => (
-            <div key={a} className="mw-scr-check"><span><b style={{ display: "inline" }}>{a}</b> · {v}</span><small>{t}</small></div>
+            <div key={a} className="mw-scr-check"><span><b style={{ display: "inline" }}>{a}</b> — {v}</span><small>{t}</small></div>
           ))}
         </div>
         <div className="mw-scr-card">
@@ -155,7 +155,7 @@ function AssetsRegistry() {
                 <td><span className="mw-scr-code">{a.id}</span></td>
                 <td>{a.cat}</td>
                 <td><span className={`mw-scr-badge mw-scr-badge--${TONE[a.s]}`}>{a.s}</span></td>
-                <td className="mw-num" style={{ color: "var(--color-gold-ink)", fontWeight: 700 }}>{a.ria ? fmt(a.ria) : "0"}</td>
+                <td className="mw-num" style={{ color: "var(--color-gold-ink)", fontWeight: 700 }}>{a.ria ? fmt(a.ria) : "—"}</td>
                 <td className="mw-num" style={{ color: "var(--color-ink)", fontWeight: 700 }}>{fmt(a.v)}</td>
               </tr>
             ))}
@@ -166,48 +166,15 @@ function AssetsRegistry() {
   );
 }
 
-const EVENTS: [string, string, string, string][] = [
-  ["فيصل المطيري", "اعتمد توزيع ريع على المستفيدين (120,000 ر.س)", "الاعتمادات", "اليوم 11:08"],
-  ["نورة القحطاني", "أنشأت طلب توزيع ريع على ٤٨ مستفيداً", "المالية", "اليوم 10:42"],
-  ["خالد العتيبي", "رفع فاتورة صيانة عمارة الريان", "الأصول", "اليوم 09:15"],
-  ["فيصل المطيري", "أضاف عقد إيجار، برج النخيل التجاري", "العقود", "أمس 16:20"],
-  ["سارة الشهري", "عدّلت حصة مستفيد بعد قرار المجلس", "المستفيدون", "أمس 13:02"],
-  ["نورة القحطاني", "صدّرت تقرير الريع للربع الثالث", "التقارير", "٢٢ أكتوبر"],
-];
-
-function AuditLog() {
+export function SystemScreen({ view, style }: { view: "dashboard" | "assets"; style?: React.CSSProperties }) {
   return (
-    <>
-      <div className="mw-scr-head">
-        <div>
-          <h5>سجل الأحداث</h5>
-          <p>كل إجراء في النظام بمن قام به ومتى، ولا يمكن تعديله أو حذفه.</p>
-        </div>
-        <span className="mw-scr-btn">تصدير السجل</span>
-      </div>
-      <div className="mw-scr-card mw-scr-card--flush" style={{ overflow: "hidden" }}>
-        <table className="mw-scr-table">
-          <thead><tr><th>المستخدم</th><th>الإجراء</th><th>الوحدة</th><th>الوقت</th></tr></thead>
-          <tbody>
-            {EVENTS.map(([who, what, mod, at]) => (
-              <tr key={what}><td><b>{who}</b></td><td>{what}</td><td><span className="mw-scr-badge mw-scr-badge--info">{mod}</span></td><td>{at}</td></tr>
-            ))}
-          </tbody>
-        </table>
-      </div>
-    </>
-  );
-}
-
-export function SystemScreen({ view, style }: { view: "dashboard" | "assets" | "audit"; style?: React.CSSProperties }) {
-  return (
-    <div className="mw-screen mw-scr-sys" style={style} aria-hidden="true" data-ui>
+    <div className="mw-screen mw-scr-sys" style={style} aria-hidden="true">
       <aside className="mw-scr-side">
         <div className="mw-scr-side__brand"><img src="/brand/masheed-mark.svg" alt="" />نظام مَشيد</div>
         <div className="mw-scr-side__waqf"><small>الوقف الحالي</small>وقف الملك عبدالعزيز الخيري</div>
         {NAV.map((n, i) => {
-          const on = view === "dashboard" ? i === 0 : view === "assets" ? i === 2 : i === 6;
-          return <div key={n} className={`mw-scr-side__item${on ? " is-on" : ""}`}><span className="mw-scr-side__dot" />{n}</div>;
+          const on = view === "dashboard" ? i === 0 : i === 2;
+          return <div key={n} className={`mw-scr-side__item${on ? " is-on" : ""}`}><i />{n}</div>;
         })}
       </aside>
       <div className="mw-scr-main">
@@ -215,21 +182,21 @@ export function SystemScreen({ view, style }: { view: "dashboard" | "assets" | "
           <span className="mw-scr-top__search">ابحث في الأصول والعقود والمستفيدين…</span>
           <span className="mw-scr-top__me"><i>ف</i>فيصل المطيري</span>
         </div>
-        <div className="mw-scr-body">{view === "dashboard" ? <Overview /> : view === "assets" ? <AssetsRegistry /> : <AuditLog />}</div>
+        <div className="mw-scr-body">{view === "dashboard" ? <Overview /> : <AssetsRegistry />}</div>
       </div>
     </div>
   );
 }
 
 const OPPS = [
-  { tag: "عقاري · الرياض", name: "مجمع سكني وقفي، حي النرجس", ret: "8.2%", min: "5,000", term: "٧ سنوات", p: "72%", g: "#596B4B" },
-  { tag: "تجاري · جدة", name: "مركز تجاري، طريق المدينة", ret: "9.1%", min: "10,000", term: "٥ سنوات", p: "45%", g: "#46553B" },
-  { tag: "زراعي · القصيم", name: "مزارع نخيل وقفية مستدامة", ret: "7.4%", min: "2,500", term: "١٠ سنوات", p: "88%", g: "#7A9167" },
+  { tag: "عقاري · الرياض", name: "مجمع سكني وقفي — حي النرجس", ret: "8.2%", min: "5,000", term: "٧ سنوات", p: "72%", g: "linear-gradient(135deg,#3F4D35,#596B4B 60%,#8A9C7A)" },
+  { tag: "تجاري · جدة", name: "مركز تجاري — طريق المدينة", ret: "9.1%", min: "10,000", term: "٥ سنوات", p: "45%", g: "linear-gradient(135deg,#2B3326,#46553B 55%,#B7C4A6)" },
+  { tag: "زراعي · القصيم", name: "مزارع نخيل وقفية مستدامة", ret: "7.4%", min: "2,500", term: "١٠ سنوات", p: "88%", g: "linear-gradient(135deg,#46553B,#7A9167 60%,#C9A876)" },
 ];
 
 export function WaqfScreen({ style }: { style?: React.CSSProperties }) {
   return (
-    <div className="mw-screen mw-scr-waqf" style={style} aria-hidden="true" data-ui>
+    <div className="mw-screen mw-scr-waqf" style={style} aria-hidden="true">
       <div className="mw-scr-waqf__top">
         <b><img src="/brand/masheed-mark-waqf.svg" alt="" />وقف مَشيد</b>
         <span>الفرص</span><span>محفظتي</span><span>التقارير</span>
@@ -253,7 +220,7 @@ export function WaqfScreen({ style }: { style?: React.CSSProperties }) {
                   <span>الحد الأدنى (ر.س)<b className="mw-num">{o.min}</b></span>
                   <span>المدة<b>{o.term}</b></span>
                 </div>
-                <div className="mw-scr-opp__bar" style={{ ["--p" as string]: o.p }}><span /></div>
+                <div className="mw-scr-opp__bar" style={{ ["--p" as string]: o.p }}><i /></div>
                 <span>اكتمال التمويل <b className="mw-num">{o.p}</b></span>
               </div>
             </div>

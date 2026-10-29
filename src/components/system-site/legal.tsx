@@ -76,22 +76,12 @@ export const TERMS: LegalDoc = {
   ],
 };
 
-// Contents list beside the page title; each entry jumps to its section.
-export function LegalToc({ doc }: { doc: LegalDoc }) {
-  return (
-    <nav className="wb-toc" aria-label="محتويات الصفحة">
-      <h2>المحتويات</h2>
-      <ol>{doc.sections.map((s, i) => <li key={s.h}><a href={"#s" + (i + 1)}>{s.h}</a></li>)}</ol>
-    </nav>
-  );
-}
-
 export function LegalBody({ doc }: { doc: LegalDoc }) {
   return (
     <article className="wb-panel wb-legal">
       <p className="wb-legal__date">آخر تحديث: {doc.updated}</p>
-      {doc.sections.map((s, i) => (
-        <section key={s.h} id={"s" + (i + 1)} className="rv">
+      {doc.sections.map((s) => (
+        <section key={s.h}>
           <h2 className="wb-h3">{s.h}</h2>
           {s.p.map((x, i) => Array.isArray(x)
             ? <ul key={i}>{x.map((li) => <li key={li}>{li}</li>)}</ul>

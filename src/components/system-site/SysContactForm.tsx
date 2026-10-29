@@ -64,7 +64,7 @@ export default function SysContactForm() {
       <div className="wb-field">
         <label className="wb-label" htmlFor="wb-c-topic">موضوع التواصل</label>
         <select className="wb-input" {...field("topic")}>
-          <option value="">اختر من القائمة</option>
+          <option value="">— اختر —</option>
           {SYS_TOPICS.map((t) => <option key={t}>{t}</option>)}
         </select>
         <FieldError f="topic" msg={err("topic")} />
