@@ -1,103 +1,105 @@
 import Link from "next/link";
-import Icon, { type IconName } from "./Icon";
-import { PlanCards, SysFlows, SysShell, WbCta, WbFaq, WbHead } from "./parts";
-import { HomeServices } from "./ServicesBrowser";
-import { FitScreen } from "./FitScreen";
+import { DirectNote, HowFields, SysShell, WbClose, WbFaq, WbHead } from "./parts";
+import { CommandList, LiveApprovals, PlanIndex, ServiceIndex, StartDialog } from "./Showcase";
+import Icon from "./Icon";
 import { SYS_FAQ, SYS_MODS } from "./data";
 import { getPlans, getServices } from "./catalog";
 
-const STATS: [IconName, string, string][] = [
-  ["grid", "19", "وحدة تشغيلية مترابطة"],
-  ["workflow", "7", "مراحل اعتماد قابلة للتخصيص"],
-  ["clock", "4 ساعات", "زمن الاستجابة في الباقات المتقدمة"],
-  ["shield", "100%", "من العمليات في سجل التدقيق"],
+// Figures set as a ledger; units live in the captions so the numerals form one column.
+const LEDGER: [string, string][] = [
+  ["19", "وحدة تشغيلية مترابطة"],
+  ["7", "مراحل اعتماد قابلة للتخصيص"],
+  ["4", "ساعات زمن الاستجابة في الباقات المتقدمة"],
+  ["100", "بالمئة من العمليات تُسجَّل في سجل التدقيق"],
 ];
 
-// system.masheedwaqf.com home — ui_kits/system-website SysHome
+// system.masheedwaqf.com home. Direction: the product performs (tasteskill v2).
 export default async function SysHome() {
   const [services, plans] = await Promise.all([getServices(), getPlans()]);
   return (
     <SysShell>
       <section className="wb-hero">
-        <div className="wb-wrap">
-          <div className="wb-hero__panel">
-            <div className="wb-hero__copy">
-              <span className="wb-eyebrow"><Icon n="zap" s={14} />المساعد الذكي متاح الآن في الباقة المتقدمة</span>
-              <h1 className="wb-h1">نظام تشغيلٍ واحد لكل أعمال الجهة الوقفية.</h1>
-              <p className="wb-lead" style={{ maxWidth: 680 }}>أصولك، مستفيدوك، ماليتك، عقودك وحوكمتك في بيئةٍ واحدة — بمسارات اعتمادٍ واضحة وسجلٍّ تدقيقيٍّ لكل إجراء.</p>
-              <div className="wb-hero__cta">
-                <Link className="wb-btn wb-btn--pri wb-btn--lg" href="/packages">اختر باقتك</Link>
-                <Link className="wb-btn wb-btn--ghost wb-btn--lg" href="/contact">اطلب عرضاً توضيحياً</Link>
-              </div>
-              <div className="wb-hero__note">
-                {["أسعار شاملة الضريبة", "تدريب طوال مدة الاشتراك", "عزل كامل لبيانات كل وقف"].map((t) => (
-                  <span key={t}><Icon n="check" s={15} w={2.5} />{t}</span>
-                ))}
-              </div>
-            </div>
-            <div className="wb-hero__stage">
-              <div className="wb-float wb-float--a">
-                <span className="wb-float__i"><Icon n="checkSquare" /></span>
-                <div><b>طلب صرف بانتظار اعتمادك</b><span>توزيع ريع · <span className="wb-num">120,000</span> ر.س</span></div>
-              </div>
-              <div className="wb-float wb-float--b">
-                <span className="wb-float__i wb-float__i--ok"><Icon n="shield" /></span>
-                <div><b>سجل المراجعة مفعّل</b><span>كل العمليات موثّقة ومؤرخة</span></div>
-              </div>
-              <div className="wb-shot"><FitScreen label="معاينة لوحة معلومات نظام مَشيد" /></div>
+        <div className="wb-wrap wb-hero__copy">
+          <h1 className="wb-h1">
+            <span className="wb-mline"><span>نظام تشغيلٍ واحد لكل</span></span>{" "}
+            <span className="wb-mline"><span>أعمال الجهة الوقفية.</span></span>
+          </h1>
+          <div className="wb-hero__row">
+            <p className="wb-lead rv" style={{ ["--i" as string]: 3 }}>أصولك، مستفيدوك، ماليتك، عقودك وحوكمتك في بيئةٍ واحدة، بمسارات اعتمادٍ واضحة وسجلٍّ تدقيقيٍّ لكل إجراء.</p>
+            <div className="wb-hero__cta rv" style={{ ["--i" as string]: 4 }}>
+              <Link className="wb-btn wb-btn--pri wb-btn--lg" href="/packages">اختر باقتك</Link>
+              <Link className="wb-btn wb-btn--ghost wb-btn--lg" href="/contact">اطلب عرضاً توضيحياً</Link>
             </div>
           </div>
-          <div className="wb-stats">
-            {STATS.map(([i, b, t]) => (
-              <div key={t} className="wb-stat">
-                <span className="wb-ico"><Icon n={i} s={20} /></span>
-                <div><b className="wb-num">{b}</b><span>{t}</span></div>
-              </div>
-            ))}
-          </div>
+          <p className="wb-hero__note rv" style={{ ["--i" as string]: 5 }}>أسعار شاملة الضريبة · تدريب طوال مدة الاشتراك · عزل كامل لبيانات كل وقف</p>
+        </div>
+        <div className="wb-stage">
+          <div className="wb-wrap rv" style={{ ["--i" as string]: 6 }}><LiveApprovals /></div>
         </div>
       </section>
 
-      <section className="wb-sec"><div className="wb-wrap"><HomeServices services={services} /></div></section>
-
-      <section className="wb-sec wb-sec--canvas">
-        <div className="wb-wrap">
-          <WbHead center eyebrow="طريقتان للحصول على الخدمة" title="خدمات تطلبها مباشرة، وأخرى نُعدّ لها عرضاً يناسب نطاقك." />
-          <SysFlows />
-        </div>
-      </section>
-
-      <section className="wb-sec wb-band">
-        <div className="wb-wrap">
-          <WbHead eyebrow="النظام" title="كل ما تحتاجه الجهة الوقفية، مترابطٌ في مكانٍ واحد." lead="لا ترى الإدارة الرقم فقط، بل تربطه بالأصل أو المشروع أو الاستثمار الذي نتج عنه." />
-          <div className="wb-mods">
-            {SYS_MODS.map(([i, t, d]) => (
-              <div key={t} className="wb-mod"><span className="wb-ico"><Icon n={i} s={20} /></span><b>{t}</b><span>{d}</span></div>
+      <section className="wb-sec">
+        <div className="wb-wrap wb-ledger">
+          <h2 className="wb-h2 wb-ledger__h rv"><span>أرقامٌ تصف النظام</span>كما يعمل اليوم.</h2>
+          <figure className="wb-pic wb-ledger__pic rv" style={{ ["--i" as string]: 1, margin: 0 }}>
+            <div><img src="/media/masmak-castle.jpg" width={1600} height={1200} alt="قصر المصمك في الرياض" loading="lazy" decoding="async" /></div>
+            <figcaption>قصر المصمك، الرياض.</figcaption>
+          </figure>
+          <dl className="wb-ledger__dl">
+            {LEDGER.map(([n, t], i) => (
+              <div key={t} className="rv" style={{ ["--i" as string]: i }}><dt className="wb-num">{n}</dt><dd>{t}</dd></div>
             ))}
-          </div>
+          </dl>
         </div>
       </section>
 
       <section className="wb-sec">
         <div className="wb-wrap">
-          <WbHead eyebrow="الباقات" title="باقات سنوية تناسب حجم جهتك." action={<Link className="wb-link" href="/packages">قارن الباقات بالتفصيل<Icon n="arrow" s={16} /></Link>} />
-          <PlanCards plans={plans} />
+          <WbHead title="كل ما تحتاجه الجهة الوقفية، مترابطٌ في مكانٍ واحد." lead="لا ترى الإدارة الرقم فقط، بل تربطه بالأصل أو المشروع أو الاستثمار الذي نتج عنه." />
+          <CommandList mods={SYS_MODS} />
         </div>
       </section>
 
-      <section className="wb-sec" style={{ paddingTop: 0 }}>
+      <section className="wb-sec">
+        <div className="wb-wrap">
+          <WbHead title="من تأسيس الوقف إلى متابعة تنفيذ خطته طوال العام." />
+          <ServiceIndex services={services} />
+        </div>
+      </section>
+
+      <section className="wb-sec">
+        <div className="wb-wrap">
+          <WbHead title="خدمات تطلبها مباشرة، وأخرى نُعدّ لها عرضاً يناسب نطاقك." />
+          <DirectNote />
+        </div>
+        <HowFields />
+      </section>
+
+      <section className="wb-sec">
+        <div className="wb-wrap">
+          <WbHead title="باقات سنوية تناسب حجم جهتك." />
+          <PlanIndex plans={plans} />
+          <div className="wb-more"><Link className="wb-link" href="/packages">قارن الباقات بالتفصيل<Icon n="arrow" s={18} /></Link></div>
+        </div>
+      </section>
+
+      <section className="wb-sec">
         <div className="wb-wrap wb-split">
           <div className="wb-split__aside">
-            <span className="wb-eyebrow">الأسئلة الشائعة</span>
-            <h2 className="wb-h2">إجابات واضحة قبل أن تبدأ.</h2>
-            <p className="wb-p">لم تجد إجابتك؟ <Link href="/contact">تواصل مع فريقنا</Link>.</p>
+            <h2 className="wb-h2 rv">إجابات واضحة قبل أن تبدأ.</h2>
+            <p className="wb-p rv" style={{ ["--i" as string]: 1 }}>لم تجد إجابتك؟ <Link href="/contact">تواصل مع فريقنا</Link>.</p>
+            <figure className="wb-pic rv" style={{ ["--i" as string]: 2, margin: 0 }}>
+              <div><img src="/media/old-jeddah-5.jpg" width={1600} height={1200} alt="بيوت جدة التاريخية برواشينها الخشبية" loading="lazy" decoding="async" /></div>
+              <figcaption>جدة التاريخية.</figcaption>
+            </figure>
           </div>
           <WbFaq items={SYS_FAQ} />
         </div>
       </section>
 
-      <WbCta title="جاهزٌ لتنظيم أعمال وقفك؟" text="اختر الباقة المناسبة وابدأ خلال أيام، أو احجز عرضاً توضيحياً مع فريقنا."
-        actions={<><Link className="wb-btn wb-btn--light wb-btn--lg" href="/packages">اختر باقتك</Link><Link className="wb-btn wb-btn--line wb-btn--lg" href="/contact">تواصل معنا</Link></>} />
+      <WbClose title="جاهزٌ لتنظيم أعمال وقفك؟"
+        text={<>اكتب اسم جهتك واختر الباقة، وتنتقل إلى إنشاء الحساب بهما. تفضّل عرضاً توضيحياً أولاً؟ <Link href="/contact">تواصل معنا</Link>.</>}
+        aside={<StartDialog plans={plans} />} />
     </SysShell>
   );
 }

@@ -55,7 +55,7 @@ export default function ServiceOrder({ s }: { s: Service }) {
     <div className="wb-field">
       <label className="wb-label" htmlFor={`wb-o-${f}`}>{label}</label>
       <select className="wb-input" {...field(f)}>
-        <option value="">— اختر —</option>
+        <option value="">اختر من القائمة</option>
         {opts.map(([v, l]) => <option key={v} value={v}>{l}</option>)}
       </select>
     </div>

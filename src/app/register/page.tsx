@@ -18,8 +18,9 @@ const FIELDS: { name: "name" | "phone" | "email" | "password"; label: string; ty
   { name: "password", label: "كلمة المرور", type: "password", placeholder: "8 أحرف على الأقل", auto: "new-password" },
 ];
 
-export default function RegisterPage({ searchParams }: { searchParams: Promise<{ plan?: string }> }) {
-  const { plan: planParam } = use(searchParams);
+export default function RegisterPage({ searchParams }: { searchParams: Promise<{ plan?: string; name?: string }> }) {
+  // ?name= comes from the "create your account" dialog on the System website
+  const { plan: planParam, name: nameParam } = use(searchParams);
   const plan = planParam && PLAN_NAMES[planParam] ? planParam : null;
   const [state, action, pending] = useActionState(registerAccount, initial);
   const ok = state.status === "ok";
@@ -88,7 +89,7 @@ export default function RegisterPage({ searchParams }: { searchParams: Promise<{
                       inputMode={f.inputMode}
                       placeholder={f.placeholder}
                       autoComplete={f.auto}
-                      defaultValue={f.name === "password" ? undefined : state.values?.[f.name]}
+                      defaultValue={f.name === "password" ? undefined : state.values?.[f.name] ?? (f.name === "name" ? nameParam?.slice(0, 120) : undefined)}
                       aria-invalid={!!state.errors?.[f.name]}
                       aria-describedby={state.errors?.[f.name] ? `rg-${f.name}-err` : undefined}
                       className={`input ${styles.input}`}

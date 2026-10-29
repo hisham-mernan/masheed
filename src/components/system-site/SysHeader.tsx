@@ -27,8 +27,7 @@ export default function SysHeader() {
     <>
       <div className="wb-ann">
         <div className="wb-wrap wb-ann__in">
-          <span className="wb-ann__dot" />
-          <span>جديد: المساعد الذكي لتحليل الوثائق وصياغة التقارير. <Link href="/packages">اعرف المزيد</Link></span>
+          <span>المساعد الذكي لتحليل الوثائق وصياغة التقارير. <Link href="/packages">اعرف المزيد</Link></span>
         </div>
       </div>
       <header className="wb-hdr">
@@ -43,7 +42,7 @@ export default function SysHeader() {
             <Link className="wb-btn wb-btn--pri wb-btn--sm" href="/packages">ابدأ الآن</Link>
             <button type="button" className="wb-menu" aria-expanded={open} aria-controls="wb-mnav"
               aria-label={open ? "إغلاق القائمة" : "فتح القائمة"} onClick={() => setOpen(!open)}>
-              <Icon n={open ? "x" : "menu"} s={20} />
+              <Icon n={open ? "x" : "menu"} s={22} />
             </button>
           </div>
         </div>
