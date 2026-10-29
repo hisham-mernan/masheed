@@ -1,8 +1,8 @@
 import Link from "next/link";
 import Icon from "./Icon";
 import SysHeader from "./SysHeader";
-import { fmt, type Plan, type Service } from "./data";
-import "../landing/masheed-site.css"; // product-screen previews (.mw-screen)
+import Reveal from "./Reveal";
+import { type Service } from "./data";
 import "./system-site.css";
 
 export const MAIN_URL = process.env.NEXT_PUBLIC_MAIN_URL || "https://masheedwaqf.com";
@@ -11,6 +11,7 @@ export const INVESTMENT_URL = process.env.NEXT_PUBLIC_INVESTMENT_URL || "https:/
 export function SysShell({ children }: { children: React.ReactNode }) {
   return (
     <div className="wb" dir="rtl" lang="ar">
+      <Reveal />
       <SysHeader />
       <main>{children}</main>
       <SysFooter />
@@ -36,35 +37,40 @@ function SysFooter() {
             <p>نظام تشغيلٍ مؤسسي يجمع أصول الوقف ومستفيديه وماليته وحوكمته في بيئةٍ واحدة.</p>
             <a className="wb-foot__sister" href={INVESTMENT_URL}>
               <img src="/brand/masheed-mark-waqf.svg" alt="" />
-              <span><small>من منظومة مَشيد</small><b>وقف مَشيد — منصة الاستثمار</b></span>
+              <span><small>من منظومة مَشيد</small><b>وقف مَشيد، منصة الاستثمار</b></span>
               <Icon n="arrow" s={16} />
             </a>
           </div>
           {cols.map(([h, links]) => (
-            <div key={h}>
-              <h4>{h}</h4>
+            <nav key={h} aria-label={h}>
+              <h2>{h}</h2>
               <ul>{links.map(([href, l]) => <li key={l}><a href={href}>{l}</a></li>)}</ul>
-            </div>
+            </nav>
           ))}
         </div>
+        <p className="wb-foot__mark" aria-hidden="true">نظام مَشيد</p>
         <div className="wb-foot__base">
           <span>© 2026 مَشيد. جميع الحقوق محفوظة.</span>
           <div><a href="/privacy">سياسة الخصوصية</a><a href="/terms">الشروط والأحكام</a></div>
         </div>
+        <p className="wb-foot__credits">
+          حقوق الصور (ويكيميديا كومنز): <a href="https://commons.wikimedia.org/wiki/File:Masmak_castle.jpg" rel="noopener">«Masmak castle»، Baptiste Marcel، ملكية عامة</a>؛{" "}
+          <a href="https://commons.wikimedia.org/wiki/File:Old_Jeddah_(5).jpg" rel="noopener">«Old Jeddah (5)»، Radosław Botev</a>، <a href="https://creativecommons.org/licenses/by/3.0/" rel="noopener license">CC BY 3.0</a>.
+        </p>
       </div>
     </footer>
   );
 }
 
-export function WbHead({ eyebrow, title, lead, center, action }: { eyebrow?: string; title: string; lead?: string; center?: boolean; action?: React.ReactNode }) {
-  const copy = <>{eyebrow && <span className="wb-eyebrow">{eyebrow}</span>}<h2 className="wb-h2">{title}</h2>{lead && <p className="wb-lead">{lead}</p>}</>;
-  if (action) return <div className="wb-head wb-head--row"><div>{copy}</div>{action}</div>;
+export function WbHead({ title, lead, center, action }: { title: string; lead?: string; center?: boolean; action?: React.ReactNode }) {
+  const copy = <><h2 className="wb-h2 rv">{title}</h2>{lead && <p className="wb-lead rv" style={{ ["--i" as string]: 1 }}>{lead}</p>}</>;
+  if (action) return <div className="wb-head wb-head--row"><div>{copy}</div><div className="rv" style={{ ["--i" as string]: 2 }}>{action}</div></div>;
   return <div className={"wb-head" + (center ? " wb-head--center" : "")}>{copy}</div>;
 }
 
-export function WbPageHead({ crumbs = [], title, lead, children }: { crumbs?: [string | null, string][]; title: string; lead?: string; children?: React.ReactNode }) {
+export function WbPageHead({ crumbs = [], title, lead, kind, aside }: { crumbs?: [string | null, string][]; title: string; lead?: string; kind?: string; aside?: React.ReactNode }) {
   return (
-    <section className="wb-ph">
+    <section className={"wb-ph" + (aside ? " wb-ph--legal" : "")}>
       <div className="wb-wrap">
         <nav className="wb-crumb" aria-label="مسار التنقل">
           <Link href="/">الرئيسية</Link>
@@ -76,21 +82,13 @@ export function WbPageHead({ crumbs = [], title, lead, children }: { crumbs?: [s
           ))}
         </nav>
         <div className="wb-ph__row">
-          <div className="wb-ph__copy"><h1 className="wb-h2">{title}</h1>{lead && <p className="wb-lead">{lead}</p>}</div>
-          {children}
+          <div className="wb-ph__copy">
+            <h1 className="rv">{title}</h1>
+            {lead && <p className="wb-lead rv" style={{ ["--i" as string]: 1 }}>{lead}</p>}
+            {kind && <p className="wb-ph__kind rv" style={{ ["--i" as string]: 2 }}>{kind}</p>}
+          </div>
+          {aside && <div className="rv" style={{ ["--i" as string]: 2 }}>{aside}</div>}
         </div>
-      </div>
-    </section>
-  );
-}
-
-export function WbCta({ title, text, actions }: { title: string; text: string; actions: React.ReactNode }) {
-  return (
-    <section className="wb-wrap">
-      <div className="wb-cta">
-        <img className="wb-cta__mark" src="/brand/masheed-mark-mono-white.svg" alt="" />
-        <div><h2>{title}</h2><p>{text}</p></div>
-        <div className="wb-cta__act">{actions}</div>
       </div>
     </section>
   );
@@ -100,8 +98,8 @@ export function WbFaq({ items }: { items: [string, string][] }) {
   return (
     <div className="wb-faq">
       {items.map(([q, a], i) => (
-        <details key={q} open={i === 0}>
-          <summary>{q}<i><Icon n="plus" s={16} /></i></summary>
+        <details key={q} name="wb-faq" open={i === 0} className="rv" style={{ ["--i" as string]: i }}>
+          <summary>{q}<i className="wb-pm" aria-hidden="true" /></summary>
           <p>{a}</p>
         </details>
       ))}
@@ -109,76 +107,108 @@ export function WbFaq({ items }: { items: [string, string][] }) {
   );
 }
 
-export function TypeTag({ direct }: { direct: boolean }) {
-  return (
-    <span className={"wb-tag " + (direct ? "wb-tag--direct" : "wb-tag--request")}>
-      <Icon n={direct ? "cart" : "send"} s={13} />{direct ? "بسعر ثابت" : "بطلب عرض سعر"}
-    </span>
-  );
-}
-
+export const kindLabel = (s: Service) => (s.type === "request" ? "بطلب عرض سعر" : "بسعر ثابت");
 const CTA = { request: "اطلب الخدمة", direct: "اشترك في الخدمة", booking: "احجز جلسة" };
+const priceText = (s: Service) => s.priceLabel.replace(/^السعر:\s*/, "");
 
-export function ServiceCard({ s }: { s: Service }) {
+// One service as a row of the services list: name and scope, the price, the action.
+export function ServiceRow({ s, i = 0 }: { s: Service; i?: number }) {
   return (
-    <article className="wb-card wb-card--hover">
-      <div className="wb-card__top"><span className="wb-ico"><Icon n={s.icon} s={22} /></span><TypeTag direct={s.type !== "request"} /></div>
-      <h3 className="wb-h3"><Link href={"/services/" + s.id}>{s.title}</Link></h3>
-      <p className="wb-p">{s.subtitle}</p>
-      <ul className="wb-checks">{s.includes.map((i) => <li key={i}><Icon n="check" s={16} w={2.5} />{i}</li>)}</ul>
-      <div className="wb-card__foot">
-        <div className="wb-price"><small>السعر</small><b>{s.priceLabel.replace(/^السعر:s*/, "")}</b></div>
-        <Link className="wb-link" href={"/services/" + s.id}>{CTA[s.type]}<Icon n="arrow" s={16} /></Link>
+    <li className="wb-svc rv" style={{ ["--i" as string]: i }}>
+      <div className="wb-svc__body">
+        <h3><Link href={"/services/" + s.id}>{s.title}</Link></h3>
+        <p className="wb-p">{s.subtitle}</p>
+        <p className="wb-svc__inc">{s.includes.join("، ")}</p>
       </div>
-    </article>
+      <div className="wb-svc__price"><b>{priceText(s)}</b><span>{kindLabel(s)}</span></div>
+      <Link className="wb-btn wb-btn--ghost" href={"/services/" + s.id}>{CTA[s.type]}</Link>
+    </li>
   );
 }
 
-export function PlanCards({ plans }: { plans: Plan[] }) {
-  return (
-    <div className="wb-plans">
-      {plans.map((p) => (
-        <div key={p.id} className={"wb-plan" + (p.best ? " wb-plan--best" : "")}>
-          {p.best && <span className="wb-plan__badge">الأكثر اختياراً</span>}
-          <h3 className="wb-plan__name">{p.name}</h3>
-          <p className="wb-plan__users">{p.users}</p>
-          <div className="wb-plan__price"><b className="wb-num">{fmt(p.price)}</b><span>ر.س / سنوياً</span></div>
-          <ul className="wb-checks">{p.feats.map((f) => <li key={f}><Icon n="check" s={16} w={2.5} />{f}</li>)}</ul>
-          <Link className={"wb-btn wb-btn--block " + (p.best ? "wb-btn--pri" : "wb-btn--ghost")} href={"/register?plan=" + p.id}>ابدأ تجربة مجانية</Link>
-        </div>
-      ))}
-    </div>
-  );
+export function ServiceList({ services }: { services: Service[] }) {
+  return <ul className="wb-svcs">{services.map((s, i) => <ServiceRow key={s.id} s={s} i={i} />)}</ul>;
 }
 
-// Fixed-price services are booked and paid inside the platform; the others start with a request and a quotation.
-export function SysFlows() {
-  const d: [string, string][] = [["اختر الخدمة", "السعر ظاهر وشامل الضريبة"], ["أنشئ حسابك", "تجربة مجانية للنظام 15 يوماً"], ["احجز وادفع من المنصة", "دفع إلكتروني آمن"]];
-  const r: [string, string][] = [["أرسل طلبك", "من الموقع أو من داخل المنصة"], ["مراجعة الطلب", "يراجع الفريق بياناتك ونطاق العمل"], ["عرض السعر", "يصلك في حسابك على المنصة"], ["الدفع والتنفيذ", "بعد موافقتك على العرض"]];
+// Fixed-price services are booked and paid inside the platform; quoted ones run through the four fields.
+export function DirectNote() {
   return (
-    <div className="wb-flows">
-      <div className="wb-flow">
-        <TypeTag direct />
-        <h3 className="wb-h3">خدمات بسعرٍ ثابت</h3>
-        <p className="wb-p">الاستشارات (جلسة مرئية 30 دقيقة) والمتابعة التنفيذية السنوية.</p>
-        <Steps list={d} />
-        <Link className="wb-btn wb-btn--ghost" href="/services?type=direct">الخدمات بسعر ثابت</Link>
-      </div>
-      <div className="wb-flow wb-flow--alt">
-        <TypeTag direct={false} />
-        <h3 className="wb-h3">خدمات تُسعَّر بحسب حالتك</h3>
-        <p className="wb-p">تأسيس الوقف، وتقييم الأداء المالي والتشغيلي.</p>
-        <Steps list={r} />
-        <Link className="wb-btn wb-btn--light" href="/services?type=request">خدمات بطلب عرض سعر</Link>
+    <div className="wb-direct rv">
+      <p className="wb-p">الاستشارات (جلسة مرئية 30 دقيقة) والمتابعة التنفيذية السنوية سعرها ثابت وشامل الضريبة، فتحجزها وتدفع من المنصة مباشرة بعد إنشاء حسابك.</p>
+      <div className="wb-hero__cta">
+        <Link className="wb-btn wb-btn--pri" href="/services?type=direct">الخدمات بسعر ثابت</Link>
+        <Link className="wb-btn wb-btn--ghost" href="/services?type=request">خدمات بطلب عرض سعر</Link>
       </div>
     </div>
   );
 }
 
-export function Steps({ list, style }: { list: [string, string][]; style?: React.CSSProperties }) {
+export function Steps({ list }: { list: [string, string][] }) {
   return (
-    <ol className="wb-flow__steps" style={style}>
-      {list.map(([b, s], i) => <li key={b}><span className="wb-flow__n wb-num">{i + 1}</span><b>{b}</b><span>{s}</span></li>)}
+    <ol className="wb-steps">
+      {list.map(([b, s]) => <li key={b}><b>{b}</b><span>{s}</span></li>)}
     </ol>
+  );
+}
+
+export function Checks({ items }: { items: string[] }) {
+  return <ul className="wb-checks">{items.map((i) => <li key={i}>{i}</li>)}</ul>;
+}
+
+// The page close: the closing line, and the first step of sign-up already open beside it.
+export function WbClose({ title, text, aside }: { title: string; text: React.ReactNode; aside: React.ReactNode }) {
+  return (
+    <section className="wb-close">
+      <div className="wb-wrap wb-close__in">
+        <div className="wb-close__copy">
+          <h2 className="rv">{title}</h2>
+          <p className="rv" style={{ ["--i" as string]: 1 }}>{text}</p>
+        </div>
+        <div className="rv" style={{ ["--i" as string]: 2, justifySelf: "end", width: "100%", display: "flex", justifyContent: "flex-end" }}>{aside}</div>
+      </div>
+    </section>
+  );
+}
+
+// How a quoted service runs: the same request card in four fields, a step further along in each.
+export function HowFields() {
+  const checks: [string, boolean][] = [["القوائم المالية لثلاث سنوات", true], ["سجل الأصول", true], ["محاضر مجلس النظارة", false]];
+  return (
+    <ol className="wb-fields" aria-label="مراحل الخدمة بطلب عرض سعر">
+      <li className="rv">
+        <Ticket state="جديد"><dl><dt>الجهة</dt><dd>وقف الهداية الخيري</dd><dt>المسؤول</dt><dd>لم يُسنَد بعد</dd></dl></Ticket>
+        <p>أولاً يصل طلبك، من الموقع أو من داخل المنصة.</p>
+      </li>
+      <li className="rv" style={{ ["--i" as string]: 1 }}>
+        <Ticket state="قيد المراجعة">
+          <dl><dt>المسؤول</dt><dd>فريق التقييم</dd><dt>الموعد</dt><dd>خلال يومي عمل</dd></dl>
+          <ul>{checks.map(([t, on]) => <li key={t} className={on ? "is-on" : undefined}><i aria-hidden="true" />{t}</li>)}</ul>
+        </Ticket>
+        <p>ثم يراجع الفريق بياناتك ونطاق العمل.</p>
+      </li>
+      <li className="rv" style={{ ["--i" as string]: 2 }}>
+        <Ticket state="عرض السعر">
+          <dl><dt>نطاق العمل</dt><dd>تقييم مالي وتشغيلي</dd><dt>المدة</dt><dd>4 أسابيع</dd></dl>
+          <div className="wb-ticket__sum"><span>قيمة العرض</span><b className="wb-num">38,000</b></div>
+        </Ticket>
+        <p>بعدها يصلك عرض السعر في حسابك على المنصة.</p>
+      </li>
+      <li className="rv" style={{ ["--i" as string]: 3 }}>
+        <Ticket state="قيد التنفيذ">
+          <dl><dt>الدفع</dt><dd>مكتمل</dd><dt>التسليم</dt><dd>تقرير التقييم</dd></dl>
+          <div className="wb-ticket__sum"><span>المدفوع (ر.س)</span><b className="wb-num">38,000</b></div>
+        </Ticket>
+        <p>وبعد موافقتك تدفع، ويبدأ التنفيذ.</p>
+      </li>
+    </ol>
+  );
+}
+
+function Ticket({ state, children }: { state: string; children: React.ReactNode }) {
+  return (
+    <div className="wb-ticket" data-ui>
+      <div className="wb-ticket__top"><b>تقييم الأداء المالي</b><span>{state}</span></div>
+      {children}
+    </div>
   );
 }

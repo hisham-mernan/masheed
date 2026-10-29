@@ -1,14 +1,12 @@
-import type { Metadata } from "next";
-import { SysFlows, SysShell, WbHead, WbPageHead } from "@/components/system-site/parts";
+import { HowFields, DirectNote, SysShell, WbHead, WbPageHead } from "@/components/system-site/parts";
 import { ServicesBrowser } from "@/components/system-site/ServicesBrowser";
 import { getServices } from "@/components/system-site/catalog";
+import { sysMeta } from "@/lib/seo";
 
 export const revalidate = 300;
 
-export const metadata: Metadata = {
-  title: "الخدمات | نظام مَشيد",
-  description: "الخدمات المهنية للجهات الوقفية: تأسيس الوقف، وتقييم الأداء المالي والتشغيلي، والاستشارات المرئية، والمتابعة التنفيذية السنوية.",
-};
+export const metadata = sysMeta("/services", "الخدمات | نظام مَشيد",
+  "الخدمات المهنية للجهات الوقفية: تأسيس الوقف، وتقييم الأداء المالي والتشغيلي، والاستشارات المرئية، والمتابعة التنفيذية السنوية.");
 
 export default async function ServicesPage({ searchParams }: { searchParams: Promise<{ type?: string }> }) {
   const [{ type }, services] = await Promise.all([searchParams, getServices()]);
@@ -19,8 +17,9 @@ export default async function ServicesPage({ searchParams }: { searchParams: Pro
       <section className="wb-page">
         <div className="wb-wrap"><ServicesBrowser key={type ?? "all"} services={services} initialType={type} /></div>
       </section>
-      <section className="wb-sec" style={{ paddingBottom: 0 }}>
-        <div className="wb-wrap"><WbHead center title="كيف تحصل على الخدمة" /><SysFlows /></div>
+      <section className="wb-sec">
+        <div className="wb-wrap"><WbHead title="كيف تحصل على الخدمة" /><DirectNote /></div>
+        <HowFields />
       </section>
     </SysShell>
   );
