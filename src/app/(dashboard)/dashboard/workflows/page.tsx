@@ -12,7 +12,7 @@ export default async function WorkflowsPage() {
   const scope = profile?.is_platform_admin ? await getWaqfScope() : null;
 
   const { data: requests } = await scopeQuery(
-    supabase.from("approval_requests").select("*, creator:created_by(full_name), approver:approved_by(full_name)"), scope
+    supabase.from("approval_requests").select("*, creator:profiles!approval_requests_created_by_fkey(full_name), approver:profiles!approval_requests_decided_by_fkey(full_name)"), scope
   ).order("created_at", { ascending: false }).limit(20);
 
   const pending = (requests || []).filter(r => r.status === "pending");
