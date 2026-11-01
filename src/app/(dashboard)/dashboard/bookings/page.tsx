@@ -12,7 +12,7 @@ export default async function BookingsPage({ searchParams }: { searchParams: Pro
   const { booked } = await searchParams;
   const ctx = await getAccountContext();
   const { data: bookings } = await ctx!.supabase.from("bookings")
-    .select("id, starts_at, ends_at, status, hold_until, paid_via, room_code, topic, experts(name, type)")
+    .select("id, starts_at, ends_at, status, hold_until, paid_via, room_code, topic, consult_type, experts(name, type)")
     .eq("account_id", ctx!.account?.id || "").order("starts_at", { ascending: false });
   const h = await headers();
   const origin = `${h.get("x-forwarded-proto") || "https"}://${h.get("host")}`;
@@ -21,7 +21,7 @@ export default async function BookingsPage({ searchParams }: { searchParams: Pro
   return (
     <div className="fade-in">
       <PageHead title="حجوزاتي" lead="جلساتك الاستشارية وروابطها. يمكن مشاركة رابط الجلسة مع أي شخص تريد حضوره." action={<Link href="/dashboard/bookings/new" className={s.btn}>احجز جلسة</Link>} />
-      {booked && <div className={`${s.alert} ${s.alertOk}`} style={{ marginBottom: "1rem" }} role="status">تأكد حجزك من رصيد جلسات باقتك.</div>}
+      {booked && <div className={`${s.alert} ${s.alertOk}`} style={{ marginBottom: "1rem" }} role="status">تأكد حجزك من رصيد جلسات باقتك، وسيعيّن فريق مَشيد المستشار المناسب لطلبك.</div>}
       <div className={s.tableWrap}>
         <table className={s.table}>
           <thead><tr><th>الموعد (الرياض)</th><th>المستشار</th><th>الحالة</th><th>رابط الجلسة</th></tr></thead>
@@ -34,7 +34,7 @@ export default async function BookingsPage({ searchParams }: { searchParams: Pro
               return (
                 <tr key={b.id}>
                   <td className={s.num}>{dateAr(b.starts_at, { dateStyle: "full" })}<div className={s.muted}>{dateAr(b.starts_at, { timeStyle: "short" })} – {dateAr(b.ends_at, { timeStyle: "short" })}</div></td>
-                  <td><b>{ex?.name}</b><div className={s.muted}>استشارة {CONSULT_TYPES[ex?.type || ""] || ""}{b.topic ? ` — ${b.topic}` : ""}</div></td>
+                  <td>{ex ? <b>{ex.name}</b> : <span className={s.muted}>يعيّنه فريق مَشيد</span>}<div className={s.muted}>استشارة {CONSULT_TYPES[b.consult_type || ex?.type || ""] || ""}{b.topic ? ` — ${b.topic}` : ""}</div></td>
                   <td><Pill map={BOOKING_STATUS} value={status} />{b.paid_via === "package" && <div className={s.muted}>من رصيد الباقة</div>}</td>
                   <td>
                     {b.status === "confirmed" && b.room_code ? (

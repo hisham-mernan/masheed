@@ -25,7 +25,7 @@ export default async function PayPage({ params, searchParams }: { params: Promis
         <div className={`${s.alert} ${s.alertOk}`} role="status">
           استلمنا {SAR(pay.amount_halalas / 100)} ر.س مقابل «{pay.description}».
           {pay.purpose === "package" && " فُعّلت باقتك."}
-          {pay.purpose === "booking" && " تأكد موعدك، وستجد رابط الجلسة في حجوزاتي."}
+          {pay.purpose === "booking" && " تأكد موعدك، وسيعيّن فريق مَشيد المستشار المناسب. ستجد رابط الجلسة في حجوزاتي."}
         </div>
         <p style={{ marginTop: "1rem" }}><Link className={s.btn} href={backHref}>انتقل إلى {backLabel}</Link></p>
       </div>

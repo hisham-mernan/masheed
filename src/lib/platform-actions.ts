@@ -152,20 +152,22 @@ export async function buyPackage(fd: FormData) {
   redirect(`/dashboard/pay/${pid}`);
 }
 
-// ── Consultation booking ──
+// ── Consultation request: the client picks type, slot and topic; the Masheed admin assigns the consultant ──
 export async function bookConsultation(_: FormState, fd: FormData): Promise<FormState> {
   const { supabase } = await requireAccount();
-  const expert = text(fd, "expert", 40);
+  const type = text(fd, "type", 20);
   const startsAt = text(fd, "starts_at", 40);
   const topic = text(fd, "topic", 1000);
-  if (!expert || !startsAt) return { status: "error", message: "اختر المستشار والموعد." };
-  const { data: bookingId, error } = await supabase.rpc("book_consultation", { p_expert: expert, p_starts: startsAt, p_topic: topic || null });
+  if (!type || !startsAt) return { status: "error", message: "اختر نوع الاستشارة والموعد." };
+  if (topic.length < 10) return { status: "error", message: "صف طلبك في 10 أحرف على الأقل ليختار فريق مَشيد المستشار المناسب." };
+  const { data: bookingId, error } = await supabase.rpc("request_consultation", { p_type: type, p_starts: startsAt, p_topic: topic });
   if (error || !bookingId) {
     const msg = error?.message || "";
-    return { status: "error", message: msg.includes("slot_taken") ? "حُجز هذا الموعد للتو، اختر موعداً آخر." : msg.includes("slot_out_of_range") ? "الموعد يجب أن يكون بعد ساعة على الأقل وخلال 60 يوماً." : "تعذّر حجز الموعد، اختر موعداً آخر." };
+    return { status: "error", message: msg.includes("slot_taken") ? "امتلأ هذا الموعد للتو، اختر موعداً آخر." : msg.includes("slot_out_of_range") ? "الموعد يجب أن يكون بعد ساعة على الأقل وخلال 60 يوماً." : "تعذّر إرسال الطلب، اختر موعداً آخر." };
   }
   const { data: b } = await supabase.from("bookings").select("id, status").eq("id", bookingId).single();
   revalidatePath("/dashboard/bookings");
+  revalidatePath("/dashboard/admin/bookings");
   if (b?.status === "confirmed") redirect(`/dashboard/bookings?booked=${bookingId}`);
   const { data: svc } = await supabase.from("services").select("title, price").eq("id", "consulting").single();
   const pid = await createPayment("booking", String(bookingId), Number(svc?.price || 0), "جلسة استشارية — 30 دقيقة");
@@ -253,6 +255,19 @@ export async function setBookingStatus(id: string, status: string) {
   if (error) return { error: error.message };
   revalidatePath("/dashboard/admin/bookings");
   return { success: true };
+}
+
+export async function assignConsultant(_: FormState, fd: FormData): Promise<FormState> {
+  const { supabase } = await requirePlatformAdmin();
+  const expert = text(fd, "expert", 40);
+  if (!expert) return { status: "error", message: "اختر المستشار" };
+  const { error } = await supabase.rpc("assign_consultant", { p_booking: text(fd, "id", 40), p_expert: expert });
+  if (error) {
+    const m = error.message;
+    return { status: "error", message: m.includes("expert_busy") ? "المستشار مشغول في هذا الموعد" : m.includes("expert_off_hours") ? "الموعد خارج أوقات عمل المستشار" : m.includes("booking_closed") ? "الحجز ملغى أو منتهٍ" : "تعذّر التعيين" };
+  }
+  revalidatePath("/dashboard/admin/bookings");
+  return { status: "ok", message: "عُيّن المستشار" };
 }
 
 export async function reviewListing(_: FormState, fd: FormData): Promise<FormState> {

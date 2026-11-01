@@ -18,7 +18,7 @@ export async function getMeeting(code: string) {
   return {
     startsAt: data.starts_at as string,
     endsAt: data.ends_at as string,
-    expert: (data.experts as unknown as { name: string } | null)?.name || "",
+    expert: (data.experts as unknown as { name: string } | null)?.name || "مستشار مَشيد",
     account: (data.accounts as unknown as { name: string } | null)?.name || "",
   };
 }
