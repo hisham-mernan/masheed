@@ -29,9 +29,12 @@ export default function ForgotPasswordPage() {
 
   return (
     <div className={styles.container} style={{ justifyContent: "center", alignItems: "center", display: "flex", minHeight: "100vh" }}>
-      <div className={`${styles.loginCard} glass-card fade-in`} style={{ maxWidth: 420, width: "100%" }}>
+      <div className={`${styles.loginCard} fade-in`} style={{ maxWidth: 420, width: "100%" }}>
         <div className={styles.header}>
-          <div className={styles.logoSmall}>م</div>
+          <Link href="/" aria-label="مَشيد — الصفحة الرئيسية">
+              {/* eslint-disable-next-line @next/next/no-img-element */}
+              <img src="/brand/masheed-lockup.svg" alt="مَشيد" className={styles.logoSmall} />
+            </Link>
           <h1>استعادة كلمة المرور</h1>
           <p>أدخل بريدك الإلكتروني وسنرسل لك رابط إعادة التعيين</p>
         </div>

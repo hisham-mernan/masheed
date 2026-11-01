@@ -6,9 +6,16 @@ import { createClient } from "@/lib/supabase/client";
 import Link from "next/link";
 import styles from "./login.module.css";
 
+const POINTS = [
+  "الأصول والريع والمستفيدون في سجل واحد لكل وقف",
+  "كل توزيع للريع يمر باعتماد طرف ثانٍ قبل تنفيذه",
+  "سجل مراجعة يوثّق كل عملية باسم منفذها ووقتها",
+];
+
 export default function LoginPage() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [showPassword, setShowPassword] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState("");
   const router = useRouter();
@@ -24,9 +31,8 @@ export default function LoginPage() {
       password,
     });
 
-
     if (authError) {
-      setError("بيانات الدخول غير صحيحة. يرجى المحاولة مجدداً.");
+      setError("البريد الإلكتروني أو كلمة المرور غير صحيحة. تحقق منهما وحاول مجدداً.");
       setIsLoading(false);
       return;
     }
@@ -37,117 +43,128 @@ export default function LoginPage() {
 
   return (
     <div className={styles.container}>
-      {/* Left – decorative panel */}
-      <div className={styles.decorPanel}>
-        <div className={styles.geometryBg}></div>
-        <div className={styles.decorContent}>
-          <div className={styles.decorLogo}>
-            <svg viewBox="0 0 60 60" fill="none" xmlns="http://www.w3.org/2000/svg">
-              <path d="M30 4L56 18V42L30 56L4 42V18L30 4Z" stroke="white" strokeWidth="1.5" strokeOpacity="0.4"/>
-              <path d="M30 12L48 22V38L30 48L12 38V22L30 12Z" fill="white" fillOpacity="0.08"/>
-              <text x="50%" y="54%" dominantBaseline="middle" textAnchor="middle" fill="white" fontSize="20" fontFamily="Cairo, sans-serif" fontWeight="700">م</text>
-            </svg>
-          </div>
-          <h2 className={styles.decorTitle}>مَشيد</h2>
-          <p className={styles.decorSubtitle}>المنصة المتكاملة<br/>لإدارة الأوقاف وتنمية مواردها</p>
-          <div className={styles.decorStats}>
-            <div className={styles.decorStat}>
-              <span className={styles.decorStatVal}>١٠٠٪</span>
-              <span className={styles.decorStatLabel}>امتثال GAW</span>
-            </div>
-            <div className={styles.decorDivider}></div>
-            <div className={styles.decorStat}>
-              <span className={styles.decorStatVal}>ZATCA</span>
-              <span className={styles.decorStatLabel}>Phase 2 متوافق</span>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      {/* Right – login form */}
       <div className={styles.formSide}>
-        <div className={`${styles.loginCard} glass-card fade-in`}>
+        <div className={`${styles.loginCard} fade-in`}>
           <div className={styles.header}>
-            <div className={styles.logoSmall}>م</div>
+            <Link href="/" aria-label="مَشيد — الصفحة الرئيسية">
+              {/* eslint-disable-next-line @next/next/no-img-element */}
+              <img src="/brand/masheed-lockup.svg" alt="مَشيد" className={styles.logoSmall} />
+            </Link>
             <h1>تسجيل الدخول</h1>
-            <p>ادخل بياناتك للوصول إلى لوحة التحكم</p>
+            <p>ادخل إلى نظام مَشيد لإدارة أوقافك.</p>
           </div>
 
           <form className={styles.form} onSubmit={handleLogin}>
             <div className={styles.inputGroup}>
               <label htmlFor="email">البريد الإلكتروني</label>
               <div className={styles.inputWrapper}>
-                <svg className={styles.inputIcon} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-                  <path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013.07 8.81a19.79 19.79 0 01-3.07-8.63A2 2 0 012 0h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L6.09 7.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0120 14h2a2 2 0 012 2z"/>
+                <svg className={styles.inputIcon} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+                  <rect x="3" y="5" width="18" height="14" rx="2" />
+                  <path d="M3 7l9 6 9-6" />
                 </svg>
                 <input
                   id="email"
                   type="email"
-                  placeholder="name@awqaf.gov.sa"
+                  dir="ltr"
+                  placeholder="name@example.com"
                   required
                   value={email}
                   onChange={(e) => setEmail(e.target.value)}
-                  className={`input ${styles.input}`}
+                  className={styles.input}
                   autoComplete="email"
+                  aria-invalid={!!error}
                 />
               </div>
             </div>
 
             <div className={styles.inputGroup}>
-              <label htmlFor="password">كلمة المرور</label>
+              <div className={styles.labelRow}>
+                <label htmlFor="password">كلمة المرور</label>
+                <Link href="/forgot-password">نسيت كلمة المرور؟</Link>
+              </div>
               <div className={styles.inputWrapper}>
-                <svg className={styles.inputIcon} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-                  <rect x="3" y="11" width="18" height="11" rx="2" ry="2"/>
-                  <path d="M7 11V7a5 5 0 0110 0v4"/>
+                <svg className={styles.inputIcon} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+                  <rect x="4" y="11" width="16" height="10" rx="2" />
+                  <path d="M8 11V7a4 4 0 018 0v4" />
                 </svg>
                 <input
                   id="password"
-                  type="password"
-                  placeholder="••••••••"
+                  type={showPassword ? "text" : "password"}
+                  dir="ltr"
                   required
                   value={password}
                   onChange={(e) => setPassword(e.target.value)}
-                  className={`input ${styles.input}`}
+                  className={styles.input}
                   autoComplete="current-password"
+                  aria-invalid={!!error}
                 />
+                <button
+                  type="button"
+                  className={styles.reveal}
+                  onClick={() => setShowPassword((v) => !v)}
+                  aria-label={showPassword ? "إخفاء كلمة المرور" : "إظهار كلمة المرور"}
+                  aria-pressed={showPassword}
+                >
+                  <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+                    <path d="M2 12s3.5-7 10-7 10 7 10 7-3.5 7-10 7S2 12 2 12z" />
+                    <circle cx="12" cy="12" r="3" />
+                    {showPassword && <line x1="3" y1="3" x2="21" y2="21" />}
+                  </svg>
+                </button>
               </div>
             </div>
 
             {error && (
-              <div className={styles.errorBox}>
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" width="16" height="16">
-                  <circle cx="12" cy="12" r="10"/>
-                  <line x1="12" y1="8" x2="12" y2="12"/>
-                  <line x1="12" y1="16" x2="12.01" y2="16"/>
+              <div className={styles.errorBox} role="alert">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" width="16" height="16" aria-hidden="true">
+                  <circle cx="12" cy="12" r="10" />
+                  <line x1="12" y1="8" x2="12" y2="12" />
+                  <line x1="12" y1="16" x2="12.01" y2="16" />
                 </svg>
                 {error}
               </div>
             )}
 
-            <button
-              type="submit"
-              className={`${styles.loginBtn} btn-primary`}
-              disabled={isLoading}
-            >
+            <button type="submit" className={`${styles.loginBtn} btn-primary`} disabled={isLoading}>
               {isLoading ? (
                 <span className={styles.spinner}>
-                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" className={styles.spinnerIcon}>
-                    <path d="M12 2v4M12 18v4M4.93 4.93l2.83 2.83M16.24 16.24l2.83 2.83M2 12h4M18 12h4M4.93 19.07l2.83-2.83M16.24 7.76l2.83-2.83"/>
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" className={styles.spinnerIcon} aria-hidden="true">
+                    <path d="M12 2v4M12 18v4M4.93 4.93l2.83 2.83M16.24 16.24l2.83 2.83M2 12h4M18 12h4M4.93 19.07l2.83-2.83M16.24 7.76l2.83-2.83" />
                   </svg>
-                  جاري الدخول...
+                  جارٍ الدخول…
                 </span>
-              ) : "دخول إلى النظام"}
+              ) : "دخول"}
             </button>
           </form>
 
           <div className={styles.footer}>
-            <p>ليس لديك حساب؟ <Link href="/register" className={styles.supabase}>إنشاء حساب جديد</Link></p>
-            <p style={{ marginTop: '0.5rem' }}>الأمان مدعوم بـ <span className={styles.supabase}>Supabase</span> &nbsp;|&nbsp; رؤية ٢٠٣٠</p>
+            <p>ليس لديك حساب؟ <Link href="/register" className={styles.supabase}>أنشئ حساباً وجرّب النظام 15 يوماً</Link></p>
             <div className={styles.links}>
-              <Link href="/forgot-password">نسيت كلمة المرور؟</Link>
-              <a href="#">الدعم الفني</a>
+              <Link href="/contact">الدعم الفني</Link>
+              <Link href="/privacy">سياسة الخصوصية</Link>
+              <Link href="/terms">الشروط والأحكام</Link>
             </div>
           </div>
+        </div>
+      </div>
+
+      <div className={styles.decorPanel} aria-hidden="true">
+        <div className={styles.geometryBg}></div>
+        <div className={styles.decorContent}>
+          <div className={styles.decorLogo}>
+            {/* eslint-disable-next-line @next/next/no-img-element */}
+            <img src="/brand/masheed-mark-mono-white.svg" alt="" />
+          </div>
+          <h2 className={styles.decorTitle}>نظام مَشيد لإدارة الأوقاف</h2>
+          <p className={styles.decorSubtitle}>إدارة الأصول، تحصيل الريع وتوزيعه، والامتثال لأنظمة الهيئة العامة للأوقاف، في منصة واحدة.</p>
+          <ul className={styles.decorPoints}>
+            {POINTS.map((p) => (
+              <li key={p}>
+                <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M20 6L9 17l-5-5" /></svg>
+                {p}
+              </li>
+            ))}
+          </ul>
         </div>
       </div>
     </div>

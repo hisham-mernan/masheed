@@ -32,11 +32,8 @@ export default function RegisterPage({ searchParams }: { searchParams: Promise<{
         <div className={styles.geometryBg}></div>
         <div className={styles.decorContent}>
           <div className={styles.decorLogo}>
-            <svg viewBox="0 0 60 60" fill="none" xmlns="http://www.w3.org/2000/svg">
-              <path d="M30 4L56 18V42L30 56L4 42V18L30 4Z" stroke="white" strokeWidth="1.5" strokeOpacity="0.4"/>
-              <path d="M30 12L48 22V38L30 48L12 38V22L30 12Z" fill="white" fillOpacity="0.08"/>
-              <text x="50%" y="54%" dominantBaseline="middle" textAnchor="middle" fill="white" fontSize="20" fontFamily="Cairo, sans-serif" fontWeight="700">م</text>
-            </svg>
+            {/* eslint-disable-next-line @next/next/no-img-element */}
+            <img src="/brand/masheed-mark-mono-white.svg" alt="" />
           </div>
           <h2 className={styles.decorTitle}>انضم إلى مَشيد</h2>
           <p className={styles.decorSubtitle}>ابدأ رحلة التحول الرقمي لوقفك<br/>وفق أحدث المعايير العالمية</p>
@@ -56,9 +53,12 @@ export default function RegisterPage({ searchParams }: { searchParams: Promise<{
 
       {/* Right – registration form */}
       <div className={styles.formSide}>
-        <div className={`${styles.loginCard} glass-card fade-in`}>
+        <div className={`${styles.loginCard} fade-in`}>
           <div className={styles.header}>
-            <div className={styles.logoSmall}>م</div>
+            <Link href="/" aria-label="مَشيد — الصفحة الرئيسية">
+              {/* eslint-disable-next-line @next/next/no-img-element */}
+              <img src="/brand/masheed-lockup.svg" alt="مَشيد" className={styles.logoSmall} />
+            </Link>
             <h1>إنشاء حساب جديد</h1>
             <p>جرّب النظام مجاناً لمدة 15 يوماً</p>
           </div>

@@ -2,10 +2,11 @@
 
 import { useState, useRef, useEffect } from "react";
 import Link from "next/link";
-import { useRouter } from "next/navigation";
+import { usePathname, useRouter } from "next/navigation";
 import { createClient } from "@/lib/supabase/client";
 import { markNotificationRead, markAllNotificationsRead } from "@/app/actions";
 import styles from "@/app/(dashboard)/layout.module.css";
+import { OPEN_MENU_EVENT, pageTitle } from "./Sidebar";
 
 type Notif = { refKey: string; icon: string; text: string; href: string; date?: string | null; read: boolean };
 
@@ -19,6 +20,7 @@ export default function TopNav({
   notifications?: Notif[];
 }) {
   const router = useRouter();
+  const pathname = usePathname();
   const supabase = createClient();
   const [notifOpen, setNotifOpen] = useState(false);
   const notifRef = useRef<HTMLDivElement>(null);
@@ -57,27 +59,22 @@ export default function TopNav({
 
   return (
     <header className={styles.topNav}>
-      <div className={styles.breadcrumb}>
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" width="14" height="14">
-          <rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/>
-          <rect x="14" y="14" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/>
-        </svg>
-        <span>لوحة التحكم</span>
+      <div className={styles.titleRow}>
+        <button type="button" className={styles.menuBtn} onClick={() => window.dispatchEvent(new Event(OPEN_MENU_EVENT))} aria-label="فتح القائمة">
+          <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" aria-hidden="true"><path d="M4 6h16M4 12h16M4 18h16"/></svg>
+        </button>
+        <h1 className={styles.pageTitle}>{pageTitle(pathname)}</h1>
       </div>
       <div className={styles.topActions}>
         <div ref={notifRef} style={{ position: "relative" }}>
-          <button className={styles.notifBtn} title="الإشعارات" onClick={() => setNotifOpen(!notifOpen)}>
+          <button type="button" className={styles.notifBtn} aria-label={notifCount > 0 ? `الإشعارات، ${notifCount} جديد` : "الإشعارات"} aria-expanded={notifOpen} onClick={() => setNotifOpen(!notifOpen)}>
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" width="18" height="18">
               <path d="M18 8A6 6 0 006 8c0 7-3 9-3 9h18s-3-2-3-9M13.73 21a2 2 0 01-3.46 0"/>
             </svg>
             {notifCount > 0 && <span className={styles.notifBadge}>{notifCount.toLocaleString("ar-SA")}</span>}
           </button>
           {notifOpen && (
-            <div style={{
-              position: "absolute", top: "110%", left: 0, width: "340px", background: "#fff",
-              border: "1px solid #E4E7EF", borderRadius: "12px", boxShadow: "0 10px 30px rgba(0,0,0,0.12)",
-              zIndex: 1000, overflow: "hidden",
-            }}>
+            <div className={styles.notifPanel}>
               <div style={{ padding: "0.75rem 1rem", borderBottom: "1px solid #E4E7EF", fontWeight: 700, display: "flex", justifyContent: "space-between", alignItems: "center" }}>
                 <span>الإشعارات {notifCount > 0 && <span style={{ color: "#8561AD" }}>({notifCount.toLocaleString("ar-SA")} جديد)</span>}</span>
                 {notifCount > 0 && (
@@ -123,13 +120,12 @@ export default function TopNav({
             <span className={styles.avatarRole}>{roleLabel}</span>
           </div>
         </Link>
-        <button className={styles.logoutBtn} onClick={handleSignOut} title="تسجيل الخروج" style={{ background: "transparent", border: "1px solid #ef4444", color: "#ef4444", borderRadius: "8px", padding: "6px 12px", cursor: "pointer", fontSize: "12px", display: "flex", alignItems: "center", gap: "6px", marginRight: "12px" }}>
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" width="14" height="14">
+        <button type="button" className={styles.iconBtn} onClick={handleSignOut} aria-label="تسجيل الخروج" title="تسجيل الخروج">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" width="18" height="18" aria-hidden="true">
             <path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"></path>
             <polyline points="16 17 21 12 16 7"></polyline>
             <line x1="21" y1="12" x2="9" y2="12"></line>
           </svg>
-          خروج
         </button>
       </div>
     </header>

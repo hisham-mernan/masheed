@@ -1,5 +1,6 @@
 "use client";
 
+import Link from "next/link";
 import { useState, useEffect } from "react";
 import { useRouter } from "next/navigation";
 import { createClient } from "@/lib/supabase/client";
@@ -46,9 +47,12 @@ export default function ResetPasswordPage() {
 
   return (
     <div className={styles.container} style={{ justifyContent: "center", alignItems: "center", display: "flex", minHeight: "100vh" }}>
-      <div className={`${styles.loginCard} glass-card fade-in`} style={{ maxWidth: 420, width: "100%" }}>
+      <div className={`${styles.loginCard} fade-in`} style={{ maxWidth: 420, width: "100%" }}>
         <div className={styles.header}>
-          <div className={styles.logoSmall}>م</div>
+          <Link href="/" aria-label="مَشيد — الصفحة الرئيسية">
+              {/* eslint-disable-next-line @next/next/no-img-element */}
+              <img src="/brand/masheed-lockup.svg" alt="مَشيد" className={styles.logoSmall} />
+            </Link>
           <h1>تعيين كلمة مرور جديدة</h1>
           <p>اختر كلمة مرور قوية لحسابك</p>
         </div>

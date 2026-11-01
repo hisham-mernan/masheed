@@ -69,6 +69,35 @@
   --shadow-glow:  0 0 0 3px rgba(133, 97, 173, 0.18);
   --shadow-primary: 0 8px 28px -5px rgba(133, 97, 173, 0.42);
   --shadow-primary-lg: 0 14px 40px -8px rgba(133, 97, 173, 0.55);
+
+  /* ── Masheed Design System (same values as the gateway's .mw tokens) ── */
+  --color-primary-deep:   #4A2D8A;
+  --color-primary-soft:   #C4A8E0;
+  --color-gold:           #A97E2F;
+  --color-gold-soft:      #C9A25A;
+  --color-gold-light:     #E6D7BD;
+  --color-gold-bg:        #FBF6EC;
+  --color-gold-ink:       #7A5A1E;
+  --color-ink:            #0F0F14;
+  --color-ink-2:          #2A2D36;
+  --color-ink-3:          #5B6170;
+  --color-ink-4:          #8A8F9C;
+  --color-hairline:       #E6E7EC;
+  --color-hairline-strong:#C9CCD6;
+  --color-row-line:       #EFF0F3;
+  --color-canvas:         #F7F7F9;
+  --status-success-ink:   #067647;
+  --status-success-bg:    #ECFDF3;
+  --status-warning-ink:   #B54708;
+  --status-warning-bg:    #FFFAEB;
+  --status-danger-ink:    #B42318;
+  --status-danger-bg:     #FEF3F2;
+  --status-info-ink:      #175CD3;
+  --status-info-bg:       #EFF8FF;
+  --gradient-sidebar:     linear-gradient(180deg, #0F0F1A 0%, #12102A 100%);
+  --gradient-hero-panel:  linear-gradient(145deg, #4a2d8a 0%, #6b46a8 40%, #8561AD 100%);
+  --pattern-lattice:      repeating-linear-gradient(45deg, rgba(255,255,255,0.06) 0px, rgba(255,255,255,0.06) 1px, transparent 1px, transparent 60px), repeating-linear-gradient(-45deg, rgba(255,255,255,0.06) 0px, rgba(255,255,255,0.06) 1px, transparent 1px, transparent 60px);
+  --font-num:             var(--font-thmanyah-sans), "Thmanyah Sans", var(--font-plex-arabic), sans-serif;
 }
 
 /* ─── Typography by Direction ─── */

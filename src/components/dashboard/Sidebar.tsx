@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Link from "next/link";
 import { usePathname, useRouter } from "next/navigation";
 import { setSelectedWaqf } from "@/app/actions";
@@ -336,31 +336,56 @@ const menuItems = [
   },
 ];
 
+export const OPEN_MENU_EVENT = "masheed:open-menu";
+
+// Page title for the top bar: the longest nav path that prefixes the current one
+const ALL_ITEMS = [...menuItems, ...platformItems, ...adminItems];
+export function pageTitle(pathname: string) {
+  const hit = ALL_ITEMS
+    .filter((i) => pathname === i.path || (i.path !== "/dashboard" && pathname.startsWith(i.path.replace(/\/requests$/, "") + "/")) || pathname === i.path.replace(/\/requests$/, ""))
+    .sort((a, b) => b.path.length - a.path.length)[0];
+  return hit?.label || "لوحة التحكم";
+}
+
 export default function Sidebar({ userWaqfs = [], openTasks = 0, isPlatformAdmin = false, selectedWaqf = "", hasWaqf = true }: { userWaqfs?: any[]; openTasks?: number; isPlatformAdmin?: boolean; selectedWaqf?: string; hasWaqf?: boolean }) {
   const [isCollapsed, setIsCollapsed] = useState(false);
+  const [mobileOpen, setMobileOpen] = useState(false);
   const [switching, setSwitching] = useState(false);
   const waqfList = userWaqfs.length > 0 ? userWaqfs : [{ id: 'none', name: 'لا يوجد أوقاف' }];
   const pathname = usePathname();
   const router = useRouter();
   const [searchQuery, setSearchQuery] = useState("");
 
+  // On phones the sidebar is a drawer: the top bar's menu button opens it, navigating or Escape closes it
+  useEffect(() => {
+    const open = () => setMobileOpen(true);
+    const onKey = (e: KeyboardEvent) => { if (e.key === "Escape") setMobileOpen(false); };
+    window.addEventListener(OPEN_MENU_EVENT, open);
+    window.addEventListener("keydown", onKey);
+    return () => { window.removeEventListener(OPEN_MENU_EVENT, open); window.removeEventListener("keydown", onKey); };
+  }, []);
+  const [openedOn, setOpenedOn] = useState(pathname);
+  if (openedOn !== pathname) { setOpenedOn(pathname); setMobileOpen(false); }
+
   return (
-    <aside className={`${styles.sidebar} ${isCollapsed ? styles.collapsed : ""}`}>
+    <>
+    {mobileOpen && <div className={styles.scrim} onClick={() => setMobileOpen(false)} aria-hidden="true" />}
+    <aside className={`${styles.sidebar} ${isCollapsed ? styles.collapsed : ""} ${mobileOpen ? styles.open : ""}`} aria-label="القائمة الرئيسية">
       {/* Header */}
       <div className={styles.sidebarHeader}>
-        <div className={styles.logo}>
-          <svg viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg" width="24" height="24">
-            <path d="M16 2L30 10V22L16 30L2 22V10L16 2Z" stroke="white" strokeWidth="1.5" strokeOpacity="0.4"/>
-            <path d="M16 6L26 12V20L16 26L6 20V12L16 6Z" fill="white" fillOpacity="0.1"/>
-            <text x="50%" y="54%" dominantBaseline="middle" textAnchor="middle" fill="white" fontSize="10" fontFamily="Cairo, sans-serif" fontWeight="700">م</text>
-          </svg>
-        </div>
+        <Link href="/dashboard" className={styles.logo} aria-label="مَشيد — نظرة عامة">
+          {/* eslint-disable-next-line @next/next/no-img-element */}
+          <img src="/brand/masheed-mark.svg" alt="" />
+        </Link>
         {!isCollapsed && (
           <div className={styles.logoText}>
             <span className={styles.logoPrimary}>مَشيد</span>
             <span className={styles.logoSecondary}>نظام إدارة الأوقاف</span>
           </div>
         )}
+        <button type="button" className={styles.closeBtn} onClick={() => setMobileOpen(false)} aria-label="إغلاق القائمة">
+          <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" aria-hidden="true"><path d="M18 6L6 18M6 6l12 12"/></svg>
+        </button>
       </div>
 
       {/* Waqf Switcher — فعلي: يغيّر نطاق كل الصفحات */}
@@ -374,7 +399,7 @@ export default function Sidebar({ userWaqfs = [], openTasks = 0, isPlatformAdmin
           </div>
           <select
             className={styles.waqfSelect}
-            style={{ color: "#fff", background: "transparent", border: "none", flex: 1, fontSize: "0.85rem", fontWeight: 600, cursor: "pointer", outline: "none" }}
+            aria-label="الوقف المعروض"
             value={selectedWaqf}
             disabled={switching}
             onChange={async (e) => {
@@ -405,7 +430,8 @@ export default function Sidebar({ userWaqfs = [], openTasks = 0, isPlatformAdmin
         {!isCollapsed && (
           <input
             type="text"
-            placeholder="بحث في النظام..."
+            placeholder="ابحث في النظام"
+            aria-label="ابحث في النظام"
             className={styles.searchInput}
             value={searchQuery}
             onChange={(e) => setSearchQuery(e.target.value)}
@@ -438,7 +464,7 @@ export default function Sidebar({ userWaqfs = [], openTasks = 0, isPlatformAdmin
         {(hasWaqf || isPlatformAdmin) && <div className={styles.navGroup}>
           {!isCollapsed && <span className={styles.navGroupLabel}>الوحدات</span>}
           {menuItems.slice(1).filter(item => !(item as any).platformOnly || isPlatformAdmin).map(item => (
-            <NavItem key={item.id} item={item} isCollapsed={isCollapsed} isActive={pathname === item.path} />
+            <NavItem key={item.id} item={item} isCollapsed={isCollapsed} isActive={pathname === item.path || pathname.startsWith(item.path + "/")} />
           ))}
         </div>}
       </nav>
@@ -452,9 +478,11 @@ export default function Sidebar({ userWaqfs = [], openTasks = 0, isPlatformAdmin
           </Link>
         )}
         <button
+          type="button"
           className={styles.toggleBtn}
           onClick={() => setIsCollapsed(!isCollapsed)}
-          title={isCollapsed ? "توسيع" : "طي"}
+          aria-label={isCollapsed ? "توسيع القائمة" : "طي القائمة"}
+          title={isCollapsed ? "توسيع القائمة" : "طي القائمة"}
         >
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round"
             width="16" height="16"
@@ -464,6 +492,7 @@ export default function Sidebar({ userWaqfs = [], openTasks = 0, isPlatformAdmin
         </button>
       </div>
     </aside>
+    </>
   );
 }
 
@@ -481,12 +510,12 @@ function NavItem({
       href={item.path}
       className={`${styles.navItem} ${isActive ? styles.active : ""}`}
       title={isCollapsed ? item.label : undefined}
+      aria-current={isActive ? "page" : undefined}
     >
       <span className={styles.navIcon}>{item.icon}</span>
       {!isCollapsed && (
         <div className={styles.navLabels}>
           <span className={styles.navLabelAr}>{item.label}</span>
-          <span className={styles.navLabelEn}>{item.labelEn}</span>
         </div>
       )}
       {!isCollapsed && item.badge && (
