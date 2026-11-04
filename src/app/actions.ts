@@ -199,7 +199,7 @@ export async function addTransaction(formData: FormData) {
  * Add a user to the SAME waqf with a chosen role.
  * Uses the public signup endpoint directly (no session hijack), and the
  * handle_new_user trigger links the new account to this waqf via
- * invite_waqf_id metadata. Only admins can do this.
+ * a one-time invite code issued for this email. Only admins can do this.
  */
 export async function addUserProfile(formData: FormData) {
   const supabase = await createClient();
@@ -221,6 +221,15 @@ export async function addUserProfile(formData: FormData) {
     return { error: "البريد الإلكتروني وكلمة مرور (٦ أحرف على الأقل) مطلوبان" };
   }
 
+  // One-time invite for this email and role; the sign-up trigger only accepts its code
+  const { data: inviteCode, error: inviteError } = await supabase.rpc("create_waqf_invite", {
+    p_waqf: inviteWaqfId, p_email: email, p_role: role,
+  });
+  if (inviteError || !inviteCode) {
+    const m = inviteError?.message || "";
+    return { error: m.includes("email_invalid") ? "البريد الإلكتروني غير صحيح" : m.includes("role_invalid") ? "اختر دوراً صالحاً (مشرف، مراقب مالي، قارئ)" : "تعذّر إنشاء الدعوة" };
+  }
+
   // Direct call to the Auth API so the current admin session is untouched
   const res = await fetch(
     `${process.env.NEXT_PUBLIC_SUPABASE_URL}/auth/v1/signup`,
@@ -235,8 +244,7 @@ export async function addUserProfile(formData: FormData) {
         password,
         data: {
           full_name: fullName,
-          invite_waqf_id: inviteWaqfId,
-          role,
+          invite_code: inviteCode,
         },
       }),
     }

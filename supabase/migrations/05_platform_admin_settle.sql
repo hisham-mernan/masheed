@@ -6,8 +6,8 @@
 -- 1. Platform admin flag
 alter table public.profiles add column if not exists is_platform_admin boolean default false;
 
--- Dev stage: existing admins are platform operators
-update public.profiles set is_platform_admin = true where role = 'admin';
+-- Platform admins are Masheed staff, set one by one in the SQL editor:
+--   update public.profiles set is_platform_admin = true where id = '<staff user id>';
 
 create or replace function public.is_platform_admin()
 returns boolean language sql security definer stable as $$
