@@ -6,8 +6,8 @@ export default function AIConsultancyPage() {
     <div className="fade-in">
       <div className={styles.header}>
         <div className={styles.titleInfo}>
-          <h1>المساعد الاستشاري الذكي</h1>
-          <p>إجابات فورية محسوبة من بيانات وقفك الفعلية — زكاة، ريع، صيانة، جاهزية طرح، وحوكمة.</p>
+          <h1>مساعد بيانات الوقف</h1>
+          <p>ملخصات جاهزة محسوبة من بيانات وقفك عن ستة مواضيع: الزكاة، الريع، الصيانة، الطرح، الحوكمة، والتقارير. لا يستخدم نموذج ذكاء اصطناعي بعد.</p>
         </div>
       </div>
       <AssistantChat />

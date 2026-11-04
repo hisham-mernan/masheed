@@ -59,7 +59,6 @@ export default function AuditLogList({ logs }: { logs: any[] }) {
                 <span>{ACTION_AR[log.action] || log.action}</span> - <em>{ENTITY_AR[log.entity_type] || log.entity_type || "—"}</em>
               </div>
               <div className={styles.logId}>#{log.id.split("-")[0]}</div>
-              <div className={styles.logHash} title={log.hash}>sha256:{log.hash.slice(0, 8)}…{log.hash.slice(-4)}</div>
             </div>
             {open && (
               <div style={{ padding: "1rem 1.5rem", background: "rgba(133,97,173,0.04)", borderRadius: "0 0 8px 8px", fontSize: "0.85rem" }}>

@@ -30,7 +30,7 @@ export default async function WorkflowsPage() {
     <div className="fade-in">
       <div className={styles.header}>
         <div className={styles.titleInfo}>
-          <h1>محرك تدفقات العمل والاعتمادات</h1>
+          <h1>تدفق اعتماد العمليات المالية</h1>
           <p>كل عملية حساسة في مَشيد تمر بتدفق Maker–Checker: إنشاء → اعتماد طرف آخر → تنفيذ موثق.</p>
         </div>
         <div className={styles.actions}>

@@ -8,7 +8,7 @@ const CTA: Record<string, string> = { quote: "اطلب الخدمة", fixed: "ا
 
 export default async function ServicesPage() {
   const ctx = await getAccountContext();
-  const { data: services } = await ctx!.supabase.from("services").select("id, title, subtitle, includes, price_label, pricing").eq("active", true).order("sort");
+  const { data: services } = await ctx!.supabase.from("services").select("id, title, subtitle, includes, price_label, pricing, price").eq("active", true).order("sort");
 
   return (
     <div className="fade-in">
@@ -33,7 +33,7 @@ export default async function ServicesPage() {
       </div>
       <div className={`${s.alert} ${s.alertInfo}`} style={{ marginTop: "1.5rem" }}>
         <b>ما الذي يحدد السعر؟</b> تنطبق على التأسيس والتقييم: عدد الأصول وحجمها، ودرجة التعقيد، ونطاق الخدمات، والمتطلبات القانونية والإدارية.
-        الاستشارات: 199 ريالًا للجلسة. المتابعة التنفيذية: سعرها ثابت، ولا تشمل إدارة الوقف أو تنفيذ الأعمال نيابة عن الجهة، وتُسعَّر الأعمال الإضافية بصورة مستقلة.
+        الاستشارات: {Number((services || []).find((v) => v.id === "consulting")?.price || 0).toLocaleString("en-US")} ريالاً للجلسة. المتابعة التنفيذية: سعرها ثابت، ولا تشمل إدارة الوقف أو تنفيذ الأعمال نيابة عن الجهة، وتُسعَّر الأعمال الإضافية بصورة مستقلة.
       </div>
     </div>
   );

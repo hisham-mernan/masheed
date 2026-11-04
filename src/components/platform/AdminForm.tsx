@@ -4,11 +4,11 @@ import { useActionState } from "react";
 import type { FormState } from "@/lib/platform-actions";
 import { s } from "./ui";
 
-type Field = { name: string; label: string; type?: "text" | "number" | "textarea" | "select"; options?: [string, string][]; optional?: boolean; placeholder?: string };
+type Field = { name: string; label: string; type?: "text" | "number" | "textarea" | "select" | "date"; options?: [string, string][]; optional?: boolean; placeholder?: string };
 
 const initial: FormState = { status: "idle" };
 
-// Small form for the admin queues (send quote, review listing, grant package)
+// Small form for the admin queues (send quote, review listing, grant package) and the waqf registers
 export default function AdminForm({ action, fields, hidden = {}, submit, compact }: {
   action: (s: FormState, fd: FormData) => Promise<FormState>;
   fields: Field[];
@@ -27,7 +27,7 @@ export default function AdminForm({ action, fields, hidden = {}, submit, compact
             <label htmlFor={id}>{f.label}{f.optional && <small>(اختياري)</small>}</label>
             {f.type === "textarea" ? <textarea id={id} name={f.name} className={s.input} placeholder={f.placeholder} style={compact ? { minHeight: 60 } : undefined} />
               : f.type === "select" ? <select id={id} name={f.name} className={s.input}>{f.options?.map(([v, l]) => <option key={v} value={v}>{l}</option>)}</select>
-              : <input id={id} name={f.name} className={s.input} placeholder={f.placeholder} inputMode={f.type === "number" ? "decimal" : undefined} />}
+              : <input id={id} name={f.name} className={s.input} placeholder={f.placeholder} type={f.type === "date" ? "date" : "text"} inputMode={f.type === "number" ? "decimal" : undefined} />}
           </div>
         );
       })}

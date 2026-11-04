@@ -7,7 +7,7 @@ const SUGGESTIONS = ["ما وضع الزكاة الحالي؟", "كم ريع م�
 
 export default function AssistantChat() {
   const [messages, setMessages] = useState<{ sender: "user" | "ai"; text: string }[]>([
-    { sender: "ai", text: "مرحباً بك في المساعد الذكي لمَشيد 👋 أجيبك من بيانات وقفك الفعلية — اسألني عن الزكاة، الريع، الصيانة، طرح الصكوك، الحوكمة، أو التقارير." },
+    { sender: "ai", text: "مرحباً بك. أعرض لك ملخصات جاهزة من بيانات وقفك عن ستة مواضيع: الزكاة، الريع، الصيانة، الطرح، الحوكمة، والتقارير. اكتب أحدها في سؤالك." },
   ]);
   const [input, setInput] = useState("");
   const [typing, setTyping] = useState(false);

@@ -56,7 +56,7 @@ export default async function BeneficiaryPage() {
         <div>
           <h1 className={styles.title}>إدارة المستفيدين والأسهم</h1>
           <p className={styles.subtitle}>
-            نظام التوكينيزيشن (Tokenization) لتقسيم وتوزيع الريع بشكل آلي
+            توزيع الريع على المستفيدين حسب عدد أسهم كل منهم
           </p>
         </div>
         <div className={styles.actions}>
@@ -75,7 +75,7 @@ export default async function BeneficiaryPage() {
 
       <div className={styles.statsGrid}>
         <div className={`${styles.statCard} glass-card`}>
-          <div className={styles.statLabel}>إجمالي الأسهم (Tokens)</div>
+          <div className={styles.statLabel}>إجمالي الأسهم</div>
           <div className={styles.statValue}>{totalShares} <small>سهم</small></div>
           <div className={styles.statDesc}>مقسمة على {activeBeneficiariesCount} مستفيدين</div>
         </div>
@@ -124,7 +124,7 @@ export default async function BeneficiaryPage() {
               <tr>
                 <th>الاسم / رقم الهوية</th>
                 <th>الحالة</th>
-                <th>الأسهم المملوكة (Tokens)</th>
+                <th>الأسهم المملوكة</th>
                 <th>نسبة الملكية</th>
                 <th>رصيد المحفظة</th>
                 {canWrite && <th>إجراءات</th>}

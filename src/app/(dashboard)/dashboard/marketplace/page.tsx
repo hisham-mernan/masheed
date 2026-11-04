@@ -7,7 +7,7 @@ import styles from "../assets/assets.module.css";
 const STATUS_AR: Record<string, { label: string; color: string; bg: string }> = {
   pending: { label: "بانتظار الاعتماد", color: "#B45309", bg: "#FFFBEB" },
   approved: { label: "معتمد للطرح", color: "#1D4ED8", bg: "#EFF6FF" },
-  trading: { label: "متداول", color: "#15803D", bg: "#F0FDF4" },
+  trading: { label: "مفتوح لتسجيل الاهتمام", color: "#15803D", bg: "#F0FDF4" },
   rejected: { label: "مرفوض", color: "#DC2626", bg: "#FEF2F2" },
 };
 
@@ -38,8 +38,8 @@ export default async function MarketplacePage() {
       <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(160px, 1fr))", gap: "1rem", marginTop: "1.5rem" }}>
         {[
           { label: "طلبات بانتظار الاعتماد", value: (requests || []).filter(r => r.status === "pending").length, color: "#F59E0B" },
-          { label: "صكوك متداولة", value: trading.length, color: "#10B981" },
-          { label: "إجمالي التمويل المتداول", value: `${Math.round(totalFunding).toLocaleString()} ر.س`, color: "#8561AD" },
+          { label: "فرص منشورة", value: trading.length, color: "#10B981" },
+          { label: "التمويل المستهدف للفرص المنشورة", value: `${Math.round(totalFunding).toLocaleString()} ر.س`, color: "#8561AD" },
         ].map(s => (
           <div key={s.label} className="glass-card" style={{ padding: "1rem 1.25rem", borderTop: `3px solid ${s.color}` }}>
             <div style={{ fontSize: "1.2rem", fontWeight: 800 }}>{s.value}</div>

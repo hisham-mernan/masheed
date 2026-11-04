@@ -156,7 +156,7 @@ const menuItems = [
   },
   {
     id: "beneficiary",
-    label: "المستفيدون والتوكينيزيشن",
+    label: "المستفيدون",
     labelEn: "Beneficiaries",
     path: "/dashboard/beneficiary",
     icon: (
@@ -293,7 +293,7 @@ const menuItems = [
   },
   {
     id: "settings",
-    label: "الإعدادات",
+    label: "ملف الوقف والإعدادات",
     labelEn: "Settings",
     path: "/dashboard/settings",
     icon: (
@@ -320,10 +320,9 @@ const menuItems = [
   },
   {
     id: "ocr",
-    label: "الأرشفة الذكية",
-    labelEn: "OCR Scanning",
+    label: "أرشيف المستندات",
+    labelEn: "Documents",
     path: "/dashboard/ocr",
-    badge: "جديد",
     icon: (
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round">
         <path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/>

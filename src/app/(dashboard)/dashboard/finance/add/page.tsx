@@ -18,7 +18,7 @@ export default async function AddTransactionPage() {
             <label style={{ fontWeight: 600, color: "var(--text-main)" }}>نوع المعاملة</label>
             <select name="type" required style={{ padding: "0.75rem", borderRadius: "6px", border: "1px solid var(--border-color)", background: "var(--bg-main)", color: "var(--text-main)" }}>
               <option value="income">إيراد (Ri'a) - إيجار، أرباح أسهم</option>
-              <option value="expense">مصروف (Asl) - صيانة، تشغيل</option>
+              <option value="expense">مصروف - صيانة، تشغيل</option>
             </select>
           </div>
 

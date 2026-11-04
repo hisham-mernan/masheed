@@ -48,16 +48,16 @@ export default async function AnalyticsPage() {
   // مؤشرات
   const totalIncome = (transactions || []).filter(t => t.type === "income").reduce((s, t) => s + Number(t.amount), 0);
   const totalExpense = (transactions || []).filter(t => t.type !== "income").reduce((s, t) => s + Number(t.amount), 0);
-  const efficiency = totalIncome > 0 ? Math.max(0, 100 - (totalExpense / totalIncome) * 100) : 100;
+  const efficiency = totalIncome > 0 ? Math.max(0, 100 - (totalExpense / totalIncome) * 100) : null;
   const openTasks = (tasks || []).filter(t => t.status === "open").length;
   const doneTasks = (tasks || []).filter(t => t.status !== "open").length;
-  const taskRate = tasks && tasks.length > 0 ? Math.round((doneTasks / tasks.length) * 100) : 100;
+  const taskRate = tasks && tasks.length > 0 ? Math.round((doneTasks / tasks.length) * 100) : null;
   const invVal = (investments || []).filter(i => i.status === "active").reduce((s, i) => s + Number(i.valuation || 0), 0);
   const wallets = (beneficiaries || []).reduce((s, b) => s + Number(b.wallet_balance || 0), 0);
 
   const kpis = [
-    { label: "كفاءة التشغيل (صافي/إيراد)", value: `${efficiency.toFixed(0)}٪`, color: "#8561AD" },
-    { label: "معدل إنجاز المهام", value: `${taskRate}٪`, color: "#10B981" },
+    { label: "كفاءة التشغيل (صافي/إيراد)", value: efficiency === null ? "—" : `${efficiency.toFixed(0)}٪`, color: "#8561AD" },
+    { label: "معدل إنجاز المهام", value: taskRate === null ? "—" : `${taskRate}٪`, color: "#10B981" },
     { label: "مهام مفتوحة", value: openTasks, color: "#F59E0B" },
     { label: "قيمة الاستثمارات النشطة", value: `${Math.round(invVal).toLocaleString()} ر.س`, color: "#3B82F6" },
     { label: "أرصدة محافظ المستفيدين", value: `${Math.round(wallets).toLocaleString()} ر.س`, color: "#0D9488" },

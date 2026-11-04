@@ -42,7 +42,7 @@ export default function EditBeneficiaryForm({ beneficiary }: { beneficiary: any 
         <input name="national_id" defaultValue={beneficiary.national_id || ""} style={inputStyle} />
       </div>
       <div style={{ display: "flex", flexDirection: "column", gap: "0.4rem" }}>
-        <label style={{ fontWeight: 600 }}>الأسهم (Tokens)</label>
+        <label style={{ fontWeight: 600 }}>الأسهم</label>
         <input name="shares_owned" type="number" step="0.01" defaultValue={beneficiary.shares_owned} required style={inputStyle} />
       </div>
       <div style={{ display: "flex", flexDirection: "column", gap: "0.4rem" }}>

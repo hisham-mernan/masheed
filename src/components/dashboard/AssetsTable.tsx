@@ -137,7 +137,7 @@ export default function AssetsTable({ assets, canWrite, isAdmin }: { assets: any
           <div className="glass-card" style={{ padding: "2rem", textAlign: "center", background: "#fff" }} onClick={(e) => e.stopPropagation()}>
             <h3 style={{ marginTop: 0 }}>{qr.name}</h3>
             <img src={qr.url} alt="QR" style={{ width: 240, height: 240 }} />
-            <p style={{ color: "var(--text-muted)", fontSize: "0.85rem" }}>امسح للتحقق من هوية الأصل</p>
+            <p style={{ color: "var(--text-muted)", fontSize: "0.85rem" }}>رمز تعريف الأصل</p>
             <button className="btn-outline" onClick={() => setQr(null)}>إغلاق</button>
           </div>
         </div>

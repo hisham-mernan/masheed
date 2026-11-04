@@ -54,7 +54,7 @@ export default async function CompliancePage() {
       <div className={styles.header}>
         <div className={styles.titleInfo}>
           <h1>الرقابة والامتثال (Audit & Users)</h1>
-          <p>إدارة الصلاحيات وتتبع كافة التغييرات التي تمت داخل النظام (ممتثل لمتطلبات هيئة الأوقاف).</p>
+          <p>إدارة المستخدمين وصلاحياتهم، وآخر التغييرات المسجّلة في النظام.</p>
         </div>
         <div className={styles.actions}>
           {isAdmin && (

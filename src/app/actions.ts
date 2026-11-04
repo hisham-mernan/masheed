@@ -808,23 +808,7 @@ export async function toggleExpertAvailability(id: string, available: boolean | 
 }
 
 // ── إعدادات الوقف (اسم + إجمالي الأسهم) ──
-export async function updateWaqfSettings(formData: FormData) {
-  const supabase = await createClient();
-  const ctx = await requireWrite(supabase);
-  if ("error" in ctx) return { error: ctx.error };
-  if (ctx.profile.role !== "admin" && !ctx.profile.is_platform_admin)
-    return { error: "إعدادات الوقف متاحة للمدير فقط" };
-  const name = formData.get("name") as string;
-  const totalShares = num(formData.get("total_shares"));
-  if (!name?.trim()) return { error: "اسم الوقف مطلوب" };
-  const { error } = await supabase.from("waqfs").update({ name: name.trim(), total_shares: totalShares }).eq("id", ctx.writeWaqfId);
-  if (error) return { error: error.message };
-  revalidatePath("/dashboard/settings");
-  revalidatePath("/dashboard", "layout");
-  return { success: true };
-}
-
-// ── المساعد الذكي: إجابات محسوبة من بيانات النظام الفعلية ──
+// ── مساعد بيانات الوقف: ردود جاهزة بالكلمات المفتاحية، محسوبة من بيانات النظام الفعلية ──
 export async function askAssistant(query: string): Promise<{ reply: string }> {
   const supabase = await createClient();
   const { user, profile } = await getProfile(supabase);
@@ -863,7 +847,7 @@ export async function askAssistant(query: string): Promise<{ reply: string }> {
   } else if (/طرح|سوق|صكوك|تداول|استثمار/.test(q)) {
     const pend = (listings || []).filter(l => l.status === "pending").length;
     const trading = (listings || []).filter(l => l.status === "trading").length;
-    reply = `حالة السوق: ${trading} صك متداول و${pend} طلب طرح بانتظار الاعتماد. قيمة الأصول المرشحة ${fmtN(totalVal)} ر.س. افحص "جاهزية الطرح" من صفحة وقف باي مشيد — المعايير: توثيق الصك، قوائم مالية، مجلس نظارة فعّال، وتقييم فني للأصل.`;
+    reply = `حالة السوق: ${trading} فرصة منشورة و${pend} طلب طرح بانتظار الاعتماد. قيمة الأصول المرشحة ${fmtN(totalVal)} ر.س. افحص "جاهزية الطرح" من صفحة وقف باي مشيد — المعايير: توثيق الصك، قوائم مالية، مجلس نظارة فعّال، وتقييم فني للأصل.`;
   } else if (/حوكمة|قرار|مجلس|نظارة/.test(q)) {
     reply = `لديك ${pendingDecisions} قرار بانتظار الاعتماد في سجل الحوكمة. تذكّر: نظام مَشيد يفرض مبدأ Maker–Checker — لا يمكن لمنشئ القرار اعتماده بنفسه، لازم عضو آخر من مجلس النظارة يعتمد.`;
   } else if (/تقرير|طباعة|pdf/i.test(q)) {

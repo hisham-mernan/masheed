@@ -18,7 +18,7 @@ export const BOOKING_STATUS: Record<string, [string, Tone]> = {
   pending_payment: ["بانتظار الدفع", "pWait"], confirmed: ["مؤكد", "pOk"], cancelled: ["ملغى", "pBad"], done: ["منتهية", "pOff"],
 };
 export const LISTING_STATUS: Record<string, [string, Tone]> = {
-  pending: ["قيد المراجعة", "pWait"], approved: ["معتمد ومنشور", "pOk"], trading: ["متاح للاستثمار", "pOk"], rejected: ["مرفوض", "pBad"],
+  pending: ["قيد المراجعة", "pWait"], approved: ["معتمد ومنشور", "pOk"], trading: ["مفتوح لتسجيل الاهتمام", "pOk"], rejected: ["مرفوض", "pBad"],
 };
 export const PAYMENT_STATUS: Record<string, [string, Tone]> = {
   initiated: ["لم يكتمل", "pOff"], paid: ["مدفوع", "pOk"], failed: ["فشل", "pBad"],

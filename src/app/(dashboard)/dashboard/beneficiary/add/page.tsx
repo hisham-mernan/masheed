@@ -25,7 +25,7 @@ export default function AddBeneficiaryPage() {
   return (
     <div className="fade-in" style={{ padding: "2rem", maxWidth: "800px", margin: "0 auto" }}>
       <h1 style={{ fontSize: "1.75rem", marginBottom: "0.5rem", color: "var(--text-main)" }}>إضافة مستفيد جديد (إصدار أسهم)</h1>
-      <p style={{ color: "var(--text-muted)", marginBottom: "2rem" }}>تسجيل بيانات المستفيد وتخصيص حصته (Tokens) من الوقف.</p>
+      <p style={{ color: "var(--text-muted)", marginBottom: "2rem" }}>تسجيل بيانات المستفيد وتخصيص حصته من الوقف.</p>
 
       <div className="glass-card" style={{ padding: "2rem" }}>
         <form onSubmit={handleSubmit} style={{ display: "flex", flexDirection: "column", gap: "1.5rem" }}>
@@ -41,7 +41,7 @@ export default function AddBeneficiaryPage() {
           </div>
 
           <div style={{ display: "flex", flexDirection: "column", gap: "0.5rem" }}>
-            <label style={{ fontWeight: 600, color: "var(--text-main)" }}>عدد الأسهم المخصصة (Tokens)</label>
+            <label style={{ fontWeight: 600, color: "var(--text-main)" }}>عدد الأسهم المخصصة</label>
             <input name="shares_owned" type="number" step="0.01" required placeholder="12.5" style={{ padding: "0.75rem", borderRadius: "6px", border: "1px solid var(--border-color)", background: "var(--bg-main)", color: "var(--text-main)" }} />
           </div>
 

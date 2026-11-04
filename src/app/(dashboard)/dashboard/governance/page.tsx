@@ -30,7 +30,7 @@ export default async function GovernancePage() {
   const pending = (decisions || []).filter(d => d.status === "pending").length;
   const approved = (decisions || []).filter(d => d.status === "approved").length;
   const documented = (meetings || []).filter(m => m.status === "documented").length;
-  const govScore = decisions && decisions.length > 0 ? Math.round((approved / decisions.length) * 100) : 100;
+  const govScore = decisions && decisions.length > 0 ? Math.round((approved / decisions.length) * 100) : null;
 
   return (
     <div className="fade-in">
@@ -59,7 +59,7 @@ export default async function GovernancePage() {
 
       <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(160px, 1fr))", gap: "1rem", marginTop: "1.5rem" }}>
         {[
-          { label: "مؤشر الحوكمة", value: `${govScore}٪`, color: "#8561AD" },
+          { label: "نسبة القرارات المعتمدة", value: govScore === null ? "—" : `${govScore}٪`, color: "#8561AD" },
           { label: "قرارات بانتظار الاعتماد", value: pending, color: "#F59E0B" },
           { label: "قرارات معتمدة", value: approved, color: "#10B981" },
           { label: "اجتماعات موثقة", value: documented, color: "#3B82F6" },
